@@ -1,0 +1,63 @@
+project:
+  type: website
+
+website:
+  title: "ISSS608"
+  navbar:
+    background: "#e0ae24"
+    left:
+    - text: "Syllabus"
+      href: syllabus.html
+    - text: "Lesson Plan"
+      href: lesson.html
+    - text: "DataViz Makeover"
+      href: DataViz.html
+    - text: "Take-home Exercise"
+      menu:
+        - text: "Take-home Exercise 1"
+          href: "take-home_ex/TH_EX01.html"
+        - text: "Take-home Exercise 2"
+          href: "take-home_ex/TH_EX02.html"
+        - text: "Take-home Exercise 3"
+          href: "take-home_ex/TH_EX03.html"
+        - text: "Take-home Exercise 4"
+          href: "take-home_ex/TH_EX04.html"
+    - text: "Visual Analytics Project"
+      href: VAproject.html
+
+    right:
+    - text: "Shiny Workshop"
+      menu:
+        - text: "R Shiny basic"
+          href: "ShinyWorkshop/Shiny1/Shiny1.html"
+        - text: "Beyond the basic"
+          href: "ShinyWorkshop/Shiny2/Shiny0.html"
+        - text: "Customising Shiny"
+          href: "ShinyWorkshop/Shiny3/Shiny0.html"
+        - text: "Shiny Resources"  
+          href: ShinyResources.html
+    - text: "Tableau Resources"
+      href: Tableau.html
+    - text: "All About R"
+      menu: 
+        - text: "R Resouces"
+          href: R.html
+        - text: "R for Visual Analytics"
+          href: R4Vis.html
+        - text: "R tips & tricks"
+          href: Rt.html
+        - text: "Quarto"
+          href: Quarto.html
+        - text: "git and github"
+          href: git.html
+    - text: "Home"
+      href: index.html
+
+format:
+  html:
+    theme: flatly
+    css: styles.css
+    toc: true
+
+editor: visual
+
