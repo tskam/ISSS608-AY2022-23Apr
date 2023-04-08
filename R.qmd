@@ -1,0 +1,20 @@
+---
+title: "R Resources"
+description: |
+  This page provides links to a selected resources to learn modern R packages, especially those related to tidyverse framework.
+date: "`r Sys.Date()`"
+format: html
+editor: visual
+---
+
+## Getting Started with R
+
+-   [R for Data Science](https://r4ds.had.co.nz/) by Garrett Grolemund and Hadley Wickham.
+-   [Modern R with the tidyverse](https://b-rodrigues.github.io/modern_R/) by Bruno Rodrigues. [Chapter 2](https://b-rodrigues.github.io/modern_R/objects-types-and-useful-r-functions-to-get-started.html) provides a detail discussion on R data objects.
+-   Brendan R. E. Ansell [Introduction to R - tidyverse](https://bookdown.org/ansellbr/WEHI_tidyR_course_book/)
+-   [The Comprehensive Guide to Installing R Packages from CRAN, Bioconductor, GitHub and Co.](https://thomasadventure.blog/posts/install-r-packages/). This article provides useful tips on how to install R packages from different sources.
+-   [R Workflow](https://hbiostat.org/rflow/)
+
+## Blog post
+
+-   [R Workflow](https://www.fharrell.com/post/rflow/) from Statistical Thinking.
