@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dr.&nbsp;Kam Tin Seong Assoc. Professor of Information Systems (Practice)">
+<meta name="dcterms.date" content="2023-04-14">
+
+<title>ISSS608 - Lesson 4: Fundamentals of Visual Analytics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">ISSS608</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../syllabus.html">
+ <span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../lesson.html">
+ <span class="menu-text">Lesson Plan</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../DataViz.html">
+ <span class="menu-text">DataViz Makeover</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Take-home Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../take-home_ex/TH_EX01.html">
+ <span class="dropdown-text">Take-home Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../take-home_ex/TH_EX02.html">
+ <span class="dropdown-text">Take-home Exercise 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../take-home_ex/TH_EX03.html">
+ <span class="dropdown-text">Take-home Exercise 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../take-home_ex/TH_EX04.html">
+ <span class="dropdown-text">Take-home Exercise 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../VAproject.html">
+ <span class="menu-text">Visual Analytics Project</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-shiny-workshop" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Shiny Workshop</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-shiny-workshop">    
+        <li>
+    <a class="dropdown-item" href="../../ShinyWorkshop/Shiny1/Shiny1.html">
+ <span class="dropdown-text">R Shiny basic</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ShinyWorkshop/Shiny2/Shiny0.html">
+ <span class="dropdown-text">Beyond the basic</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ShinyWorkshop/Shiny3/Shiny0.html">
+ <span class="dropdown-text">Customising Shiny</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ShinyResources.html">
+ <span class="dropdown-text">Shiny Resources</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../Tableau.html">
+ <span class="menu-text">Tableau Resources</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-all-about-r" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">All About R</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-all-about-r">    
+        <li>
+    <a class="dropdown-item" href="../../R.html">
+ <span class="dropdown-text">R Resouces</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../R4Vis.html">
+ <span class="dropdown-text">R for Visual Analytics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Rt.html">
+ <span class="dropdown-text">R tips &amp; tricks</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Quarto.html">
+ <span class="dropdown-text">Quarto</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../git.html">
+ <span class="dropdown-text">git and github</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#what-will-you-learn-from-this-lesson" id="toc-what-will-you-learn-from-this-lesson" class="nav-link active" data-scroll-target="#what-will-you-learn-from-this-lesson">What will you learn from this lesson?</a></li>
+  <li><a href="#visually-analytics-for-knowledge-discovery" id="toc-visually-analytics-for-knowledge-discovery" class="nav-link" data-scroll-target="#visually-analytics-for-knowledge-discovery">Visually Analytics for Knowledge Discovery</a></li>
+  <li><a href="#visual-statistical-testing" id="toc-visual-statistical-testing" class="nav-link" data-scroll-target="#visual-statistical-testing">Visual Statistical Testing</a></li>
+  <li><a href="#visual-statistical-testing-1" id="toc-visual-statistical-testing-1" class="nav-link" data-scroll-target="#visual-statistical-testing-1">Visual Statistical Testing</a>
+  <ul class="collapse">
+  <li><a href="#two-sample-means" id="toc-two-sample-means" class="nav-link" data-scroll-target="#two-sample-means">Two-sample means</a></li>
+  <li><a href="#visually-driven-correlation-analysis" id="toc-visually-driven-correlation-analysis" class="nav-link" data-scroll-target="#visually-driven-correlation-analysis">Visually-driven Correlation Analysis</a></li>
+  <li><a href="#visually-driven-association-independent-analysis" id="toc-visually-driven-association-independent-analysis" class="nav-link" data-scroll-target="#visually-driven-association-independent-analysis">Visually-driven Association (Independent) Analysis</a></li>
+  <li><a href="#visual-analytics-appraoch-for-building-exploratory-models" id="toc-visual-analytics-appraoch-for-building-exploratory-models" class="nav-link" data-scroll-target="#visual-analytics-appraoch-for-building-exploratory-models">Visual Analytics Appraoch for Building Exploratory Models</a></li>
+  <li><a href="#visual-analytics-appraoch-for-building-exploratory-models-1" id="toc-visual-analytics-appraoch-for-building-exploratory-models-1" class="nav-link" data-scroll-target="#visual-analytics-appraoch-for-building-exploratory-models-1">Visual Analytics Appraoch for Building Exploratory Models</a></li>
+  <li><a href="#visual-analytics-appraoch-for-building-exploratory-models-2" id="toc-visual-analytics-appraoch-for-building-exploratory-models-2" class="nav-link" data-scroll-target="#visual-analytics-appraoch-for-building-exploratory-models-2">Visual Analytics Appraoch for Building Exploratory Models</a></li>
+  </ul></li>
+  <li><a href="#visualising-uncertainty" id="toc-visualising-uncertainty" class="nav-link" data-scroll-target="#visualising-uncertainty">Visualising Uncertainty</a>
+  <ul class="collapse">
+  <li><a href="#why-it-is-important" id="toc-why-it-is-important" class="nav-link" data-scroll-target="#why-it-is-important">Why it is important?</a></li>
+  <li><a href="#why-one-shouldnt-use-a-bar-graph-even-if-the-data-are-normally-distributed" id="toc-why-one-shouldnt-use-a-bar-graph-even-if-the-data-are-normally-distributed" class="nav-link" data-scroll-target="#why-one-shouldnt-use-a-bar-graph-even-if-the-data-are-normally-distributed">Why one shouldn’t use a bar graph, even if the data are normally distributed?</a></li>
+  <li><a href="#why-error-bar-failed" id="toc-why-error-bar-failed" class="nav-link" data-scroll-target="#why-error-bar-failed">Why Error bar failed?</a></li>
+  <li><a href="#error-bar-on-a-dot-plot" id="toc-error-bar-on-a-dot-plot" class="nav-link" data-scroll-target="#error-bar-on-a-dot-plot">Error bar on a dot plot</a></li>
+  <li><a href="#graphical-methods-for-visualising-uncertainty" id="toc-graphical-methods-for-visualising-uncertainty" class="nav-link" data-scroll-target="#graphical-methods-for-visualising-uncertainty">Graphical methods for visualising uncertainty</a></li>
+  <li><a href="#back-to-statistics-101" id="toc-back-to-statistics-101" class="nav-link" data-scroll-target="#back-to-statistics-101">Back to Statistics 101</a></li>
+  <li><a href="#calculating-the-confidence-interval-of-a-mean" id="toc-calculating-the-confidence-interval-of-a-mean" class="nav-link" data-scroll-target="#calculating-the-confidence-interval-of-a-mean">Calculating the confidence interval of a mean</a></li>
+  <li><a href="#calculating-the-confidence-interval-of-a-percentage" id="toc-calculating-the-confidence-interval-of-a-percentage" class="nav-link" data-scroll-target="#calculating-the-confidence-interval-of-a-percentage">Calculating the confidence interval of a percentage</a></li>
+  <li><a href="#d-graphical-methods-for-visualising-uncertainty" id="toc-d-graphical-methods-for-visualising-uncertainty" class="nav-link" data-scroll-target="#d-graphical-methods-for-visualising-uncertainty">2-d graphical methods for visualising uncertainty</a></li>
+  <li><a href="#confidence-band-of-a-trend-line" id="toc-confidence-band-of-a-trend-line" class="nav-link" data-scroll-target="#confidence-band-of-a-trend-line">Confidence band of a trend line</a></li>
+  </ul></li>
+  <li><a href="#variation-and-its-discontents" id="toc-variation-and-its-discontents" class="nav-link" data-scroll-target="#variation-and-its-discontents">Variation and Its Discontents</a>
+  <ul class="collapse">
+  <li><a href="#random-and-unfair-comparisons" id="toc-random-and-unfair-comparisons" class="nav-link" data-scroll-target="#random-and-unfair-comparisons">Random and unfair comparisons</a></li>
+  <li><a href="#funnel-plots-to-the-rescue" id="toc-funnel-plots-to-the-rescue" class="nav-link" data-scroll-target="#funnel-plots-to-the-rescue">Funnel plots to the rescue</a></li>
+  <li><a href="#normality-assumption" id="toc-normality-assumption" class="nav-link" data-scroll-target="#normality-assumption">Normality assumption</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lesson 4: <br>Fundamentals of Visual Analytics</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    Dr.&nbsp;Kam Tin Seong<br>Assoc. Professor of Information Systems (Practice) 
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            School of Computing and Information Systems,<br>Singapore Management University
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">14 Apr 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="what-will-you-learn-from-this-lesson" class="level2">
+<h2 class="anchored" data-anchor-id="what-will-you-learn-from-this-lesson">What will you learn from this lesson?</h2>
+<div style="font-size: 1.2em">
+<ul>
+<li>Visual Analytics for Knowledge Discovery</li>
+<li>Visual Analytics Approach for Statistical Testing</li>
+<li>Visual Analytics for Building Better Models</li>
+<li>Visualising Uncertainty</li>
+<li>Variation and Its Discontents</li>
+</ul>
+</div>
+<div class="notes">
+<p>In this lesson, I am going to share with you how visual analytics approach can be used to complement conventional statistical testing and model building. Then, We will examine methods for visualising uncertainty. Lastly, I will introduce you to funnel plot, a visual method specially designed to provide a fare comparison among entities in a group.</p>
+</div>
+</section>
+<section id="visually-analytics-for-knowledge-discovery" class="level2">
+<h2 class="anchored" data-anchor-id="visually-analytics-for-knowledge-discovery">Visually Analytics for Knowledge Discovery</h2>
+<p>Motivation: To combine data visualisation and statistical modeling.</p>
+<p><img src="img/image1.jpg" class="img-fluid"></p>
+<div class="notes">
+<p>This slide highlight the important roles play by visual analytics in the knowledge discovery framework.</p>
+<p>Before building model, visual analytics can be used to provide better understanding of the variables. These information can be very useful in the subsequent model building process. For example, appropriately designed visual analytics can be used to reveals if there is sign of multicolinearity.</p>
+<p>After calibrating the model, visual analytics can be used to reveal the model output for example to check if the model conform to a specific statistical assumption.</p>
+</div>
+</section>
+<section id="visual-statistical-testing" class="level2">
+<h2 class="anchored" data-anchor-id="visual-statistical-testing">Visual Statistical Testing</h2>
+<ul>
+<li>To provide alternative statistical inference methods by default.</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img src="img/image2.jpg" class="img-fluid"></p>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image3.jpg" class="img-fluid"></p>
+</div>
+</div>
+<div class="notes">
+<p>It is important to note that by combining data visualisation and statistical analysis, we need ensure that the methods used are regorous and inline with the statistical principles.</p>
+</div>
+</section>
+<section id="visual-statistical-testing-1" class="level2">
+<h2 class="anchored" data-anchor-id="visual-statistical-testing-1">Visual Statistical Testing</h2>
+<ul>
+<li><p>To follow best practices for statistical reporting.</p></li>
+<li><p>For all statistical tests reported in the plots, the default template abides by the <a href="https://my.ilstu.edu/~jhkahn/apastats.html">APA</a> gold standard for statistical reporting. For example, here are results from a robust t-test:</p></li>
+</ul>
+<p><img src="img/image4.jpg" class="img-fluid"></p>
+<div class="notes">
+<p>At the sametime, we also want to ensure that the reports are inline with the academic publication best practices.</p>
+</div>
+<hr>
+<section id="two-sample-means" class="level3">
+<h3 class="anchored" data-anchor-id="two-sample-means">Two-sample means</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Boxplot revealing the mean and distribution of two samples.</p>
+<p><img src="img/image4a.png" class="img-fluid"></p>
+</div><div class="column" style="width:50%;">
+<p>Boxplot with two-sample mean test</p>
+<p><img src="img/image4b.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="notes">
+<p>The chart on the left is a typical boxplot commonly prepared by data visualisation designer.</p>
+<p>The chart on the right is an example of a visual analytic boxplot. Notice that, the chart is complement with statistical test results and other ancillary information such as sample sizes and sample means.</p>
+</div>
+<hr>
+</section>
+<section id="visually-driven-correlation-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="visually-driven-correlation-analysis">Visually-driven Correlation Analysis</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Scatter plot showing the relationship between two continuous variables.</p>
+<p><img src="img/image5a.png" class="img-fluid"></p>
+</div><div class="column" style="width:50%;">
+<p>Scatter plot with significant test of correlation.</p>
+<p><img src="img/image5b.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="notes">
+<p>The chart on the left is a typical scatter plot commonly prepared by data visualisation designer.</p>
+<p>The chart on the right is an example of a visual analytic boxplot. Notice that, the chart is complement with statistical test results and other ancillary information such as sample sizes.</p>
+</div>
+<hr>
+</section>
+<section id="visually-driven-association-independent-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="visually-driven-association-independent-analysis">Visually-driven Association (Independent) Analysis</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Mosaic plot showing the association between two categorical variables.</p>
+<p><img src="img/image6a.png" class="img-fluid"></p>
+</div><div class="column" style="width:50%;">
+<p>Stacked bar chart with significant test of association.</p>
+<p><img src="img/image6b.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="notes">
+<p>The chart on the left is a typical stacked bar chart commonly prepared by data visualisation designer.</p>
+<p>The chart on the right is an example of a visual analytic stacked bar chart. Notice that, the chart is complement with statistical test results and other ancillary information such as sample sizes.</p>
+</div>
+<hr>
+</section>
+<section id="visual-analytics-appraoch-for-building-exploratory-models" class="level3">
+<h3 class="anchored" data-anchor-id="visual-analytics-appraoch-for-building-exploratory-models">Visual Analytics Appraoch for Building Exploratory Models</h3>
+<section id="model-diagnostic-checking-for-multicolinearity" class="level4">
+<h4 class="anchored" data-anchor-id="model-diagnostic-checking-for-multicolinearity">Model Diagnostic: checking for multicolinearity:</h4>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Conventional statistical report</p>
+<p><img src="img/image7a.png" class="img-fluid"></p>
+</div><div class="column" style="width:50%;">
+<p>Visual Analytics approach</p>
+<p><img src="img/image7b.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="notes">
+<p>When building explanatory model by using multiple regression method, it is important for us to avoid having dependent variables that are high correlated. Conventional a statistical method called VIF (Variance Inflation Factor) is used and a typical result is shown on the left. The report is not easy to comprehend by casual data analyst.</p>
+<p>The bar chart on the right is a visual analytic approach to show the same report. Three different colours are used to diffrentiate the degree of multicolinearity and the VIF values are mapped to the height of the bar.</p>
+</div>
+<hr>
+</section>
+</section>
+<section id="visual-analytics-appraoch-for-building-exploratory-models-1" class="level3">
+<h3 class="anchored" data-anchor-id="visual-analytics-appraoch-for-building-exploratory-models-1">Visual Analytics Appraoch for Building Exploratory Models</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<section id="model-diagnostic-checking-normality-assumption" class="level4">
+<h4 class="anchored" data-anchor-id="model-diagnostic-checking-normality-assumption">Model Diagnostic: Checking normality assumption</h4>
+<p><img src="img/image8a.png" class="img-fluid"></p>
+</section>
+</div><div class="column" style="width:50%;">
+<section id="model-diagnostic-checking-model-for-homogeneity-of-variances" class="level4">
+<h4 class="anchored" data-anchor-id="model-diagnostic-checking-model-for-homogeneity-of-variances">Model Diagnostic: Checking model for homogeneity of variances</h4>
+<p><img src="img/image8b.png" class="img-fluid"></p>
+</section>
+</div>
+</div>
+<div class="notes">
+<p>The analytical histogram of the left is specially designed for normality assumption test. When the residual histogram (in cyan colour) is not closed to the theretical histogram (i.e in green), then we will reject the Null hypotehsis and infer that the model residual failed to conform to normality assumption.</p>
+<p>The analytical scatter plot on the right is used to perform homogeneity of Variance assumption test. A constant variance distribution should be flat and horizontal and the data points should be scattered around the fit line. The chart on the right shows clear sign of heteroscedasticity.</p>
+</div>
+<hr>
+</section>
+<section id="visual-analytics-appraoch-for-building-exploratory-models-2" class="level3">
+<h3 class="anchored" data-anchor-id="visual-analytics-appraoch-for-building-exploratory-models-2">Visual Analytics Appraoch for Building Exploratory Models</h3>
+<section id="analysing-model-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="analysing-model-parameters">Analysing model parameters</h4>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Conventional statistical report</p>
+<p><img src="img/image9a.png" class="img-fluid"></p>
+</div><div class="column" style="width:50%;">
+<p>Visual Analytics approach</p>
+<p><img src="img/image9b.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="visualising-uncertainty" class="level2">
+<h2 class="anchored" data-anchor-id="visualising-uncertainty">Visualising Uncertainty</h2>
+<section id="why-it-is-important" class="level3">
+<h3 class="anchored" data-anchor-id="why-it-is-important">Why it is important?</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>One of the most challenging aspects of data visualization is the visualization of uncertainty.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image5-1.jpg" class="img-fluid"></p>
+</div>
+</div>
+<div style="font-size: 0.65em">
+<p>Source: Chart 61, LABOUR FORCE IN SINGAPORE 2019, pg. 52.</p>
+</div>
+<div class="notes">
+<p>One of the most challenging aspects of visual analytics is the visualisation of uncertainty. When we see data point drawn in a specific location, we tend to interpret it as a precise representation of the true value. It is difficult to conceive that a data point could actually lie somewhere it hasn’t been drawn. Yet this scenario is ubiquitous in data visualisation. Nearly every dataset we work with has some uncertainty, and whether and how we choose to represent this uncertainty can make a major difference in how accurately our audience perceives the meaning of the data.</p>
+<p>Two commonly used approaches to indicate uncertainty are error bars and confidence bands. In this section, we will examine the basic concepts and design pricinples of these methods.</p>
+</div>
+<hr>
+</section>
+<section id="why-one-shouldnt-use-a-bar-graph-even-if-the-data-are-normally-distributed" class="level3">
+<h3 class="anchored" data-anchor-id="why-one-shouldnt-use-a-bar-graph-even-if-the-data-are-normally-distributed">Why one shouldn’t use a bar graph, even if the data are normally distributed?</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>It is not appropriate to displace average values on bars.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image5-2.jpg" class="img-fluid"></p>
+</div>
+</div>
+<div class="notes">
+<p>Figure on the right is an EDA plot that I use to see in the Assignment 1 reports of ISSS602 Data Analytics Lab. Bar chart should be used to show count or frequency count and should not be used to reveal summary statistics such as mean. This is because the bar failed to show the range of observed values.</p>
+</div>
+<hr>
+</section>
+<section id="why-error-bar-failed" class="level3">
+<h3 class="anchored" data-anchor-id="why-error-bar-failed">Why Error bar failed?</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Each error bar is constructed using a 95% confidence interval of the mean.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image5-3.jpg" class="img-fluid"></p>
+</div>
+</div>
+<div class="notes">
+<p>In an error bar, the bar height represents the mean. Error bars represent 1 standard error. The y-axis starts at zero and ends just above the highest error bar.</p>
+<p>Given that the y-axis typically starts at zero, bars often include irrelevance values as shown in the figure. zone of irrelevance.</p>
+</div>
+<hr>
+</section>
+<section id="error-bar-on-a-dot-plot" class="level3">
+<h3 class="anchored" data-anchor-id="error-bar-on-a-dot-plot">Error bar on a dot plot</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Each error bar is constructed using a 95% confidence interval of the percentage.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image5-3b.jpg" class="img-fluid"></p>
+</div>
+</div>
+<div class="notes">
+<p>The error plot on dot plot is more truthful and informative alternatives to the error bar graph in previous slide. The plot reveals the value range of each race clearly. By applying inking principle in the design, the error plot and the mean value of each race is shown clearly.</p>
+</div>
+<hr>
+</section>
+<section id="graphical-methods-for-visualising-uncertainty" class="level3">
+<h3 class="anchored" data-anchor-id="graphical-methods-for-visualising-uncertainty">Graphical methods for visualising uncertainty</h3>
+<p><img src="img/image5-12.png" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Reference: <a href="https://serialmentor.com/dataviz/visualizing-uncertainty.html#visualizing-the-uncertainty-of-point-estimates">Visualizing the uncertainty of point estimates</a></p>
+</div>
+<div class="notes">
+<p>This figure shows different different alternative design of error plots: + graded error plots with caps; + graded error plots without caps; + single-interval error plots with caps; + single-interval error plots without caps; + confidence strips; and + confidence distributions.</p>
+<p>There are advantages and disadvantages to all these choices. You are encouraged to explore them one by one and select the best data visualisation that meet you storytelling need.</p>
+</div>
+<hr>
+</section>
+<section id="back-to-statistics-101" class="level3">
+<h3 class="anchored" data-anchor-id="back-to-statistics-101">Back to Statistics 101</h3>
+<section id="population-and-samples" class="level4">
+<h4 class="anchored" data-anchor-id="population-and-samples">Population and samples</h4>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img src="img/image5-5.jpg" class="img-fluid"></p>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image5-6.jpg" class="img-fluid"></p>
+</div>
+</div>
+<ul>
+<li>When drawing many samples from a population, it is possible to obtain a few with means that greatly differ from the population.</li>
+</ul>
+<div style="font-size: 0.65em">
+<p>Reference: Cairo, A. (2016) The Truthful Art, Chapter 11, New Riders]</p>
+</div>
+<div class="notes">
+<p>in order to prepare an error plot manually, it is good for us the revise some of the basic statistical concepts.</p>
+</div>
+<hr>
+</section>
+<section id="a-reminder-of-the-standard-normal-distribution" class="level4">
+<h4 class="anchored" data-anchor-id="a-reminder-of-the-standard-normal-distribution">A reminder of the standard normal distribution</h4>
+<p><img src="img/image5-7.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Reference: Cairo, A. (2016) The Truthful Art, Chapter 11, New Riders.</p>
+</div>
+<div class="notes">
+<p>If the distribution of heights in the population is roughly normal (and, again, we don’t know this), your answer can be inspired by a chart in this slide, which displays the percentage of scores that lie in between a certain number of standard deviations from the mean. We see that 68.2 percent of score lie between -1 and 1 standard deviations from the mean, and just 0.1 percent of scores are above three standard deviation.</p>
+<ul>
+<li>In a standard normal distribution, 95 percent of the scores lie between z-score -1.96 and 1.96 (that is, between -1.96 and 1.96 standard deviations from the mean).</li>
+<li>Also in a standard normal distribution, 99 percent of the scores lie between z-scores -2.58 and 2.58 (they are between -2.58 and 2.58 standard deviations from the mean)</li>
+</ul>
+</div>
+<hr>
+</section>
+<section id="the-standard-error" class="level4">
+<h4 class="anchored" data-anchor-id="the-standard-error">The standard error</h4>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>The formulas of standard deviation and standard error</p>
+<p><img src="img/image5-8a.jpg" class="img-fluid"></p>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image5-8.jpg" class="img-fluid" width="560"></p>
+</div>
+</div>
+<div style="font-size: 0.65em">
+<p>Reference: Cairo, A. (2016) The Truthful Art, Chapter 11, New Riders.</p>
+</div>
+<div class="notes">
+<p>Imagine that instead of drawing just a few samples from our population, we are able to get dozens of random samples of 40 purples each and that we calculate the mean of each of them.<br>
+Next, imagine that we discard all scores from all samples, and that we just keep their means. Then, we draw a histogram of just these means. This imaginary histogram is called <strong>a distribution of sample means</strong>. As any other distribution, it will have a mean of its own (a mean of sample means) and a standard deviation. This standard deviation of many imaginary sample means is called <strong>the standard error of the mean</strong>.</p>
+</div>
+<hr>
+</section>
+</section>
+<section id="calculating-the-confidence-interval-of-a-mean" class="level3">
+<h3 class="anchored" data-anchor-id="calculating-the-confidence-interval-of-a-mean">Calculating the confidence interval of a mean</h3>
+<p><img src="img/image5-9.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Reference: Cairo, A. (2016) The Truthful Art, Chapter 11, New Riders.</p>
+</div>
+<div class="notes">
+<p>A confidence interval is an expression of the uncertainty around any statistic we wish to report. It is based on the standard error, and it’s usually communicated this way:</p>
+<p>“With a 95 percent level of confidence, we estimate that the average height of 12-year-old purples is 5.3feet +/-(margin of error here).</p>
+<p>To calculate a confidence interval first, we need to decide on a confidence level. The most common one is 95% and 98%, although you could really pick any figure you wish. What we need to remember is that <strong>the greater the confidence level we choose, the greater the margin of error becomes</strong>.</p>
+<p>Let us begin with the confidence interval for the mean of a sample. The average height of purples in our sample was 5.3 feet, and the standard deviation was 0.5. The 5.3 score is a <strong>point estimate</strong>. Reporting it on its own isn’t correct. We must also disclose the uncertainty that surrounds it. The formulas for the confidence interval of the mean of a large sample and to apply them are in the slide. The z in red is called the <strong>critical value</strong>.</p>
+</div>
+<hr>
+</section>
+<section id="calculating-the-confidence-interval-of-a-percentage" class="level3">
+<h3 class="anchored" data-anchor-id="calculating-the-confidence-interval-of-a-percentage">Calculating the confidence interval of a percentage</h3>
+<p><img src="img/image5-11.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Reference: Cairo, A. (2016) The Truthful Art, Chapter 11, New Riders.</p>
+</div>
+<div class="notes">
+<p>This slide shows the formulas to calculate the confidence interval of a percentage. Notice that the main different in these formula.</p>
+</div>
+<hr>
+</section>
+<section id="d-graphical-methods-for-visualising-uncertainty" class="level3">
+<h3 class="anchored" data-anchor-id="d-graphical-methods-for-visualising-uncertainty">2-d graphical methods for visualising uncertainty</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<section id="scatter-plot-with-95-confidence-ellipse" class="level4">
+<h4 class="anchored" data-anchor-id="scatter-plot-with-95-confidence-ellipse">Scatter plot with 95% confidence ellipse</h4>
+<p><img src="img/image5-13.jpg" class="img-fluid"></p>
+</section>
+</div><div class="column" style="width:50%;">
+<section id="scatter-plot-with-95-confidence-intervals" class="level4">
+<h4 class="anchored" data-anchor-id="scatter-plot-with-95-confidence-intervals">Scatter plot with 95% confidence intervals</h4>
+<p><img src="img/image5-14.jpg" class="img-fluid"></p>
+</section>
+</div>
+</div>
+<div class="notes">
+<p>The chart on the left shows the 95% confidence ellipse of a scatter plot and the chart on the right shows the 95% confidence band of a trend line (also known as best fit line).</p>
+<p>It is a common mistake to think that 95% confidence ellipse contains 95% of the data. A 95% confidence ellipse for it’s mean is really an algorithm with the following property: if you were to replicate our sampling from the underlying distribution many times and each time calculate a confidence ellipse, then 95% of the ellipses so constructed would contain the underlying mean. (Note that each sample would of course yield a different ellipse.)</p>
+</div>
+<hr>
+</section>
+<section id="confidence-band-of-a-trend-line" class="level3">
+<h3 class="anchored" data-anchor-id="confidence-band-of-a-trend-line">Confidence band of a trend line</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<section id="confidence-band-and-fit-lines" class="level4">
+<h4 class="anchored" data-anchor-id="confidence-band-and-fit-lines">Confidence band and fit lines</h4>
+<p><img src="img/image5-15a.jpg" class="img-fluid"></p>
+</section>
+</div><div class="column" style="width:50%;">
+<section id="a-graded-confidence-band" class="level4">
+<h4 class="anchored" data-anchor-id="a-graded-confidence-band">A graded confidence band</h4>
+<p><img src="img/image5-15b.png" class="img-fluid"></p>
+</section>
+</div>
+</div>
+<div class="notes">
+<p>The 95% confidence band, on the other hand, provides us with a range of different fit lines that would be compatible with the data. When student encounter a confidence band for the first time, they are often surprised that even a perfectly straight line produces a confidence band that is curved. The reason for the curvature is that the straight line fit can move in two distinct directions: it can be up and down (i.e have different intercepts), and it can rotate (i.e.&nbsp;having different slopes.)</p>
+<p>To draw a confidence ban, we need to specify a confidence lvel, and just as we did for error plots, it can be useful to highlight different levels of confidence. This leads us to the graded confidence band, which shows several confidence levels at once.</p>
+</div>
+</section>
+</section>
+<section id="variation-and-its-discontents" class="level2">
+<h2 class="anchored" data-anchor-id="variation-and-its-discontents">Variation and Its Discontents</h2>
+<section id="random-and-unfair-comparisons" class="level3">
+<h3 class="anchored" data-anchor-id="random-and-unfair-comparisons">Random and unfair comparisons</h3>
+<p><img src="img/image5-16.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Reference: <a href="https://www.perceptualedge.com/articles/visual_business_intelligence/variation_and_its_discontents.pdf">Variation and its discontents</a></p>
+</div>
+<div class="notes">
+<p>Central to quantitative data analysis is an understanding of <strong>variation</strong>. When we measure multiple occurrences of things to determine how and to what extent they differ, we’re examining variation. Some variation is random and some is caused by factors that we can attempt to identify and perhaps control. Random variation consists of differences in measures that occur routinely, without a specific cause. We should note random variation and move on, because nothing can be done about it. It is noise. It tells us nothing that requires a response.</p>
+<p>Instances of non-random variation are signals; they tell us something useful and provide opportunities for action. Signals that indicate poor performance—an undesirable state—can perhaps be reduced by controlling the causes. Signals that indicate an especially good state of affairs can provide useful insights and opportunities for improvement.</p>
+<p>Despite the significance of variation, relatively few people who work with data in most organizations understand it, especially the nature of randomness. This leads to false conclusions and poor decisions, especially when comparing measures of performance within a set of like entities (e.g., countries or companies). Most organizations spend too much time examining noise: the cacophony of random variation. Learning to distinguish signals from the noise is a fundamental skill of data analysis and performance monitoring. In this article, we’ll take a look at a special version of a scatter plot, called a <strong>funnel plot</strong> (not to be confused with a funnel chart), which is designed to filter out the noise and shine a spotlight on meaningful variation when we compare performance among entities in a group. Funnel plots address the fact that entities with relatively few occurrences of the thing being measured (a small sample), when compared to entities with many occurrences (a large sample), exhibit a greater degree of random variation, which must be taken into account when comparing them. A little later we’ll take a look at this problem and the solution that funnel plots provide in relation to healthcare data, but first let’s get more familiar with the effects of sample size on randomness.</p>
+<p>Consider the following display (a caterpillar plot) of actual healthcare data. Each data point represents a hospital, with 260 in total. The values are mortality rates following surgeries and the solid horizontal line represents the mean.</p>
+<p>The sample sizes (number of surgeries reported by each hospital) on which this graph is based range from 7 to 3,151. For this reason it isn’t appropriate to rank the hospitals by mortality rate. The ranking suggests a relationship of relative performance that cannot be determined by the data.</p>
+<p>Imagine that, unlike the anonymous version of the graph above, each data point is labeled with the hospital’s name. Can you hear the screams of surgeons from the hospitals with the highest mortality rates in the 4th quartile section of the chart? Can you see the puffed up egos of the surgeons who work at the hospitals with mortality rates of zero in the 1st quartile section? One of the hospitals with a zero mortality rate provided a sample of only seven surgeries.</p>
+<p>Note: You might realize, especially if you work with healthcare data similar to the example above, that a fair comparison of hospitals would require the data to be adjusted not just to account for varying sample sizes but also for varying levels of risk. Some surgeries are more risky than others and some patients, due to varying levels of illness, are more at risk than others. We’ll ignore this for now to keep the example simple.</p>
+</div>
+<hr>
+</section>
+<section id="funnel-plots-to-the-rescue" class="level3">
+<h3 class="anchored" data-anchor-id="funnel-plots-to-the-rescue">Funnel plots to the rescue</h3>
+</section>
+<div class="columns">
+<div class="column" style="width:50%;">
+<section id="statistical-details" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-details">Statistical details</h3>
+<p><img src="img/image5-18.jpg" class="img-fluid" width="980"></p>
+</section>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image5-17.jpg" class="img-fluid"></p>
+</div>
+</div>
+<div class="notes">
+<p>This funnel plot displays one data point per hospital, each of which shows the number of surgeries and the square root transformed mortality rate. The square roots of the mortality rates are not particularly meaningful in and of themselves, but that doesn’t matter because we’re simply trying to identify the hospitals that exhibit a level of performance that is outside of the boundaries of random variation and thus, according to the language of statistical process control, were probably due to a “special cause.” The farther a value falls outside of the boundaries, the more likely it is due to a special cause rather than randomness.</p>
+<p>Notice in the lower left-hand corner of the same plot below that two of the hospitals with mortality rates of zero reside within the boundaries, which indicates that we cannot rely on their low rates as significant.</p>
+<p>It is important to note that in making this comparison, we are assuming that the hospitals are homogeneous, all part of a single system which might not true in real world. For example, surgeries of many types are being compared without taking into account the fact that surgeries vary significantly in mortality risk. Likewise, patients of various levels of heath are being compared without taking into account that some of them went into surgery much healthier than others and were therefore at lesser mortality risk.</p>
+<p>It is routine when dealing with heterogeneous entities such as different types of surgeries and patients of varying levels of health to adjust values to account for these factors. In a case such as post-surgical mortality, typically an expected number of deaths is calculated to account for varying levels of risk and then the observed (actual) number of deaths that occurred is compared to this, resulting in an observed vs.&nbsp;expected (O/E) ratio. For a completely fair comparison of post-surgical mortality among these hospitals, it is this O/E ratio that should appear in the funnel plot.</p>
+</div>
+<hr>
+<section id="normality-assumption" class="level3">
+<h3 class="anchored" data-anchor-id="normality-assumption">Normality assumption</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p>Before plotting the graph, it is important to check if the values are conformed to normal distribution assumption.</p></li>
+<li><p>If the raw values are not conformed to normality assumption, they have to be transformed.</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image5-19.jpg" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell">
+
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

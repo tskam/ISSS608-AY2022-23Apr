@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dr.&nbsp;Kam Tin Seong Assoc. Professor of Information Systems (Practice)">
+<meta name="dcterms.date" content="2023-04-14">
+
+<title>ISSS608 - Lesson 9: Information Dashboard Design</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">ISSS608</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../syllabus.html">
+ <span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../lesson.html">
+ <span class="menu-text">Lesson Plan</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../DataViz.html">
+ <span class="menu-text">DataViz Makeover</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Take-home Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../take-home_ex/TH_EX01.html">
+ <span class="dropdown-text">Take-home Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../take-home_ex/TH_EX02.html">
+ <span class="dropdown-text">Take-home Exercise 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../take-home_ex/TH_EX03.html">
+ <span class="dropdown-text">Take-home Exercise 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../take-home_ex/TH_EX04.html">
+ <span class="dropdown-text">Take-home Exercise 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../VAproject.html">
+ <span class="menu-text">Visual Analytics Project</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-shiny-workshop" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Shiny Workshop</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-shiny-workshop">    
+        <li>
+    <a class="dropdown-item" href="../../ShinyWorkshop/Shiny1/Shiny1.html">
+ <span class="dropdown-text">R Shiny basic</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ShinyWorkshop/Shiny2/Shiny0.html">
+ <span class="dropdown-text">Beyond the basic</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ShinyWorkshop/Shiny3/Shiny0.html">
+ <span class="dropdown-text">Customising Shiny</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ShinyResources.html">
+ <span class="dropdown-text">Shiny Resources</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../Tableau.html">
+ <span class="menu-text">Tableau Resources</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-all-about-r" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">All About R</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-all-about-r">    
+        <li>
+    <a class="dropdown-item" href="../../R.html">
+ <span class="dropdown-text">R Resouces</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../R4Vis.html">
+ <span class="dropdown-text">R for Visual Analytics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Rt.html">
+ <span class="dropdown-text">R tips &amp; tricks</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Quarto.html">
+ <span class="dropdown-text">Quarto</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../git.html">
+ <span class="dropdown-text">git and github</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#content" id="toc-content" class="nav-link active" data-scroll-target="#content">Content</a></li>
+  <li><a href="#introducing-information-dashboard" id="toc-introducing-information-dashboard" class="nav-link" data-scroll-target="#introducing-information-dashboard">Introducing information dashboard</a>
+  <ul class="collapse">
+  <li><a href="#why-are-dashboards-so-important" id="toc-why-are-dashboards-so-important" class="nav-link" data-scroll-target="#why-are-dashboards-so-important">Why are dashboards so important?</a></li>
+  <li><a href="#classifying-dashboards-by-role" id="toc-classifying-dashboards-by-role" class="nav-link" data-scroll-target="#classifying-dashboards-by-role">Classifying Dashboards by Role</a></li>
+  <li><a href="#dashboards-for-operational-purpose" id="toc-dashboards-for-operational-purpose" class="nav-link" data-scroll-target="#dashboards-for-operational-purpose">Dashboards for operational purpose</a></li>
+  <li><a href="#dashboards-for-strategic-purpose" id="toc-dashboards-for-strategic-purpose" class="nav-link" data-scroll-target="#dashboards-for-strategic-purpose">Dashboards for strategic purpose</a></li>
+  <li><a href="#dashboards-for-analytics-purpose" id="toc-dashboards-for-analytics-purpose" class="nav-link" data-scroll-target="#dashboards-for-analytics-purpose">Dashboards for analytics purpose</a></li>
+  </ul></li>
+  <li><a href="#best-practices-for-dashboard-design" id="toc-best-practices-for-dashboard-design" class="nav-link" data-scroll-target="#best-practices-for-dashboard-design">Best Practices for Dashboard Design</a>
+  <ul class="collapse">
+  <li><a href="#preparing-stage-target-the-user" id="toc-preparing-stage-target-the-user" class="nav-link" data-scroll-target="#preparing-stage-target-the-user">Preparing stage: Target the user</a></li>
+  </ul></li>
+  <li><a href="#preparing-stage-user-centered-design-process" id="toc-preparing-stage-user-centered-design-process" class="nav-link" data-scroll-target="#preparing-stage-user-centered-design-process">Preparing stage: User-centered Design Process</a>
+  <ul class="collapse">
+  <li><a href="#preparing-stage-a-user-centric-dashboard-design-guide" id="toc-preparing-stage-a-user-centric-dashboard-design-guide" class="nav-link" data-scroll-target="#preparing-stage-a-user-centric-dashboard-design-guide">Preparing stage: A User-Centric Dashboard Design Guide</a></li>
+  <li><a href="#preparing-stage-a-user-centric-dashboard-design-guide-1" id="toc-preparing-stage-a-user-centric-dashboard-design-guide-1" class="nav-link" data-scroll-target="#preparing-stage-a-user-centric-dashboard-design-guide-1">Preparing stage: A User-Centric Dashboard Design Guide</a></li>
+  <li><a href="#preparing-stage-a-user-centric-dashboard-design-guide-2" id="toc-preparing-stage-a-user-centric-dashboard-design-guide-2" class="nav-link" data-scroll-target="#preparing-stage-a-user-centric-dashboard-design-guide-2">Preparing stage: A User-Centric Dashboard Design Guide</a></li>
+  <li><a href="#preparing-stage-a-user-centric-dashboard-design-guide-3" id="toc-preparing-stage-a-user-centric-dashboard-design-guide-3" class="nav-link" data-scroll-target="#preparing-stage-a-user-centric-dashboard-design-guide-3">Preparing stage: A User-Centric Dashboard Design Guide</a></li>
+  <li><a href="#preparing-stage-a-user-centric-dashboard-design-guide-4" id="toc-preparing-stage-a-user-centric-dashboard-design-guide-4" class="nav-link" data-scroll-target="#preparing-stage-a-user-centric-dashboard-design-guide-4">Preparing stage: A User-Centric Dashboard Design Guide</a></li>
+  <li><a href="#preparing-stage-a-user-centric-dashboard-design-guide-5" id="toc-preparing-stage-a-user-centric-dashboard-design-guide-5" class="nav-link" data-scroll-target="#preparing-stage-a-user-centric-dashboard-design-guide-5">Preparing stage: A User-Centric Dashboard Design Guide</a></li>
+  <li><a href="#preparing-stage-a-user-centric-dashboard-design-guide-6" id="toc-preparing-stage-a-user-centric-dashboard-design-guide-6" class="nav-link" data-scroll-target="#preparing-stage-a-user-centric-dashboard-design-guide-6">Preparing stage: A User-Centric Dashboard Design Guide</a></li>
+  <li><a href="#ideal-graphs-for-information-dashboard" id="toc-ideal-graphs-for-information-dashboard" class="nav-link" data-scroll-target="#ideal-graphs-for-information-dashboard">Ideal graphs for information dashboard</a></li>
+  </ul></li>
+  <li><a href="#ideal-graphs-for-information-dashboard-bullet-graphs" id="toc-ideal-graphs-for-information-dashboard-bullet-graphs" class="nav-link" data-scroll-target="#ideal-graphs-for-information-dashboard-bullet-graphs">Ideal graphs for information dashboard: Bullet Graphs</a>
+  <ul class="collapse">
+  <li><a href="#bullet-graph-design-specifications" id="toc-bullet-graph-design-specifications" class="nav-link" data-scroll-target="#bullet-graph-design-specifications">Bullet graph design specifications</a></li>
+  </ul></li>
+  <li><a href="#ideal-graphs-for-information-dashboard-sparklines" id="toc-ideal-graphs-for-information-dashboard-sparklines" class="nav-link" data-scroll-target="#ideal-graphs-for-information-dashboard-sparklines">Ideal graphs for information dashboard: Sparklines</a>
+  <ul class="collapse">
+  <li><a href="#pre-attentive-with-colour-and-symbol" id="toc-pre-attentive-with-colour-and-symbol" class="nav-link" data-scroll-target="#pre-attentive-with-colour-and-symbol">Pre-attentive with colour and symbol</a></li>
+  <li><a href="#aspect-ratio" id="toc-aspect-ratio" class="nav-link" data-scroll-target="#aspect-ratio">Aspect ratio</a></li>
+  <li><a href="#unintentional-optical-clutter" id="toc-unintentional-optical-clutter" class="nav-link" data-scroll-target="#unintentional-optical-clutter">Unintentional optical clutter</a></li>
+  <li><a href="#sparklines-best-practice" id="toc-sparklines-best-practice" class="nav-link" data-scroll-target="#sparklines-best-practice">Sparklines best practice</a></li>
+  <li><a href="#sparklines-best-practice-1" id="toc-sparklines-best-practice-1" class="nav-link" data-scroll-target="#sparklines-best-practice-1">Sparklines best practice</a></li>
+  <li><a href="#sparklines-best-practice-2" id="toc-sparklines-best-practice-2" class="nav-link" data-scroll-target="#sparklines-best-practice-2">Sparklines best practice</a></li>
+  </ul></li>
+  <li><a href="#best-practices-for-dashboard-design-1" id="toc-best-practices-for-dashboard-design-1" class="nav-link" data-scroll-target="#best-practices-for-dashboard-design-1">Best Practices for Dashboard Design</a>
+  <ul class="collapse">
+  <li><a href="#common-mistakes-in-dashboard-design" id="toc-common-mistakes-in-dashboard-design" class="nav-link" data-scroll-target="#common-mistakes-in-dashboard-design">Common mistakes in dashboard design</a></li>
+  <li><a href="#common-mistakes-in-dashboard-design-1" id="toc-common-mistakes-in-dashboard-design-1" class="nav-link" data-scroll-target="#common-mistakes-in-dashboard-design-1">Common mistakes in dashboard design</a></li>
+  <li><a href="#common-mistakes-in-dashboard-design-2" id="toc-common-mistakes-in-dashboard-design-2" class="nav-link" data-scroll-target="#common-mistakes-in-dashboard-design-2">Common mistakes in dashboard design</a></li>
+  <li><a href="#common-mistakes-in-dashboard-design-3" id="toc-common-mistakes-in-dashboard-design-3" class="nav-link" data-scroll-target="#common-mistakes-in-dashboard-design-3">Common mistakes in dashboard design</a></li>
+  <li><a href="#common-mistakes-in-dashboard-design-4" id="toc-common-mistakes-in-dashboard-design-4" class="nav-link" data-scroll-target="#common-mistakes-in-dashboard-design-4">Common mistakes in dashboard design</a></li>
+  <li><a href="#common-mistakes-in-dashboard-design-5" id="toc-common-mistakes-in-dashboard-design-5" class="nav-link" data-scroll-target="#common-mistakes-in-dashboard-design-5">Common mistakes in dashboard design</a></li>
+  <li><a href="#common-mistakes-in-dashboard-design-6" id="toc-common-mistakes-in-dashboard-design-6" class="nav-link" data-scroll-target="#common-mistakes-in-dashboard-design-6">Common mistakes in dashboard design</a></li>
+  <li><a href="#common-mistakes-in-dashboard-design-7" id="toc-common-mistakes-in-dashboard-design-7" class="nav-link" data-scroll-target="#common-mistakes-in-dashboard-design-7">Common mistakes in dashboard design</a></li>
+  <li><a href="#common-mistakes-in-dashboard-design-8" id="toc-common-mistakes-in-dashboard-design-8" class="nav-link" data-scroll-target="#common-mistakes-in-dashboard-design-8">Common mistakes in dashboard design</a></li>
+  <li><a href="#common-mistakes-in-dashboard-design-9" id="toc-common-mistakes-in-dashboard-design-9" class="nav-link" data-scroll-target="#common-mistakes-in-dashboard-design-9">Common mistakes in dashboard design</a></li>
+  <li><a href="#common-mistakes-in-dashboard-design-10" id="toc-common-mistakes-in-dashboard-design-10" class="nav-link" data-scroll-target="#common-mistakes-in-dashboard-design-10">Common mistakes in dashboard design</a></li>
+  <li><a href="#alternative-dashboard-design" id="toc-alternative-dashboard-design" class="nav-link" data-scroll-target="#alternative-dashboard-design">Alternative dashboard design</a></li>
+  <li><a href="#common-mistakes-in-dashboard-design-11" id="toc-common-mistakes-in-dashboard-design-11" class="nav-link" data-scroll-target="#common-mistakes-in-dashboard-design-11">Common mistakes in dashboard design</a></li>
+  <li><a href="#alternative-dashboard-design-1" id="toc-alternative-dashboard-design-1" class="nav-link" data-scroll-target="#alternative-dashboard-design-1">Alternative dashboard design</a></li>
+  <li><a href="#common-mistakes-in-dashboard-design-12" id="toc-common-mistakes-in-dashboard-design-12" class="nav-link" data-scroll-target="#common-mistakes-in-dashboard-design-12">Common mistakes in dashboard design</a></li>
+  <li><a href="#alternative-dashboard-design-2" id="toc-alternative-dashboard-design-2" class="nav-link" data-scroll-target="#alternative-dashboard-design-2">Alternative dashboard design</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a>
+  <ul class="collapse">
+  <li><a href="#dashboard-design" id="toc-dashboard-design" class="nav-link" data-scroll-target="#dashboard-design">Dashboard Design</a></li>
+  </ul></li>
+  <li><a href="#references-1" id="toc-references-1" class="nav-link" data-scroll-target="#references-1">References</a>
+  <ul class="collapse">
+  <li><a href="#dashboard-design-1" id="toc-dashboard-design-1" class="nav-link" data-scroll-target="#dashboard-design-1">Dashboard Design</a></li>
+  </ul></li>
+  <li><a href="#references-2" id="toc-references-2" class="nav-link" data-scroll-target="#references-2">References</a>
+  <ul class="collapse">
+  <li><a href="#bullet-chart-sparklines" id="toc-bullet-chart-sparklines" class="nav-link" data-scroll-target="#bullet-chart-sparklines">Bullet Chart &amp; Sparklines</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lesson 9: <br>Information Dashboard Design</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    Dr.&nbsp;Kam Tin Seong<br>Assoc. Professor of Information Systems (Practice) 
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            School of Computing and Information Systems,<br>Singapore Management University
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">14 Apr 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="content" class="level2">
+<h2 class="anchored" data-anchor-id="content">Content</h2>
+<ul>
+<li><p>Introducing information dashboard</p></li>
+<li><p>Information dashboard design best practices</p></li>
+<li><p>Common mistakes in dashboard design</p></li>
+<li><p>Ideal graphs for information dashboard</p>
+<ul>
+<li>Bullet graph</li>
+<li>Sparklines</li>
+<li>Bandlines</li>
+</ul></li>
+</ul>
+</section>
+<section id="introducing-information-dashboard" class="level2">
+<h2 class="anchored" data-anchor-id="introducing-information-dashboard">Introducing information dashboard</h2>
+<p><img src="img/image10-1.jpg" class="img-fluid"></p>
+<hr>
+<section id="why-are-dashboards-so-important" class="level3">
+<h3 class="anchored" data-anchor-id="why-are-dashboards-so-important">Why are dashboards so important?</h3>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li>A well-designed performance dashboard helps you to see more clearly by helping you to understand each fact more quickly so you can find patterns in the storm.</li>
+</ul>
+</div><div class="column" style="width:60%;">
+<p><img src="img/image10-2.jpg" class="img-fluid"></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="classifying-dashboards-by-role" class="level3">
+<h3 class="anchored" data-anchor-id="classifying-dashboards-by-role">Classifying Dashboards by Role</h3>
+<ul>
+<li><p>Dashboards for strategic purpose</p></li>
+<li><p>Dashboards for operational purpose</p></li>
+<li><p>Dashboards for analytics purpose</p></li>
+</ul>
+<hr>
+</section>
+<section id="dashboards-for-operational-purpose" class="level3">
+<h3 class="anchored" data-anchor-id="dashboards-for-operational-purpose">Dashboards for operational purpose</h3>
+<p><img src="img/image10-3.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="dashboards-for-strategic-purpose" class="level3">
+<h3 class="anchored" data-anchor-id="dashboards-for-strategic-purpose">Dashboards for strategic purpose</h3>
+<p><img src="img/image10-4.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="dashboards-for-analytics-purpose" class="level3">
+<h3 class="anchored" data-anchor-id="dashboards-for-analytics-purpose">Dashboards for analytics purpose</h3>
+<p><img src="img/image10-5.jpg" class="img-fluid"></p>
+</section>
+</section>
+<section id="best-practices-for-dashboard-design" class="level2">
+<h2 class="anchored" data-anchor-id="best-practices-for-dashboard-design">Best Practices for Dashboard Design</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Preparing stage
+<ul>
+<li>Target the user</li>
+<li>Know what value your dashboard will add</li>
+<li>Display only actionable information</li>
+</ul></li>
+<li>Design stage
+<ul>
+<li>Right tool for the right job</li>
+<li>Context</li>
+<li>Layout and clarity</li>
+<li>Visual aesthetics</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<hr>
+<section id="preparing-stage-target-the-user" class="level3">
+<h3 class="anchored" data-anchor-id="preparing-stage-target-the-user">Preparing stage: Target the user</h3>
+<p><img src="img/image10-6.png" class="img-fluid"></p>
+<hr>
+</section>
+</section>
+<section id="preparing-stage-user-centered-design-process" class="level2">
+<h2 class="anchored" data-anchor-id="preparing-stage-user-centered-design-process">Preparing stage: User-centered Design Process</h2>
+<p><img src="img/image10-7.png" class="img-fluid"></p>
+<p>Reference: <a href="https://ink.library.smu.edu.sg/sis_research/1479/">Developing and Applying a User-Centered Model for the Design and Implementation of Information Visualisation</a></p>
+<hr>
+<section id="preparing-stage-a-user-centric-dashboard-design-guide" class="level3">
+<h3 class="anchored" data-anchor-id="preparing-stage-a-user-centric-dashboard-design-guide">Preparing stage: A User-Centric Dashboard Design Guide</h3>
+<p><img src="img/image10-8.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="preparing-stage-a-user-centric-dashboard-design-guide-1" class="level3">
+<h3 class="anchored" data-anchor-id="preparing-stage-a-user-centric-dashboard-design-guide-1">Preparing stage: A User-Centric Dashboard Design Guide</h3>
+<p><strong>Who is my target audience?</strong></p>
+<p><img src="img/image10-9.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="preparing-stage-a-user-centric-dashboard-design-guide-2" class="level3">
+<h3 class="anchored" data-anchor-id="preparing-stage-a-user-centric-dashboard-design-guide-2">Preparing stage: A User-Centric Dashboard Design Guide</h3>
+<p><strong>What value will the dashboard bring?</strong></p>
+<ul>
+<li>Help management define what is important.</li>
+<li>Educate people in the organization about the things that matter.</li>
+<li>Set goals and expectations for specific individuals or groups.</li>
+<li>Help executives sleep at night because they know what’s going on.</li>
+<li>Encourage specific actions in a timely manner.</li>
+<li>Highlight exceptions and provide alerts when problems occur.</li>
+<li>Communicate progress and success.</li>
+<li>Provide a common interface for interacting with and analysing important business data.</li>
+</ul>
+<hr>
+</section>
+<section id="preparing-stage-a-user-centric-dashboard-design-guide-3" class="level3">
+<h3 class="anchored" data-anchor-id="preparing-stage-a-user-centric-dashboard-design-guide-3">Preparing stage: A User-Centric Dashboard Design Guide</h3>
+<p><strong>What type of dashboard am I creating?</strong></p>
+<p><img src="img/image10-10.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="preparing-stage-a-user-centric-dashboard-design-guide-4" class="level3">
+<h3 class="anchored" data-anchor-id="preparing-stage-a-user-centric-dashboard-design-guide-4">Preparing stage: A User-Centric Dashboard Design Guide</h3>
+<div class="columns">
+<div class="column" data-widht="50%">
+<p><strong>Information Discrimination</strong></p>
+<ul>
+<li><p>Find the core</p></li>
+<li><p>Ask a better question</p></li>
+<li><p>Push to the appendix</p></li>
+<li><p>Reporting vs exploration</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image10-12.png" class="img-fluid"></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="preparing-stage-a-user-centric-dashboard-design-guide-5" class="level3">
+<h3 class="anchored" data-anchor-id="preparing-stage-a-user-centric-dashboard-design-guide-5">Preparing stage: A User-Centric Dashboard Design Guide</h3>
+<p><strong>Choosing the perfect metric</strong></p>
+<p><img src="img/image10-13.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="preparing-stage-a-user-centric-dashboard-design-guide-6" class="level3">
+<h3 class="anchored" data-anchor-id="preparing-stage-a-user-centric-dashboard-design-guide-6">Preparing stage: A User-Centric Dashboard Design Guide</h3>
+<p><strong>Choosing the perfect metric</strong></p>
+<p><img src="img/image10-11.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="ideal-graphs-for-information-dashboard" class="level3">
+<h3 class="anchored" data-anchor-id="ideal-graphs-for-information-dashboard">Ideal graphs for information dashboard</h3>
+<section id="right-tool-for-the-right-job" class="level4">
+<h4 class="anchored" data-anchor-id="right-tool-for-the-right-job">Right tool for the right job?</h4>
+<p><strong>An assortment of typical dashboard gauges</strong></p>
+<p><img src="img/image10-14.png" class="img-fluid"></p>
+<hr>
+</section>
+</section>
+</section>
+<section id="ideal-graphs-for-information-dashboard-bullet-graphs" class="level2">
+<h2 class="anchored" data-anchor-id="ideal-graphs-for-information-dashboard-bullet-graphs">Ideal graphs for information dashboard: Bullet Graphs</h2>
+<ul>
+<li>Bullet graphs to replace gauges.</li>
+</ul>
+<p><img src="img/image10-15.jpg" class="img-fluid"></p>
+<hr>
+<section id="bullet-graph-design-specifications" class="level3">
+<h3 class="anchored" data-anchor-id="bullet-graph-design-specifications">Bullet graph design specifications</h3>
+<p><img src="img/image10-16.png" class="img-fluid"></p>
+<hr>
+</section>
+</section>
+<section id="ideal-graphs-for-information-dashboard-sparklines" class="level2">
+<h2 class="anchored" data-anchor-id="ideal-graphs-for-information-dashboard-sparklines">Ideal graphs for information dashboard: Sparklines</h2>
+<ul>
+<li>A sparkline is a very small line chart, typically drawn without axes or coordinates.</li>
+</ul>
+<p><img src="img/image10-17.jpg" class="img-fluid" width="1089"></p>
+<div style="font-size: 0.65em">
+<p>Reference: <a href="https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=000AIr">Sparklines</a></p>
+</div>
+<hr>
+<section id="pre-attentive-with-colour-and-symbol" class="level3">
+<h3 class="anchored" data-anchor-id="pre-attentive-with-colour-and-symbol">Pre-attentive with colour and symbol</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img src="img/image10-18.jpg" class="img-fluid"></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="aspect-ratio" class="level3">
+<h3 class="anchored" data-anchor-id="aspect-ratio">Aspect ratio</h3>
+<ul>
+<li>A graphic’s width/height ratio makes a big difference in displaying data.</li>
+</ul>
+<p><img src="img/image10-19.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="unintentional-optical-clutter" class="level3">
+<h3 class="anchored" data-anchor-id="unintentional-optical-clutter">Unintentional optical clutter</h3>
+<ul>
+<li>Areas surrounding data-lines may generate unintentional optical clutter. Strong frames produce melodramatic but content-diminishing visual effects.</li>
+</ul>
+<p><img src="img/image10-20.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="sparklines-best-practice" class="level3">
+<h3 class="anchored" data-anchor-id="sparklines-best-practice">Sparklines best practice</h3>
+<ul>
+<li>Enriched with context</li>
+</ul>
+<p><img src="img/image10-21.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="sparklines-best-practice-1" class="level3">
+<h3 class="anchored" data-anchor-id="sparklines-best-practice-1">Sparklines best practice</h3>
+<ul>
+<li>Use reference line to provide context</li>
+</ul>
+<p><img src="img/image10-22.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="sparklines-best-practice-2" class="level3">
+<h3 class="anchored" data-anchor-id="sparklines-best-practice-2">Sparklines best practice</h3>
+<ul>
+<li>Use reference region to provide context</li>
+</ul>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="img/image10-23.jpg" class="img-fluid figure-img" width="581"></p>
+</figure>
+</div>
+<div style="font-size: 0.65em">
+<p>Reference: <a href="https://stackoverflow.com/questions/35434760/sparklines-in-ggplot2">Sparklines in ggplot2</a></p>
+</div>
+</section>
+</section>
+<section id="best-practices-for-dashboard-design-1" class="level2">
+<h2 class="anchored" data-anchor-id="best-practices-for-dashboard-design-1">Best Practices for Dashboard Design</h2>
+<section id="common-mistakes-in-dashboard-design" class="level3">
+<h3 class="anchored" data-anchor-id="common-mistakes-in-dashboard-design">Common mistakes in dashboard design</h3>
+<ul>
+<li><p>Exceeding the boundaries of a single page</p></li>
+<li><p>Supplying inadequate context for the data</p></li>
+<li><p>Displaying excessive detail or precision</p></li>
+<li><p>Exposing measure indirectly</p></li>
+<li><p>Choosing inappropriate display media</p></li>
+<li><p>Introducing meaningless variety</p></li>
+<li><p>Using poorly designed display media</p></li>
+<li><p>Encoding quantitative data inaccurately</p></li>
+</ul>
+<hr>
+</section>
+<section id="common-mistakes-in-dashboard-design-1" class="level3">
+<h3 class="anchored" data-anchor-id="common-mistakes-in-dashboard-design-1">Common mistakes in dashboard design</h3>
+<ul>
+<li>Exceeding the boundaries of a single page and requiring the viewer to scroll</li>
+</ul>
+<p><img src="img/image10-24.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="common-mistakes-in-dashboard-design-2" class="level3">
+<h3 class="anchored" data-anchor-id="common-mistakes-in-dashboard-design-2">Common mistakes in dashboard design</h3>
+<ul>
+<li>Fragmenting data into separate screen</li>
+</ul>
+<p><img src="img/image10-25.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="common-mistakes-in-dashboard-design-3" class="level3">
+<h3 class="anchored" data-anchor-id="common-mistakes-in-dashboard-design-3">Common mistakes in dashboard design</h3>
+<ul>
+<li>Displaying excessive detail or precision</li>
+</ul>
+<p><img src="img/image10-26.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="common-mistakes-in-dashboard-design-4" class="level3">
+<h3 class="anchored" data-anchor-id="common-mistakes-in-dashboard-design-4">Common mistakes in dashboard design</h3>
+<ul>
+<li>Introducing meaningless variety</li>
+</ul>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="img/image10-27.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<hr>
+</section>
+<section id="common-mistakes-in-dashboard-design-5" class="level3">
+<h3 class="anchored" data-anchor-id="common-mistakes-in-dashboard-design-5">Common mistakes in dashboard design</h3>
+<ul>
+<li>Arranging the data poorly</li>
+</ul>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="img/image10-28.png" class="img-fluid figure-img" width="700"></p>
+</figure>
+</div>
+<hr>
+</section>
+<section id="common-mistakes-in-dashboard-design-6" class="level3">
+<h3 class="anchored" data-anchor-id="common-mistakes-in-dashboard-design-6">Common mistakes in dashboard design</h3>
+<ul>
+<li>Highlighting important data ineffectively or not</li>
+</ul>
+<p><img src="img/image10-29.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="common-mistakes-in-dashboard-design-7" class="level3">
+<h3 class="anchored" data-anchor-id="common-mistakes-in-dashboard-design-7">Common mistakes in dashboard design</h3>
+<ul>
+<li>Cluttering the display with useless decoration</li>
+</ul>
+<p><img src="img/image10-30.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="common-mistakes-in-dashboard-design-8" class="level3">
+<h3 class="anchored" data-anchor-id="common-mistakes-in-dashboard-design-8">Common mistakes in dashboard design</h3>
+<ul>
+<li>Misusing or overusing colour</li>
+</ul>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="img/image10-31.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+<hr>
+</section>
+<section id="common-mistakes-in-dashboard-design-9" class="level3">
+<h3 class="anchored" data-anchor-id="common-mistakes-in-dashboard-design-9">Common mistakes in dashboard design</h3>
+<ul>
+<li>Designing an unattractive visual display</li>
+</ul>
+<p><img src="img/image10-32.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="common-mistakes-in-dashboard-design-10" class="level3">
+<h3 class="anchored" data-anchor-id="common-mistakes-in-dashboard-design-10">Common mistakes in dashboard design</h3>
+<ul>
+<li>Design that failed to reveal KPIs effectively</li>
+</ul>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="img/image10-33.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<hr>
+</section>
+<section id="alternative-dashboard-design" class="level3">
+<h3 class="anchored" data-anchor-id="alternative-dashboard-design">Alternative dashboard design</h3>
+<ul>
+<li>Design that reveals KPIs effectively</li>
+</ul>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="img/image10-34.png" class="img-fluid figure-img" width="600"></p>
+</figure>
+</div>
+<hr>
+</section>
+<section id="common-mistakes-in-dashboard-design-11" class="level3">
+<h3 class="anchored" data-anchor-id="common-mistakes-in-dashboard-design-11">Common mistakes in dashboard design</h3>
+<ul>
+<li>Design with poor layout and clarity</li>
+</ul>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="img/image10-35.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<hr>
+</section>
+<section id="alternative-dashboard-design-1" class="level3">
+<h3 class="anchored" data-anchor-id="alternative-dashboard-design-1">Alternative dashboard design</h3>
+<ul>
+<li>Design with good layout and clarity</li>
+</ul>
+<p><img src="img/image10-36.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="common-mistakes-in-dashboard-design-12" class="level3">
+<h3 class="anchored" data-anchor-id="common-mistakes-in-dashboard-design-12">Common mistakes in dashboard design</h3>
+<ul>
+<li>Design with poor visual aestheticsness</li>
+</ul>
+<p><img src="img/image10-37.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="alternative-dashboard-design-2" class="level3">
+<h3 class="anchored" data-anchor-id="alternative-dashboard-design-2">Alternative dashboard design</h3>
+<ul>
+<li>Design with good visual aestheticsness</li>
+</ul>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="img/image10-38.png" class="img-fluid figure-img" width="700"></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<section id="dashboard-design" class="level3">
+<h3 class="anchored" data-anchor-id="dashboard-design">Dashboard Design</h3>
+<ul>
+<li><p><a href="http://static.squarespace.com/static/52f42657e4b0b3416ff6b831/t/5310292ce4b08d35a87c9426/1393568044420/Guide_to_Dashboard_Design.pdf">A Guide to Creating Dashboards People Love to Use</a></p></li>
+<li><p><a href="http://www.tableausoftware.com/learn/whitepapers/5-best-practices-for-effective-dashboards">5 Best Practices for Creating Effective Dashboards</a></p></li>
+<li><p><a href="http://www.tableau.com/sites/default/files/media/whitepaper_mustdosofmarketingdashboards_eng_3.pdf">The Must Do’s of Marketing Dashboards</a></p></li>
+<li><p><a href="http://www.tableau.com/learn/webinars/making-flow-happen-dashboards-persuade-inform-and-engage">Making Flow Happen</a></p></li>
+<li><p><a href="http://www.perceptualedge.com/articles/Whitepapers/Formatting_and_Layout_Matter.pdf">With Dashboards: Formatting and layout Definitely Matter</a></p></li>
+<li><p><a href="http://www.perceptualedge.com/articles/Whitepapers/Dashboard_Design.pdf">Dashboard Design for real-Time Situation Awareness</a></p></li>
+</ul>
+</section>
+</section>
+<section id="references-1" class="level2">
+<h2 class="anchored" data-anchor-id="references-1">References</h2>
+<section id="dashboard-design-1" class="level3">
+<h3 class="anchored" data-anchor-id="dashboard-design-1">Dashboard Design</h3>
+<ul>
+<li><p><a href="http://www.perceptualedge.com/articles/visual_business_intelligence/dd_for_rapid_monitoring.pdf">Dashboard Design for Rich and Rapid Monitoring</a></p></li>
+<li><p><a href="http://www.perceptualedge.com/articles/visual_business_intelligence/pervasive_hurdles_to_dd.pdf">Pervasive Hurdles to Effective Dashboard Design</a></p></li>
+<li><p><a href="http://www.perceptualedge.com/articles/misc/WhyMostDashboardsFail.pdf">Why Most Dashboards Fail</a></p></li>
+<li><p><a href="http://www.perceptualedge.com/articles/ie/dashboard_confusion.pdf">Dashboard Confusion</a></p></li>
+<li><p><a href="http://www.perceptualedge.com/articles/visual_business_intelligence/dboard_confusion_revisited.pdf">Dashboard Confusion Revisited</a></p></li>
+<li><p><a href="http://courses.ischool.berkeley.edu/i247/s10/lectures/Few-Dashboards.pdf">Dashboard Design for at-a-glance monitoring</a></p></li>
+</ul>
+</section>
+</section>
+<section id="references-2" class="level2">
+<h2 class="anchored" data-anchor-id="references-2">References</h2>
+<section id="bullet-chart-sparklines" class="level3">
+<h3 class="anchored" data-anchor-id="bullet-chart-sparklines">Bullet Chart &amp; Sparklines</h3>
+<ul>
+<li><p><a href="https://en.wikipedia.org/wiki/Bullet_graph">Bullet graph <span class="citation" data-cites="wiki">@wiki</span></a></p></li>
+<li><p><a href="http://www.perceptualedge.com/articles/misc/Bullet_Graph_Design_Spec.pdf">Bullet Graph Design Specification</a></p></li>
+<li><p><a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR">Sparkline theory and practice</a></p></li>
+<li><p><a href="http://www.perceptualedge.com/articles/visual_business_intelligence/best_practices_for_scaling_sparklines.pdf">Best Practices for Scaling Sparklines in Dashboard</a></p></li>
+<li><p><a href="https://www.perceptualedge.com/articles/visual_business_intelligence/introducing_bandlines.pdf">Introducing Bandlines</a></p></li>
+</ul>
+<div class="cell">
+
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

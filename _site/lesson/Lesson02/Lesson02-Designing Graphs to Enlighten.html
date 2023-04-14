@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dr.&nbsp;Kam Tin Seong Assoc. Professor of Information Systems (Practice)">
+<meta name="dcterms.date" content="2023-04-14">
+
+<title>ISSS608 - Lesson 2: Designing Graphs to Enlighten</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">ISSS608</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../syllabus.html">
+ <span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../lesson.html">
+ <span class="menu-text">Lesson Plan</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../DataViz.html">
+ <span class="menu-text">DataViz Makeover</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Take-home Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../take-home_ex/TH_EX01.html">
+ <span class="dropdown-text">Take-home Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../take-home_ex/TH_EX02.html">
+ <span class="dropdown-text">Take-home Exercise 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../take-home_ex/TH_EX03.html">
+ <span class="dropdown-text">Take-home Exercise 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../take-home_ex/TH_EX04.html">
+ <span class="dropdown-text">Take-home Exercise 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../VAproject.html">
+ <span class="menu-text">Visual Analytics Project</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-shiny-workshop" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Shiny Workshop</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-shiny-workshop">    
+        <li>
+    <a class="dropdown-item" href="../../ShinyWorkshop/Shiny1/Shiny1.html">
+ <span class="dropdown-text">R Shiny basic</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ShinyWorkshop/Shiny2/Shiny0.html">
+ <span class="dropdown-text">Beyond the basic</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ShinyWorkshop/Shiny3/Shiny0.html">
+ <span class="dropdown-text">Customising Shiny</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ShinyResources.html">
+ <span class="dropdown-text">Shiny Resources</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../Tableau.html">
+ <span class="menu-text">Tableau Resources</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-all-about-r" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">All About R</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-all-about-r">    
+        <li>
+    <a class="dropdown-item" href="../../R.html">
+ <span class="dropdown-text">R Resouces</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../R4Vis.html">
+ <span class="dropdown-text">R for Visual Analytics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Rt.html">
+ <span class="dropdown-text">R tips &amp; tricks</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Quarto.html">
+ <span class="dropdown-text">Quarto</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../git.html">
+ <span class="dropdown-text">git and github</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#what-will-you-learn-from-this-lesson" id="toc-what-will-you-learn-from-this-lesson" class="nav-link active" data-scroll-target="#what-will-you-learn-from-this-lesson">What will you learn from this lesson?</a></li>
+  <li><a href="#building-block-of-visual-analytics" id="toc-building-block-of-visual-analytics" class="nav-link" data-scroll-target="#building-block-of-visual-analytics">Building Block of Visual Analytics</a></li>
+  <li><a href="#datavis-design-process" id="toc-datavis-design-process" class="nav-link" data-scroll-target="#datavis-design-process">DataVis design process</a></li>
+  <li><a href="#dataviz-design-process-start-with-a-clear-message" id="toc-dataviz-design-process-start-with-a-clear-message" class="nav-link" data-scroll-target="#dataviz-design-process-start-with-a-clear-message">DataViz design process: Start with a clear message</a></li>
+  <li><a href="#the-devil-is-in-the-data" id="toc-the-devil-is-in-the-data" class="nav-link" data-scroll-target="#the-devil-is-in-the-data">The Devil is in the Data</a>
+  <ul class="collapse">
+  <li><a href="#visualising-the-right-data" id="toc-visualising-the-right-data" class="nav-link" data-scroll-target="#visualising-the-right-data">Visualising the Right Data</a></li>
+  <li><a href="#visualising-the-right-data-1" id="toc-visualising-the-right-data-1" class="nav-link" data-scroll-target="#visualising-the-right-data-1">Visualising the Right Data</a></li>
+  <li><a href="#visualising-the-right-data-2" id="toc-visualising-the-right-data-2" class="nav-link" data-scroll-target="#visualising-the-right-data-2">Visualising the Right Data</a></li>
+  </ul></li>
+  <li><a href="#graphical-integrity-show-me-the-truth" id="toc-graphical-integrity-show-me-the-truth" class="nav-link" data-scroll-target="#graphical-integrity-show-me-the-truth">Graphical Integrity: Show Me the Truth</a></li>
+  <li><a href="#graphical-integrity-show-me-the-truth-1" id="toc-graphical-integrity-show-me-the-truth-1" class="nav-link" data-scroll-target="#graphical-integrity-show-me-the-truth-1">Graphical Integrity: Show Me the Truth</a>
+  <ul class="collapse">
+  <li><a href="#snapshot-can-be-misleading" id="toc-snapshot-can-be-misleading" class="nav-link" data-scroll-target="#snapshot-can-be-misleading">Snapshot can be misleading!</a></li>
+  </ul></li>
+  <li><a href="#graphical-integrity-show-me-the-truth-2" id="toc-graphical-integrity-show-me-the-truth-2" class="nav-link" data-scroll-target="#graphical-integrity-show-me-the-truth-2">Graphical Integrity: Show Me the Truth</a>
+  <ul class="collapse">
+  <li><a href="#do-not-miss-out-what-had-happened-in-between." id="toc-do-not-miss-out-what-had-happened-in-between." class="nav-link" data-scroll-target="#do-not-miss-out-what-had-happened-in-between.">Do not miss-out what had happened in between.</a></li>
+  </ul></li>
+  <li><a href="#human-perception-and-information-processing" id="toc-human-perception-and-information-processing" class="nav-link" data-scroll-target="#human-perception-and-information-processing">Human Perception and Information Processing</a>
+  <ul class="collapse">
+  <li><a href="#pre-attentive-processing" id="toc-pre-attentive-processing" class="nav-link" data-scroll-target="#pre-attentive-processing">Pre-attentive Processing</a></li>
+  <li><a href="#how-visual-sensing-works" id="toc-how-visual-sensing-works" class="nav-link" data-scroll-target="#how-visual-sensing-works">How Visual Sensing Works?</a></li>
+  <li><a href="#how-visual-sensing-works-1" id="toc-how-visual-sensing-works-1" class="nav-link" data-scroll-target="#how-visual-sensing-works-1">How Visual Sensing Works?</a></li>
+  <li><a href="#how-visual-sensing-works-2" id="toc-how-visual-sensing-works-2" class="nav-link" data-scroll-target="#how-visual-sensing-works-2">How Visual Sensing Works?</a></li>
+  <li><a href="#how-visual-sensing-works-3" id="toc-how-visual-sensing-works-3" class="nav-link" data-scroll-target="#how-visual-sensing-works-3">How Visual Sensing Works?</a></li>
+  <li><a href="#how-visual-sensing-works-4" id="toc-how-visual-sensing-works-4" class="nav-link" data-scroll-target="#how-visual-sensing-works-4">How Visual Sensing Works?</a></li>
+  <li><a href="#how-visual-sensing-works-5" id="toc-how-visual-sensing-works-5" class="nav-link" data-scroll-target="#how-visual-sensing-works-5">How Visual Sensing Works?</a></li>
+  <li><a href="#application-of-pre-attentive-principle-in-data-visualisation-design" id="toc-application-of-pre-attentive-principle-in-data-visualisation-design" class="nav-link" data-scroll-target="#application-of-pre-attentive-principle-in-data-visualisation-design">Application of pre-attentive principle in data visualisation design</a></li>
+  </ul></li>
+  <li><a href="#application-of-pre-attentive-principle-in-data-visualisation-design-1" id="toc-application-of-pre-attentive-principle-in-data-visualisation-design-1" class="nav-link" data-scroll-target="#application-of-pre-attentive-principle-in-data-visualisation-design-1">Application of pre-attentive principle in data visualisation design</a></li>
+  <li><a href="#components-of-a-graph" id="toc-components-of-a-graph" class="nav-link" data-scroll-target="#components-of-a-graph">Components of a graph</a></li>
+  <li><a href="#bertins-semiology-of-graphics" id="toc-bertins-semiology-of-graphics" class="nav-link" data-scroll-target="#bertins-semiology-of-graphics">Bertin’s Semiology of graphics</a></li>
+  <li><a href="#choosing-the-right-visualisation" id="toc-choosing-the-right-visualisation" class="nav-link" data-scroll-target="#choosing-the-right-visualisation">Choosing the Right Visualisation</a></li>
+  <li><a href="#design-principles-for-effective-visual-presentation" id="toc-design-principles-for-effective-visual-presentation" class="nav-link" data-scroll-target="#design-principles-for-effective-visual-presentation">Design principles for effective visual presentation</a>
+  <ul class="collapse">
+  <li><a href="#design-principles-for-effective-visual-presentation-1" id="toc-design-principles-for-effective-visual-presentation-1" class="nav-link" data-scroll-target="#design-principles-for-effective-visual-presentation-1">Design principles for effective visual presentation</a></li>
+  <li><a href="#general-guide-show-the-data-clearly" id="toc-general-guide-show-the-data-clearly" class="nav-link" data-scroll-target="#general-guide-show-the-data-clearly">General Guide: Show the Data Clearly</a></li>
+  <li><a href="#guides-for-encoding-values-in-graph" id="toc-guides-for-encoding-values-in-graph" class="nav-link" data-scroll-target="#guides-for-encoding-values-in-graph">Guides for Encoding Values in Graph</a></li>
+  <li><a href="#guides-for-encoding-values-in-graph-1" id="toc-guides-for-encoding-values-in-graph-1" class="nav-link" data-scroll-target="#guides-for-encoding-values-in-graph-1">Guides for Encoding Values in Graph</a></li>
+  <li><a href="#guides-for-encoding-values-in-graph-2" id="toc-guides-for-encoding-values-in-graph-2" class="nav-link" data-scroll-target="#guides-for-encoding-values-in-graph-2">Guides for Encoding Values in Graph</a></li>
+  <li><a href="#guide-for-encoding-values-in-graph" id="toc-guide-for-encoding-values-in-graph" class="nav-link" data-scroll-target="#guide-for-encoding-values-in-graph">Guide for Encoding Values in Graph</a></li>
+  <li><a href="#guide-for-encoding-values-in-graph-1" id="toc-guide-for-encoding-values-in-graph-1" class="nav-link" data-scroll-target="#guide-for-encoding-values-in-graph-1">Guide for Encoding Values in Graph</a></li>
+  </ul></li>
+  <li><a href="#design-principles-for-effective-visual-presentation-2" id="toc-design-principles-for-effective-visual-presentation-2" class="nav-link" data-scroll-target="#design-principles-for-effective-visual-presentation-2">Design principles for effective visual presentation</a>
+  <ul class="collapse">
+  <li><a href="#chartjunk-i" id="toc-chartjunk-i" class="nav-link" data-scroll-target="#chartjunk-i">ChartJunk I</a></li>
+  <li><a href="#chartjunk-ii" id="toc-chartjunk-ii" class="nav-link" data-scroll-target="#chartjunk-ii">ChartJunk II</a></li>
+  <li><a href="#chartjunk-iii" id="toc-chartjunk-iii" class="nav-link" data-scroll-target="#chartjunk-iii">ChartJunk III</a></li>
+  <li><a href="#chartjunk-iv" id="toc-chartjunk-iv" class="nav-link" data-scroll-target="#chartjunk-iv">ChartJunk IV</a></li>
+  <li><a href="#chartjunk-v" id="toc-chartjunk-v" class="nav-link" data-scroll-target="#chartjunk-v">ChartJunk V</a></li>
+  <li><a href="#chartjunk-vi" id="toc-chartjunk-vi" class="nav-link" data-scroll-target="#chartjunk-vi">ChartJunk VI</a></li>
+  </ul></li>
+  <li><a href="#design-principles-for-effective-visual-presentation-3" id="toc-design-principles-for-effective-visual-presentation-3" class="nav-link" data-scroll-target="#design-principles-for-effective-visual-presentation-3">Design principles for effective visual presentation</a>
+  <ul class="collapse">
+  <li><a href="#practical-guides-for-using-colour-in-charts" id="toc-practical-guides-for-using-colour-in-charts" class="nav-link" data-scroll-target="#practical-guides-for-using-colour-in-charts">Practical Guides for Using Colour in Charts</a></li>
+  <li><a href="#practical-guides-for-using-colour-in-charts-1" id="toc-practical-guides-for-using-colour-in-charts-1" class="nav-link" data-scroll-target="#practical-guides-for-using-colour-in-charts-1">Practical Guides for Using Colour in Charts</a></li>
+  <li><a href="#practical-guides-for-using-colour-in-charts-2" id="toc-practical-guides-for-using-colour-in-charts-2" class="nav-link" data-scroll-target="#practical-guides-for-using-colour-in-charts-2">Practical Guides for Using Colour in Charts</a></li>
+  <li><a href="#practical-guides-for-using-colour-in-charts-3" id="toc-practical-guides-for-using-colour-in-charts-3" class="nav-link" data-scroll-target="#practical-guides-for-using-colour-in-charts-3">Practical Guides for Using Colour in Charts</a></li>
+  <li><a href="#practical-guides-for-using-colour-in-charts-4" id="toc-practical-guides-for-using-colour-in-charts-4" class="nav-link" data-scroll-target="#practical-guides-for-using-colour-in-charts-4">Practical Guides for Using Colour in Charts</a></li>
+  <li><a href="#practical-guides-for-using-colour-in-charts-5" id="toc-practical-guides-for-using-colour-in-charts-5" class="nav-link" data-scroll-target="#practical-guides-for-using-colour-in-charts-5">Practical Guides for Using Colour in Charts</a></li>
+  <li><a href="#practical-guides-for-using-colour-in-charts-6" id="toc-practical-guides-for-using-colour-in-charts-6" class="nav-link" data-scroll-target="#practical-guides-for-using-colour-in-charts-6">Practical Guides for Using Colour in Charts</a></li>
+  <li><a href="#practical-guides-for-using-colour-in-charts-7" id="toc-practical-guides-for-using-colour-in-charts-7" class="nav-link" data-scroll-target="#practical-guides-for-using-colour-in-charts-7">Practical Guides for Using Colour in Charts</a></li>
+  </ul></li>
+  <li><a href="#design-principles-for-effective-visual-presentation-4" id="toc-design-principles-for-effective-visual-presentation-4" class="nav-link" data-scroll-target="#design-principles-for-effective-visual-presentation-4">Design principles for effective visual presentation</a></li>
+  <li><a href="#data-ink" id="toc-data-ink" class="nav-link" data-scroll-target="#data-ink">Data-ink</a>
+  <ul class="collapse">
+  <li><a href="#practical-used-of-data-ink" id="toc-practical-used-of-data-ink" class="nav-link" data-scroll-target="#practical-used-of-data-ink">Practical used of data-ink</a></li>
+  <li><a href="#what-should-the-relative-lengths-of-the-axis-be" id="toc-what-should-the-relative-lengths-of-the-axis-be" class="nav-link" data-scroll-target="#what-should-the-relative-lengths-of-the-axis-be">What should the relative lengths of the axis be?</a></li>
+  <li><a href="#when-can-you-eliminate-tick-mark" id="toc-when-can-you-eliminate-tick-mark" class="nav-link" data-scroll-target="#when-can-you-eliminate-tick-mark">When can you eliminate tick mark?</a></li>
+  <li><a href="#when-you-shouldnt-eliminate-tick-mark" id="toc-when-you-shouldnt-eliminate-tick-mark" class="nav-link" data-scroll-target="#when-you-shouldnt-eliminate-tick-mark">When you shouldn’t eliminate tick mark?</a></li>
+  <li><a href="#how-many-tick-marks-should-you-use" id="toc-how-many-tick-marks-should-you-use" class="nav-link" data-scroll-target="#how-many-tick-marks-should-you-use">How many tick marks should you use?</a></li>
+  <li><a href="#when-can-you-eliminate-legends" id="toc-when-can-you-eliminate-legends" class="nav-link" data-scroll-target="#when-can-you-eliminate-legends">When can you eliminate legends?</a></li>
+  </ul></li>
+  <li><a href="#an-enligthening-data-visualisation-will-be-incomplete-without-a-well-worded-title" id="toc-an-enligthening-data-visualisation-will-be-incomplete-without-a-well-worded-title" class="nav-link" data-scroll-target="#an-enligthening-data-visualisation-will-be-incomplete-without-a-well-worded-title">An enligthening data visualisation will be incomplete without a well worded title</a>
+  <ul class="collapse">
+  <li><a href="#using-annotation-to-tell-data-story" id="toc-using-annotation-to-tell-data-story" class="nav-link" data-scroll-target="#using-annotation-to-tell-data-story">Using Annotation to tell data story</a></li>
+  <li><a href="#graphical-integrity-show-me-the-truth-3" id="toc-graphical-integrity-show-me-the-truth-3" class="nav-link" data-scroll-target="#graphical-integrity-show-me-the-truth-3">Graphical Integrity: Show Me the Truth</a></li>
+  </ul></li>
+  <li><a href="#graph-typography" id="toc-graph-typography" class="nav-link" data-scroll-target="#graph-typography">Graph typography</a>
+  <ul class="collapse">
+  <li><a href="#avoid-using-artistic-fonts" id="toc-avoid-using-artistic-fonts" class="nav-link" data-scroll-target="#avoid-using-artistic-fonts">Avoid using artistic fonts</a></li>
+  <li><a href="#graph-labeling" id="toc-graph-labeling" class="nav-link" data-scroll-target="#graph-labeling">Graph Labeling</a></li>
+  </ul></li>
+  <li><a href="#three-bugs-of-charts-interpretation" id="toc-three-bugs-of-charts-interpretation" class="nav-link" data-scroll-target="#three-bugs-of-charts-interpretation">Three Bugs of Charts Interpretation</a>
+  <ul class="collapse">
+  <li><a href="#three-bugs-example" id="toc-three-bugs-example" class="nav-link" data-scroll-target="#three-bugs-example">Three Bugs example</a></li>
+  <li><a href="#stop-the-fallacy-of-visual-storytelling" id="toc-stop-the-fallacy-of-visual-storytelling" class="nav-link" data-scroll-target="#stop-the-fallacy-of-visual-storytelling">Stop the Fallacy of Visual Storytelling</a></li>
+  </ul></li>
+  <li><a href="#data-visualization-clarity-or-aesthetics" id="toc-data-visualization-clarity-or-aesthetics" class="nav-link" data-scroll-target="#data-visualization-clarity-or-aesthetics">Data Visualization: Clarity or Aesthetics?</a>
+  <ul class="collapse">
+  <li><a href="#a-tale-of-four-quadrants" id="toc-a-tale-of-four-quadrants" class="nav-link" data-scroll-target="#a-tale-of-four-quadrants">A Tale of Four Quadrants</a></li>
+  <li><a href="#quadrant-iv-confusing-yet-beautiful" id="toc-quadrant-iv-confusing-yet-beautiful" class="nav-link" data-scroll-target="#quadrant-iv-confusing-yet-beautiful">Quadrant IV – Confusing yet Beautiful</a></li>
+  <li><a href="#quadrant-iii-confusing-and-ugly" id="toc-quadrant-iii-confusing-and-ugly" class="nav-link" data-scroll-target="#quadrant-iii-confusing-and-ugly">Quadrant III – Confusing and Ugly</a></li>
+  <li><a href="#quadrant-ii-clear-but-ugly" id="toc-quadrant-ii-clear-but-ugly" class="nav-link" data-scroll-target="#quadrant-ii-clear-but-ugly">Quadrant II – Clear but Ugly</a></li>
+  <li><a href="#quadrant-i-clear-and-beautiful" id="toc-quadrant-i-clear-and-beautiful" class="nav-link" data-scroll-target="#quadrant-i-clear-and-beautiful">Quadrant I – Clear and Beautiful</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  <li><a href="#highly-recommended-blog" id="toc-highly-recommended-blog" class="nav-link" data-scroll-target="#highly-recommended-blog">Highly recommended blog</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lesson 2: Designing Graphs to Enlighten</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    Dr.&nbsp;Kam Tin Seong<br>Assoc. Professor of Information Systems (Practice) 
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            School of Computing and Information Systems,<br>Singapore Management University
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">14 Apr 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="what-will-you-learn-from-this-lesson" class="level2">
+<h2 class="anchored" data-anchor-id="what-will-you-learn-from-this-lesson">What will you learn from this lesson?</h2>
+<div style="font-size: 1.25em">
+<ul>
+<li>Data visualisation design process</li>
+<li>The Devil is in the data</li>
+<li>Human perception and information processing</li>
+<li>Components of a graph</li>
+<li>Principles and practical guides for data visualisation design</li>
+<li>Data visualisation critics framework</li>
+</ul>
+</div>
+<div class="notes">
+<p>In this lesson, I am going to share with you the basic principles and best practices of Data Visualisation Design. The discussion consists of five sections. First, I will provide an overview of data visualisation design process. Next, by using appropriate examples, I will share with you the importance of data selection and preparation in building enlightening graphs. In section three, the principles of visual perception will be introduce. In section four, the practical guides of data visualisation design will be discussed. Lastly, a framework for evaluating and criticising data visualisation design will be introduced.</p>
+</div>
+</section>
+<section id="building-block-of-visual-analytics" class="level2">
+<h2 class="anchored" data-anchor-id="building-block-of-visual-analytics">Building Block of Visual Analytics</h2>
+<p><img src="img/image2-1.png" class="img-fluid"></p>
+<div class="notes">
+<p>This slide shows the building block of visual analytics. Today, we will focus our attention on the lower left corner of the building block, namely Visual Perception.</p>
+</div>
+</section>
+<section id="datavis-design-process" class="level2">
+<h2 class="anchored" data-anchor-id="datavis-design-process">DataVis design process</h2>
+<ul>
+<li>Start with a clear message</li>
+<li>Select the right data</li>
+<li>Use the right visualisations</li>
+<li>Express and explain</li>
+<li>Review and seek feedback from experts and casual readers</li>
+</ul>
+<div class="notes">
+<p>In general, a data visualisation design process consists of five major steps.</p>
+</div>
+</section>
+<section id="dataviz-design-process-start-with-a-clear-message" class="level2">
+<h2 class="anchored" data-anchor-id="dataviz-design-process-start-with-a-clear-message">DataViz design process: Start with a clear message</h2>
+<p><img src="img/image2-2.png" class="img-fluid"></p>
+<div class="notes">
+<p>In data visualisation design, it is important to be clear and explicit about what you want to achieve. Is it to explore some data, to convey an inferential analysis, to deliver a message, convince an audience, or support a decision? It may be a mixture of these—for example, even seemingly simple exploratory plots should serve some (perhaps implicit) decision (e.g., on how to explore further). Every graph, and, more generally, every communication, must be tailored to its specific purpose.</p>
+</div>
+</section>
+<section id="the-devil-is-in-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-devil-is-in-the-data">The Devil is in the Data</h2>
+<p><img src="img/image2-3.png" class="img-fluid"></p>
+<div class="notes">
+<p>Clean and tidy data are needed to build truthful data visualisation. But beside clean and tidy data, there are at least two considerations related to data require our attention.</p>
+</div>
+<hr>
+<section id="numbers-worth-knowing" class="level4">
+<h4 class="anchored" data-anchor-id="numbers-worth-knowing">Numbers Worth Knowing</h4>
+<p>Not all numerical data are continuous!</p>
+<p><img src="img/image2-4.png" class="img-fluid"></p>
+<div class="notes">
+<p>First, it is important to note that not all numerical data are continuous. There are two types of numerical data. They are discrete and continuous. Discrete data can only assume specific values that you cannot subdivide. Typically, you count discrete values, and the results are in frequency count or in per cent . For example, display size should be classified as discrete (i.e.&nbsp;nominal or ordinal scales) instead of continuous., a mean of 15.81 in monitor is no meaning. Continuous data can assume any numeric value and can be meaningfully split into smaller parts. Consequently, they have valid fractional and decimal values. In fact, continuous variables have an infinite number of potential values between any two points. Generally, you measure them using a scale.</p>
+</div>
+<hr>
+</section>
+<section id="visualising-the-right-data" class="level3">
+<h3 class="anchored" data-anchor-id="visualising-the-right-data">Visualising the Right Data</h3>
+<ul>
+<li>There are more than one way to present the data.</li>
+</ul>
+<p><img src="img/image2-5a.jpg" class="img-fluid"></p>
+<div class="notes">
+<p>Secondly, there are more than one way to present the data. It is not unusual by presenting derived data reveal more aha surprises than the raw data.</p>
+</div>
+<hr>
+</section>
+<section id="visualising-the-right-data-1" class="level3">
+<h3 class="anchored" data-anchor-id="visualising-the-right-data-1">Visualising the Right Data</h3>
+<ul>
+<li>Derived values reveal more interesting patterns than absolute values.</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img src="img/image2-5b.jpg" class="img-fluid"></p>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image2-5c.jpg" class="img-fluid"></p>
+</div>
+</div>
+<div class="notes">
+<p>The data visualisation on the left is a dual y-axis bar graph. The y-axis on the left shows revenue and the y-axis on right shows customers. From the graph, you can see how both the monthly revenue and number of customers are growing for this company.</p>
+<p>The data visualisation on the right shows the differences between the month-to-month % change of revenue and customers. By showing the data in percent change, the data visualisation allows us to discover that the month-to-month customers and revenue growth rate are reducing in the financial year.</p>
+</div>
+<hr>
+</section>
+<section id="visualising-the-right-data-2" class="level3">
+<h3 class="anchored" data-anchor-id="visualising-the-right-data-2">Visualising the Right Data</h3>
+<ul>
+<li>Derived values reveal more interesting patterns than absolute values.</li>
+</ul>
+<p><img src="img/image2-5d.jpg" class="img-fluid"></p>
+<div class="notes">
+<p>By deriving revenue per customer and plot them as a line graph, the data visualisation allows us to tell a more compelling data story. In the figure, we can see that revenue per customer has decreased significantly during the year, even though the monthly revenue has risen steadily. The important take away from this case study is that select the right data to prepare the data visualisation and be mindful that the raw data might not always be the right choice.</p>
+</div>
+</section>
+</section>
+<section id="graphical-integrity-show-me-the-truth" class="level2">
+<h2 class="anchored" data-anchor-id="graphical-integrity-show-me-the-truth">Graphical Integrity: Show Me the Truth</h2>
+<p><img src="img/image2-7.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="https://www.singstat.gov.sg/modules/infographics/singapore-international-trade">Department of Statistics</a></p>
+</div>
+<div class="notes">
+<p>Let us take a good look at the data visualisation on the slide. Can you spot any graphical integrity issue? Yes, the issue of inconsistent data aggregation. On the figure, the major trading partners are at the country level except EU.</p>
+</div>
+</section>
+<section id="graphical-integrity-show-me-the-truth-1" class="level2">
+<h2 class="anchored" data-anchor-id="graphical-integrity-show-me-the-truth-1">Graphical Integrity: Show Me the Truth</h2>
+<section id="snapshot-can-be-misleading" class="level3">
+<h3 class="anchored" data-anchor-id="snapshot-can-be-misleading">Snapshot can be misleading!</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img src="img/image2-5a.png" class="img-fluid"></p>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image2-5b.png" class="img-fluid"></p>
+</div>
+</div>
+<div style="font-size: 0.65em">
+<p>Source: Cairo, Alberto (2019) <strong>How Charts Lie</strong>, W.W. Norton &amp; Company, USA. pg 168.</p>
+</div>
+<div class="notes">
+<p>Donald Trump liked to claim that the job market was a “disaster” before he was sworn in but recovered right after, and he used charts that cropped the horizontal axis in a convenient place.</p>
+<p>But if we go back in time and mark the point when Trump became president, we’ll see that there’s no remarkable change in the trajectory and slope of the line. Jobs began recovering in 2010.</p>
+</div>
+</section>
+</section>
+<section id="graphical-integrity-show-me-the-truth-2" class="level2">
+<h2 class="anchored" data-anchor-id="graphical-integrity-show-me-the-truth-2">Graphical Integrity: Show Me the Truth</h2>
+<section id="do-not-miss-out-what-had-happened-in-between." class="level3">
+<h3 class="anchored" data-anchor-id="do-not-miss-out-what-had-happened-in-between.">Do not miss-out what had happened in between.</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img src="img/image2-6a.png" class="img-fluid"></p>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image2-6b.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="human-perception-and-information-processing" class="level2">
+<h2 class="anchored" data-anchor-id="human-perception-and-information-processing">Human Perception and Information Processing</h2>
+<p><img src="img/image2-8.png" class="img-fluid"></p>
+<hr>
+<section id="pre-attentive-processing" class="level3">
+<h3 class="anchored" data-anchor-id="pre-attentive-processing">Pre-attentive Processing</h3>
+<ul>
+<li><p>A limited set of visual properties are processed preattentively (without need for focusing attention).</p></li>
+<li><p>This is important for design of visualizations</p>
+<ul>
+<li>What can be perceived immediately?</li>
+<li>Which properties are good discriminators?</li>
+<li>What can mislead viewers?</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="how-visual-sensing-works" class="level3">
+<h3 class="anchored" data-anchor-id="how-visual-sensing-works">How Visual Sensing Works?</h3>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Fact 1:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We see what we know and expect.</p>
+</div>
+</div>
+<p><img src="img/image2-10.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="how-visual-sensing-works-1" class="level3">
+<h3 class="anchored" data-anchor-id="how-visual-sensing-works-1">How Visual Sensing Works?</h3>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Fact 2:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We do not attend to everything we see.</p>
+</div>
+</div>
+<p><img src="img/image2-9.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="how-visual-sensing-works-2" class="level3">
+<h3 class="anchored" data-anchor-id="how-visual-sensing-works-2">How Visual Sensing Works?</h3>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Fact 3:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We don’t remember everything we see.</p>
+</div>
+</div>
+<p><img src="img/image2-11.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="how-visual-sensing-works-3" class="level3">
+<h3 class="anchored" data-anchor-id="how-visual-sensing-works-3">How Visual Sensing Works?</h3>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Fact 3:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We don’t remember everything we see.</p>
+</div>
+</div>
+<p><img src="img/image2-12.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="how-visual-sensing-works-4" class="level3">
+<h3 class="anchored" data-anchor-id="how-visual-sensing-works-4">How Visual Sensing Works?</h3>
+<p>How Many 3’s?</p>
+<p><img src="img/image2-13.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="how-visual-sensing-works-5" class="level3">
+<h3 class="anchored" data-anchor-id="how-visual-sensing-works-5">How Visual Sensing Works?</h3>
+<p>Now you see them!</p>
+<p><img src="img/image2-14.png" class="img-fluid"></p>
+<div class="notes">
+<p>As you can see, by applying pre-attentive principle, we can count the number 3 easily now.</p>
+</div>
+<hr>
+</section>
+<section id="application-of-pre-attentive-principle-in-data-visualisation-design" class="level3">
+<h3 class="anchored" data-anchor-id="application-of-pre-attentive-principle-in-data-visualisation-design">Application of pre-attentive principle in data visualisation design</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img src="img/image2-8a.jpg" class="img-fluid"></p>
+</div><div class="column" data-wdith="50%">
+<p><img src="img/image2-8b.jpg" class="img-fluid"></p>
+</div>
+</div>
+<div class="notes">
+<p>In last Saturday class, I had shown the reference line feature of Tableau. By understanding the principle of pre-attentive, reference line feature is useful for providing context to the data visualisation.</p>
+</div>
+</section>
+</section>
+<section id="application-of-pre-attentive-principle-in-data-visualisation-design-1" class="level2">
+<h2 class="anchored" data-anchor-id="application-of-pre-attentive-principle-in-data-visualisation-design-1">Application of pre-attentive principle in data visualisation design</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img src="img/image2-9a.jpg" class="img-fluid"></p>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image2-9b.jpg" class="img-fluid"></p>
+</div>
+</div>
+<div class="notes">
+<p>In the data visualisation of the right, bright red is use to show the month running at a lot. This is another example whereby pre-attentive principle is put go used.</p>
+</div>
+</section>
+<section id="components-of-a-graph" class="level2">
+<h2 class="anchored" data-anchor-id="components-of-a-graph">Components of a graph</h2>
+<p><img src="img/image2-15.png" class="img-fluid"></p>
+</section>
+<section id="bertins-semiology-of-graphics" class="level2">
+<h2 class="anchored" data-anchor-id="bertins-semiology-of-graphics">Bertin’s Semiology of graphics</h2>
+<p><img src="img/image2-18.png" class="img-fluid"></p>
+</section>
+<section id="choosing-the-right-visualisation" class="level2">
+<h2 class="anchored" data-anchor-id="choosing-the-right-visualisation">Choosing the Right Visualisation</h2>
+<p><img src="img/image2-16.jpg" class="img-fluid"></p>
+</section>
+<section id="design-principles-for-effective-visual-presentation" class="level2">
+<h2 class="anchored" data-anchor-id="design-principles-for-effective-visual-presentation">Design principles for effective visual presentation</h2>
+<div style="font-size: 1.25em">
+<ul>
+<li>Guides for Encoding Values in Graph</li>
+<li>JunkCharts</li>
+<li>Practical Guides for Using Colour in Charts</li>
+<li>Data-ink</li>
+</ul>
+</div>
+<hr>
+<section id="design-principles-for-effective-visual-presentation-1" class="level3">
+<h3 class="anchored" data-anchor-id="design-principles-for-effective-visual-presentation-1">Design principles for effective visual presentation</h3>
+<div style="font-size: 1.25em">
+<ul>
+<li><strong>Guides for Encoding Values in Graph</strong></li>
+<li>JunkCharts</li>
+<li>Practical Guides for Using Colour in Charts</li>
+<li>Data-ink</li>
+</ul>
+</div>
+<hr>
+</section>
+<section id="general-guide-show-the-data-clearly" class="level3">
+<h3 class="anchored" data-anchor-id="general-guide-show-the-data-clearly">General Guide: Show the Data Clearly</h3>
+<p><img src="img/image2-20a.jpg" class="img-fluid"></p>
+<div class="notes">
+<p>The pie and donut charts in panels (a) and (b) make it difficult to see the order of magnitude of some of the segments. The eye needs to compare areas, bent lengths (of the contour), or angles, – graphical attributes that are not easily decoded. The donut chart even omits the angles. The mosaic plot in panel (c) only relies on areas; again, it is hard to tell the order of magnitude. It is better to use lengths with a common baseline or positions on a common scale, such as in a bar chart or dot plot (see Cleveland-McGill effectiveness ranking in Law 3). The bar chart in panel (d), however, introduces a fake dimension, which is unnecessary and makes it hard to decode the numerical values from the height of the bars. Panels (e) and (f) are appropriately simple and show the data clearly. They also order the data by magnitude to aid comparison even further. The dot plot in panel (f) uses minimal amount of ink and draws the eye to the position of the dots; it is the most effective way of displaying these data.</p>
+</div>
+<hr>
+</section>
+<section id="guides-for-encoding-values-in-graph" class="level3">
+<h3 class="anchored" data-anchor-id="guides-for-encoding-values-in-graph">Guides for Encoding Values in Graph</h3>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Guide 1:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Avoid using point alone to display time-series data.</p>
+</div>
+</div>
+<p><img src="img/image2-20.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="guides-for-encoding-values-in-graph-1" class="level3">
+<h3 class="anchored" data-anchor-id="guides-for-encoding-values-in-graph-1">Guides for Encoding Values in Graph</h3>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Guide 2:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Avoid using points to represent discrete values</p>
+</div>
+</div>
+<p><img src="img/image2-21.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="guides-for-encoding-values-in-graph-2" class="level3">
+<h3 class="anchored" data-anchor-id="guides-for-encoding-values-in-graph-2">Guides for Encoding Values in Graph</h3>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Guide 3:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Bars don’t work unless the quantative scale begins at zero</p>
+</div>
+</div>
+<p><img src="img/image2-22.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="guide-for-encoding-values-in-graph" class="level3">
+<h3 class="anchored" data-anchor-id="guide-for-encoding-values-in-graph">Guide for Encoding Values in Graph</h3>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Guide 4:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Avoid pie chart if possible because our eyes are not good in reading areas</p>
+</div>
+</div>
+<p><img src="img/image2-23.png" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Reference: <a href="http://junkcharts.typepad.com/junk_charts/2015/09/a-not-so-satisfying-rose.html">JunkCharts</a></p>
+</div>
+<hr>
+</section>
+<section id="guide-for-encoding-values-in-graph-1" class="level3">
+<h3 class="anchored" data-anchor-id="guide-for-encoding-values-in-graph-1">Guide for Encoding Values in Graph</h3>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Guide 5:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Avoid pie chart if you are comparing changes over time</p>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img src="img/image2-24a.png" class="img-fluid"></p>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/image2-24b.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">:scale 80%</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="design-principles-for-effective-visual-presentation-2" class="level2">
+<h2 class="anchored" data-anchor-id="design-principles-for-effective-visual-presentation-2">Design principles for effective visual presentation</h2>
+<div style="font-size: 1.25em">
+<ul>
+<li>Guides for Encoding Values in Graph</li>
+<li><strong>Chartjunk</strong></li>
+<li>Practical Guides for Using Colour in Charts</li>
+<li>Data-ink</li>
+</ul>
+</div>
+<div class="notes">
+<p>Chartjunk refers to all visual elements in charts and graphs that are not necessary to comprehend the information represented on the graph, or that distract the viewer from this information.</p>
+<p>It was first introduced by Edward Tufte in his 1983 book <em>The Visual Display of Quantitative Information</em>.</p>
+<p>There is an interesting blog called Junk Charts by Kaiser Fung. The blog link is available on the last slide.</p>
+</div>
+<hr>
+<section id="chartjunk-i" class="level3">
+<h3 class="anchored" data-anchor-id="chartjunk-i">ChartJunk I</h3>
+<section id="avoid-using-unnecessary-colour-shading-for-the-bar." class="level4">
+<h4 class="anchored" data-anchor-id="avoid-using-unnecessary-colour-shading-for-the-bar.">Avoid using unnecessary colour shading for the bar.</h4>
+<p><img src="img/image2-25.png" class="img-fluid"></p>
+<div class="notes">
+<p>In this data visualisation, it is very obvious that the different intensity colours shading used on the bars and background are not map to any meaningful variables. These are junk that should be avoid in our graphs.</p>
+</div>
+<hr>
+</section>
+</section>
+<section id="chartjunk-ii" class="level3">
+<h3 class="anchored" data-anchor-id="chartjunk-ii">ChartJunk II</h3>
+<section id="avoid-colourful-or-wallpaper-background." class="level4">
+<h4 class="anchored" data-anchor-id="avoid-colourful-or-wallpaper-background.">Avoid colourful or wallpaper background.</h4>
+<p><img src="img/image2-26.png" class="img-fluid"></p>
+<div class="notes">
+<p>In this data visualisation, the background patterns make it impossible for us to read the words in the legend. Likewise the watermarks used as the background of the graph is redudant. Again, these are junk that we should be avoided.</p>
+</div>
+<hr>
+</section>
+</section>
+<section id="chartjunk-iii" class="level3">
+<h3 class="anchored" data-anchor-id="chartjunk-iii">ChartJunk III</h3>
+<section id="avoid-using-3d-effects-in-graphics." class="level4">
+<h4 class="anchored" data-anchor-id="avoid-using-3d-effects-in-graphics.">Avoid using 3D effects in graphics.</h4>
+<p><img src="img/image2-27.png" class="img-fluid"></p>
+<div class="notes">
+<p>It is very common for us to see 3D bar chart was used to present frequency distribution of a categorical variable like the data visualisation on the left of the slide. In fact, the fancy 3D bar chart is less effective to read as compared to the simple bar chart on the right of the slide. The key take away is avoid using 3D object to display univariate data.</p>
+</div>
+<hr>
+</section>
+</section>
+<section id="chartjunk-iv" class="level3">
+<h3 class="anchored" data-anchor-id="chartjunk-iv">ChartJunk IV</h3>
+<section id="avoid-using-misleading-graphical-representation." class="level4">
+<h4 class="anchored" data-anchor-id="avoid-using-misleading-graphical-representation.">Avoid using misleading graphical representation.</h4>
+<p><img src="img/image2-28.png" class="img-fluid"></p>
+<div class="notes">
+<p>In this data visualisation, there is no way for us to know what is the sales volume represented by one potato because their ratio varies from one year to another.</p>
+</div>
+<hr>
+</section>
+</section>
+<section id="chartjunk-v" class="level3">
+<h3 class="anchored" data-anchor-id="chartjunk-v">ChartJunk V</h3>
+<section id="avoid-using-artistic-design-which-is-difficult-to-visualise." class="level4">
+<h4 class="anchored" data-anchor-id="avoid-using-artistic-design-which-is-difficult-to-visualise.">Avoid using artistic design which is difficult to visualise.</h4>
+<p><img src="img/image2-29.png" class="img-fluid"></p>
+<div class="notes">
+<p>Although the visualisation is very appealing visually. However, it is not functional because the curve 3D bar chart make it very difficult to do a proper comparison.</p>
+</div>
+<hr>
+</section>
+</section>
+<section id="chartjunk-vi" class="level3">
+<h3 class="anchored" data-anchor-id="chartjunk-vi">ChartJunk VI</h3>
+<section id="designing-graph-to-enlighten-people-not-to-entertain-them." class="level4">
+<h4 class="anchored" data-anchor-id="designing-graph-to-enlighten-people-not-to-entertain-them.">Designing graph to enlighten people – not to entertain them.</h4>
+<p><img src="img/image2-7b.png" class="img-fluid"></p>
+<div class="notes">
+<p>This is another good example of JunkChart. In this data visualisation, the author distorts the sequence of the age-cohort intentionally in order to show the ladder-like view. But this design easily lead to misinterpretation by the graph users.</p>
+</div>
+</section>
+</section>
+</section>
+<section id="design-principles-for-effective-visual-presentation-3" class="level2">
+<h2 class="anchored" data-anchor-id="design-principles-for-effective-visual-presentation-3">Design principles for effective visual presentation</h2>
+<div style="font-size: 1.25em">
+<ul>
+<li>Guides for Encoding Values in Graph</li>
+<li>JunkCharts</li>
+<li><strong>Practical Guides for Using Colour in Charts</strong></li>
+<li>Data-ink</li>
+</ul>
+</div>
+<div class="notes">
+<p>In this topic, I am going to share with the practical guides for using colour in data visualisation.</p>
+</div>
+<hr>
+<section id="practical-guides-for-using-colour-in-charts" class="level3">
+<h3 class="anchored" data-anchor-id="practical-guides-for-using-colour-in-charts">Practical Guides for Using Colour in Charts</h3>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Guide 1:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you want different objects of the same colour in a graph to look the same, make sure that the background- the colour that surrounds them – is consistent.</p>
+</div>
+</div>
+<p><img src="img/image2-30.png" class="img-fluid"></p>
+<div class="notes">
+<p>The guide practice If you want different objects of the same colour in a graph to look the same, make sure that the background- the colour that surrounds them – is consistent. We should avoid using background with different colour intensity.</p>
+</div>
+<hr>
+</section>
+<section id="practical-guides-for-using-colour-in-charts-1" class="level3">
+<h3 class="anchored" data-anchor-id="practical-guides-for-using-colour-in-charts-1">Practical Guides for Using Colour in Charts</h3>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Guide 2:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you want objects in a graph to be easily seen, use a background colour that constrasts sufficiently with the object.</p>
+</div>
+</div>
+<p><img src="img/image2-31.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="practical-guides-for-using-colour-in-charts-2" class="level3">
+<h3 class="anchored" data-anchor-id="practical-guides-for-using-colour-in-charts-2">Practical Guides for Using Colour in Charts</h3>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Guide 3:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use color only when needed to serve a particular communication goal.</p>
+</div>
+</div>
+<p><img src="img/image2-32.png" class="img-fluid"></p>
+<div class="notes">
+<p>The power of pre-attentive processing.</p>
+</div>
+<hr>
+</section>
+<section id="practical-guides-for-using-colour-in-charts-3" class="level3">
+<h3 class="anchored" data-anchor-id="practical-guides-for-using-colour-in-charts-3">Practical Guides for Using Colour in Charts</h3>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Guide 4:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use different colours when they correspond to differences of meaning in the data.</p>
+</div>
+</div>
+<p><img src="img/image2-33.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="practical-guides-for-using-colour-in-charts-4" class="level3">
+<h3 class="anchored" data-anchor-id="practical-guides-for-using-colour-in-charts-4">Practical Guides for Using Colour in Charts</h3>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Guide 5:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use soft, natural colours to display most information and bright and/or dark colours to highlight information that requires greater attention.</p>
+</div>
+</div>
+<p><img src="img/image2-34.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="practical-guides-for-using-colour-in-charts-5" class="level3">
+<h3 class="anchored" data-anchor-id="practical-guides-for-using-colour-in-charts-5">Practical Guides for Using Colour in Charts</h3>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Guide 6:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When using colour to encode a sequential range of quantitative values, stick with a single hue (or a small set of closely related hues) and vary intensity from pale colours for low values to increasingly darker and brighter colours for high values.</p>
+</div>
+</div>
+<p><img src="img/image2-35.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="practical-guides-for-using-colour-in-charts-6" class="level3">
+<h3 class="anchored" data-anchor-id="practical-guides-for-using-colour-in-charts-6">Practical Guides for Using Colour in Charts</h3>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Guide 7:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Non-data components of a graph should be displayed just visibly enough to perform their role, but not more so, for excessive salience could cause them to distract attention from the data.</p>
+</div>
+</div>
+<p><img src="img/image2-36.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="practical-guides-for-using-colour-in-charts-7" class="level3">
+<h3 class="anchored" data-anchor-id="practical-guides-for-using-colour-in-charts-7">Practical Guides for Using Colour in Charts</h3>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Guide 8:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To guarantee that most people who are colourblind can distinguish groups of data that are colour coded, avoid using a combination of red and green in the same display.</p>
+</div>
+</div>
+<p><img src="img/image2-37.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="design-principles-for-effective-visual-presentation-4" class="level2">
+<h2 class="anchored" data-anchor-id="design-principles-for-effective-visual-presentation-4">Design principles for effective visual presentation</h2>
+<div style="font-size: 1.25em">
+<ul>
+<li>Guides for Encoding Values in Graph</li>
+<li>JunkCharts</li>
+<li>Practical Guides for Using Colour in Charts</li>
+<li><strong>Data-ink</strong></li>
+</ul>
+</div>
+<hr>
+</section>
+<section id="data-ink" class="level2">
+<h2 class="anchored" data-anchor-id="data-ink">Data-ink</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Reduce the non data-ink
+<ul>
+<li>Removed unnecessary non data-ink</li>
+<li>De-emphasise or regularise the remaining non data-ink</li>
+</ul></li>
+<li>Enhance the data-ink
+<ul>
+<li>Remove unnecessary data-ink</li>
+<li>Emphasise the remaining data-ink</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image2-38.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="notes">
+<p>The term, ‘data-ink’, is defined as the total ink on a graph that represents data. Tufte claims that good graphical representations maximize data-ink and erase as much non-data-ink as possible. Thus, he defines the data-ink ratio is the proportion of a graphic’s ink devoted to the non-redundant display of data-information. It should equal to (1 - the proportion of graphics that can be erased without loss of data-information).</p>
+</div>
+<hr>
+<section id="practical-used-of-data-ink" class="level3">
+<h3 class="anchored" data-anchor-id="practical-used-of-data-ink">Practical used of data-ink</h3>
+<section id="shouting-to-emphasize-whats-interesting" class="level4">
+<h4 class="anchored" data-anchor-id="shouting-to-emphasize-whats-interesting">Shouting to emphasize what’s interesting</h4>
+<p><img src="img/image2-39.png" class="img-fluid"></p>
+<hr>
+</section>
+</section>
+<section id="what-should-the-relative-lengths-of-the-axis-be" class="level3">
+<h3 class="anchored" data-anchor-id="what-should-the-relative-lengths-of-the-axis-be">What should the relative lengths of the axis be?</h3>
+<ul>
+<li>Should not manipulate the aspect ratio to intentionally exaggerate or downplay the rate of change.</li>
+<li>Stick to the convention of making your graphs wider than being tall.</li>
+</ul>
+<p><img src="img/image2-40.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="when-can-you-eliminate-tick-mark" class="level3">
+<h3 class="anchored" data-anchor-id="when-can-you-eliminate-tick-mark">When can you eliminate tick mark?</h3>
+<section id="tick-marks-are-superfluous-on-categorical-scale." class="level4">
+<h4 class="anchored" data-anchor-id="tick-marks-are-superfluous-on-categorical-scale.">Tick marks are superfluous on categorical scale.</h4>
+<p><img src="img/image2-41.png" class="img-fluid"></p>
+<hr>
+</section>
+</section>
+<section id="when-you-shouldnt-eliminate-tick-mark" class="level3">
+<h3 class="anchored" data-anchor-id="when-you-shouldnt-eliminate-tick-mark">When you shouldn’t eliminate tick mark?</h3>
+<section id="tick-marks-are-necessary-on-continuous-scale." class="level4">
+<h4 class="anchored" data-anchor-id="tick-marks-are-necessary-on-continuous-scale.">Tick marks are necessary on continuous scale.</h4>
+<p><img src="img/image2-42.png" class="img-fluid"></p>
+<hr>
+</section>
+</section>
+<section id="how-many-tick-marks-should-you-use" class="level3">
+<h3 class="anchored" data-anchor-id="how-many-tick-marks-should-you-use">How many tick marks should you use?</h3>
+<ul>
+<li>There is no exact number that works best in all circumstances, and the size of the graph is a factor that must considered: the longer the scale line, the more tick marks it should contain.</li>
+</ul>
+<p><img src="img/image2-43.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="when-can-you-eliminate-legends" class="level3">
+<h3 class="anchored" data-anchor-id="when-can-you-eliminate-legends">When can you eliminate legends?</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>In this graph, a legend is used to indicate product types.</li>
+</ul>
+<p><img src="img/image2-44a.png" class="img-fluid"></p>
+</div><div class="column" style="width:50%;">
+<p>In this graph, product types are labeled directly.</p>
+<p><img src="img/image2-44b.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="an-enligthening-data-visualisation-will-be-incomplete-without-a-well-worded-title" class="level2">
+<h2 class="anchored" data-anchor-id="an-enligthening-data-visualisation-will-be-incomplete-without-a-well-worded-title">An enligthening data visualisation will be incomplete without a well worded title</h2>
+<p><img src="img/image2-54.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="https://www.ft.com/content/085749dc-3cac-11ea-b232-000f4477fbca">The truth about weekend working</a>, Financial Times, January 23 2020.</p>
+<ul>
+<li>More example can be found <a href="https://www.ft.com/graphics">here</a></li>
+</ul>
+</div>
+<hr>
+<section id="using-annotation-to-tell-data-story" class="level3">
+<h3 class="anchored" data-anchor-id="using-annotation-to-tell-data-story">Using Annotation to tell data story</h3>
+<p><img src="img/image2-55.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="https://www.ft.com/content/085749dc-3cac-11ea-b232-000f4477fbca">The truth about weekend working</a>, Financial Times, January 23 2020.</p>
+</div>
+<hr>
+</section>
+<section id="graphical-integrity-show-me-the-truth-3" class="level3">
+<h3 class="anchored" data-anchor-id="graphical-integrity-show-me-the-truth-3">Graphical Integrity: Show Me the Truth</h3>
+<section id="dont-lie-to-yourself-or-to-others-with-charts" class="level4">
+<h4 class="anchored" data-anchor-id="dont-lie-to-yourself-or-to-others-with-charts">Don’t lie to yourself (or to others) with charts</h4>
+<p><img src="img/image2-5.png" class="img-fluid"></p>
+</section>
+</section>
+</section>
+<section id="graph-typography" class="level2">
+<h2 class="anchored" data-anchor-id="graph-typography">Graph typography</h2>
+<section id="avoid-using-artistic-fonts" class="level3">
+<h3 class="anchored" data-anchor-id="avoid-using-artistic-fonts">Avoid using artistic fonts</h3>
+<p><img src="img/image2-45.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="graph-labeling" class="level3">
+<h3 class="anchored" data-anchor-id="graph-labeling">Graph Labeling</h3>
+<section id="orientation-of-label-should-be-reader-friendly" class="level4">
+<h4 class="anchored" data-anchor-id="orientation-of-label-should-be-reader-friendly">Orientation of label should be reader friendly</h4>
+<p><img src="img/image2-46.png" class="img-fluid"></p>
+</section>
+</section>
+</section>
+<section id="three-bugs-of-charts-interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="three-bugs-of-charts-interpretation">Three Bugs of Charts Interpretation</h2>
+<div style="font-size: 1.25em">
+<ul>
+<li>The <strong>Patternicity</strong> bug: We detect interating patterns, regardless of whether or not they are real.</li>
+<li>The <strong>Storytelling</strong> bug: We immediately come up with a coherent explanation for those patterns.</li>
+<li>The <strong>Confirmation</strong> bug: We start seeing all further information we receive, even the one that conflicts with our explanation, in a way that confirmed it. We refuse to give our explanation up, no matter what.</li>
+</ul>
+</div>
+<hr>
+<section id="three-bugs-example" class="level3">
+<h3 class="anchored" data-anchor-id="three-bugs-example">Three Bugs example</h3>
+<p><img src="img/image2-56.jpeg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="https://www.tylervigen.com/spurious-correlations">Spurious Correlation</a></p>
+</div>
+<hr>
+</section>
+<section id="stop-the-fallacy-of-visual-storytelling" class="level3">
+<h3 class="anchored" data-anchor-id="stop-the-fallacy-of-visual-storytelling">Stop the Fallacy of Visual Storytelling</h3>
+<p><img src="img/image2-57.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: Franz H. Messerli (2012) <a href="https://www.nejm.org/doi/full/10.1056/NEJMon1211064">Chocolate Consumption, Cognitive Function, and Nobel Laureates</a>, <em>The New England Journal of Medicine</em>.</p>
+</div>
+</section>
+</section>
+<section id="data-visualization-clarity-or-aesthetics" class="level2">
+<h2 class="anchored" data-anchor-id="data-visualization-clarity-or-aesthetics">Data Visualization: Clarity or Aesthetics?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img src="img/image2-48a.png" class="img-fluid"></p>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image2-48b.png" class="img-fluid"></p>
+</div>
+</div>
+<div style="font-size: 0.65em">
+<p>Source: <a href="http://dataremixed.com/2012/05/data-visualization-clarity-or-aesthetics/">Data Visualisation: Clarity or Aesthetics</a></p>
+</div>
+<hr>
+<section id="a-tale-of-four-quadrants" class="level3">
+<h3 class="anchored" data-anchor-id="a-tale-of-four-quadrants">A Tale of Four Quadrants</h3>
+<p><img src="img/image2-49.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="quadrant-iv-confusing-yet-beautiful" class="level3">
+<h3 class="anchored" data-anchor-id="quadrant-iv-confusing-yet-beautiful">Quadrant IV – Confusing yet Beautiful</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div style="font-size: 0.85em">
+<ul>
+<li>Why is it “beautiful”?
+<ul>
+<li>Well placed &amp; aligned title &amp; lead-in.</li>
+<li>Attention to detail with font selection.</li>
+<li>Inclusion of image.</li>
+</ul></li>
+<li>Why is it “confusing”?
+<ul>
+<li>Y-axis starts at 10K (column height misleading).</li>
+<li>3D effect makes it difficult to gage heights.</li>
+<li>Title &amp; lead-in aren’t helpful.</li>
+</ul></li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image2-50.png" class="img-fluid"></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="quadrant-iii-confusing-and-ugly" class="level3">
+<h3 class="anchored" data-anchor-id="quadrant-iii-confusing-and-ugly">Quadrant III – Confusing and Ugly</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div style="font-size: 0.85em">
+<ul>
+<li>Why is it “ugly”?
+<ul>
+<li>Horrible font &amp; color choice.</li>
+<li>Grid lines are too dark &amp; distracting.</li>
+<li>Format of axes (vertical x-axis labels, number format of y-axis).</li>
+</ul></li>
+<li>Why is it “confusing”?
+<ul>
+<li>Y-axis starts at 10K (column height misleading).</li>
+<li>3D effect makes it difficult to gage heights.</li>
+<li>No lead-in or call-outs to provide context.</li>
+</ul></li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image2-51.png" class="img-fluid"></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="quadrant-ii-clear-but-ugly" class="level3">
+<h3 class="anchored" data-anchor-id="quadrant-ii-clear-but-ugly">Quadrant II – Clear but Ugly</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div style="font-size: 0.85em">
+<ul>
+<li>Why is it “ugly”?
+<ul>
+<li>Poor color (puke yellow?) and font (Comic Sans?) choices.</li>
+<li>Slightly pixelated – poor attention to image quality detail.</li>
+<li>Chart details – axis orientation, grid lines, outline.</li>
+</ul></li>
+<li>Why is it “clear”?
+<ul>
+<li>The y-axis starts at 0 and the 2D columns are easy to gage.</li>
+<li>For the first time, we see call-outs of relevant events on the timeline.</li>
+<li>This time the lead-in paragraph is actually informative.</li>
+</ul></li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image2-52.png" class="img-fluid"></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="quadrant-i-clear-and-beautiful" class="level3">
+<h3 class="anchored" data-anchor-id="quadrant-i-clear-and-beautiful">Quadrant I – Clear and Beautiful</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div style="font-size: 0.85em">
+<ul>
+<li>Why is it “beautiful”?
+<ul>
+<li>Good font &amp; color choices throughout.</li>
+<li>Soft gridlines don’t distract.</li>
+<li>All elements well aligned and spaced.</li>
+<li>High res images are “useful” chartjunk.</li>
+</ul></li>
+<li>Why is it “clear”?
+<ul>
+<li>The y-axis starts at 0 and the 2D columns are easy to gage.</li>
+<li>Call-outs with images aid cognition.</li>
+<li>Improved title &amp; lead-in verbiage provide further elucidation.</li>
+<li>For the first time, a photo credit and data source are included.</li>
+</ul></li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image2-53.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>Claus O. Wilke (2019) <a href="https://clauswilke.com/dataviz/">Fundamentals of Data Visuaization</a>. O’Reilly, USA.</p>
+<p>Few, Stephen (2012) (2nd edition) <strong>Show Me the Numbers: Designing Tables and Graphs to Enlighten</strong>, Analytics Press, Oakland, USA</p>
+<p>Cairo, Alberto (2019) <strong>How Charts Lie</strong>, W.W. Norton &amp; Company, USA.</p>
+<p>Robbins, Naomi B. (2005) <strong>Creating More Effective Graphs</strong>, John Wiley &amp; Sons, New Jersey, USA</p>
+<p>Wong, Dona M. (2010) <strong>The Wall Street Journal Guide to Information Graphics</strong>, W. W. Norton &amp; Company, Inc.&nbsp;New York.</p>
+<p>Tufte, Edward (2nd Edition) <strong>The Visual Display of Quantitative Information</strong>, Graphics Press LLC, Connecticut, USA.</p>
+</section>
+<section id="highly-recommended-blog" class="level2">
+<h2 class="anchored" data-anchor-id="highly-recommended-blog">Highly recommended blog</h2>
+<ul>
+<li><a href="http://www.thefunctionalart.com/">The Functional Art</a></li>
+<li><a href="http://junkcharts.typepad.com/junk_charts/">Junk Charts</a></li>
+<li><a href="http://www.perceptualedge.com/blog/">Perceptual Edge</a></li>
+<li><a href="http://eagereyes.org/">EagerEyes</a></li>
+<li><a href="http://www.theusrus.de/blog/">Statistical Graphics and more</a></li>
+<li><a href="http://www.visualisingdata.com/">Visualizing data</a></li>
+<li><a href="http://visualizingeconomics.com/">Visualizing Economics</a></li>
+</ul>
+<div class="cell">
+
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

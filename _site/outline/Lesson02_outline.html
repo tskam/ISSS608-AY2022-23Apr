@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2023-04-14">
+
+<title>ISSS608 - Lesson 2: Designing Graphs to Enlighten</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">ISSS608</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html">
+ <span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../lesson.html">
+ <span class="menu-text">Lesson Plan</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../DataViz.html">
+ <span class="menu-text">DataViz Makeover</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Take-home Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
+        <li>
+    <a class="dropdown-item" href="../take-home_ex/TH_EX01.html">
+ <span class="dropdown-text">Take-home Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../take-home_ex/TH_EX02.html">
+ <span class="dropdown-text">Take-home Exercise 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../take-home_ex/TH_EX03.html">
+ <span class="dropdown-text">Take-home Exercise 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../take-home_ex/TH_EX04.html">
+ <span class="dropdown-text">Take-home Exercise 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../VAproject.html">
+ <span class="menu-text">Visual Analytics Project</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-shiny-workshop" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Shiny Workshop</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-shiny-workshop">    
+        <li>
+    <a class="dropdown-item" href="../ShinyWorkshop/Shiny1/Shiny1.html">
+ <span class="dropdown-text">R Shiny basic</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ShinyWorkshop/Shiny2/Shiny0.html">
+ <span class="dropdown-text">Beyond the basic</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ShinyWorkshop/Shiny3/Shiny0.html">
+ <span class="dropdown-text">Customising Shiny</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ShinyResources.html">
+ <span class="dropdown-text">Shiny Resources</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../Tableau.html">
+ <span class="menu-text">Tableau Resources</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-all-about-r" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">All About R</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-all-about-r">    
+        <li>
+    <a class="dropdown-item" href="../R.html">
+ <span class="dropdown-text">R Resouces</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../R4Vis.html">
+ <span class="dropdown-text">R for Visual Analytics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Rt.html">
+ <span class="dropdown-text">R tips &amp; tricks</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Quarto.html">
+ <span class="dropdown-text">Quarto</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../git.html">
+ <span class="dropdown-text">git and github</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#content" id="toc-content" class="nav-link active" data-scroll-target="#content">Content</a></li>
+  <li><a href="#lesson-slides-and-hands-on-notes" id="toc-lesson-slides-and-hands-on-notes" class="nav-link" data-scroll-target="#lesson-slides-and-hands-on-notes">Lesson Slides and Hands-on Notes</a></li>
+  <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings">Readings</a>
+  <ul class="collapse">
+  <li><a href="#core-readings" id="toc-core-readings" class="nav-link" data-scroll-target="#core-readings">Core Readings</a></li>
+  <li><a href="#optional-readings" id="toc-optional-readings" class="nav-link" data-scroll-target="#optional-readings">Optional Readings</a></li>
+  </ul></li>
+  <li><a href="#learning-from-examples" id="toc-learning-from-examples" class="nav-link" data-scroll-target="#learning-from-examples">Learning from Examples</a></li>
+  <li><a href="#all-about-tableau" id="toc-all-about-tableau" class="nav-link" data-scroll-target="#all-about-tableau">All About Tableau</a>
+  <ul class="collapse">
+  <li><a href="#white-paper" id="toc-white-paper" class="nav-link" data-scroll-target="#white-paper">White Paper</a></li>
+  <li><a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial">Tutorial</a></li>
+  </ul></li>
+  <li><a href="#visual-analytics-methods-of-the-week" id="toc-visual-analytics-methods-of-the-week" class="nav-link" data-scroll-target="#visual-analytics-methods-of-the-week">Visual Analytics Method(s) of the Week</a>
+  <ul class="collapse">
+  <li><a href="#boxplot" id="toc-boxplot" class="nav-link" data-scroll-target="#boxplot">Boxplot</a></li>
+  <li><a href="#violin-plots" id="toc-violin-plots" class="nav-link" data-scroll-target="#violin-plots">Violin Plots</a></li>
+  <li><a href="#notched-box-plots" id="toc-notched-box-plots" class="nav-link" data-scroll-target="#notched-box-plots">Notched Box Plots</a></li>
+  <li><a href="#dot-plots" id="toc-dot-plots" class="nav-link" data-scroll-target="#dot-plots">Dot Plots</a></li>
+  <li><a href="#pie-chart-and-bar-chart" id="toc-pie-chart-and-bar-chart" class="nav-link" data-scroll-target="#pie-chart-and-bar-chart">Pie chart and Bar chart</a></li>
+  <li><a href="#raincloud-plots" id="toc-raincloud-plots" class="nav-link" data-scroll-target="#raincloud-plots">Raincloud Plots</a></li>
+  <li><a href="#diverging-stacked-bar-chart" id="toc-diverging-stacked-bar-chart" class="nav-link" data-scroll-target="#diverging-stacked-bar-chart">Diverging Stacked Bar Chart</a></li>
+  <li><a href="#packed-bars" id="toc-packed-bars" class="nav-link" data-scroll-target="#packed-bars">Packed Bars</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lesson 2: Designing Graphs to Enlighten</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 14, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="content" class="level2">
+<h2 class="anchored" data-anchor-id="content">Content</h2>
+<ul>
+<li>Human perception and information processing</li>
+<li>Perceptual and design principles for effective visual analytics</li>
+<li>Principles of Graphic Design
+<ul>
+<li>Rules for Encoding Values in Graph</li>
+<li>JunkCharts</li>
+<li>Practical Guides for Using Colour in Charts</li>
+<li>Data-ink</li>
+</ul></li>
+</ul>
+</section>
+<section id="lesson-slides-and-hands-on-notes" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-slides-and-hands-on-notes">Lesson Slides and Hands-on Notes</h2>
+<ul>
+<li><p>Lesson 2: Designing Graphs to Enlighten in <a href="../lesson/Lesson02/Lesson02-Designing Graphs to Enlighten.html">html</a> and <a href="../lesson/Lesson02/Lesson02-Designing Graphs to Enlighten.pdf">pdf</a> formats</p></li>
+<li><p>Handout of Hands-on Exercise 2 in <a href="../Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02-Beyond_ggplot2.html">html</a> and <a href="../Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02-Beyond_ggplot2.pdf">pdf</a> formats.</p></li>
+</ul>
+</section>
+<section id="readings" class="level2">
+<h2 class="anchored" data-anchor-id="readings">Readings</h2>
+<section id="core-readings" class="level3">
+<h3 class="anchored" data-anchor-id="core-readings">Core Readings</h3>
+<ul>
+<li>Claus O. Wilke <a href="https://clauswilke.com/dataviz/">Fundamentals of Data Visualisation</a>, Chapter 1-5, 17-26.</li>
+<li><a href="http://dataremixed.com/2012/05/data-visualization-clarity-or-aesthetics/">Data Visualization: Clarity or Aesthetics?</a></li>
+<li><a href="http://dataremixed.com/2012/05/clarity-or-aesthetics-part-2-a-tale-of-four-quadrants/">Clarity or Aesthetics? Part 2 – A Tale of Four Quadrants</a></li>
+<li><a href="http://dataremixed.com/2012/06/clarity-or-aesthetics-part-3-tips-for-achieving-both/">Clarity or Aesthetics? Part 3 – Tips for Achieving Both</a></li>
+</ul>
+</section>
+<section id="optional-readings" class="level3">
+<h3 class="anchored" data-anchor-id="optional-readings">Optional Readings</h3>
+<ul>
+<li><a href="http://junkcharts.typepad.com/junk_charts/junk-charts-trifecta-checkup-the-definitive-guide.html">Junk Charts Trifecta Checkup: The Definitive Guide</a></li>
+<li><a href="http://flowingdata.com/2010/07/22/7-basic-rules-for-making-charts-and-graphs/">7 Basic Rules for Making Charts and Graphs</a></li>
+<li><a href="http://www.perceptualedge.com/articles/visual_business_intelligence/quantitative_literacy_across_curriculum.pdf">Quantitative Literacy Across the Curriculum</a></li>
+<li><a href="http://www.perceptualedge.com/articles/ie/visual_perception.pdf">Tapping the Power of Visual Perception</a></li>
+<li><a href="http://www.perceptualedge.com/articles/visual_business_intelligence/sometimes_we_must_raise_our_voices.pdf">Sometimes We Must Raise Our Voices</a></li>
+<li><a href="http://www.perceptualedge.com/articles/b-eye/quantitative_data.pdf">Best Practices for Understanding Quantitative Data</a></li>
+<li><a href="http://www.perceptualedge.com/articles/b-eye/encoding_values_in_graph.pdf">Data Visualization: Rules for Encoding Values in Graph</a></li>
+<li><a href="http://www.perceptualedge.com/articles/b-eye/choosing_colors.pdf">Choosing Colors for Data Visualization</a></li>
+<li><a href="http://www.perceptualedge.com/articles/visual_business_intelligence/line_graphs_and_irregular_intervals.pdf">Line Graphs and Irregular Intervals: An Incompatible Partnership</a></li>
+<li><a href="https://www.eea.europa.eu/data-and-maps/daviz/learn-more/chart-dos-and-donts">Dos and don’ts of data visualisation- Usability guidelines for improving your visualisations</a></li>
+</ul>
+</section>
+</section>
+<section id="learning-from-examples" class="level2">
+<h2 class="anchored" data-anchor-id="learning-from-examples">Learning from Examples</h2>
+<ul>
+<li><a href="https://medium.economist.com/mistakes-weve-drawn-a-few-8cdd8a42d368">Mistakes, we’ve drawn a few</a></li>
+<li><a href="https://www.ft.com/graphics">FT stories through charts and graphics</a></li>
+<li><a href="https://www.tableau.com/sites/default/files/whitepapers/three_steps_to_make_your_data_clearer_the_gi_tableau_guide.pdf">Three Steps to Make Your Data Clearer</a></li>
+<li><a href="http://www.thefunctionalart.com/2019/03/when-your-own-data-contradicts-your.html">When your own data contradicts your headline</a></li>
+</ul>
+</section>
+<section id="all-about-tableau" class="level2">
+<h2 class="anchored" data-anchor-id="all-about-tableau">All About Tableau</h2>
+<section id="white-paper" class="level3">
+<h3 class="anchored" data-anchor-id="white-paper">White Paper</h3>
+<ul>
+<li><a href="https://www.tableau.com/sites/default/files/whitepapers/which_chart_or_graph_v2.pdf">Which chart or graphis right for you?</a></li>
+<li><a href="https://www.tableau.com/sites/default/files/whitepapers/goodenoughtogreat.pdf">Good Enough to Great: A Quick Guide for Better Data Visualizations</a></li>
+</ul>
+</section>
+<section id="tutorial" class="level3">
+<h3 class="anchored" data-anchor-id="tutorial">Tutorial</h3>
+<ul>
+<li><p><a href="https://www.tableau.com/learn/tutorials/on-demand/getting-started-dashboards-and-stories">Getting Started with Dashboards and Stories</a></p></li>
+<li><p><a href="https://www.tableau.com/learn/tutorials/on-demand/getting-started-calculations">Getting Started with Calculation</a></p></li>
+<li><p><a href="https://www.tableau.com/learn/tutorials/on-demand/calculation-syntax">Calculation Syntax</a></p></li>
+<li><p><a href="https://www.tableau.com/learn/tutorials/on-demand/introduction-lod-expressions">Introduction to LOD Expressions</a></p></li>
+<li><p><a href="https://www.tableau.com/learn/tutorials/on-demand/intro-table-calculations">Intro to Table Calculations</a></p></li>
+<li><p><a href="https://www.tableau.com/learn/tutorials/on-demand/modifying-table-calculations">Modifying Table Calculations</a></p></li>
+<li><p><a href="https://www.tableau.com/learn/tutorials/on-demand/aggregate-calculations">Aggregate Calculations</a></p></li>
+<li><p><a href="https://www.tableau.com/learn/tutorials/on-demand/date-calculations">Date Calculations</a></p></li>
+<li><p><a href="https://www.tableau.com/learn/tutorials/on-demand/logic-calculations">Logic Calculation</a></p></li>
+<li><p><a href="https://www.tableau.com/learn/tutorials/on-demand/string-calculations">String Calculation</a></p></li>
+<li><p><a href="https://www.tableau.com/learn/tutorials/on-demand/number-calculations">Number Calculation</a></p></li>
+<li><p><a href="https://www.tableau.com/learn/tutorials/on-demand/type-calculations">Type Calculation</a></p></li>
+<li><p><a href="https://www.tableau.com/learn/tutorials/on-demand/conceptual-topics-lod-expressions">Conceptual Topics with LOD Expressions</a></p></li>
+<li><p><a href="https://www.tableau.com/learn/tutorials/on-demand/aggregation-and-replication-lod-expressions">Aggregation and Replication with LOD Expressions</a></p></li>
+<li><p><a href="https://www.tableau.com/learn/tutorials/on-demand/nested-lod-expressions">Nested LOD Expressions</a></p></li>
+</ul>
+</section>
+</section>
+<section id="visual-analytics-methods-of-the-week" class="level2">
+<h2 class="anchored" data-anchor-id="visual-analytics-methods-of-the-week">Visual Analytics Method(s) of the Week</h2>
+<section id="boxplot" class="level3">
+<h3 class="anchored" data-anchor-id="boxplot">Boxplot</h3>
+<ul>
+<li><a href="https://towardsdatascience.com/understanding-boxplots-5e2df7bcbd51">Understanding Boxplots</a></li>
+<li>Regina L. Nuzzo (2016) <a href="https://onlinelibrary.wiley.com/doi/pdf/10.1016/j.pmrj.2016.02.001">“The Box Plots Alternative for Visualizing Quantitative Data”</a>, <em>PR&amp;M</em>, Volume8, Issue3, pp.&nbsp;268-272.</li>
+</ul>
+</section>
+<section id="violin-plots" class="level3">
+<h3 class="anchored" data-anchor-id="violin-plots">Violin Plots</h3>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Violin_plot">Violin Plot-wikipedia</a></li>
+<li>Hintze, Jerry L.; Nelson, Ray D. (1998). “<a href="https://search.proquest.com/openview/dcd68eb137d2d6b08aa23f37e34e0b01/1?pq-origsite=gscholar">Violin Plots: A Box Plot-Density Trace Synergism</a>”. <em>The American Statistician</em>. 52 (2): 181–4</li>
+<li><a href="https://www.londonsoda.com/articles/violin-plots">Violin Plot</a> by LondonSODA.</li>
+</ul>
+</section>
+<section id="notched-box-plots" class="level3">
+<h3 class="anchored" data-anchor-id="notched-box-plots">Notched Box Plots</h3>
+<ul>
+<li><a href="https://sites.google.com/site/davidsstatistics/davids-statistics/notched-box-plots">Notched Box Plots</a></li>
+</ul>
+</section>
+<section id="dot-plots" class="level3">
+<h3 class="anchored" data-anchor-id="dot-plots">Dot Plots</h3>
+<ul>
+<li><a href="https://search-proquest-com.libproxy.smu.edu.sg/docview/228429978?rfr_id=info%3Axri%2Fsid%3Aprimo">Dot plots</a></li>
+<li><a href="http://www.b-eye-network.com/view/2468">Dot Plots: A Useful Alternative to Bar Charts</a></li>
+<li><a href="https://d-nb.info/1151959243/34">The dot plot: A graphical tool for data analysis and presentation</a></li>
+<li>Leland Wilkinson (1999) <a href="http://moderngraphics11.pbworks.com/f/wilkinson_1999.DotPlots.pdf">“Dot Plot”</a>, <em>Statistical Computing and Graphics</em>, Vol. 53, No.&nbsp;3, pp.&nbsp;276-281.</li>
+</ul>
+</section>
+<section id="pie-chart-and-bar-chart" class="level3">
+<h3 class="anchored" data-anchor-id="pie-chart-and-bar-chart">Pie chart and Bar chart</h3>
+<ul>
+<li><a href="https://eagereyes.org/techniques/pie-charts">Understanding Pie Charts</a></li>
+<li>Tracey L. Weissgerber et. al.&nbsp;(2015) <a href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1002128">“Beyond Bar and Line Graphs: Time for a New Data Presentation Paradigm”</a>, <em>PLoS Biology</em>.</li>
+</ul>
+</section>
+<section id="raincloud-plots" class="level3">
+<h3 class="anchored" data-anchor-id="raincloud-plots">Raincloud Plots</h3>
+<ul>
+<li>Allen M, Poggiali D, Whitaker K et al.&nbsp;<a href="https://wellcomeopenresearch.org/articles/4-63">“Raincloud plots: a multi-platform tool for robust data. visualization”</a> [version 2; peer review: 2 approved]. <em>Welcome Open Res</em> 2021, pp.&nbsp;4:63.</li>
+</ul>
+</section>
+<section id="diverging-stacked-bar-chart" class="level3">
+<h3 class="anchored" data-anchor-id="diverging-stacked-bar-chart">Diverging Stacked Bar Chart</h3>
+<ul>
+<li><a href="https://www.jstatsoft.org/article/view/v057i05">Design of Diverging Stacked Bar Charts for Likert Scales and Other Applications</a></li>
+<li><a href="https://www.perceptualedge.com/blog/?p=2239">When Are 100% Stacked Bar Graphs Useful?</a></li>
+<li><a href="https://blog.datawrapper.de/divergingbars/">The case against diverging stacked bars</a></li>
+<li><a href="https://www.linkedin.com/pulse/diverging-100-stacked-bars-useless-daniel-zvinca/?published=t">Are diverging 100% stacked bars useless?</a></li>
+<li><a href="https://www.datarevelations.com/rethinkingdivergent.html">Rethinking the divergent stacked bar chart — placing the stronger views in the center</a></li>
+</ul>
+</section>
+<section id="packed-bars" class="level3">
+<h3 class="anchored" data-anchor-id="packed-bars">Packed Bars</h3>
+<ul>
+<li><a href="https://community.jmp.com/t5/JMP-Blog/Introducing-packed-bars-a-new-chart-form/ba-p/39972#">Introducing packed bars, a new chart form</a></li>
+<li><a href="https://cran.r-project.org/web/packages/rPackedBar/index.html">rPackedBar: Packed Bar Charts with ‘plotly’</a></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

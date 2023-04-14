@@ -1,7 +1,8 @@
 ---
 title: "Lesson 1: Introduction to Visual Analytics"
 description: " "
-date: "`r Sys.Date()`"
+date: "3 April 2023"
+date-modified: "`r Sys.Date()`"
 format: html
 editor: visual
 ---
@@ -20,7 +21,7 @@ editor: visual
 
 -   Lesson slides in [html](../lesson/Lesson01/Lesson01-VAA.html) and [pdf](../lesson/Lesson01/Lesson01-VAA.pdf) formats.
 
--   Hands-on Exercise 1 in [html](../hands-on_ex/Hands-on_Ex01/Hands-on_Ex01-ggplot2.html) format.
+-   Hands-on Exercise 1 in [html](https://r4va.netlify.app/chap01.html) format.
 
 ## In-class Exercise
 

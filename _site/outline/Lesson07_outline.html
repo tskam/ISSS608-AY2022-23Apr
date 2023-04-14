@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2022-12-30">
+
+<title>ISSS608 - Lesson 7: Visualising and Analysing Geographic Data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">ISSS608</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html">
+ <span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../lesson.html">
+ <span class="menu-text">Lesson Plan</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../DataViz.html">
+ <span class="menu-text">DataViz Makeover</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Take-home Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
+        <li>
+    <a class="dropdown-item" href="../take-home_ex/TH_EX01.html">
+ <span class="dropdown-text">Take-home Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../take-home_ex/TH_EX02.html">
+ <span class="dropdown-text">Take-home Exercise 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../take-home_ex/TH_EX03.html">
+ <span class="dropdown-text">Take-home Exercise 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../take-home_ex/TH_EX04.html">
+ <span class="dropdown-text">Take-home Exercise 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../VAproject.html">
+ <span class="menu-text">Visual Analytics Project</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-shiny-workshop" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Shiny Workshop</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-shiny-workshop">    
+        <li>
+    <a class="dropdown-item" href="../ShinyWorkshop/Shiny1/Shiny1.html">
+ <span class="dropdown-text">R Shiny basic</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ShinyWorkshop/Shiny2/Shiny0.html">
+ <span class="dropdown-text">Beyond the basic</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ShinyWorkshop/Shiny3/Shiny0.html">
+ <span class="dropdown-text">Customising Shiny</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ShinyResources.html">
+ <span class="dropdown-text">Shiny Resources</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../Tableau.html">
+ <span class="menu-text">Tableau Resources</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-all-about-r" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">All About R</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-all-about-r">    
+        <li>
+    <a class="dropdown-item" href="../R.html">
+ <span class="dropdown-text">R Resouces</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../R4Vis.html">
+ <span class="dropdown-text">R for Visual Analytics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Rt.html">
+ <span class="dropdown-text">R tips &amp; tricks</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Quarto.html">
+ <span class="dropdown-text">Quarto</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../git.html">
+ <span class="dropdown-text">git and github</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#lesson-outline" id="toc-lesson-outline" class="nav-link active" data-scroll-target="#lesson-outline">Lesson Outline</a></li>
+  <li><a href="#lesson-slides-and-hands-on-notes" id="toc-lesson-slides-and-hands-on-notes" class="nav-link" data-scroll-target="#lesson-slides-and-hands-on-notes">Lesson Slides and Hands-on Notes</a></li>
+  <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings">Readings</a>
+  <ul class="collapse">
+  <li><a href="#core-reading" id="toc-core-reading" class="nav-link" data-scroll-target="#core-reading">Core Reading</a></li>
+  <li><a href="#additional-readings" id="toc-additional-readings" class="nav-link" data-scroll-target="#additional-readings">Additional Readings</a></li>
+  </ul></li>
+  <li><a href="#visualising-geographic-data-tableau-methods" id="toc-visualising-geographic-data-tableau-methods" class="nav-link" data-scroll-target="#visualising-geographic-data-tableau-methods">Visualising Geographic Data: Tableau Methods</a>
+  <ul class="collapse">
+  <li><a href="#basic-tutorial" id="toc-basic-tutorial" class="nav-link" data-scroll-target="#basic-tutorial">Basic Tutorial</a></li>
+  <li><a href="#beyond-the-basic" id="toc-beyond-the-basic" class="nav-link" data-scroll-target="#beyond-the-basic">Beyond the Basic</a></li>
+  </ul></li>
+  <li><a href="#geovisual-analytics-r-methods" id="toc-geovisual-analytics-r-methods" class="nav-link" data-scroll-target="#geovisual-analytics-r-methods">GeoVisual Analytics: R methods</a>
+  <ul class="collapse">
+  <li><a href="#sf-package" id="toc-sf-package" class="nav-link" data-scroll-target="#sf-package">sf package</a></li>
+  <li><a href="#raster-package" id="toc-raster-package" class="nav-link" data-scroll-target="#raster-package">raster package</a></li>
+  <li><a href="#stars" id="toc-stars" class="nav-link" data-scroll-target="#stars">stars</a></li>
+  <li><a href="#tmap-package" id="toc-tmap-package" class="nav-link" data-scroll-target="#tmap-package">tmap package</a></li>
+  <li><a href="#micromap-package" id="toc-micromap-package" class="nav-link" data-scroll-target="#micromap-package">micromap package</a></li>
+  <li><a href="#geofacet-package" id="toc-geofacet-package" class="nav-link" data-scroll-target="#geofacet-package">geofacet package</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lesson 7: Visualising and Analysing Geographic Data</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">December 30, 2022</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">April 14, 2023</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<section id="lesson-outline" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-outline">Lesson Outline</h2>
+<ul>
+<li>Introducing map</li>
+<li>Properties of geographical data</li>
+<li>Typology of map</li>
+<li>Thematic mapping techniques
+<ul>
+<li>Proportional symbol map</li>
+<li>Choropleth map</li>
+<li>Data Classification</li>
+</ul></li>
+<li>Alternative mapping techniques</li>
+</ul>
+</section>
+<section id="lesson-slides-and-hands-on-notes" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-slides-and-hands-on-notes">Lesson Slides and Hands-on Notes</h2>
+<ul>
+<li><p>Lesson slides in <a href="../lesson/Lesson07/Lesson07-VisGeo.html">html</a> and <a href="../lesson/Lesson07/Lesson07-VisGeo.pdf">pdf</a> formats</p></li>
+<li><p>Hands-on Exercises:</p></li>
+<li><p>Hands-on Exercise 7: Choropleth Mapping in R <a href="../Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07-Choropleth_Mapping.html">html</a></p></li>
+<li><p>Hands-on Exercise 7: Visualising Geospatial Point Data <a href="../Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07-Point_Mapping.html">html</a></p></li>
+<li><p>Handout of Hands-on Exercise 7: Analytical Mapping in <a href="../Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07-Analytical_Mapping.html">html</a>.</p></li>
+</ul>
+</section>
+<section id="readings" class="level2">
+<h2 class="anchored" data-anchor-id="readings">Readings</h2>
+<section id="core-reading" class="level3">
+<h3 class="anchored" data-anchor-id="core-reading">Core Reading</h3>
+<ul>
+<li><a href="https://www.yaaka.cc/unit/the-concept-of-map-symbols/">The Concept of Map Symbols</a></li>
+<li><a href="https://www.axismaps.com/guide/univariate/proportional-symbols/">Proportional Symbols</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Choropleth_map">Choropleth map</a></li>
+<li><a href="https://www.axismaps.com/guide/univariate/choropleth/">Choropleth Maps</a></li>
+<li><a href="https://www.axismaps.com/guide/data/data-classification/">The Basics of Data Classification</a></li>
+</ul>
+</section>
+<section id="additional-readings" class="level3">
+<h3 class="anchored" data-anchor-id="additional-readings">Additional Readings</h3>
+<ul>
+<li><a href="https://gisgeography.com/choropleth-maps-data-classification/">Choropleth Maps – A Guide to Data Classification</a></li>
+<li><a href="https://www.axismaps.com/guide/multivariate/bivariate-choropleth/">Bivariate Choropleth</a></li>
+<li><a href="http://andywoodruff.com/blog/value-by-alpha-maps/">Value-by-alpha maps</a></li>
+<li><a href="https://blog.datawrapper.de/choroplethmaps/">What to consider when creating choropleth maps</a></li>
+<li><a href="https://www.directionsmag.com/article/3363">Choropleth Mapping with Exploratory Data Analysis</a></li>
+<li><a href="https://gisgeography.com/cartogram-maps/">Cartogram Maps: Data Visualization with Exaggeration</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cartogram">Cartogram</a></li>
+<li><a href="http://www.ericson.net/content/2011/10/when-maps-shouldnt-be-maps/">When Maps Shouldn’t Be Maps</a></li>
+<li><a href="https://blog.datawrapper.de/choroplethmaps/">What to consider when creating choropleth maps</a></li>
+</ul>
+</section>
+</section>
+<section id="visualising-geographic-data-tableau-methods" class="level2">
+<h2 class="anchored" data-anchor-id="visualising-geographic-data-tableau-methods">Visualising Geographic Data: Tableau Methods</h2>
+<section id="basic-tutorial" class="level3">
+<h3 class="anchored" data-anchor-id="basic-tutorial">Basic Tutorial</h3>
+<ul>
+<li><a href="https://help.tableau.com/current/pro/desktop/en-us/maps.htm">Maps and Geographic Data Analysis in Tableau</a>. This chapter from the User Guide of Tableau provide a comprehensive overview of the mapping concepts and Tableau methods. I strongly recommend you to read the chapter at least once.</li>
+<li><a href="https://www.tableau.com/learn/webinars/live-training-mapping#video">Live Training: Mapping</a></li>
+<li><a href="https://www.tableau.com/learn/tutorials/on-demand/getting-started-mapping?product=tableau_desktop%2Btableau_prep&amp;version=tableau_desktop_2019_3%2Btableau_prep_2019_3_1&amp;topic=mapping">Getting Started with Mapping</a></li>
+<li><a href="https://www.tableau.com/learn/tutorials/on-demand/maps-tableau?product=tableau_desktop%2Btableau_prep&amp;version=tableau_desktop_2019_3%2Btableau_prep_2019_3_1&amp;topic=mapping">Maps in Tableau</a></li>
+<li><a href="https://www.tableau.com/learn/tutorials/on-demand/editing-unrecognized-locations?product=tableau_desktop%2Btableau_prep&amp;version=tableau_desktop_2019_3%2Btableau_prep_2019_3_1&amp;topic=mapping">Editing Unrecognized Location</a></li>
+<li><a href="https://www.tableau.com/learn/tutorials/on-demand/spatial-files?product=tableau_desktop%2Btableau_prep&amp;version=tableau_desktop_2019_3%2Btableau_prep_2019_3_1&amp;topic=mapping">Spatial Files</a></li>
+<li><a href="https://www.tableau.com/learn/tutorials/on-demand/density-mark-type?product=tableau_desktop%2Btableau_prep&amp;version=tableau_desktop_2019_3%2Btableau_prep_2019_3_1&amp;topic=mapping">The Density Mark Type (Heat maps)</a></li>
+<li><a href="https://www.tableau.com/learn/tutorials/on-demand/expanding-tableaus-mapping-capabilities?product=tableau_desktop%2Btableau_prep&amp;version=tableau_desktop_2019_3%2Btableau_prep_2019_3_1&amp;topic=mapping">Expanding Tableau’s Mapping Capabilities</a></li>
+<li><a href="https://www.tableau.com/learn/tutorials/on-demand/custom-geocoding?product=tableau_desktop%2Btableau_prep&amp;version=tableau_desktop_2019_3%2Btableau_prep_2019_3_1&amp;topic=mapping">Custom Geocoding</a></li>
+<li><a href="https://www.tableau.com/learn/tutorials/on-demand/polygon-maps?product=tableau_desktop%2Btableau_prep&amp;version=tableau_desktop_2019_3%2Btableau_prep_2019_3_1&amp;topic=mapping">Polygon Maps</a></li>
+<li><a href="https://www.tableau.com/learn/tutorials/on-demand/background-images?product=tableau_desktop%2Btableau_prep&amp;version=tableau_desktop_2019_3%2Btableau_prep_2019_3_1&amp;topic=mapping">Background Images</a></li>
+</ul>
+</section>
+<section id="beyond-the-basic" class="level3">
+<h3 class="anchored" data-anchor-id="beyond-the-basic">Beyond the Basic</h3>
+<ul>
+<li><a href="https://www.tableau.com/learn/webinars/advanced-mapping-techniques-tableau">Advanced Mapping with Tableau</a></li>
+<li><a href="https://www.tableau.com/learn/whitepapers/10-ways-add-value-your-dashboards-maps">10 ways to add value to your dashboards with maps</a></li>
+<li><a href="https://www.ryansleeper.com/3-ways-to-make-magnificent-maps-in-tableau/">3 Ways to Make Magnificent Maps in Tableau</a></li>
+<li><a href="https://playfairdata.com/how-to-make-trellis-tile-small-multiple-maps-in-tableau//">How to Make Trellis / Tile / Small Multiple Maps in Tableau</a></li>
+</ul>
+</section>
+</section>
+<section id="geovisual-analytics-r-methods" class="level2">
+<h2 class="anchored" data-anchor-id="geovisual-analytics-r-methods">GeoVisual Analytics: R methods</h2>
+<section id="sf-package" class="level3">
+<h3 class="anchored" data-anchor-id="sf-package">sf package</h3>
+<ul>
+<li><a href="https://r-spatial.github.io/sf/articles/sf1.html">Simple Features for R</a></li>
+<li><a href="https://r-spatial.github.io/sf/articles/sf2.html">Reading, Writing and Converting Simple Features</a></li>
+<li><a href="https://r-spatial.github.io/sf/articles/sf3.html">Manipulating Simple Feature Geometries</a></li>
+<li><a href="https://r-spatial.github.io/sf/articles/sf4.html">Manipulating Simple Features</a></li>
+<li><a href="https://r-spatial.github.io/sf/articles/sf5.html">Plotting Simple Features</a></li>
+<li><a href="https://r-spatial.github.io/sf/articles/sf6.html">Miscellaneous</a></li>
+<li><a href="https://r-spatial.github.io/sf/articles/sf7.html">Spherical geometry in sf using s2geometry</a></li>
+</ul>
+</section>
+<section id="raster-package" class="level3">
+<h3 class="anchored" data-anchor-id="raster-package">raster package</h3>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/raster/raster.pdf">raster reference</a></li>
+<li><a href="https://rspatial.org/raster/pkg/index.html">raster</a> package</li>
+</ul>
+</section>
+<section id="stars" class="level3">
+<h3 class="anchored" data-anchor-id="stars">stars</h3>
+<ul>
+<li><a href="https://r-spatial.github.io/stars/reference/index.html">stars reference</a></li>
+<li><a href="https://r-spatial.github.io/stars/index.html">Spatiotemporal Arrays: Raster and Vector Datacubes</a></li>
+<li><a href="https://r-spatial.github.io/stars/articles/stars1.html">Introduction</a></li>
+<li><a href="https://r-spatial.github.io/stars/articles/stars3.html">stars tidyverse methods</a></li>
+<li><a href="https://r-spatial.github.io/stars/articles/stars7.html">Statistical modelling with stars objects</a></li>
+</ul>
+</section>
+<section id="tmap-package" class="level3">
+<h3 class="anchored" data-anchor-id="tmap-package">tmap package</h3>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/tmap/tmap.pdf">tmap reference</a></li>
+<li><a href="https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html">tmap: get started!</a></li>
+<li><a href="https://cran.r-project.org/web/packages/tmap/vignettes/tmap-changes.html">tmap: what is changed in recent versions?</a></li>
+<li>Tennekes, M., (2018)<a href="https://www.jstatsoft.org/article/view/v084i06">tmap: Thematic Maps in R</a>, <em>Journal of Statistical Software</em>, 84(6), 1-39.</li>
+</ul>
+</section>
+<section id="micromap-package" class="level3">
+<h3 class="anchored" data-anchor-id="micromap-package">micromap package</h3>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/micromap/index.html">micromap</a> provides functions simplifies the creation of linked micromap plots.</li>
+<li><a href="https://cran.r-project.org/web/packages/micromap/vignettes/Introduction_Guide.pdf">Linked Micromaps</a></li>
+</ul>
+</section>
+<section id="geofacet-package" class="level3">
+<h3 class="anchored" data-anchor-id="geofacet-package">geofacet package</h3>
+<ul>
+<li><a href="https://hafen.github.io/geofacet/">geofacet</a> provides geofaceting functionality for ggplot2. Geofaceting arranges a sequence of plots of data for different geographical entities into a grid that strives to preserve some of the original geographical orientation of the entities.</li>
+<li><a href="https://hafen.github.io/geofacet/articles/geofacet.html">Introduction to geofacet</a></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

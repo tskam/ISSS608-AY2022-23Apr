@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dr.&nbsp;Kam Tin Seong Assoc. Professor of Information Systems (Practice)">
+<meta name="dcterms.date" content="2023-04-14">
+
+<title>ISSS608 - Lesson 8: Visualising and Analysing Network Data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">ISSS608</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../syllabus.html">
+ <span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../lesson.html">
+ <span class="menu-text">Lesson Plan</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../DataViz.html">
+ <span class="menu-text">DataViz Makeover</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Take-home Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../take-home_ex/TH_EX01.html">
+ <span class="dropdown-text">Take-home Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../take-home_ex/TH_EX02.html">
+ <span class="dropdown-text">Take-home Exercise 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../take-home_ex/TH_EX03.html">
+ <span class="dropdown-text">Take-home Exercise 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../take-home_ex/TH_EX04.html">
+ <span class="dropdown-text">Take-home Exercise 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../VAproject.html">
+ <span class="menu-text">Visual Analytics Project</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-shiny-workshop" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Shiny Workshop</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-shiny-workshop">    
+        <li>
+    <a class="dropdown-item" href="../../ShinyWorkshop/Shiny1/Shiny1.html">
+ <span class="dropdown-text">R Shiny basic</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ShinyWorkshop/Shiny2/Shiny0.html">
+ <span class="dropdown-text">Beyond the basic</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ShinyWorkshop/Shiny3/Shiny0.html">
+ <span class="dropdown-text">Customising Shiny</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ShinyResources.html">
+ <span class="dropdown-text">Shiny Resources</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../Tableau.html">
+ <span class="menu-text">Tableau Resources</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-all-about-r" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">All About R</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-all-about-r">    
+        <li>
+    <a class="dropdown-item" href="../../R.html">
+ <span class="dropdown-text">R Resouces</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../R4Vis.html">
+ <span class="dropdown-text">R for Visual Analytics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Rt.html">
+ <span class="dropdown-text">R tips &amp; tricks</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Quarto.html">
+ <span class="dropdown-text">Quarto</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../git.html">
+ <span class="dropdown-text">git and github</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#content" id="toc-content" class="nav-link active" data-scroll-target="#content">Content</a></li>
+  <li><a href="#introduction-to-graph-analytics" id="toc-introduction-to-graph-analytics" class="nav-link" data-scroll-target="#introduction-to-graph-analytics">Introduction to Graph Analytics</a>
+  <ul class="collapse">
+  <li><a href="#what-is-graph-analytics" id="toc-what-is-graph-analytics" class="nav-link" data-scroll-target="#what-is-graph-analytics">What is Graph Analytics?</a></li>
+  </ul></li>
+  <li><a href="#what-is-graph-analytics-1" id="toc-what-is-graph-analytics-1" class="nav-link" data-scroll-target="#what-is-graph-analytics-1">What is Graph Analytics?</a>
+  <ul class="collapse">
+  <li><a href="#graph-analytics-in-history-classical-graph-theory" id="toc-graph-analytics-in-history-classical-graph-theory" class="nav-link" data-scroll-target="#graph-analytics-in-history-classical-graph-theory">Graph Analytics in History: Classical Graph Theory</a></li>
+  <li><a href="#graph-analytics-in-history-sociogram" id="toc-graph-analytics-in-history-sociogram" class="nav-link" data-scroll-target="#graph-analytics-in-history-sociogram">Graph Analytics in History: Sociogram</a></li>
+  <li><a href="#where-are-graphs-used" id="toc-where-are-graphs-used" class="nav-link" data-scroll-target="#where-are-graphs-used">Where are Graphs used</a></li>
+  </ul></li>
+  <li><a href="#basic-principles-of-graph" id="toc-basic-principles-of-graph" class="nav-link" data-scroll-target="#basic-principles-of-graph">Basic Principles of Graph</a>
+  <ul class="collapse">
+  <li><a href="#a-complete-graph" id="toc-a-complete-graph" class="nav-link" data-scroll-target="#a-complete-graph">A Complete Graph</a></li>
+  <li><a href="#a-directed-graph" id="toc-a-directed-graph" class="nav-link" data-scroll-target="#a-directed-graph">A Directed Graph</a></li>
+  <li><a href="#graph-representation" id="toc-graph-representation" class="nav-link" data-scroll-target="#graph-representation">Graph representation</a></li>
+  <li><a href="#a-weighted-graph" id="toc-a-weighted-graph" class="nav-link" data-scroll-target="#a-weighted-graph">A weighted graph</a></li>
+  <li><a href="#a-weighted-graph-1" id="toc-a-weighted-graph-1" class="nav-link" data-scroll-target="#a-weighted-graph-1">A weighted graph</a></li>
+  <li><a href="#an-ego-centric-graph" id="toc-an-ego-centric-graph" class="nav-link" data-scroll-target="#an-ego-centric-graph">An ego-centric graph</a></li>
+  <li><a href="#bipartite-graph" id="toc-bipartite-graph" class="nav-link" data-scroll-target="#bipartite-graph">Bipartite Graph</a></li>
+  <li><a href="#affiliation-networks---bipartite-graph" id="toc-affiliation-networks---bipartite-graph" class="nav-link" data-scroll-target="#affiliation-networks---bipartite-graph">Affiliation Networks - Bipartite Graph</a></li>
+  <li><a href="#a-multimodel-graph" id="toc-a-multimodel-graph" class="nav-link" data-scroll-target="#a-multimodel-graph">A Multimodel Graph</a></li>
+  </ul></li>
+  <li><a href="#network-in-real-world" id="toc-network-in-real-world" class="nav-link" data-scroll-target="#network-in-real-world">Network in real World</a>
+  <ul class="collapse">
+  <li><a href="#real-world-network---land-transport" id="toc-real-world-network---land-transport" class="nav-link" data-scroll-target="#real-world-network---land-transport">Real world network - Land transport</a></li>
+  <li><a href="#real-world-network---maritime-transport" id="toc-real-world-network---maritime-transport" class="nav-link" data-scroll-target="#real-world-network---maritime-transport">Real world network - Maritime transport</a></li>
+  <li><a href="#real-world-network---air-transport" id="toc-real-world-network---air-transport" class="nav-link" data-scroll-target="#real-world-network---air-transport">Real world network - Air transport</a></li>
+  <li><a href="#real-world-network---life-line" id="toc-real-world-network---life-line" class="nav-link" data-scroll-target="#real-world-network---life-line">Real world network - Life line</a></li>
+  <li><a href="#real-world-network---social-network" id="toc-real-world-network---social-network" class="nav-link" data-scroll-target="#real-world-network---social-network">Real world network - Social network</a></li>
+  </ul></li>
+  <li><a href="#graph-visualisation-in-action-1" id="toc-graph-visualisation-in-action-1" class="nav-link" data-scroll-target="#graph-visualisation-in-action-1">Graph Visualisation in action 1</a></li>
+  <li><a href="#graph-visualisation-in-action-2" id="toc-graph-visualisation-in-action-2" class="nav-link" data-scroll-target="#graph-visualisation-in-action-2">Graph Visualisation in action 2</a>
+  <ul class="collapse">
+  <li><a href="#graph-visualisation-in-action-3" id="toc-graph-visualisation-in-action-3" class="nav-link" data-scroll-target="#graph-visualisation-in-action-3">Graph Visualisation in action 3</a></li>
+  <li><a href="#graph-visualisation-in-action-4" id="toc-graph-visualisation-in-action-4" class="nav-link" data-scroll-target="#graph-visualisation-in-action-4">Graph Visualisation in action 4</a></li>
+  <li><a href="#graph-visualisation-in-action-5" id="toc-graph-visualisation-in-action-5" class="nav-link" data-scroll-target="#graph-visualisation-in-action-5">Graph Visualisation in action 5</a></li>
+  <li><a href="#graph-visualisation-in-action-6" id="toc-graph-visualisation-in-action-6" class="nav-link" data-scroll-target="#graph-visualisation-in-action-6">Graph Visualisation in action 6</a></li>
+  <li><a href="#graph-visualisation-in-action-7" id="toc-graph-visualisation-in-action-7" class="nav-link" data-scroll-target="#graph-visualisation-in-action-7">Graph Visualisation in action 7</a></li>
+  <li><a href="#graph-visualisation-in-action-8" id="toc-graph-visualisation-in-action-8" class="nav-link" data-scroll-target="#graph-visualisation-in-action-8">Graph Visualisation in action 8</a></li>
+  <li><a href="#graph-visualisation-in-action-9" id="toc-graph-visualisation-in-action-9" class="nav-link" data-scroll-target="#graph-visualisation-in-action-9">Graph Visualisation in action 9</a></li>
+  <li><a href="#graph-visualisation-in-action-10" id="toc-graph-visualisation-in-action-10" class="nav-link" data-scroll-target="#graph-visualisation-in-action-10">Graph Visualisation in action 10</a></li>
+  <li><a href="#graph-visualisation-in-action-11--un-voting-in-europe" id="toc-graph-visualisation-in-action-11--un-voting-in-europe" class="nav-link" data-scroll-target="#graph-visualisation-in-action-11--un-voting-in-europe">Graph Visualisation in action 11- UN Voting in Europe</a></li>
+  </ul></li>
+  <li><a href="#to-learn-more-go-to-visual-complexity" id="toc-to-learn-more-go-to-visual-complexity" class="nav-link" data-scroll-target="#to-learn-more-go-to-visual-complexity">To learn more, go to Visual Complexity</a></li>
+  <li><a href="#graph-data" id="toc-graph-data" class="nav-link" data-scroll-target="#graph-data">Graph Data</a></li>
+  <li><a href="#potential-graph-data-sources" id="toc-potential-graph-data-sources" class="nav-link" data-scroll-target="#potential-graph-data-sources">Potential Graph Data Sources</a>
+  <ul class="collapse">
+  <li><a href="#node-and-link-data-sets" id="toc-node-and-link-data-sets" class="nav-link" data-scroll-target="#node-and-link-data-sets">Node and Link Data Sets</a></li>
+  </ul></li>
+  <li><a href="#potential-graph-data-sources-1" id="toc-potential-graph-data-sources-1" class="nav-link" data-scroll-target="#potential-graph-data-sources-1">Potential Graph Data Sources</a>
+  <ul class="collapse">
+  <li><a href="#link-records" id="toc-link-records" class="nav-link" data-scroll-target="#link-records">Link Records</a></li>
+  </ul></li>
+  <li><a href="#potential-graph-data-sources-2" id="toc-potential-graph-data-sources-2" class="nav-link" data-scroll-target="#potential-graph-data-sources-2">Potential Graph Data Sources</a>
+  <ul class="collapse">
+  <li><a href="#transaction-records" id="toc-transaction-records" class="nav-link" data-scroll-target="#transaction-records">Transaction Records</a></li>
+  </ul></li>
+  <li><a href="#potential-graph-data-sources-3" id="toc-potential-graph-data-sources-3" class="nav-link" data-scroll-target="#potential-graph-data-sources-3">Potential Graph Data Sources</a>
+  <ul class="collapse">
+  <li><a href="#sequence-data" id="toc-sequence-data" class="nav-link" data-scroll-target="#sequence-data">Sequence Data</a></li>
+  </ul></li>
+  <li><a href="#potential-graph-data-sources-4" id="toc-potential-graph-data-sources-4" class="nav-link" data-scroll-target="#potential-graph-data-sources-4">Potential Graph Data Sources</a>
+  <ul class="collapse">
+  <li><a href="#unstructured-data-for-example-tweets" id="toc-unstructured-data-for-example-tweets" class="nav-link" data-scroll-target="#unstructured-data-for-example-tweets">Unstructured Data (for Example, Tweets)</a></li>
+  </ul></li>
+  <li><a href="#potential-graph-data-sources-5" id="toc-potential-graph-data-sources-5" class="nav-link" data-scroll-target="#potential-graph-data-sources-5">Potential Graph Data Sources</a>
+  <ul class="collapse">
+  <li><a href="#matrix-for-example-trade-migration" id="toc-matrix-for-example-trade-migration" class="nav-link" data-scroll-target="#matrix-for-example-trade-migration">Matrix (for Example, Trade, Migration)</a></li>
+  </ul></li>
+  <li><a href="#potential-graph-data-sources-6" id="toc-potential-graph-data-sources-6" class="nav-link" data-scroll-target="#potential-graph-data-sources-6">Potential Graph Data Sources</a>
+  <ul class="collapse">
+  <li><a href="#statistical-correlation-for-example-stocks-news-stories" id="toc-statistical-correlation-for-example-stocks-news-stories" class="nav-link" data-scroll-target="#statistical-correlation-for-example-stocks-news-stories">Statistical Correlation (for Example, Stocks, News Stories)</a></li>
+  </ul></li>
+  <li><a href="#potential-graph-data-sources-7" id="toc-potential-graph-data-sources-7" class="nav-link" data-scroll-target="#potential-graph-data-sources-7">Potential Graph Data Sources</a>
+  <ul class="collapse">
+  <li><a href="#two-data-types-for-example-board-memberships" id="toc-two-data-types-for-example-board-memberships" class="nav-link" data-scroll-target="#two-data-types-for-example-board-memberships">Two Data Types (for Example, Board Memberships)</a></li>
+  </ul></li>
+  <li><a href="#potential-graph-data-sources-8" id="toc-potential-graph-data-sources-8" class="nav-link" data-scroll-target="#potential-graph-data-sources-8">Potential Graph Data Sources</a>
+  <ul class="collapse">
+  <li><a href="#many-data-types-for-example-social-links" id="toc-many-data-types-for-example-social-links" class="nav-link" data-scroll-target="#many-data-types-for-example-social-links">Many Data Types (for Example, Social Links)</a></li>
+  </ul></li>
+  <li><a href="#popular-graph-data-file-formats" id="toc-popular-graph-data-file-formats" class="nav-link" data-scroll-target="#popular-graph-data-file-formats">Popular Graph Data File Formats</a></li>
+  <li><a href="#graph-database" id="toc-graph-database" class="nav-link" data-scroll-target="#graph-database">Graph database</a></li>
+  <li><a href="#r-graph-objects" id="toc-r-graph-objects" class="nav-link" data-scroll-target="#r-graph-objects">R Graph Objects</a></li>
+  <li><a href="#introducing-tidygraph" id="toc-introducing-tidygraph" class="nav-link" data-scroll-target="#introducing-tidygraph">Introducing <strong>tidygraph</strong></a></li>
+  <li><a href="#network-graph-visualisation-and-analysis" id="toc-network-graph-visualisation-and-analysis" class="nav-link" data-scroll-target="#network-graph-visualisation-and-analysis">Network Graph Visualisation and Analysis</a>
+  <ul class="collapse">
+  <li><a href="#graph-layouts" id="toc-graph-layouts" class="nav-link" data-scroll-target="#graph-layouts">Graph Layouts</a></li>
+  <li><a href="#node-and-link-layouts" id="toc-node-and-link-layouts" class="nav-link" data-scroll-target="#node-and-link-layouts">Node-and-Link Layouts</a></li>
+  <li><a href="#node-and-link-layouts-1" id="toc-node-and-link-layouts-1" class="nav-link" data-scroll-target="#node-and-link-layouts-1">Node-and-Link Layouts</a></li>
+  <li><a href="#force-directed-layout" id="toc-force-directed-layout" class="nav-link" data-scroll-target="#force-directed-layout">Force-Directed Layout</a></li>
+  <li><a href="#bipartite-layout" id="toc-bipartite-layout" class="nav-link" data-scroll-target="#bipartite-layout">BiPartite Layout</a></li>
+  <li><a href="#node-only-layout" id="toc-node-only-layout" class="nav-link" data-scroll-target="#node-only-layout">Node-Only Layout</a></li>
+  <li><a href="#time-oriented-layout" id="toc-time-oriented-layout" class="nav-link" data-scroll-target="#time-oriented-layout">Time-Oriented Layout</a></li>
+  <li><a href="#radial-hierarchical-layout" id="toc-radial-hierarchical-layout" class="nav-link" data-scroll-target="#radial-hierarchical-layout">Radial Hierarchical Layout</a></li>
+  <li><a href="#tree-hierarchical-layout" id="toc-tree-hierarchical-layout" class="nav-link" data-scroll-target="#tree-hierarchical-layout">Tree Hierarchical Layout</a></li>
+  <li><a href="#geographic-layout" id="toc-geographic-layout" class="nav-link" data-scroll-target="#geographic-layout">Geographic Layout</a></li>
+  <li><a href="#chord-diagrams" id="toc-chord-diagrams" class="nav-link" data-scroll-target="#chord-diagrams">Chord Diagrams</a></li>
+  <li><a href="#sankey-diagrams" id="toc-sankey-diagrams" class="nav-link" data-scroll-target="#sankey-diagrams">Sankey Diagrams</a></li>
+  <li><a href="#hive-plot-httpsacademic.oup.combibarticle135627412507" id="toc-hive-plot-httpsacademic.oup.combibarticle135627412507" class="nav-link" data-scroll-target="#hive-plot-httpsacademic.oup.combibarticle135627412507">Hive Plot (https://academic.oup.com/bib/article/13/5/627/412507)</a></li>
+  <li><a href="#hive-plot-of-network-of-individuals-at-risk-of-hiv" id="toc-hive-plot-of-network-of-individuals-at-risk-of-hiv" class="nav-link" data-scroll-target="#hive-plot-of-network-of-individuals-at-risk-of-hiv">Hive Plot of Network of Individuals at Risk of HIV</a></li>
+  <li><a href="#hive-plot-in-ggraph" id="toc-hive-plot-in-ggraph" class="nav-link" data-scroll-target="#hive-plot-in-ggraph">Hive Plot in <strong>ggraph</strong></a></li>
+  <li><a href="#adjacency-matrix" id="toc-adjacency-matrix" class="nav-link" data-scroll-target="#adjacency-matrix">Adjacency Matrix</a></li>
+  </ul></li>
+  <li><a href="#basic-visual-attributes" id="toc-basic-visual-attributes" class="nav-link" data-scroll-target="#basic-visual-attributes">Basic Visual Attributes</a>
+  <ul class="collapse">
+  <li><a href="#additional-visual-attributes" id="toc-additional-visual-attributes" class="nav-link" data-scroll-target="#additional-visual-attributes">Additional Visual Attributes</a></li>
+  <li><a href="#combining-visual-attributes" id="toc-combining-visual-attributes" class="nav-link" data-scroll-target="#combining-visual-attributes">Combining Visual Attributes</a></li>
+  </ul></li>
+  <li><a href="#network-visualisation-and-analysis-process-model" id="toc-network-visualisation-and-analysis-process-model" class="nav-link" data-scroll-target="#network-visualisation-and-analysis-process-model">Network Visualisation and Analysis Process Model</a>
+  <ul class="collapse">
+  <li><a href="#network-metrics-measures-of-power-and-influence" id="toc-network-metrics-measures-of-power-and-influence" class="nav-link" data-scroll-target="#network-metrics-measures-of-power-and-influence">Network Metrics: Measures of Power and Influence</a></li>
+  <li><a href="#network-metrics-degree" id="toc-network-metrics-degree" class="nav-link" data-scroll-target="#network-metrics-degree">Network Metrics: Degree</a></li>
+  <li><a href="#network-metrics-in-degree-out-degree" id="toc-network-metrics-in-degree-out-degree" class="nav-link" data-scroll-target="#network-metrics-in-degree-out-degree">Network Metrics: In-degree &amp; Out-degree</a></li>
+  <li><a href="#network-metrics-betweenness-centrality" id="toc-network-metrics-betweenness-centrality" class="nav-link" data-scroll-target="#network-metrics-betweenness-centrality">Network Metrics: Betweenness centrality</a></li>
+  <li><a href="#network-metrics-closeness-centrality" id="toc-network-metrics-closeness-centrality" class="nav-link" data-scroll-target="#network-metrics-closeness-centrality">Network Metrics: Closeness Centrality</a></li>
+  <li><a href="#network-metrics-eigenvector-centrality" id="toc-network-metrics-eigenvector-centrality" class="nav-link" data-scroll-target="#network-metrics-eigenvector-centrality">Network Metrics: Eigenvector Centrality</a></li>
+  <li><a href="#network-metrics-clustering-coefficient" id="toc-network-metrics-clustering-coefficient" class="nav-link" data-scroll-target="#network-metrics-clustering-coefficient">Network Metrics: Clustering Coefficient</a></li>
+  </ul></li>
+  <li><a href="#network-analytics-methods" id="toc-network-analytics-methods" class="nav-link" data-scroll-target="#network-analytics-methods">Network Analytics Methods</a>
+  <ul class="collapse">
+  <li><a href="#analysing-spatial-networks-relationship" id="toc-analysing-spatial-networks-relationship" class="nav-link" data-scroll-target="#analysing-spatial-networks-relationship">Analysing Spatial Networks Relationship</a></li>
+  <li><a href="#analysing-hierarchy-of-spatial-network" id="toc-analysing-hierarchy-of-spatial-network" class="nav-link" data-scroll-target="#analysing-hierarchy-of-spatial-network">Analysing Hierarchy of Spatial Network</a></li>
+  <li><a href="#detecting-communities" id="toc-detecting-communities" class="nav-link" data-scroll-target="#detecting-communities">Detecting communities</a></li>
+  <li><a href="#spatial-networks-for-flow-analysis" id="toc-spatial-networks-for-flow-analysis" class="nav-link" data-scroll-target="#spatial-networks-for-flow-analysis">Spatial Networks for Flow Analysis</a></li>
+  </ul></li>
+  <li><a href="#swiss-knife-for-graph-visualisation-and-analysis-i" id="toc-swiss-knife-for-graph-visualisation-and-analysis-i" class="nav-link" data-scroll-target="#swiss-knife-for-graph-visualisation-and-analysis-i">Swiss Knife for Graph Visualisation and Analysis I</a></li>
+  <li><a href="#swiss-knife-for-graph-visualisation-and-analysis-ii" id="toc-swiss-knife-for-graph-visualisation-and-analysis-ii" class="nav-link" data-scroll-target="#swiss-knife-for-graph-visualisation-and-analysis-ii">Swiss Knife for Graph Visualisation and Analysis II</a></li>
+  <li><a href="#r-package-for-network-visualisation-and-analysis" id="toc-r-package-for-network-visualisation-and-analysis" class="nav-link" data-scroll-target="#r-package-for-network-visualisation-and-analysis">R Package for Network Visualisation and Analysis</a>
+  <ul class="collapse">
+  <li><a href="#web-enabled-graph-visualisation-libraries" id="toc-web-enabled-graph-visualisation-libraries" class="nav-link" data-scroll-target="#web-enabled-graph-visualisation-libraries">Web enabled Graph Visualisation Libraries</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a>
+  <ul class="collapse">
+  <li><a href="#highly-recommended" id="toc-highly-recommended" class="nav-link" data-scroll-target="#highly-recommended">Highly Recommended:</a></li>
+  </ul></li>
+  <li><a href="#geospatial-network-visualisation" id="toc-geospatial-network-visualisation" class="nav-link" data-scroll-target="#geospatial-network-visualisation">Geospatial Network Visualisation</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lesson 8: Visualising and Analysing Network Data</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    Dr.&nbsp;Kam Tin Seong<br>Assoc. Professor of Information Systems (Practice) 
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            School of Computing and Information Systems,<br>Singapore Management University
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">14 Apr 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="content" class="level2">
+<h2 class="anchored" data-anchor-id="content">Content</h2>
+<ul>
+<li><p>Introduction to Graph Visual Analytics</p></li>
+<li><p>Graph Visualisation in Actions</p></li>
+<li><p>Basic Principles of Graph</p></li>
+<li><p>Network data sets</p>
+<ul>
+<li>Graph data format</li>
+</ul></li>
+<li><p>Network Visualisation and Analysis</p>
+<ul>
+<li>Network visualisation and analysis process model</li>
+<li>Graph layouts and visual attributes</li>
+<li>Network metrics</li>
+</ul></li>
+</ul>
+</section>
+<section id="introduction-to-graph-analytics" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-graph-analytics">Introduction to Graph Analytics</h2>
+<ul>
+<li><p>What is Graph Analytics?</p></li>
+<li><p>Basic concepts of graph</p></li>
+<li><p>Network in Real World</p></li>
+<li><p>Graph Visualisation in Actions</p></li>
+</ul>
+<hr>
+<section id="what-is-graph-analytics" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-graph-analytics">What is Graph Analytics?</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p>The study and analysis of data that can be transformed into a graph representation consisting of nodes and links.</p></li>
+<li><p>Analytic tools used to determine strength and direction of relationships between objects in a graph.</p></li>
+<li><p>The focus of graph analytics is on pairwise relationship between two objects at a time and structural characteristics of the graph as a whole.</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image9-1.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="https://cambridge-intelligence.com/using-social-network-analysis-measures/">Using Social Network Analysis Measures</a></p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="what-is-graph-analytics-1" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-graph-analytics-1">What is Graph Analytics?</h2>
+<ul>
+<li>For example, in a graph representing relationships (such as “liking” or “friending” another individual’s profile or site) between individuals, graph analytics can help answer questions like the following:
+<ul>
+<li>How many other individuals does the average individual “friend” with?</li>
+<li>What is the maximum number of “friends” any one individual has?</li>
+<li>How interconnected are groups of users with one another?</li>
+<li>How many “friend” relationships does it take to get from one user to another user?</li>
+<li>Are there isolated groups of individuals who are connected to each other but not to individuals not in their group?</li>
+</ul></li>
+<li>Applications of Graph Analytics include clustering, partitioning, search, shortest path solution, widest path solution, finding connected components, and page rank.</li>
+</ul>
+<hr>
+<section id="graph-analytics-in-history-classical-graph-theory" class="level3">
+<h3 class="anchored" data-anchor-id="graph-analytics-in-history-classical-graph-theory">Graph Analytics in History: Classical Graph Theory</h3>
+<p>The Seven Bridges of Königsberg is a historically notable problem in mathematics. Its negative resolution by Leonhard Euler in 1735 laid the foundations of graph theory and prefigured the idea of topology.</p>
+<p><img src="img/image9-2.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="http://en.wikipedia.org/wiki/Seven_Bridges_of_K%C3%B6nigsberg">The Seven Bridges of Königsberg</a></p>
+</div>
+<hr>
+</section>
+<section id="graph-analytics-in-history-sociogram" class="level3">
+<h3 class="anchored" data-anchor-id="graph-analytics-in-history-sociogram">Graph Analytics in History: Sociogram</h3>
+<p>A sociogram is a tool for charting the relationships within a group. It’s a visual representation of the social links and preferences that each person has – valuable data for leaders.</p>
+<p><img src="img/image9-3.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: Valdis Krebs (2010) “Your Choice Reveal Who You Are: Mining and Visualizing Social Patterns” in <strong>Beautiful Visualization</strong>.</p>
+</div>
+<hr>
+</section>
+<section id="where-are-graphs-used" class="level3">
+<h3 class="anchored" data-anchor-id="where-are-graphs-used">Where are Graphs used</h3>
+<ul>
+<li><p>Graphs are sometimes used in surprising ways. There are many problems which may not initially appear to take the form of graphs but can be solved more quickly if they are transformed into a graph:</p>
+<ul>
+<li>Partitioning large physical volumes into smaller physical volumes as part of high performance simulations on supercomputers.</li>
+<li>Parsing speech to determine what is the most likely sequence of words that matches a given set of sounds.</li>
+<li>Analyzing the way different parts of a complex software program interact in order to proactively find and remove bugs.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="basic-principles-of-graph" class="level2">
+<h2 class="anchored" data-anchor-id="basic-principles-of-graph">Basic Principles of Graph</h2>
+<ul>
+<li><p>Basic Graph</p></li>
+<li><p>Direct and Undirected Graphs</p></li>
+<li><p>Weighted Graph</p></li>
+<li><p>Ego-centric Graph</p></li>
+<li><p>Bipartite Graph</p></li>
+<li><p>Multimodel Graph</p></li>
+</ul>
+<hr>
+<section id="a-complete-graph" class="level3">
+<h3 class="anchored" data-anchor-id="a-complete-graph">A Complete Graph</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>A complete graph is a simple <strong>undirected</strong> graph in which every pair of distinct <strong>vertices</strong> (also known as <strong>nodes</strong>) are connected by an unique <strong>edge</strong> (also known as <strong>link</strong>).</p>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image9-4.jpg" class="img-fluid"></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="a-directed-graph" class="level3">
+<h3 class="anchored" data-anchor-id="a-directed-graph">A Directed Graph</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Have a clear origin and destination. Also known as <em>asymmetric edges</em>. Suitable for representing network with non reciprocal relationships such as Twitter.</p>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image9-5.jpg" class="img-fluid"></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="graph-representation" class="level3">
+<h3 class="anchored" data-anchor-id="graph-representation">Graph representation</h3>
+<p>On the left is a normal graph, in the centre is a graph in which each edge is given a numerical value, and to the right is a directed graph.</p>
+<p><img src="img/image9-6.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="a-weighted-graph" class="level3">
+<h3 class="anchored" data-anchor-id="a-weighted-graph">A weighted graph</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>A weighted edge includes values associated with each edge that indicate the strength or frequency of tie. For example, numbers of calls between two staffs.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image9-7.jpg" class="img-fluid"></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="a-weighted-graph-1" class="level3">
+<h3 class="anchored" data-anchor-id="a-weighted-graph-1">A weighted graph</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Edges with different thickness are used to represent the monthly calls by staffs.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image9-8.jpg" class="img-fluid"></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="an-ego-centric-graph" class="level3">
+<h3 class="anchored" data-anchor-id="an-ego-centric-graph">An ego-centric graph</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Network consisting of an individual and their immediate peers (Heer &amp; Boyd, 2005).</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image9-9.jpg" class="img-fluid"></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="bipartite-graph" class="level3">
+<h3 class="anchored" data-anchor-id="bipartite-graph">Bipartite Graph</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p>A graph whose vertices can be divided into two disjoint sets U and V such that every edge connects a vertex in U to one in V; that is, U and V are independent sets.</p></li>
+<li><p>Equivalently, a bipartite graph is a graph that does not contain any odd-length cycles.</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image9-10.jpg" class="img-fluid"></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="affiliation-networks---bipartite-graph" class="level3">
+<h3 class="anchored" data-anchor-id="affiliation-networks---bipartite-graph">Affiliation Networks - Bipartite Graph</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img src="img/image9-11a.jpg" class="img-fluid" width="389"></p>
+<div style="font-size: 0.65em">
+<p>Source: Valdis Krebs (2010) “Your Choice Reveal Who You Are: Mining and Visualizing Social Patterns” in <strong>Beautiful Visualization</strong>.</p>
+</div>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image9-11b.jpg" class="img-fluid"></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="a-multimodel-graph" class="level3">
+<h3 class="anchored" data-anchor-id="a-multimodel-graph">A Multimodel Graph</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Social network connecting different types of vertices. For example, a network may connect peers to discussion forums and blog posts they have commented on.</p>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image9-12.jpg" class="img-fluid"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="network-in-real-world" class="level2">
+<h2 class="anchored" data-anchor-id="network-in-real-world">Network in real World</h2>
+<ul>
+<li>Physical
+<ul>
+<li>Transportation (i.e.&nbsp;road, port, rail, etc)</li>
+<li>Utility (electricity, water, gas, network cable, etc)</li>
+<li>Natural (river, etc)</li>
+</ul></li>
+<li>Abstract
+<ul>
+<li>Social media (i.e.&nbsp;e-mail, Facebook, Twitter, Wikipedia, etc)</li>
+<li>Organisation (i.e.&nbsp;NGO, politics, customer-company, staff-to-staff, criminal, terrorist, disease, etc)</li>
+</ul></li>
+</ul>
+<hr>
+<section id="real-world-network---land-transport" class="level3">
+<h3 class="anchored" data-anchor-id="real-world-network---land-transport">Real world network - Land transport</h3>
+<p><img src="img/image9-13.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="real-world-network---maritime-transport" class="level3">
+<h3 class="anchored" data-anchor-id="real-world-network---maritime-transport">Real world network - Maritime transport</h3>
+<p><img src="img/image9-14.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="real-world-network---air-transport" class="level3">
+<h3 class="anchored" data-anchor-id="real-world-network---air-transport">Real world network - Air transport</h3>
+<p><img src="img/image9-15.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="real-world-network---life-line" class="level3">
+<h3 class="anchored" data-anchor-id="real-world-network---life-line">Real world network - Life line</h3>
+<p><img src="img/image9-16.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="real-world-network---social-network" class="level3">
+<h3 class="anchored" data-anchor-id="real-world-network---social-network">Real world network - Social network</h3>
+<p><img src="img/image9-17.jpg" class="img-fluid"></p>
+</section>
+</section>
+<section id="graph-visualisation-in-action-1" class="level2">
+<h2 class="anchored" data-anchor-id="graph-visualisation-in-action-1">Graph Visualisation in action 1</h2>
+<p>Using graph visualisation to understand business networks.</p>
+<p><img src="img/image9-19.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="https://exxonsecrets.org/maps.php">Exxon Secrets</a></p>
+</div>
+<hr>
+</section>
+<section id="graph-visualisation-in-action-2" class="level2">
+<h2 class="anchored" data-anchor-id="graph-visualisation-in-action-2">Graph Visualisation in action 2</h2>
+<p>Graph visualisation is used to reveal voting patterns among United States senators.</p>
+<p><img src="img/image9-20.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="http://www.cs.umd.edu/hcil/socialaction/users/umd/socialaction.jnlp">Social Action</a></p>
+</div>
+<hr>
+<section id="graph-visualisation-in-action-3" class="level3">
+<h3 class="anchored" data-anchor-id="graph-visualisation-in-action-3">Graph Visualisation in action 3</h3>
+<p>Graph visualisation is used to understand online social network.</p>
+<p><img src="img/image9-21.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="graph-visualisation-in-action-4" class="level3">
+<h3 class="anchored" data-anchor-id="graph-visualisation-in-action-4">Graph Visualisation in action 4</h3>
+<p>Graph visualisation is used to show how the news are all connected by degrees of separation.</p>
+<p><img src="img/image9-22.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="http://whichlight.github.io/reddit-network-vis/?discussion=http://reddit.com/r/gaming/comments/3d2ewz/nintendo_president_satoru_iwata_passes_away/">Link</a></p>
+</div>
+<hr>
+</section>
+<section id="graph-visualisation-in-action-5" class="level3">
+<h3 class="anchored" data-anchor-id="graph-visualisation-in-action-5">Graph Visualisation in action 5</h3>
+<p>Application of network analysis in project management.</p>
+<p><img src="img/image9-23.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: Pryke, S.D.”Analysing construction project coalitions: exploring the application of social network analysis”, <strong>Construction Management and Economics</strong>, (2004), 22. pp.&nbsp;787-797.</p>
+</div>
+<hr>
+</section>
+<section id="graph-visualisation-in-action-6" class="level3">
+<h3 class="anchored" data-anchor-id="graph-visualisation-in-action-6">Graph Visualisation in action 6</h3>
+<p>SecViz: Application of network graph in security.</p>
+<ol type="a">
+<li>Similarity graph of log entries and (b) Similarity graph of network scans</li>
+</ol>
+<p><img src="img/image9-24.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: Graph Drawing for Security Visualization.</p>
+</div>
+<hr>
+</section>
+<section id="graph-visualisation-in-action-7" class="level3">
+<h3 class="anchored" data-anchor-id="graph-visualisation-in-action-7">Graph Visualisation in action 7</h3>
+<p>Alumni network.</p>
+<ul>
+<li>Networks of the below universities are expanded in a breadth first manner up to the depth of 2, (showing university, alumni and companies they are associated with through employment, investment or other activities)</li>
+<li>Size of the node reflects degree of the node (scaled logarithmically).</li>
+</ul>
+<p><img src="img/image9-25.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="http://www.innovation-ecosystems.org/wp-content/uploads/2010/12/209.educon.pdf">Article</a></p>
+</div>
+<hr>
+</section>
+<section id="graph-visualisation-in-action-8" class="level3">
+<h3 class="anchored" data-anchor-id="graph-visualisation-in-action-8">Graph Visualisation in action 8</h3>
+<p>Public Transport Network Analysis.</p>
+<ul>
+<li>Degree centrality indexes for nodes in the existing (2006) and proposed (2020) public transport networks in Melbourne’s north-east</li>
+</ul>
+<p><img src="img/image9-26.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="graph-visualisation-in-action-9" class="level3">
+<h3 class="anchored" data-anchor-id="graph-visualisation-in-action-9">Graph Visualisation in action 9</h3>
+<ul>
+<li>Maritime Port Network Analysis:
+<ul>
+<li>Maritime degree, centrality and vulnerability: Port hierarchies and emerging areas in containerized transport (2008–2010)</li>
+</ul></li>
+</ul>
+<p><img src="img/image9-27.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="graph-visualisation-in-action-10" class="level3">
+<h3 class="anchored" data-anchor-id="graph-visualisation-in-action-10">Graph Visualisation in action 10</h3>
+<ul>
+<li>Firm Network Analysis
+<ul>
+<li>S&amp;T cooperation network diagram of cities in China</li>
+</ul></li>
+</ul>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="img/image9-28.jpg" class="img-fluid figure-img" width="518"></p>
+</figure>
+</div>
+<hr>
+</section>
+<section id="graph-visualisation-in-action-11--un-voting-in-europe" class="level3">
+<h3 class="anchored" data-anchor-id="graph-visualisation-in-action-11--un-voting-in-europe">Graph Visualisation in action 11- UN Voting in Europe</h3>
+<ul>
+<li>An interesting visual analytics product contributes to <a href="https://github.com/rfordatascience/tidytuesday">tidytuesday</a>. The code is available at this <a href="https://github.com/jack-davison/TidyTuesday/blob/master/R/2021_03_23_unvotes.R">github repository</a>.</li>
+</ul>
+<p><img src="img/image9-75.jpg" class="img-fluid"></p>
+</section>
+</section>
+<section id="to-learn-more-go-to-visual-complexity" class="level2">
+<h2 class="anchored" data-anchor-id="to-learn-more-go-to-visual-complexity">To learn more, go to Visual Complexity</h2>
+<p><img src="img/image9-29.jpg" class="img-fluid">]</p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="http://www.visualcomplexity.com/vc/index.cfm?domain=Transportation%20Networks">Transportation Network</a></p>
+</div>
+</section>
+<section id="graph-data" class="level2">
+<h2 class="anchored" data-anchor-id="graph-data">Graph Data</h2>
+<ul>
+<li><p>What is graph data?</p></li>
+<li><p>Storing graph data</p>
+<ul>
+<li>file-based</li>
+<li>database management system</li>
+<li>R object</li>
+</ul></li>
+</ul>
+</section>
+<section id="potential-graph-data-sources" class="level2">
+<h2 class="anchored" data-anchor-id="potential-graph-data-sources">Potential Graph Data Sources</h2>
+<section id="node-and-link-data-sets" class="level3">
+<h3 class="anchored" data-anchor-id="node-and-link-data-sets">Node and Link Data Sets</h3>
+<div class="columns">
+<div class="column" data-with="50%">
+<ul>
+<li><p><a href="http://transtats.bts.gov">Flight Stats</a>.</p></li>
+<li><p>The record indicates the city pair (that is, a link), such as ORD–LGA or LAX–ATL. Note that this particular data has directed links. ORD–LGA is a flight that starts in Chicago’s O’Hare Airport and ends at LaGuardia Airport in New York City and is different from LGA–ORD, which is a flight going in the other direction. Both links are valid.</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image9-30.jpg" class="img-fluid" width="750"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="potential-graph-data-sources-1" class="level2">
+<h2 class="anchored" data-anchor-id="potential-graph-data-sources-1">Potential Graph Data Sources</h2>
+<section id="link-records" class="level3">
+<h3 class="anchored" data-anchor-id="link-records">Link Records</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Sometimes only links are identified in a data set. One example is network log files. Although log files may seem arcane, they contain a wealth of interesting information—for example, from where people are connecting into a corporate network, when and where big files are transferred out, patterns of regular activity (such as network backup), and patterns of irregular activity (such as hackers attempting to break in).</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image9-31.jpg" class="img-fluid" width="750"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="potential-graph-data-sources-2" class="level2">
+<h2 class="anchored" data-anchor-id="potential-graph-data-sources-2">Potential Graph Data Sources</h2>
+<section id="transaction-records" class="level3">
+<h3 class="anchored" data-anchor-id="transaction-records">Transaction Records</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>By looking at the items that co-exist in a transaction, you can construct a graph. Nodes are the items, and links are the co-occurrence of items within any transaction. Examples of this type of graph include a wide variety of social networking (including e‑mail data, as well as multiple authors of documents such as books, news stories, or reports.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image9-32.jpg" class="img-fluid" width="750"></p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="potential-graph-data-sources-3" class="level2">
+<h2 class="anchored" data-anchor-id="potential-graph-data-sources-3">Potential Graph Data Sources</h2>
+<section id="sequence-data" class="level3">
+<h3 class="anchored" data-anchor-id="sequence-data">Sequence Data</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Sequence data is very similar to transaction data with explicit time stamps on each record.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image9-33.jpg" class="img-fluid" width="750"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="potential-graph-data-sources-4" class="level2">
+<h2 class="anchored" data-anchor-id="potential-graph-data-sources-4">Potential Graph Data Sources</h2>
+<section id="unstructured-data-for-example-tweets" class="level3">
+<h3 class="anchored" data-anchor-id="unstructured-data-for-example-tweets">Unstructured Data (for Example, Tweets)</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Unstructured data can also be processed to extract nodes and links.</li>
+<li>A means to identify nodes and identify links is required. For example, tweets are short, 140-character messages publicly broadcast on Twitter. Tweets are a rich data source from which you can mine different kinds of nodes and links by looking for co-occurrence of hash tags (that is, user-defined topics), usernames, or stock symbols within tweets, and you can extract these to form graphs.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image9-34.jpg" class="img-fluid" width="750"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="potential-graph-data-sources-5" class="level2">
+<h2 class="anchored" data-anchor-id="potential-graph-data-sources-5">Potential Graph Data Sources</h2>
+<section id="matrix-for-example-trade-migration" class="level3">
+<h3 class="anchored" data-anchor-id="matrix-for-example-trade-migration">Matrix (for Example, Trade, Migration)</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Sometimes a matrix of data contains the same entries in both the first column and first row. For example, global trade flows between countries can be represented as a table of numbers (http://stats.oecd.org).</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image9-35.jpg" class="img-fluid" width="750"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="potential-graph-data-sources-6" class="level2">
+<h2 class="anchored" data-anchor-id="potential-graph-data-sources-6">Potential Graph Data Sources</h2>
+<section id="statistical-correlation-for-example-stocks-news-stories" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-correlation-for-example-stocks-news-stories">Statistical Correlation (for Example, Stocks, News Stories)</h3>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li>Graphs can also be created statistically.</li>
+</ul>
+</div><div class="column" style="width:60%;">
+<p><img src="img/image9-36.jpg" class="img-fluid" width="750"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="potential-graph-data-sources-7" class="level2">
+<h2 class="anchored" data-anchor-id="potential-graph-data-sources-7">Potential Graph Data Sources</h2>
+<section id="two-data-types-for-example-board-memberships" class="level3">
+<h3 class="anchored" data-anchor-id="two-data-types-for-example-board-memberships">Two Data Types (for Example, Board Memberships)</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>A <em>bipartite</em> graph has two different types of nodes, with linkages between the different types. For example, a graph analysis of executives and their board memberships reveals the connections between companies via board members. The two different data types in this example are people and companies. These are the nodes. The board memberships are the links that connect a person to a company.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image9-37.jpg" class="img-fluid" width="750"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="potential-graph-data-sources-8" class="level2">
+<h2 class="anchored" data-anchor-id="potential-graph-data-sources-8">Potential Graph Data Sources</h2>
+<section id="many-data-types-for-example-social-links" class="level3">
+<h3 class="anchored" data-anchor-id="many-data-types-for-example-social-links">Many Data Types (for Example, Social Links)</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>People can be connected through many kinds of commonalities, for example, LinkedIn builds connections via companies, friendships, educational institutions, group memberships, and so on.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image9-38.jpg" class="img-fluid" width="569"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="popular-graph-data-file-formats" class="level2">
+<h2 class="anchored" data-anchor-id="popular-graph-data-file-formats">Popular Graph Data File Formats</h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/GraphML">GraphML</a>, an XML-based file format for graphs.</li>
+<li><a href="https://en.wikipedia.org/wiki/GXL">GXL</a>, graph exchange format based on XML.</li>
+<li><a href="https://en.wikipedia.org/wiki/Trivial_Graph_Format">Trivial Graph Format</a>, simple text based format.</li>
+<li><a href="https://en.wikipedia.org/wiki/Graph_Modelling_Language">GML</a> is another widely used graph exchange format.</li>
+<li><a href="https://en.wikipedia.org/wiki/DGML">DGML</a>, Directed Graph Markup Language from Microsoft.</li>
+<li><a href="https://en.wikipedia.org/wiki/XGMML">XGMML</a>, an XML-based graph markup language closely related to GML.</li>
+<li>[Dot Language](https://en.wikipedia.org/wiki/DOT_(graph_description_language), a format for describing graphs and their presentation, for the Graphviz set of tools.</li>
+</ul>
+</section>
+<section id="graph-database" class="level2">
+<h2 class="anchored" data-anchor-id="graph-database">Graph database</h2>
+<p><a href="https://en.wikipedia.org/wiki/Neo4j">Neo4j (Network Exploration and Optimization 4 Java)</a> is a graph database management system developed by <a href="https://neo4j.com/">Neo4j, Inc.</a></p>
+<p><img src="img/image9-39.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="http://neo4j.com/developer/get-started/">neo4j Get Started</a></p>
+</div>
+</section>
+<section id="r-graph-objects" class="level2">
+<h2 class="anchored" data-anchor-id="r-graph-objects">R Graph Objects</h2>
+<ul>
+<li><p><a href="https://cran.r-project.org/web/packages/network/index.html">network</a>: Classes for Relational Data</p></li>
+<li><p><a href="https://igraph.org/r/">igraph</a>: Network Analysis and Visualization. There is also R <a href="https://cran.r-project.org/web/packages/igraph/index.html">CRAN version</a> of documentation. .</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/tidygraph/index.html">tidygraph</a>: A Tidy API for Graph Manipulation. Refer to these two articles for more information:</p>
+<ul>
+<li><a href="https://www.data-imaginist.com/2017/introducing-tidygraph/">Introducing tidygraph</a></li>
+<li><a href="https://www.data-imaginist.com/2018/tidygraph-1-1-a-tidy-hope/">tidygraph 1.1 – A tidy hope</a></li>
+</ul></li>
+</ul>
+</section>
+<section id="introducing-tidygraph" class="level2">
+<h2 class="anchored" data-anchor-id="introducing-tidygraph">Introducing <strong>tidygraph</strong></h2>
+<ul>
+<li><p>A tidy API for graph/network manipulation in R</p></li>
+<li><p>It provides a way to switch between node and edge tables.</p></li>
+<li><p>It provides dplyr verbs for manipulating node and edge tables.</p></li>
+<li><p>It provides access to a lot of graph algorithms with return values that facilitate their use in a tidy workflow.</p></li>
+<li><p>The full reference guide is available at this <a href="https://tidygraph.data-imaginist.com/">link</a>.</p></li>
+</ul>
+</section>
+<section id="network-graph-visualisation-and-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="network-graph-visualisation-and-analysis">Network Graph Visualisation and Analysis</h2>
+<ul>
+<li><p>Layouts</p></li>
+<li><p>Visual Attributes</p></li>
+<li><p>Network Geometrics</p></li>
+</ul>
+<hr>
+<section id="graph-layouts" class="level3">
+<h3 class="anchored" data-anchor-id="graph-layouts">Graph Layouts</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Graph layouts are algorithms that return coordinates for each node in a network graph.</p>
+<ul>
+<li><p>Showing node-edge relationship.</p></li>
+<li><p>Very challenging for large graph.</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image9-41.jpg" class="img-fluid"></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="node-and-link-layouts" class="level3">
+<h3 class="anchored" data-anchor-id="node-and-link-layouts">Node-and-Link Layouts</h3>
+<p>One common method for drawing graphs is to draw nodes as markers and edges as lines connecting them (also referred to as links)</p>
+<p><img src="img/image9-42.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="node-and-link-layouts-1" class="level3">
+<h3 class="anchored" data-anchor-id="node-and-link-layouts-1">Node-and-Link Layouts</h3>
+<p><img src="img/image9-43.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="https://flare.prefuse.org/demo/">flare.prefuse.org</a></p>
+</div>
+<hr>
+</section>
+<section id="force-directed-layout" class="level3">
+<h3 class="anchored" data-anchor-id="force-directed-layout">Force-Directed Layout</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Force-directed graph drawing algorithms are a class of algorithms for drawing graphs in an aesthetically-pleasing way.</li>
+<li>Their purpose is to position the nodes of a graph in two-dimensional or three-dimensional space so that all the edges are of more or less equal length and there are as few crossing edges as possible, by assigning forces among the set of edges and the set of nodes, based on their relative positions, and then using these forces either to simulate the motion of the edges and nodes or to minimize their energy.</li>
+</ul>
+<div style="font-size: 0.65em">
+<p>Source: <a href="https://en.wikipedia.org/wiki/Force-directed_graph_drawing">Force-directed Graph Drawing</a></p>
+</div>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image9-44.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="http://bl.ocks.org/mbostock/4062045">Observable</a></p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="bipartite-layout" class="level3">
+<h3 class="anchored" data-anchor-id="bipartite-layout">BiPartite Layout</h3>
+<p><img src="img/image9-46.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="https://rpubs.com/pjmurphy/317838">BiPartite Layout</a></p>
+</div>
+<hr>
+</section>
+<section id="node-only-layout" class="level3">
+<h3 class="anchored" data-anchor-id="node-only-layout">Node-Only Layout</h3>
+<p><img src="img/image9-47.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="http://www.nytimes.com/interactive/2012/02/13/us/politics/2013-budget-proposal-graphic.html">2013 Budget Proposal Graphic</a></p>
+</div>
+<hr>
+</section>
+<section id="time-oriented-layout" class="level3">
+<h3 class="anchored" data-anchor-id="time-oriented-layout">Time-Oriented Layout</h3>
+<p><img src="img/image9-48.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="radial-hierarchical-layout" class="level3">
+<h3 class="anchored" data-anchor-id="radial-hierarchical-layout">Radial Hierarchical Layout</h3>
+<p><img src="img/image9-49.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="http://mbostock.github.io/d3/talk/20111018/cluster.html">Cluster</a></p>
+</div>
+<hr>
+</section>
+<section id="tree-hierarchical-layout" class="level3">
+<h3 class="anchored" data-anchor-id="tree-hierarchical-layout">Tree Hierarchical Layout</h3>
+<p><img src="img/image9-50.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="http://mbostock.github.io/d3/talk/20111018/tree.html">Tree</a></p>
+</div>
+<hr>
+</section>
+<section id="geographic-layout" class="level3">
+<h3 class="anchored" data-anchor-id="geographic-layout">Geographic Layout</h3>
+<p><img src="img/image9-51.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="https://wiki.smu.edu.sg/1617t3isss608g1/ShinyNET_Data_Prep_Report">ShniyNet</a></p>
+</div>
+<hr>
+</section>
+<section id="chord-diagrams" class="level3">
+<h3 class="anchored" data-anchor-id="chord-diagrams">Chord Diagrams</h3>
+<p><img src="img/image9-52.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="https://davidten.shinyapps.io/migrationanalytics2/">Migration Analyticss</a></p>
+</div>
+<hr>
+</section>
+<section id="sankey-diagrams" class="level3">
+<h3 class="anchored" data-anchor-id="sankey-diagrams">Sankey Diagrams</h3>
+<p><img src="img/image9-53.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="https://observablehq.com/@d3/sankey-diagram">Sankey Diagram</a></p>
+</div>
+<hr>
+</section>
+<section id="hive-plot-httpsacademic.oup.combibarticle135627412507" class="level3">
+<h3 class="anchored" data-anchor-id="hive-plot-httpsacademic.oup.combibarticle135627412507">Hive Plot (https://academic.oup.com/bib/article/13/5/627/412507)</h3>
+<p><img src="img/image9-54.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="http://www.hiveplot.net/">Hiveplot</a></p>
+</div>
+<hr>
+</section>
+<section id="hive-plot-of-network-of-individuals-at-risk-of-hiv" class="level3">
+<h3 class="anchored" data-anchor-id="hive-plot-of-network-of-individuals-at-risk-of-hiv">Hive Plot of Network of Individuals at Risk of HIV</h3>
+<p><img src="img/image9-56.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="https://konstantinkashin.com/assets/data/hiveplot.html">hiveplot</a></p>
+</div>
+<hr>
+</section>
+<section id="hive-plot-in-ggraph" class="level3">
+<h3 class="anchored" data-anchor-id="hive-plot-in-ggraph">Hive Plot in <strong>ggraph</strong></h3>
+<p><img src="img/image9-55.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Soure: <a href="https://www.data-imaginist.com/2017/ggraph-introduction-layouts/">ggraph layout</a></p>
+</div>
+<hr>
+</section>
+<section id="adjacency-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="adjacency-matrix"><a href="https://en.wikipedia.org/wiki/Adjacency_matrix">Adjacency Matrix</a></h3>
+<p><img src="img/image9-57.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="https://matthewlincoln.net/2014/12/20/adjacency-matrix-plots-with-r-and-ggplot2.html">Adjacency Matrix</a></p>
+</div>
+</section>
+</section>
+<section id="basic-visual-attributes" class="level2">
+<h2 class="anchored" data-anchor-id="basic-visual-attributes">Basic Visual Attributes</h2>
+<p><img src="img/image9-58.jpg" class="img-fluid"></p>
+<hr>
+<section id="additional-visual-attributes" class="level3">
+<h3 class="anchored" data-anchor-id="additional-visual-attributes">Additional Visual Attributes</h3>
+<p><img src="img/image9-59.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="combining-visual-attributes" class="level3">
+<h3 class="anchored" data-anchor-id="combining-visual-attributes">Combining Visual Attributes</h3>
+<p><img src="img/image9-60.jpg" class="img-fluid"></p>
+</section>
+</section>
+<section id="network-visualisation-and-analysis-process-model" class="level2">
+<h2 class="anchored" data-anchor-id="network-visualisation-and-analysis-process-model">Network Visualisation and Analysis Process Model</h2>
+<p><img src="img/image9-61.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="">Hansen, D. L. et. al.&nbsp;2009</a></p>
+</div>
+<hr>
+<section id="network-metrics-measures-of-power-and-influence" class="level3">
+<h3 class="anchored" data-anchor-id="network-metrics-measures-of-power-and-influence">Network Metrics: Measures of Power and Influence</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>A collection of statistical measures to report:
+<ul>
+<li>the connectivity of a node within a network,</li>
+<li>the complexity of a network,</li>
+<li>the clusters or sub-groups within a network.</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image9-62.jpg" class="img-fluid"></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="network-metrics-degree" class="level3">
+<h3 class="anchored" data-anchor-id="network-metrics-degree">Network Metrics: Degree</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p><strong>Degree</strong>, the number of direct connections a node has.</p></li>
+<li><p>Degree is often interpreted in terms of the immediate risk of node for catching whatever is flowing through the network (such as a virus, or some information).</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image9-63.jpg" class="img-fluid"></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="network-metrics-in-degree-out-degree" class="level3">
+<h3 class="anchored" data-anchor-id="network-metrics-in-degree-out-degree">Network Metrics: In-degree &amp; Out-degree</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p>If the network is <strong>directed</strong> (meaning that ties have direction), then we usually define two separate measures of degree centrality, namely <strong>indegree</strong> and <strong>outdegree</strong>.</p></li>
+<li><p><strong>Indegree</strong> is a count of the number of ties directed to the node, and <strong>outdegree</strong> is the number of ties that the node directs to others.</p></li>
+<li><p>For positive relations such as friendship or advice, we normally interpret indegree as a form of popularity, and outdegree as gregariousness.</p></li>
+</ul>
+</div>
+</div>
+<hr>
+</section>
+<section id="network-metrics-betweenness-centrality" class="level3">
+<h3 class="anchored" data-anchor-id="network-metrics-betweenness-centrality">Network Metrics: Betweenness centrality</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p><strong>Betweenness</strong> is a centrality measure of a vertex within a graph (there is also edge betweenness, which is not discussed here).</p></li>
+<li><p>Vertices that occur on many shortest paths between other vertices have higher betweenness than those that do not.</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image9-64.jpg" class="img-fluid"></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="network-metrics-closeness-centrality" class="level3">
+<h3 class="anchored" data-anchor-id="network-metrics-closeness-centrality">Network Metrics: Closeness Centrality</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p>In graph theory closeness is a centrality measure of a vertex within a graph. Vertices that are ‘shallow’ to other vertices (that is, those that tend to have short geodesic distances to other vertices with in the graph) have higher closeness.</p></li>
+<li><p><strong>Closeness</strong> is preferred in network analysis to mean shortest-path length, as it gives higher values to more central vertices, and so is usually positively associated with other measures such as degree.</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image9-65.jpg" class="img-fluid">]</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="network-metrics-eigenvector-centrality" class="level3">
+<h3 class="anchored" data-anchor-id="network-metrics-eigenvector-centrality">Network Metrics: Eigenvector Centrality</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p>A measure of the importance of a node in a network.</p></li>
+<li><p>It assigns relative scores to all nodes in the network based on the principle that connections to high-scoring nodes contribute more to the score of the node in question than equal connections to low-scoring nodes.</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image9-66.jpg" class="img-fluid"></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="network-metrics-clustering-coefficient" class="level3">
+<h3 class="anchored" data-anchor-id="network-metrics-clustering-coefficient">Network Metrics: Clustering Coefficient</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>A measure on how connected a vertex’s neighbours are to one another. More specifically, it is the number of edges connecting a vertex’s neighbours divided by the total number of possible edges between the vertex’s neighbour.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image9-67.jpg" class="img-fluid"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="network-analytics-methods" class="level2">
+<h2 class="anchored" data-anchor-id="network-analytics-methods">Network Analytics Methods</h2>
+<ul>
+<li><p>Mapping relationships</p></li>
+<li><p>Identifying hierarchies</p></li>
+<li><p>Detecting communities</p></li>
+<li><p>Analysing flow</p></li>
+</ul>
+<hr>
+<section id="analysing-spatial-networks-relationship" class="level3">
+<h3 class="anchored" data-anchor-id="analysing-spatial-networks-relationship">Analysing Spatial Networks Relationship</h3>
+<p><img src="img/image9-69.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="http://www.snamuts.com/melbourne.html">Link</a></p>
+</div>
+<hr>
+</section>
+<section id="analysing-hierarchy-of-spatial-network" class="level3">
+<h3 class="anchored" data-anchor-id="analysing-hierarchy-of-spatial-network">Analysing Hierarchy of Spatial Network</h3>
+<p><img src="img/image9-70.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="http://onlinelibrary.wiley.com/doi/10.1111/j.1471-0374.2011.00355.x/pdf">Link</a></p>
+</div>
+<hr>
+</section>
+<section id="detecting-communities" class="level3">
+<h3 class="anchored" data-anchor-id="detecting-communities">Detecting communities</h3>
+<p><img src="img/image9-71.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="http://arxiv.org/pdf/0906.0612.pdf">Link</a></p>
+</div>
+<hr>
+</section>
+<section id="spatial-networks-for-flow-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="spatial-networks-for-flow-analysis">Spatial Networks for Flow Analysis</h3>
+<p>Arteries of the City.</p>
+<p><img src="img/image9-72.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="http://2013.sopawards.com/wp-content/uploads/2013/05/697-South-China-Morning-Post-Arteries-of-the-City.pdf">Arteries of the City</a></p>
+</div>
+</section>
+</section>
+<section id="swiss-knife-for-graph-visualisation-and-analysis-i" class="level2">
+<h2 class="anchored" data-anchor-id="swiss-knife-for-graph-visualisation-and-analysis-i">Swiss Knife for Graph Visualisation and Analysis I</h2>
+<p><a href="http://nodexl.codeplex.com/">NodeXL</a>, an open-source template for Microsoft® Excel® 2007 and 2010 that makes it easy to explore network graphs.</p>
+<p><img src="img/image9-73.jpg" class="img-fluid"></p>
+</section>
+<section id="swiss-knife-for-graph-visualisation-and-analysis-ii" class="level2">
+<h2 class="anchored" data-anchor-id="swiss-knife-for-graph-visualisation-and-analysis-ii">Swiss Knife for Graph Visualisation and Analysis II</h2>
+<p><a href="https://gephi.org/">Gephi</a>, an open source network graph visualisation and analysis toolkit.</p>
+<p><img src="img/image9-74.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="r-package-for-network-visualisation-and-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="r-package-for-network-visualisation-and-analysis">R Package for Network Visualisation and Analysis</h2>
+<ul>
+<li><p>Network analysis centric</p>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/igraph/index.html">igraph</a></li>
+<li><a href="https://cran.r-project.org/web/packages/sna/">sna</a></li>
+<li><a href="https://cran.r-project.org/web/packages/network/">Network</a></li>
+<li><a href="https://github.com/thomasp85/tidygraph">tidygraph</a></li>
+</ul></li>
+<li><p>Network visualization centric</p>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/ggraph/index.html">ggraph</a></li>
+<li><a href="https://cran.r-project.org/web/packages/visNetwork/vignettes/Introduction-to-visNetwork.html">vizNetwork</a></li>
+<li><a href="https://briatte.github.io/ggnet/">ggnet2</a></li>
+<li><a href="https://cran.r-project.org/web/packages/geomnet/index.html">geomnet</a></li>
+<li><a href="https://briatte.github.io/ggnetwork/">ggnetwork</a></li>
+</ul></li>
+</ul>
+<hr>
+<section id="web-enabled-graph-visualisation-libraries" class="level3">
+<h3 class="anchored" data-anchor-id="web-enabled-graph-visualisation-libraries">Web enabled Graph Visualisation Libraries</h3>
+<ul>
+<li>Graph
+<ul>
+<li><a href="http://sigmajs.org/">Sigma.js</a></li>
+<li><a href="http://js.cytoscape.org/">Cytoscape.js</a></li>
+</ul></li>
+<li>Generic
+<ul>
+<li><a href="http://visjs.org/index.html">Vis.js</a></li>
+<li><a href="http://philogb.github.io/jit/demos.html">JavaScript InfoVis Toolkit</a></li>
+<li><a href="http://d3js.org/">D3.js</a></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<section id="highly-recommended" class="level3">
+<h3 class="anchored" data-anchor-id="highly-recommended">Highly Recommended:</h3>
+<ul>
+<li><p>Richard Brath and David Jonker (2015) <strong>Graph Analysis and Visualization: Discovering Business Opportunity in Linked Data</strong>, John Wiley &amp; Sons. This book is available <a href="https://library-books24x7-com.libproxy.smu.edu.sg/toc.aspx?site=DJI6C&amp;bookid=80765">online</a> at smu digital library.</p></li>
+<li><p>Luke, Douglas A. (2015) <strong>A user’s guide to network analysis in R</strong>, Springer. This book is available <a href="https://link-springer-com.libproxy.smu.edu.sg/book/10.1007%2F978-3-319-23883-8">online</a> at smu digital library.</p></li>
+</ul>
+<p>Additional readings</p>
+<ul>
+<li><p>Ian McCulloh, Helen Armstrong, and Anthony Johnson (2013) <strong>Social Network Analysis with Applications</strong>, Chapter 1-3. This book is available <a href="https://ebookcentral-proquest-com.libproxy.smu.edu.sg/lib/smu/detail.action?pq-origsite=primo&amp;docID=1211931">online</a> at smu digital library.</p></li>
+<li><p>Scott, John (2017) <strong>Social network analysis</strong> (4th Edition). This book is available <a href="https://methods-sagepub-com.libproxy.smu.edu.sg/book/social-network-analysis-4e">online</a> at smu digital library.)</p></li>
+</ul>
+</section>
+</section>
+<section id="geospatial-network-visualisation" class="level2">
+<h2 class="anchored" data-anchor-id="geospatial-network-visualisation">Geospatial Network Visualisation</h2>
+<p><img src="img/image9-76.jpg" class="img-fluid"></p>
+<p>This <a href="https://geonetworks.github.io/">site</a> provides an outstanding overview and survey of various geospatial network visualisations.</p>
+<div class="cell">
+
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

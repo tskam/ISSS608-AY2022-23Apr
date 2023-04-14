@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dr.&nbsp;Kam Tin Seong Assoc. Professor of Information Systems (Practice)">
+<meta name="dcterms.date" content="2023-04-14">
+
+<title>ISSS608 - Lesson 7: Visualising and Analysing Geographic Data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">ISSS608</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../syllabus.html">
+ <span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../lesson.html">
+ <span class="menu-text">Lesson Plan</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../DataViz.html">
+ <span class="menu-text">DataViz Makeover</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Take-home Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../take-home_ex/TH_EX01.html">
+ <span class="dropdown-text">Take-home Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../take-home_ex/TH_EX02.html">
+ <span class="dropdown-text">Take-home Exercise 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../take-home_ex/TH_EX03.html">
+ <span class="dropdown-text">Take-home Exercise 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../take-home_ex/TH_EX04.html">
+ <span class="dropdown-text">Take-home Exercise 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../VAproject.html">
+ <span class="menu-text">Visual Analytics Project</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-shiny-workshop" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Shiny Workshop</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-shiny-workshop">    
+        <li>
+    <a class="dropdown-item" href="../../ShinyWorkshop/Shiny1/Shiny1.html">
+ <span class="dropdown-text">R Shiny basic</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ShinyWorkshop/Shiny2/Shiny0.html">
+ <span class="dropdown-text">Beyond the basic</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ShinyWorkshop/Shiny3/Shiny0.html">
+ <span class="dropdown-text">Customising Shiny</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ShinyResources.html">
+ <span class="dropdown-text">Shiny Resources</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../Tableau.html">
+ <span class="menu-text">Tableau Resources</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-all-about-r" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">All About R</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-all-about-r">    
+        <li>
+    <a class="dropdown-item" href="../../R.html">
+ <span class="dropdown-text">R Resouces</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../R4Vis.html">
+ <span class="dropdown-text">R for Visual Analytics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Rt.html">
+ <span class="dropdown-text">R tips &amp; tricks</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Quarto.html">
+ <span class="dropdown-text">Quarto</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../git.html">
+ <span class="dropdown-text">git and github</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#what-will-you-learn-from-this-lesson" id="toc-what-will-you-learn-from-this-lesson" class="nav-link active" data-scroll-target="#what-will-you-learn-from-this-lesson">What will you learn from this lesson?</a></li>
+  <li><a href="#what-is-a-map" id="toc-what-is-a-map" class="nav-link" data-scroll-target="#what-is-a-map">What is a Map?</a></li>
+  <li><a href="#what-is-a-map-1" id="toc-what-is-a-map-1" class="nav-link" data-scroll-target="#what-is-a-map-1">What is a Map?</a></li>
+  <li><a href="#a-map-and-geographical-data" id="toc-a-map-and-geographical-data" class="nav-link" data-scroll-target="#a-map-and-geographical-data">A Map and Geographical Data</a></li>
+  <li><a href="#types-of-geographical-data" id="toc-types-of-geographical-data" class="nav-link" data-scroll-target="#types-of-geographical-data">Types of geographical data</a></li>
+  <li><a href="#how-location-information-are-registered" id="toc-how-location-information-are-registered" class="nav-link" data-scroll-target="#how-location-information-are-registered">How location information are registered?</a></li>
+  <li><a href="#how-location-information-are-registered-1" id="toc-how-location-information-are-registered-1" class="nav-link" data-scroll-target="#how-location-information-are-registered-1">How location information are registered?</a>
+  <ul class="collapse">
+  <li><a href="#geographic-coordinates-systems" id="toc-geographic-coordinates-systems" class="nav-link" data-scroll-target="#geographic-coordinates-systems">Geographic Coordinates Systems</a></li>
+  </ul></li>
+  <li><a href="#how-location-information-are-registered-2" id="toc-how-location-information-are-registered-2" class="nav-link" data-scroll-target="#how-location-information-are-registered-2">How location information are registered?</a>
+  <ul class="collapse">
+  <li><a href="#projected-coordinates-systems" id="toc-projected-coordinates-systems" class="nav-link" data-scroll-target="#projected-coordinates-systems">Projected Coordinates Systems</a></li>
+  </ul></li>
+  <li><a href="#the-purpose-of-a-map" id="toc-the-purpose-of-a-map" class="nav-link" data-scroll-target="#the-purpose-of-a-map">The Purpose of a Map</a></li>
+  <li><a href="#the-purpose-of-a-map-1" id="toc-the-purpose-of-a-map-1" class="nav-link" data-scroll-target="#the-purpose-of-a-map-1">The Purpose of a Map</a></li>
+  <li><a href="#the-purpose-of-a-map-2" id="toc-the-purpose-of-a-map-2" class="nav-link" data-scroll-target="#the-purpose-of-a-map-2">The Purpose of a Map</a></li>
+  <li><a href="#the-purpose-of-a-map-3" id="toc-the-purpose-of-a-map-3" class="nav-link" data-scroll-target="#the-purpose-of-a-map-3">The Purpose of a Map</a></li>
+  <li><a href="#the-purpose-of-a-map-4" id="toc-the-purpose-of-a-map-4" class="nav-link" data-scroll-target="#the-purpose-of-a-map-4">The Purpose of a Map</a></li>
+  <li><a href="#typology-of-maps" id="toc-typology-of-maps" class="nav-link" data-scroll-target="#typology-of-maps">Typology of Maps</a>
+  <ul class="collapse">
+  <li><a href="#reference-maps" id="toc-reference-maps" class="nav-link" data-scroll-target="#reference-maps">Reference maps</a></li>
+  <li><a href="#thematic-map" id="toc-thematic-map" class="nav-link" data-scroll-target="#thematic-map">Thematic Map</a></li>
+  </ul></li>
+  <li><a href="#thematic-mapping-principles-and-methods" id="toc-thematic-mapping-principles-and-methods" class="nav-link" data-scroll-target="#thematic-mapping-principles-and-methods">Thematic Mapping: Principles and Methods</a></li>
+  <li><a href="#qualitative-thematic-maps" id="toc-qualitative-thematic-maps" class="nav-link" data-scroll-target="#qualitative-thematic-maps">Qualitative Thematic Maps</a>
+  <ul class="collapse">
+  <li><a href="#visual-variables-and-cartographic-symbols" id="toc-visual-variables-and-cartographic-symbols" class="nav-link" data-scroll-target="#visual-variables-and-cartographic-symbols">Visual Variables and Cartographic Symbols</a></li>
+  </ul></li>
+  <li><a href="#qualitative-thematic-map" id="toc-qualitative-thematic-map" class="nav-link" data-scroll-target="#qualitative-thematic-map">Qualitative Thematic Map</a>
+  <ul class="collapse">
+  <li><a href="#point-symbol-map" id="toc-point-symbol-map" class="nav-link" data-scroll-target="#point-symbol-map">Point symbol map</a></li>
+  </ul></li>
+  <li><a href="#qualitative-thematic-map-1" id="toc-qualitative-thematic-map-1" class="nav-link" data-scroll-target="#qualitative-thematic-map-1">Qualitative Thematic Map</a>
+  <ul class="collapse">
+  <li><a href="#line-symbol-map" id="toc-line-symbol-map" class="nav-link" data-scroll-target="#line-symbol-map">Line symbol map</a></li>
+  </ul></li>
+  <li><a href="#qualitative-thematic-map-2" id="toc-qualitative-thematic-map-2" class="nav-link" data-scroll-target="#qualitative-thematic-map-2">Qualitative Thematic Map</a>
+  <ul class="collapse">
+  <li><a href="#area-map" id="toc-area-map" class="nav-link" data-scroll-target="#area-map">Area map</a></li>
+  </ul></li>
+  <li><a href="#quantitative-thematic-map" id="toc-quantitative-thematic-map" class="nav-link" data-scroll-target="#quantitative-thematic-map">Quantitative Thematic Map</a>
+  <ul class="collapse">
+  <li><a href="#visual-variables-and-cartographic-symbols-1" id="toc-visual-variables-and-cartographic-symbols-1" class="nav-link" data-scroll-target="#visual-variables-and-cartographic-symbols-1">Visual Variables and Cartographic Symbols</a></li>
+  </ul></li>
+  <li><a href="#proportional-symbol-map" id="toc-proportional-symbol-map" class="nav-link" data-scroll-target="#proportional-symbol-map">Proportional Symbol Map</a>
+  <ul class="collapse">
+  <li><a href="#how-to-size-circles-incorrectly-and-correctly" id="toc-how-to-size-circles-incorrectly-and-correctly" class="nav-link" data-scroll-target="#how-to-size-circles-incorrectly-and-correctly">How to size circles incorrectly and correctly?</a></li>
+  <li><a href="#how-to-make-proportional-symbol-maps-clearer" id="toc-how-to-make-proportional-symbol-maps-clearer" class="nav-link" data-scroll-target="#how-to-make-proportional-symbol-maps-clearer">How to make proportional symbol maps clearer?</a></li>
+  <li><a href="#proportional-symbol-map-pie-chart-map" id="toc-proportional-symbol-map-pie-chart-map" class="nav-link" data-scroll-target="#proportional-symbol-map-pie-chart-map">Proportional Symbol Map: Pie Chart Map</a></li>
+  <li><a href="#proportional-symbol-map-bar-chart-map" id="toc-proportional-symbol-map-bar-chart-map" class="nav-link" data-scroll-target="#proportional-symbol-map-bar-chart-map">Proportional Symbol Map: Bar Chart Map</a></li>
+  <li><a href="#proportional-symbol-map---junk-map" id="toc-proportional-symbol-map---junk-map" class="nav-link" data-scroll-target="#proportional-symbol-map---junk-map">Proportional Symbol Map - Junk Map</a></li>
+  <li><a href="#altertive-of-proportional-symbol-map-bricks-map" id="toc-altertive-of-proportional-symbol-map-bricks-map" class="nav-link" data-scroll-target="#altertive-of-proportional-symbol-map-bricks-map">Altertive of Proportional Symbol Map: Bricks Map</a></li>
+  <li><a href="#bricks-map-versus-proportional-symbol-map" id="toc-bricks-map-versus-proportional-symbol-map" class="nav-link" data-scroll-target="#bricks-map-versus-proportional-symbol-map">Bricks Map versus Proportional Symbol Map</a></li>
+  </ul></li>
+  <li><a href="#dot-density-map" id="toc-dot-density-map" class="nav-link" data-scroll-target="#dot-density-map">Dot Density Map</a></li>
+  <li><a href="#choropleth-map" id="toc-choropleth-map" class="nav-link" data-scroll-target="#choropleth-map">Choropleth Map</a>
+  <ul class="collapse">
+  <li><a href="#classified-choropleth-map" id="toc-classified-choropleth-map" class="nav-link" data-scroll-target="#classified-choropleth-map">Classified choropleth map</a></li>
+  <li><a href="#unclassified-choropleth-map" id="toc-unclassified-choropleth-map" class="nav-link" data-scroll-target="#unclassified-choropleth-map">Unclassified choropleth map</a></li>
+  <li><a href="#choropleth-mapping-technique---number-of-classes" id="toc-choropleth-mapping-technique---number-of-classes" class="nav-link" data-scroll-target="#choropleth-mapping-technique---number-of-classes">Choropleth mapping technique - Number of classes</a></li>
+  <li><a href="#choropleth-mapping-technique-number-of-classes" id="toc-choropleth-mapping-technique-number-of-classes" class="nav-link" data-scroll-target="#choropleth-mapping-technique-number-of-classes">Choropleth mapping technique: Number of classes</a></li>
+  <li><a href="#choropleth-mapping-technique-methods-of-choosing-classification-scheme" id="toc-choropleth-mapping-technique-methods-of-choosing-classification-scheme" class="nav-link" data-scroll-target="#choropleth-mapping-technique-methods-of-choosing-classification-scheme">Choropleth mapping technique: Methods of choosing classification scheme</a></li>
+  <li><a href="#data-classification-method-equal-interval" id="toc-data-classification-method-equal-interval" class="nav-link" data-scroll-target="#data-classification-method-equal-interval">Data classification method: Equal interval</a></li>
+  <li><a href="#data-classification-method-quantitle" id="toc-data-classification-method-quantitle" class="nav-link" data-scroll-target="#data-classification-method-quantitle">Data classification method: Quantitle</a></li>
+  <li><a href="#data-classification-method-jenks-also-known-as-natural-breaks" id="toc-data-classification-method-jenks-also-known-as-natural-breaks" class="nav-link" data-scroll-target="#data-classification-method-jenks-also-known-as-natural-breaks">Data classification method: Jenks (also known as Natural breaks)</a></li>
+  <li><a href="#data-classification-method-standard-deviation" id="toc-data-classification-method-standard-deviation" class="nav-link" data-scroll-target="#data-classification-method-standard-deviation">Data classification method: Standard deviation</a></li>
+  <li><a href="#choropleth-map---colour-scheme" id="toc-choropleth-map---colour-scheme" class="nav-link" data-scroll-target="#choropleth-map---colour-scheme">Choropleth map - Colour scheme</a></li>
+  <li><a href="#colour-scheme-tip" id="toc-colour-scheme-tip" class="nav-link" data-scroll-target="#colour-scheme-tip">Colour Scheme Tip</a></li>
+  <li><a href="#trellis-choropleth-map" id="toc-trellis-choropleth-map" class="nav-link" data-scroll-target="#trellis-choropleth-map">Trellis choropleth map</a></li>
+  <li><a href="#geofacet" id="toc-geofacet" class="nav-link" data-scroll-target="#geofacet">Geofacet</a></li>
+  </ul></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lesson 7: Visualising and Analysing Geographic Data</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    Dr.&nbsp;Kam Tin Seong<br>Assoc. Professor of Information Systems (Practice) 
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            School of Computing and Information Systems,<br>Singapore Management University
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">14 Apr 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="what-will-you-learn-from-this-lesson" class="level2">
+<h2 class="anchored" data-anchor-id="what-will-you-learn-from-this-lesson">What will you learn from this lesson?</h2>
+<ul>
+<li>Introducing map</li>
+<li>Properties of geographical data
+<ul>
+<li>Geographical data models</li>
+<li>Map projections</li>
+</ul></li>
+<li>Typology of maps
+<ul>
+<li>Reference maps</li>
+<li>Thematic maps</li>
+</ul></li>
+<li>Proportional Symbol Map</li>
+<li>Choropleth Map]</li>
+</ul>
+</section>
+<section id="what-is-a-map" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-map">What is a Map?</h2>
+<p>A map is a model of real world depict by a collection of cartographic symbols or/and visual abstraction.</p>
+<p><img src="img/image6-1.jpg" class="img-fluid"></p>
+</section>
+<section id="what-is-a-map-1" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-map-1">What is a Map?</h2>
+<p>An interface between geographical data and map users.</p>
+<p><img src="img/image6-1b.jpg" class="img-fluid"></p>
+</section>
+<section id="a-map-and-geographical-data" class="level2">
+<h2 class="anchored" data-anchor-id="a-map-and-geographical-data">A Map and Geographical Data</h2>
+<p><img src="img/image6-1c.jpg" class="img-fluid"></p>
+</section>
+<section id="types-of-geographical-data" class="level2">
+<h2 class="anchored" data-anchor-id="types-of-geographical-data">Types of geographical data</h2>
+<p><img src="img/image6-1d.jpg" class="img-fluid"></p>
+</section>
+<section id="how-location-information-are-registered" class="level2">
+<h2 class="anchored" data-anchor-id="how-location-information-are-registered">How location information are registered?</h2>
+<ul>
+<li><p>Geographic Coordinates Systems</p></li>
+<li><p>Projected Coordinates Systems</p></li>
+</ul>
+</section>
+<section id="how-location-information-are-registered-1" class="level2">
+<h2 class="anchored" data-anchor-id="how-location-information-are-registered-1">How location information are registered?</h2>
+<section id="geographic-coordinates-systems" class="level3">
+<h3 class="anchored" data-anchor-id="geographic-coordinates-systems">Geographic Coordinates Systems</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>A geographic coordinate system defines two-dimensional coordinates based on the Earth’s surface. It has an angular unit of measure, prime meridian and datum (which contains the spheroid).</li>
+<li>For example, WGS84, NAD27 and NAD83.</li>
+</ul>
+<div style="font-size: 0.65em">
+<p>Source: <a href="https://en.wikipedia.org/wiki/Geographic_coordinate_system">Geographic Coodinate Ststem@wiki</a></p>
+</div>
+</div><div class="column" data-qidth="50%">
+<p><img src="img/image6-1e.jpg" class="img-fluid"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="how-location-information-are-registered-2" class="level2">
+<h2 class="anchored" data-anchor-id="how-location-information-are-registered-2">How location information are registered?</h2>
+<section id="projected-coordinates-systems" class="level3">
+<h3 class="anchored" data-anchor-id="projected-coordinates-systems">Projected Coordinates Systems</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>A projected coordinate system is defined on a flat, two-dimensional surface.</li>
+<li>A projected coordinate system, unlike a geographic one, has the advantage that lengths, angles, and areas are constant across the two dimensions. This is not true when working in a geographic coordinate system.</li>
+<li>A projected coordinate system is always based on a geographic coordinate system that can use a sphere or spheroid.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image6-1f.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="http://en.wikipedia.org/wiki/Map_projection">Map Projection@wiki</a></p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="the-purpose-of-a-map" class="level2">
+<h2 class="anchored" data-anchor-id="the-purpose-of-a-map">The Purpose of a Map</h2>
+<ul>
+<li>To serve as a piece of historical archive.</li>
+</ul>
+<p><img src="img/image6-2.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="http://en.wikipedia.org/wiki/Battle_of_Singapore">Battle of Singapore</a></p>
+</div>
+<div class="notes">
+<p>A map serves as a record of the physical and cultural environment at a particular time. For example, the map above shows Singapore in early February 1942; the disposition of Allied ground forces is in red. The main north–south transport corridor, formed by Woodlands Road and the railway, connecting the city centre (in the southeast) and The Causeway (central north), is the black line running through the centre of the island. Sarimbun is at the north west corner of the island; Bukit Timah is located close to the centre on the transport corridor; Pasir Panjang is between the city centre and the southwest corner of the island and the “Jurong Line” is the bracket-like shape in red, just west of Woodlands Roadland use allocation on Singapore Concept Plan in 2001.</p>
+</div>
+</section>
+<section id="the-purpose-of-a-map-1" class="level2">
+<h2 class="anchored" data-anchor-id="the-purpose-of-a-map-1">The Purpose of a Map</h2>
+<ul>
+<li>To support navigation (i.e.&nbsp;Google Map).</li>
+</ul>
+<p><img src="img/image6-3.jpg" class="img-fluid"></p>
+</section>
+<section id="the-purpose-of-a-map-2" class="level2">
+<h2 class="anchored" data-anchor-id="the-purpose-of-a-map-2">The Purpose of a Map</h2>
+<ul>
+<li>To support navigation (i.e.&nbsp;sea chart of Singapore)</li>
+</ul>
+<p><img src="img/image6-4.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="https://www.mpa.gov.sg/web/portal/home/port-of-singapore/services/charts-tidal-info-atons-and-hydrography/singapore-electronic-navigational-chart">Singapore electronic navigational chart</a></p>
+</div>
+</section>
+<section id="the-purpose-of-a-map-3" class="level2">
+<h2 class="anchored" data-anchor-id="the-purpose-of-a-map-3">The Purpose of a Map</h2>
+<ul>
+<li>To reveal spatial patterns.</li>
+</ul>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="img/image6-5.jpg" class="img-fluid figure-img" width="467"></p>
+</figure>
+</div>
+<div style="font-size: 0.65em">
+<p>Reference: <a href="https://en.wikipedia.org/wiki/John_Snow">John Snow Cholera Map</a></p>
+</div>
+</section>
+<section id="the-purpose-of-a-map-4" class="level2">
+<h2 class="anchored" data-anchor-id="the-purpose-of-a-map-4">The Purpose of a Map</h2>
+<ul>
+<li>To describe spatial relationship.</li>
+</ul>
+<p><img src="img/image6-5a.jpg" class="img-fluid"></p>
+</section>
+<section id="typology-of-maps" class="level2">
+<h2 class="anchored" data-anchor-id="typology-of-maps">Typology of Maps</h2>
+<p><img src="img/image6-6.jpg" class="img-fluid"></p>
+<hr>
+<section id="reference-maps" class="level3">
+<h3 class="anchored" data-anchor-id="reference-maps">Reference maps</h3>
+<div class="columns">
+<div class="column" style="width:30%;">
+<ul>
+<li>Reference maps emphasize the location of spatial phenomena, such buildings, roads, vegetations, rivers, etc. Some of popular reference maps are <strong>topographical map</strong> and internet map such as Google map.</li>
+</ul>
+</div><div class="column" style="width:65%;">
+<p><img src="img/image6-7.jpg" class="img-fluid"></p>
+</div>
+</div>
+<div class="notes">
+<p>Topographic maps are detailed, accurate graphic representations of features that appear on the Earth’s surface. These features include: cultural: roads, buildings, urban development, railways, airports, names of places and geographic features, administrative boundaries, state and international borders, reserves hydrography: lakes, rivers, streams, swamps, coastal flats relief: mountains, valleys, slopes, depressions vegetation: wooded and cleared areas, vineyards and orchards.</p>
+<p>A map legend (or key) lists the features shown on that map, and their corresponding symbols. Topographic maps usually show a geographic graticule and a coordinate grid, so you can determine relative and absolute positions of mapped features.<br>
+It is important to note that a map is merely a two or three dimensional representation of the physical environment at a given time. Therefore, a map will never be entirely up to date. Changes to the landscape and cultural features regularly occur (such as roads, vegetation, and buildings), resulting in maps becoming dated, although the rate of obsolescence varies depending upon location. Traditionally present in paper printed format.</p>
+</div>
+<hr>
+</section>
+<section id="thematic-map" class="level3">
+<h3 class="anchored" data-anchor-id="thematic-map">Thematic Map</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Thematic maps emphasize the spatial pattern of geographic attributes or statistics about places and relationships between places such as Life in Los Angeles.</li>
+</ul>
+<div style="font-size: 0.65em">
+<p>Source: <a href="https://mapdesign.icaci.org/2014/12/mapcarte-353365-life-in-los-angeles-by-eugene-turner-1977/">Life in Los Angeles</a></p>
+</div>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image6-8.jpg" class="img-fluid"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="thematic-mapping-principles-and-methods" class="level2">
+<h2 class="anchored" data-anchor-id="thematic-mapping-principles-and-methods">Thematic Mapping: Principles and Methods</h2>
+<ul>
+<li>Displaying
+<ul>
+<li>Qualitative data</li>
+<li>Quantitative data</li>
+</ul></li>
+<li>Choosing -Appropriate classification method for displaying data
+<ul>
+<li>Appropriate number of classes</li>
+</ul></li>
+<li>Techniques in data analysis
+<ul>
+<li>Using the classification histogram</li>
+<li>Normalizing data</li>
+</ul></li>
+</ul>
+</section>
+<section id="qualitative-thematic-maps" class="level2">
+<h2 class="anchored" data-anchor-id="qualitative-thematic-maps">Qualitative Thematic Maps</h2>
+<section id="visual-variables-and-cartographic-symbols" class="level3">
+<h3 class="anchored" data-anchor-id="visual-variables-and-cartographic-symbols">Visual Variables and Cartographic Symbols</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Qualitative visual variables are used for nominal scale data.</li>
+<li>The goal of qualitative visual variables is to show how entities differ from each other.</li>
+<li>The visual variables that do a good job of showing ordinal differences are: colour value, colour saturation, size and texture/grain.<br>
+</li>
+<li>Figure on the right for examples of these four ordinal visual variables used each in point, linear and areal symbols.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image6-9.jpg" class="img-fluid"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="qualitative-thematic-map" class="level2">
+<h2 class="anchored" data-anchor-id="qualitative-thematic-map">Qualitative Thematic Map</h2>
+<section id="point-symbol-map" class="level3">
+<h3 class="anchored" data-anchor-id="point-symbol-map">Point symbol map</h3>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li>Different point symbols are used to represent school types.</li>
+</ul>
+</div><div class="column" style="width:60%;">
+<p><img src="img/image6-10.jpg" class="img-fluid"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="qualitative-thematic-map-1" class="level2">
+<h2 class="anchored" data-anchor-id="qualitative-thematic-map-1">Qualitative Thematic Map</h2>
+<section id="line-symbol-map" class="level3">
+<h3 class="anchored" data-anchor-id="line-symbol-map">Line symbol map</h3>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li>A road map is an example of a thematic map. It shows the road network of an area. In this map, lines with different colour intensity and tickness are used to differentiate hierarchy of roads.</li>
+</ul>
+</div><div class="column" style="width:60%;">
+<p><img src="img/image6-11.jpg" class="img-fluid" width="467"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="qualitative-thematic-map-2" class="level2">
+<h2 class="anchored" data-anchor-id="qualitative-thematic-map-2">Qualitative Thematic Map</h2>
+<section id="area-map" class="level3">
+<h3 class="anchored" data-anchor-id="area-map">Area map</h3>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li>Land use map below is a good example of a discrete thematic map. In this map, different colours are use to represent different land use types.</li>
+</ul>
+</div><div class="column" style="width:60%;">
+<p><img src="img/image6-12.jpg" class="img-fluid"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="quantitative-thematic-map" class="level2">
+<h2 class="anchored" data-anchor-id="quantitative-thematic-map">Quantitative Thematic Map</h2>
+<section id="visual-variables-and-cartographic-symbols-1" class="level3">
+<h3 class="anchored" data-anchor-id="visual-variables-and-cartographic-symbols-1">Visual Variables and Cartographic Symbols</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Quantitative visual variables are used to display ordinal, interval or ratio scale data.<br>
+</li>
+<li>The goal of the quantitative visual variable is to show relative magnitude or order between entities.</li>
+<li>The visual variables that do a good job of showing ordinal differences are: colour value, colour saturation, size and texture/grain.<br>
+</li>
+<li>Figure on the right shows of these four ordinal visual variables used each in point, linear and areal symbols.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image6-13.jpg" class="img-fluid"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="proportional-symbol-map" class="level2">
+<h2 class="anchored" data-anchor-id="proportional-symbol-map">Proportional Symbol Map</h2>
+<ul>
+<li>The proportional symbol technique uses symbols of different sizes to represent data associated with different areas or locations within the map.</li>
+</ul>
+<p><img src="img/image6-14.jpg" class="img-fluid"></p>
+<div class="notes">
+<p>The proportional symbol technique uses symbols of different sizes to represent data associated with different areas or locations within the map. For example, the proportional maps above use circle with different sizes to represent millions of people. There are two types of point features that are typically depicted with proportional symbols: features for which the data represents a geographic position directly (e.g., gallons of oil from individual oil wells), and features that are geographic areas to which data are aggregated and the data magnitudes are assigned to a representative point within the area (e.g., the geographic centroid of a state as in the examples above). In either case, the area of the symbol is scaled to represent the data magnitude, sometimes with a bit of exaggeration to adjust for a general tendency of human vision to underestimate differences in area. A variant on this direct data-to-symbol scaling groups values into categories first, then scales the symbol to represent the mean for the category, assigning a symbol to each place to represent the category range that the mean for the place falls within</p>
+</div>
+<hr>
+<section id="how-to-size-circles-incorrectly-and-correctly" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-size-circles-incorrectly-and-correctly">How to size circles incorrectly and correctly?</h3>
+<p>Figure below explains how attribute values are map on circles. One strategy to overcome this problem is to use square instead of circle.</p>
+<p><img src="img/image6-16a.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="how-to-make-proportional-symbol-maps-clearer" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-make-proportional-symbol-maps-clearer">How to make proportional symbol maps clearer?</h3>
+<p>When designing a proportional symbol map, one of the important consideration is to avoid the circles blocking each other. One possible strategy to overcome this problem is to applying opacity (also known as transparency).</p>
+<p><img src="img/image6-16b.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="proportional-symbol-map-pie-chart-map" class="level3">
+<h3 class="anchored" data-anchor-id="proportional-symbol-map-pie-chart-map">Proportional Symbol Map: Pie Chart Map</h3>
+<p>One important characteristic of proportional symbols is that they can easily be designed to represent more than one data value per location. Among the most common example is a <strong>pie chart map</strong> in which a circle is scaled proportionally to some total, and the size of wedges within the circle is scaled to depict a proportion of a total for two or more sub-categories.</p>
+<p><img src="img/image6-15.jpg" class="img-fluid"></p>
+<div class="notes">
+<p>One important characteristic of proportional symbols is that they can easily be designed to represent more than one data value per location. Among the most common example is a “pie chart map” in which a circle is scaled proportionally to some total, and the size of wedges within the circle is scaled to depict a proportion of a total for two or more sub-categories. The map above uses circle size to depict total sales in each city, and the pie slices then depict proportion of the three shipping modes, namely: delivery truck, express air and regular air.</p>
+</div>
+<hr>
+</section>
+<section id="proportional-symbol-map-bar-chart-map" class="level3">
+<h3 class="anchored" data-anchor-id="proportional-symbol-map-bar-chart-map">Proportional Symbol Map: Bar Chart Map</h3>
+<p><strong>Proportional side-by-side bar map</strong> places side-by-side bar chart on a map based on the location of the observations.</p>
+<p><img src="img/image6-16.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="proportional-symbol-map---junk-map" class="level3">
+<h3 class="anchored" data-anchor-id="proportional-symbol-map---junk-map">Proportional Symbol Map - Junk Map</h3>
+<p>When preparing a proportional symbol map, it is important to ensure that the geographical level used is the same.</p>
+<p><img src="img/image6-16c.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6">COVID-19 Dashboard</a></p>
+</div>
+<hr>
+</section>
+<section id="altertive-of-proportional-symbol-map-bricks-map" class="level3">
+<h3 class="anchored" data-anchor-id="altertive-of-proportional-symbol-map-bricks-map">Altertive of Proportional Symbol Map: Bricks Map</h3>
+<p>Bricks Map aims to provide better ways to encode quantitative information graphically—ways that can be easily, efficiently, and accurately decoded.</p>
+<p><img src="img/image6-17.jpg" class="img-fluid"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="http://www.perceptualedge.com/articles/visual_business_intelligence/building_insight_with_bricks.pdf">Building insight with bricks</a>.</p>
+</div>
+<hr>
+</section>
+<section id="bricks-map-versus-proportional-symbol-map" class="level3">
+<h3 class="anchored" data-anchor-id="bricks-map-versus-proportional-symbol-map">Bricks Map versus Proportional Symbol Map</h3>
+<p>By plotting a proportional symbol map and a bricks map side-by-side as shown below, it is clear that bubbles of graduated sizes proportional to the value ranges that they represent can be difficult to distinguish than the bricks.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img src="img/image6-17a.jpg" class="img-fluid"></p>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image6-17.jpg" class="img-fluid"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="dot-density-map" class="level2">
+<h2 class="anchored" data-anchor-id="dot-density-map">Dot Density Map</h2>
+<p>A dot-density map is a type of thematic map that uses dots or other symbols on the map to show the values of one or more numeric data fields. Each dot on a dot-density map represents some amount of data.</p>
+<p><img src="img/image6-18.jpg" class="img-fluid"></p>
+<div style="font-size: 0.5em">
+<p>One dot represent 100 households.</p>
+</div>
+<div style="font-size: 0.65em">
+<p>Reference: <a href="https://en.wikipedia.org/wiki/Dot_distribution_map">Dot distribution map</a> at wiki and <a href="https://www.axismaps.com/guide/dot-density">Dot Density Maps</a></p>
+</div>
+</section>
+<section id="choropleth-map" class="level2">
+<h2 class="anchored" data-anchor-id="choropleth-map">Choropleth Map</h2>
+<p>A choropleth map is a type of thematic map in which areas are shaded or patterned in proportion to a statistical variable that represents an aggregate summary of a geographic characteristic within each area, such as population or per capita income.</p>
+<p><img src="img/image6-19.jpg" class="img-fluid"></p>
+<hr>
+<section id="classified-choropleth-map" class="level3">
+<h3 class="anchored" data-anchor-id="classified-choropleth-map">Classified choropleth map</h3>
+<ul>
+<li>A choropleth map can be either classified or unclassified.</li>
+<li>A <strong>classed choropleth map</strong> combines areal units into a smaller number of groups. Interval levels may vary, but typically 4 to 7 are used in a map. There is different classification techniques used to divide up the intervals.</li>
+</ul>
+<p><img src="img/image6-20.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="unclassified-choropleth-map" class="level3">
+<h3 class="anchored" data-anchor-id="unclassified-choropleth-map">Unclassified choropleth map</h3>
+<ul>
+<li>An <strong>unclassified choropleth</strong> map is similar to a classed choropleth map; however, an unclassed choropleth maps do not have an averaged statistic towards each particular colour.</li>
+</ul>
+<p><img src="img/image6-19.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="choropleth-mapping-technique---number-of-classes" class="level3">
+<h3 class="anchored" data-anchor-id="choropleth-mapping-technique---number-of-classes">Choropleth mapping technique - Number of classes</h3>
+<p>The readability of a choropleth map will be affected by the number of classes used.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>When a small number of classes is used, the spatial distribution reveals will be very limited.</li>
+</ul>
+<p><img src="img/image6-21a.jpg" class="img-fluid"></p>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>When an appropriate number of classes is used, the spatial distribution reveals will be clear.</li>
+</ul>
+<p><img src="img/image6-21b.jpg" class="img-fluid"></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="choropleth-mapping-technique-number-of-classes" class="level3">
+<h3 class="anchored" data-anchor-id="choropleth-mapping-technique-number-of-classes">Choropleth mapping technique: Number of classes</h3>
+<p>Figure below provided a mathematical method to determine number of classes used for preparing a choropleth map.</p>
+<p><img src="img/image6-21.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="choropleth-mapping-technique-methods-of-choosing-classification-scheme" class="level3">
+<h3 class="anchored" data-anchor-id="choropleth-mapping-technique-methods-of-choosing-classification-scheme">Choropleth mapping technique: Methods of choosing classification scheme</h3>
+<ul>
+<li>Based on the nature of the distribution
+<ul>
+<li>quantile, equal interval, natural breaks, standard deviations, defined interval</li>
+</ul></li>
+<li>Arbitrary
+<ul>
+<li>Can be based on round numbers.</li>
+<li>Examples: Grouping according to age or census housing categories</li>
+<li>Can result in empty categories</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="data-classification-method-equal-interval" class="level3">
+<h3 class="anchored" data-anchor-id="data-classification-method-equal-interval">Data classification method: Equal interval</h3>
+<ul>
+<li>Divides the range of attribute values into equally sized classes.</li>
+</ul>
+<p><img src="img/image6-22a.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="data-classification-method-quantitle" class="level3">
+<h3 class="anchored" data-anchor-id="data-classification-method-quantitle">Data classification method: Quantitle</h3>
+<ul>
+<li>Same number of features per class.</li>
+</ul>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="img/image6-22b.jpg" class="img-fluid figure-img" width="993"></p>
+</figure>
+</div>
+<hr>
+</section>
+<section id="data-classification-method-jenks-also-known-as-natural-breaks" class="level3">
+<h3 class="anchored" data-anchor-id="data-classification-method-jenks-also-known-as-natural-breaks">Data classification method: Jenks (also known as Natural breaks)</h3>
+<ul>
+<li>Default Jenk’s statistical optimization by finds natural groupings in the data.</li>
+</ul>
+<p><img src="img/image6-22c.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="data-classification-method-standard-deviation" class="level3">
+<h3 class="anchored" data-anchor-id="data-classification-method-standard-deviation">Data classification method: Standard deviation</h3>
+<ul>
+<li>A measure of dispersion. Use if the distribution approximates a normal distribution.</li>
+</ul>
+<p><img src="img/image6-22d.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="choropleth-map---colour-scheme" class="level3">
+<h3 class="anchored" data-anchor-id="choropleth-map---colour-scheme">Choropleth map - Colour scheme</h3>
+<p><a href="http://colorbrewer2.org/">ColorBrewer</a> is an online tool designed to help people select good color schemes for maps and other graphics.</p>
+<p><img src="img/image6-23.jpg" class="img-fluid"></p>
+<hr>
+</section>
+<section id="colour-scheme-tip" class="level3">
+<h3 class="anchored" data-anchor-id="colour-scheme-tip">Colour Scheme Tip</h3>
+<ul>
+<li>Avoiding multiple colours in choropleth mapping</li>
+<li>Stick with a single hue (or a small set of closely related hues) and vary intensity from pale colours for low values to increasingly darker and brighter colours for high values.</li>
+</ul>
+<p><img src="img/image6-23a.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="trellis-choropleth-map" class="level3">
+<h3 class="anchored" data-anchor-id="trellis-choropleth-map">Trellis choropleth map</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><strong>Trellis maps</strong> , also known as <strong>small multiple maps</strong>, are composed of many maps arrange side-by-side, and sometimes stacked vertically.</li>
+<li>Small multiple maps enable the visualisation of how spatial relationships change with respect to another variable, such as time.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img src="img/image6-24.jpg" class="img-fluid"></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="geofacet" class="level3">
+<h3 class="anchored" data-anchor-id="geofacet">Geofacet</h3>
+<p>Geofacet takes data representing different geographic entities and apply a visualization method to the data for each entity, with the resulting set of visualizations being laid out in a grid that mimics the original geographic topology as closely as possible.</p>
+<p><img src="img/image6-25.jpg" class="img-fluid" width="800"></p>
+<div style="font-size: 0.65em">
+<p>Source: <a href="https://joannetyy.shinyapps.io/SGPrivateProperty/">Singapore Property Market Watch</a></p>
+</div>
+</section>
+</section>
+<section id="reference" class="level2">
+<h2 class="anchored" data-anchor-id="reference">Reference</h2>
+<p><a href="https://www.axismaps.com/guide/proportional-symbols">Proportional Symbols</a></p>
+<p><a href="https://www.axismaps.com/guide/choropleth">Choropleth Maps</a></p>
+<p><a href="https://www.axismaps.com/guide/dot-density">Dot Density Maps</a></p>
+<p><a href="https://www.axismaps.com/guide/data-classification">The Basics of Data Classification</a></p>
+<p><a href="https://www.axismaps.com/guide/should-a-map-be-interactive">Should a map be interactive?</a></p>
+<p><a href="https://www.axismaps.com/guide/map-interaction">Map interaction</a></p>
+<div class="cell">
+
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
