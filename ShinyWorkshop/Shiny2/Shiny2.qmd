@@ -995,7 +995,7 @@ shinyApp (ui=ui, server=server)
     -   [Chapter 15 Reactive building blocks](https://mastering-shiny.org/reactivity-objects.html)
     -   [Chapter 16 Escaping the graph](https://mastering-shiny.org/reactivity-components.html)
 -   Carson Sievert (2019) **Interactive web-based data visualization with R, plotly, and shiny**, online version.
-    -   [Chapter 17 Server-side linking with shiny](https://plotly-r.com/linking-views-with-shiny.html)
+    -   [Chapter 17 Server-side linking with shiny](https://plotly-r.com/linking-views-with-shiny.html).
 
 ```{r}
 #| eval: false 

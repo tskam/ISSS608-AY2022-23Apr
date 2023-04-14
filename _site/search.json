@@ -2090,7 +2090,7 @@
     "href": "ShinyWorkshop/Shiny2/Shiny2.html#references",
     "title": "Building Web-enabled Visual Analytics Application with Shiny: Beyond the basic",
     "section": "References",
-    "text": "References\n\nHadley Wickham (2020) Mastering Shiny: Build Interactive Apps, Reports, and Dashboards Powered by R online version\n\nChapter 3 Basic reactivity\nChapter 13 Why reactivity?\nChapter 14 The reactive graph\nChapter 15 Reactive building blocks\nChapter 16 Escaping the graph\n\nCarson Sievert (2019) Interactive web-based data visualization with R, plotly, and shiny, online version.\n\nChapter 17 Server-side linking with shiny"
+    "text": "References\n\nHadley Wickham (2020) Mastering Shiny: Build Interactive Apps, Reports, and Dashboards Powered by R online version\n\nChapter 3 Basic reactivity\nChapter 13 Why reactivity?\nChapter 14 The reactive graph\nChapter 15 Reactive building blocks\nChapter 16 Escaping the graph\n\nCarson Sievert (2019) Interactive web-based data visualization with R, plotly, and shiny, online version.\n\nChapter 17 Server-side linking with shiny."
   },
   {
     "objectID": "ShinyWorkshop/Shiny3/Shiny3.html#overview",
@@ -2160,6 +2160,6 @@
     "href": "ShinyWorkshop/Shiny3/Shiny3.html#references",
     "title": "Building Web-enabled Visual Analytics Application with Shiny: Beyond the basic",
     "section": "References",
-    "text": "References\nShiny Layout\n\nApplication layout guide\n\nShiny Module\n\nChapter 19 Shiny modules of Mastering Shiny.\nModularizing Shiny app code, online article\nCommunication between modules. This is a relatively old article, some functions have changed.\nShiny Modules\nShiny Modules (part 1) : Why using modules?\nShiny Modules (part 2): Share reactive among multiple modules\nShiny Modules (part 3): Dynamic module call"
+    "text": "References\nShiny Layout\n\nApplication layout guide\n\nShiny Module\n\nChapter 19 Shiny modules of Mastering Shiny.\nModularizing Shiny app code, online article\nCommunication between modules. This is a relatively old article, some functions have changed.\nShiny Modules\nShiny Modules (part 1) : Why using modules?\nShiny Modules (part 2): Share reactive among multiple modules\nShiny Modules (part 3): Dynamic module call."
   }
 ]
