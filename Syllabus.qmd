@@ -96,6 +96,16 @@ The grading distribution of this course is as follows:
 
 There will be no mid-term test and final examination for this course.
 
+## Core Readings
+
+Claus. O. Wilke (2019) [**Fundamentals of Data Visualisation**](https://clauswilke.com/dataviz/), O'Reilly. USA
+
+Cairo, Alberto (2013) **The Functional Art: An Introduction to Information Graphics and Visualization**, New Riders, Berkeley, CA. This book is available at SMU eLibrary.
+
+Few, Stephen (2004) **Show Me the Numbers: Designing Tables and Graphs to Enlighten**, Analytics Press, Oakland, USA.
+
+Few, Stephen (2009) **Now You See It: Simple Visualization Techniques for Quantitative Analysis**, Analytics Press, Oakland, USA.
+
 ## Words of Encouragement
 
 For the next 10 weeks, your learning journey will be very bumpy, especially come to R programming
@@ -122,26 +132,5 @@ I promise you can succeed in this class as long as you are willing to learn, pra
 
 ![](img/image6.jpg){width="45%"}
 
-## Core Readings
 
-Claus. O. Wilke (2019) [**Fundamentals of Data Visualisation**](https://clauswilke.com/dataviz/), O'Reilly. USA
 
-Cairo, Alberto (2013) **The Functional Art: An Introduction to Information Graphics and Visualization**, New Riders, Berkeley, CA. This book is available at SMU eLibrary.
-
-Few, Stephen (2004) **Show Me the Numbers: Designing Tables and Graphs to Enlighten**, Analytics Press, Oakland, USA.
-
-Few, Stephen (2009) **Now You See It: Simple Visualization Techniques for Quantitative Analysis**, Analytics Press, Oakland, USA.
-
-## Other Important Information
-
-### Academic Integrity
-
-All acts of academic dishonesty (including, but not limited to, plagiarism, cheating, fabrication, facilitation of acts of academic dishonesty by others, unauthorized possession of exam questions, or tampering with the academic work of other students) are serious offences. All work (whether oral or written) submitted for purposes of assessment must be the student's own work. Penalties for violation of the policy range from zero marks for the component assessment to expulsion, depending on the nature of the offense. When in doubt, students should consult the instructors of the course. Details on the SMU Code of Academic Integrity may be accessed at http://www.smuscd.org/resources.html
-
-### Accessibility and Accommodations
-
-SMU strives to make learning experiences accessible for all. If you anticipate or experience physical or academic barriers due to disability, please let the instructor know immediately. You are also welcome to contact the university's disability support team if you have questions or concerns about academic accommodations: included\@smu.edu.sg Please be aware that the accessible tables in our seminar room should remain available for students who require them.
-
-### Emergency Preparedness for Teaching and Learning (EPTL)
-
-As part of emergency preparedness, Instructors may conduct lessons online via the WebEx platform during the term, to prepare students for online learning. During an actual emergency, students will be notified to access the WebEx platform for their online lessons. The class schedule will mirror the current face-to-face class timetable unless otherwise stated.
