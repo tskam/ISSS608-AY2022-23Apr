@@ -1,0 +1,14 @@
+{
+  "hash": "380bae8ea005229a49a4ab8defd43c32",
+  "result": {
+    "markdown": "---\ntitle: \"Lesson10: The Epilogue\"\nauthor: \"Dr. Kam Tin Seong<br/>Assoc. Professor of Information Systems (Practice)\"\ninstitute: \"School of Computing and Information Systems,<br/>Singapore Management University\"\ndate: \"2023-04-14\"\nformat: \n  revealjs:\n    width: 1600\n    height: 900\n    show-notes: false\n    slide-number: true\n    show-slide-number: 'all'\ndate-format: \"DD MMM YYYY\"\nexecute: \n  echo: true\n  eval: true\n  warning: false\neditor: visual\n---\n\n\n## ISSS608: Visual Analytics and Applications\n\n![](img/image10-1.jpg)\n\n## Motivation of Visual Analytics\n\n### The World is full of charts that lie!\n\n![](img/image10-2.jpg)\n\n**We need to get smarter about visual information**\n\n## Motivation of Visual Analytics\n\n### Is there a place for Visual Analytics in knowledge discovery?\n\n![](img/image10-3.jpg)\n\n## What is Visual Analytics?\n\n### Visual Analytics must be Reprducible\n\n![](img/image10-4.jpg)\n\nReference: [Ten Simple Rules for Reproducible Computational Research](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003285#s9)\n\n## A Gentle Reminder\n\n### Data Visualization: Clarity or Aesthetics?\n\n::: columns\n::: {.column width=\"50%\"}\n![](img/image10-5a.png)\n:::\n\n::: {.column width=\"50%\"}\n![](img/image10-5b.png)\n:::\n:::\n\n## A Gentle Reminder\n\n### Avoiding junk charts\n\n![](img/image10-6.jpg)\n\n## A Gentle Reminder\n\n### Avoiding junk charts\n\n![](img/image10-6.jpg)\n\n## A Gentle Reminder\n\n### Avoiding junk charts\n\n![](img/image10-7.jpg)\n\n## A Gentle Reminder\n\n### Avoiding junk charts\n\n![](img/image10-8.jpg)\n\n## A Gentle Reminder\n\n### Avoiding junk charts\n\n![](img/image10-9.jpg)\n\n## A Gentle Reminder\n\n### Avoiding junk charts\n\n![](img/image10-10.jpg)\n\n## A Gentle Reminder\n\n### Avoiding junk charts\n\n![](img/image10-11.jpg)\n\n## A Gentle Reminder\n\n### Show the world the good visual design priciples\n\n![](img/image10-12.jpg)\n\n## A Gentle Reminder\n\n### Show the world the good visual design priciples\n\n![](img/image10-13.jpg)\n\n## The bumper ride of R rollercoaster\n\n![](img/image10-14.png)\n\n## The bumper ride of R rollercoaster\n\n![](img/image10-15.png)\n\n## The bumper ride of R rollercoaster\n\n![](img/image10-16.png)\n\n## The bumper ride of R rollercoaster\n\n![](img/image10-17.png)\n\n## The bumper ride of R rollercoaster\n\n![](img/image10-18.png)\n\n## Time to Say Goodbye\n\n![](img/image10-19.jpg)\n\n::: {style=\"text-align: center\"}\n### Let's Build a Better World with Visual Analytics\n:::\n\n## Things end but memories last forever! \n\n![](img/image10-20.jpg)",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -10,8 +10,6 @@ website:
       href: syllabus.html
     - text: "Lesson Plan"
       href: lesson.html
-    - text: "DataViz Makeover"
-      href: DataViz.html
     - text: "Take-home Exercise"
       menu:
         - text: "Take-home Exercise 1"
