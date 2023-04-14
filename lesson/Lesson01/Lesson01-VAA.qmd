@@ -2,7 +2,7 @@
 title: "Lesson 1 <br/>Introduction to Visual Analytics and Applications "
 author: "Dr. Kam Tin Seong<br/>Assoc. Professor of Information Systems (Practice)"
 institute: "School of Computing and Information Systems,<br/>Singapore Management University"
-date: "3 April 2023 "
+date: "`r Sys.Date()`"
 date-modified: "`r Sys.Date()`" 
 format: 
   revealjs:
@@ -432,6 +432,6 @@ This slide provides you the links to three highly recommended data visualisation
 #| eval: false
 #| echo: false
 renderthis::to_pdf(
-  from = "https://isss608-ay2022-23jan.netlify.app/lesson/lesson01/Lesson01-VAA.html",
+  from = "https://isss608-ay2022-23apr.netlify.app/lesson/lesson01/Lesson01-VAA.html",
   to = "../../_site/lesson/lesson01/Lesson01-VAA.pdf")
 ```
