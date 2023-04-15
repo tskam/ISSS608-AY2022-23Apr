@@ -1,0 +1,381 @@
+---
+title: "In-class Exercise 1: Programming Elegant DataVis with ggplot2"
+author: "Dr. Kam Tin Seong<br/>Assoc. Professor of Information Systems (Practice)"
+institute: "School of Computing and Information Systems,<br/>Singapore Management University"
+date: "`r Sys.Date()`"
+format: 
+  revealjs:
+    width: 1600
+    height: 900
+    show-notes: false
+    slide-number: true
+    show-slide-number: 'all'
+    code-fold: true
+date-format: "DD MMM YYYY"
+execute: 
+  echo: true
+  eval: true
+  warning: false
+  message: false
+editor: visual
+---
+
+## Creating In-class Exercise 1 page
+
+1.  Start a new Quarto document call In-class_Ex01 in RStudio.
+
+2.  Add a new link onto your course web page.
+
+3.  Render the newly created qmd file into html page.
+
+4.  Push all the changes onto github.
+
+5.  Refresh your web page to ensure that the In-class Exercise 1 page has been added properly.
+
+## Getting started
+
+1.  Using `p_load()` of **pacman** package to load tidyverse on
+
+::: {style="font-size: 1.4em"}
+```{r}
+pacman::p_load(tidyverse)
+```
+:::
+
+2.  Importing data
+
+::: {style="font-size: 1.4em"}
+```{r}
+exam_data <- read_csv("data/Exam_data.csv")
+```
+:::
+------------------------------------------------------------------------
+
+### Working with theme
+
+Plot a horizontal bar chart looks similar to the figure below.
+
+-   Changing the colors of plot panel background of `theme_minimal()` to light blue and the color of grid lines to white.
+
+::: {.panel-tabset}
+
+### The plot
+
+```{r}
+#| echo: false
+ggplot(data=exam_data, 
+       aes(x=RACE)) +
+  geom_bar() +
+  coord_flip() +
+  theme_minimal() +
+  theme(panel.background = element_rect(
+    fill = "lightblue",
+    colour = "lightblue",
+    size = 0.5, 
+    linetype = "solid"),
+    panel.grid.major = element_line(
+      size = 0.5,
+      linetype = 'solid',
+      colour = "white"),
+    panel.grid.minor = element_line(
+      size = 0.25,
+      linetype = 'solid',
+      colour = "white"))
+```
+
+### The code chunk
+
+::: {style="font-size: 1.4em"}
+```{r}
+#| eval: false
+ggplot(data=exam_data, aes(x=RACE)) +
+  geom_bar() +
+  coord_flip() +
+  theme_minimal() +
+  theme(
+    panel.background = element_rect(fill = "lightblue", colour = "lightblue", 
+                                    size = 0.5, linetype = "solid"),
+    panel.grid.major = element_line(size = 0.5, linetype = 'solid', colour = "white"), 
+    panel.grid.minor = element_line(size = 0.25, linetype = 'solid', colour = "white"))
+```
+:::
+:::
+
+## Designing Data-drive Graphics for Analysis I
+
+### The original design
+
+::: columns
+::: {.column width="50%"}
+A simple vertical bar chart for frequency analysis. Critics:
+
+-   y-aixs label is not clear (i.e. count)
+-   To support effective comparison, the bars should be sorted by their resepctive frequencies.
+-   For static graph, frequency values should be added to provide addition information.
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: false
+#| fig-height: 6
+ggplot(data=exam_data, 
+       aes(x=RACE)) +
+  geom_bar()
+```
+:::
+:::
+
+## Designing Data-drive Graphics for Analysis I
+
+::: {.panel-tabset}
+
+### The makeover design
+With reference to the critics on the earlier slide, create a makeover looks similar to the figure on the right.
+
+```{r}
+#| echo: false
+ggplot(data=exam_data,
+       aes(x=reorder(RACE,RACE,
+                function(x)-length(x))))+
+  geom_bar() +
+  ylim(0,220) +
+  geom_text(stat="count", 
+      aes(label=paste0(..count.., ", ", 
+      round(..count../sum(..count..)*100,
+            1), "%")),
+      vjust=-1) +
+  xlab("Race") +
+  ylab("No. of\nPupils") +
+  theme(axis.title.y=element_text(angle = 0))
+```
+
+### The code chunk
+::: {style="font-size: 1.4em"}
+```{r}
+#| eval: false  
+#| fig-height: 6
+ggplot(data=exam_data, 
+       aes(x=reorder(RACE,RACE,
+                     function(x)-length(x)))) +
+  geom_bar() +
+  ylim(0,220) +
+  geom_text(stat="count", 
+      aes(label=paste0(..count.., ", ", 
+      round(..count../sum(..count..)*100, 1), "%")),
+      vjust=-1) +
+  xlab("Race") +
+  ylab("No. of\nPupils") +
+  theme(axis.title.y=element_text(angle = 0))
+```
+:::
+:::
+
+## Designing Data-drive Graphics for Analysis I
+
+This code chunk uses [`fct_infreq()`](https://forcats.tidyverse.org/reference/fct_inorder.html) of [**forcats**](https://forcats.tidyverse.org/articles/forcats.html) package.
+
+::: {style="font-size: 1.4em"}
+```{r}
+#| eval: false
+exam_data %>%
+  mutate(RACE = fct_infreq(RACE)) %>%
+  ggplot(aes(x = RACE)) + 
+  geom_bar()+
+  ylim(0,220) +
+  geom_text(stat="count", 
+      aes(label=paste0(..count.., ", ", 
+      round(..count../sum(..count..)*100,
+            1), "%")),
+      vjust=-1) +
+  xlab("Race") +
+  ylab("No. of\nPupils") +
+  theme(axis.title.y=element_text(angle = 0))
+```
+:::
+
+::: {style="font-size: 0.6em"}
+Credit: I learned this trick from [*Getting things into the right order*](https://wilkelab.org/SDS375/slides/getting-things-in-order.html#1) of Prof. Claus O. Wilke, the author of [**Fundamentals of Data Visualization**](https://clauswilke.com/dataviz/)
+:::
+
+## Designing Data-drive Graphics for Analysis II
+
+### The original design
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| echo: false
+ggplot(data=exam_data, 
+       aes(x= MATHS)) +
+  geom_histogram(bins=20)
+```
+:::
+:::
+
+## Designing Data-drive Graphics for Analysis II
+
+::: {.panel-tabset}
+### The makeover design
+
+-   Adding mean and median lines on the histogram plot.
+-   Change fill color and line color
+
+```{r}
+#| echo: false
+ggplot(data=exam_data, aes(x= MATHS)) +
+  geom_histogram(bins=20, color="black", fill="light blue") +
+  geom_vline(aes(xintercept=mean(MATHS, na.rm=T)), # Ignore NA values for mean
+             color="red", linetype="dashed", size=1) +
+  geom_vline(aes(xintercept=median(MATHS, na.rm=T)), # Ignore NA values for mean
+             color="grey30", linetype="dashed", size=1)
+```
+
+### The code chunk
+
+::: {style="font-size: 1.4em"}
+```{r}
+#| eval: false
+ggplot(data=exam_data, 
+       aes(x= MATHS)) +
+  geom_histogram(bins=20, 
+                 color="black", 
+                 fill="light blue") +
+  geom_vline(aes(xintercept=mean(MATHS, na.rm=T)),
+             color="red", 
+             linetype="dashed", 
+             size=1) +
+  geom_vline(aes(xintercept=median(MATHS, na.rm=T)),
+             color="grey30",
+             linetype="dashed", 
+             size=1)
+```
+:::
+:::
+
+
+## Designing Data-drive Graphics for Analysis III
+
+::: columns
+::: {.column width="50%"}
+### The original design
+
+The histograms on the left are elegantly designed but not informative. This is because they only reveal the distribution of English scores by gender but without context such as all pupils.
+
+```{r}
+#| echo: false
+ggplot(exam_data, 
+       aes(x = ENGLISH)) +
+  geom_histogram() +
+  facet_wrap(~ GENDER)
+```
+:::
+:::
+
+## Designing Data-drive Graphics for Analysis III
+
+::: {.panel-tabset}
+### The makeover design
+
+Create a makeover looks similar to the figure below. The background histograms show the distribution of English scores for all pupils.
+
+```{r}
+#| echo: false
+d <- exam_data   # Full data set
+d_bg <- d[, -3]  # Background Data - full without the 3th column (GENDER)
+
+ggplot(d, aes(x = ENGLISH, fill = GENDER)) +
+  geom_histogram(data = d_bg, fill = "grey", alpha = .5) +
+  geom_histogram(colour = "black") +
+  facet_wrap(~ GENDER) +
+  guides(fill = FALSE) +  # to remove the legend
+  theme_bw()              # for clean look overall
+```
+
+### The code chunk
+
+::: {style="font-size: 1.4em"}
+```{r}
+#| eval: false
+d <- exam_data   
+d_bg <- d[, -3]  
+
+ggplot(d, aes(x = ENGLISH, fill = GENDER)) +
+  geom_histogram(data = d_bg, fill = "grey", alpha = .5) +
+  geom_histogram(colour = "black") +
+  facet_wrap(~ GENDER) +
+  guides(fill = FALSE) +  
+  theme_bw()
+```
+:::
+:::
+
+## Designing Data-drive Graphics for Analysis IV
+
+### The original design.
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| echo: false
+#| fig-height: 8 
+ggplot(data=exam_data, aes(x=MATHS, y=ENGLISH)) +
+  geom_point()
+```
+:::
+:::
+
+------------------------------------------------------------------------
+
+## Designing Data-drive Graphics for Analysis IV
+
+::: {.panel-tabset}
+### The makeover design
+
+Create a makeover looks similar to the figure on the below.
+
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 6
+ggplot(data=exam_data, 
+       aes(x=MATHS, y=ENGLISH)) +
+  geom_point() +
+  coord_cartesian(xlim=c(0,100),
+                  ylim=c(0,100)) +
+  geom_hline(yintercept=50,
+             linetype="dashed",
+             color="grey60",
+             size=1) + 
+  geom_vline(xintercept=50, 
+             linetype="dashed",
+             color="grey60",
+             size=1)
+```
+
+### The code chunk
+
+::: {style="font-size: 1.4em"}
+```{r}
+#| eval: false
+ggplot(data=exam_data, 
+       aes(x=MATHS, y=ENGLISH)) +
+  geom_point() +
+  coord_cartesian(xlim=c(0,100),
+                  ylim=c(0,100)) +
+  geom_hline(yintercept=50,
+             linetype="dashed",
+             color="grey60",
+             size=1) + 
+  geom_vline(xintercept=50, 
+             linetype="dashed",
+             color="grey60",
+             size=1)
+```
+:::
+:::
+
+```{r}
+#| eval: false
+#| echo: false
+renderthis::to_pdf(from = "https://isss608-ay2022-23jan.netlify.app/hands-on_ex/Hands-on_Ex01/Hands-on_Ex01-ggplot2.html")
+```

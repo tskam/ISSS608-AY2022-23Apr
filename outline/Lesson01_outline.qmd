@@ -23,13 +23,7 @@ editor: visual
 
 -   Hands-on Exercise 1 in [html](https://r4va.netlify.app/chap01.html) format.
 
-## In-class Exercise
-
-By the end of this lesson, you will gain hands-on experience on:
-
--   creating the course website by using Quarto and RStudio,
--   managing the website by using git/github by using RStudio
--   publishing the website onto Netlify server
+-   In-class Exercise 1 handout and guide in [html](../In-class_Ex/In-class_Ex01/In-class_Ex01.html) format.
 
 ## Self-reading Before Lesson
 
