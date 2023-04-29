@@ -2237,70 +2237,70 @@
     "href": "In-class_Ex/In-class_Ex01/In-class_Ex01.html#getting-started",
     "title": "In-class Exercise 1: Programming Elegant DataVis with ggplot2",
     "section": "Getting started",
-    "text": "Getting started\n\nUsing p_load() of pacman package to load tidyverse on\n\n\n\n\nCode\npacman::p_load(tidyverse)\n\n\n\n\nImporting data\n\n\n\n\nCode\nexam_data <- read_csv(\"data/Exam_data.csv\")"
+    "text": "Getting started\n\nUsing p_load() of pacman package to load tidyverse on\n\n\n\npacman::p_load(tidyverse)\n\n\n\nImporting data\n\n\n\nexam_data <- read_csv(\"data/Exam_data.csv\")\n\n\n\n\nWorking with theme\nPlot a horizontal bar chart looks similar to the figure below.\n\nChanging the colors of plot panel background of theme_minimal() to light blue and the color of grid lines to white.\n\n\nThe plotThe code chunk\n\n\n\n\n\n\n\n\n\n\n\nggplot(data=exam_data, aes(x=RACE)) +\n  geom_bar() +\n  coord_flip() +\n  theme_minimal() +\n  theme(\n    panel.background = element_rect(fill = \"lightblue\", colour = \"lightblue\", \n                                    size = 0.5, linetype = \"solid\"),\n    panel.grid.major = element_line(size = 0.5, linetype = 'solid', colour = \"white\"), \n    panel.grid.minor = element_line(size = 0.25, linetype = 'solid', colour = \"white\"))"
   },
   {
     "objectID": "In-class_Ex/In-class_Ex01/In-class_Ex01.html#designing-data-drive-graphics-for-analysis-i",
     "href": "In-class_Ex/In-class_Ex01/In-class_Ex01.html#designing-data-drive-graphics-for-analysis-i",
     "title": "In-class Exercise 1: Programming Elegant DataVis with ggplot2",
     "section": "Designing Data-drive Graphics for Analysis I",
-    "text": "Designing Data-drive Graphics for Analysis I\nThe original design\n\n\nA simple vertical bar chart for frequency analysis. Critics:\n\ny-aixs label is not clear (i.e. count)\nTo support effective comparison, the bars should be sorted by their resepctive frequencies.\nFor static graph, frequency values should be added to provide addition information."
+    "text": "Designing Data-drive Graphics for Analysis I\n\nThe original design\n\n\nA simple vertical bar chart for frequency analysis. Critics:\n\ny-aixs label is not clear (i.e. count)\nTo support effective comparison, the bars should be sorted by their resepctive frequencies.\nFor static graph, frequency values should be added to provide addition information."
   },
   {
     "objectID": "In-class_Ex/In-class_Ex01/In-class_Ex01.html#designing-data-drive-graphics-for-analysis-i-1",
     "href": "In-class_Ex/In-class_Ex01/In-class_Ex01.html#designing-data-drive-graphics-for-analysis-i-1",
     "title": "In-class Exercise 1: Programming Elegant DataVis with ggplot2",
     "section": "Designing Data-drive Graphics for Analysis I",
-    "text": "Designing Data-drive Graphics for Analysis I\n\nThe makeover designThe code chunk\n\n\nWith reference to the critics on the earlier slide, create a makeover looks similar to the figure on the right.\n\n\n\n\n\n\n\n\n\n\nCode\nggplot(data=exam_data, \n       aes(x=reorder(RACE,RACE,\n                     function(x)-length(x)))) +\n  geom_bar() +\n  ylim(0,220) +\n  geom_text(stat=\"count\", \n      aes(label=paste0(..count.., \", \", \n      round(..count../sum(..count..)*100, 1), \"%\")),\n      vjust=-1) +\n  xlab(\"Race\") +\n  ylab(\"No. of\\nPupils\") +\n  theme(axis.title.y=element_text(angle = 0))"
+    "text": "Designing Data-drive Graphics for Analysis I\n\nThe makeover designThe code chunk\n\n\nWith reference to the critics on the earlier slide, create a makeover looks similar to the figure on the right.\n\n\n\n\n\n\n\n\n\nggplot(data=exam_data, \n       aes(x=reorder(RACE,RACE,\n                     function(x)-length(x)))) +\n  geom_bar() +\n  ylim(0,220) +\n  geom_text(stat=\"count\", \n      aes(label=paste0(..count.., \", \", \n      round(..count../sum(..count..)*100, 1), \"%\")),\n      vjust=-1) +\n  xlab(\"Race\") +\n  ylab(\"No. of\\nPupils\") +\n  theme(axis.title.y=element_text(angle = 0))"
   },
   {
     "objectID": "In-class_Ex/In-class_Ex01/In-class_Ex01.html#designing-data-drive-graphics-for-analysis-i-2",
     "href": "In-class_Ex/In-class_Ex01/In-class_Ex01.html#designing-data-drive-graphics-for-analysis-i-2",
     "title": "In-class Exercise 1: Programming Elegant DataVis with ggplot2",
     "section": "Designing Data-drive Graphics for Analysis I",
-    "text": "Designing Data-drive Graphics for Analysis I\nThis code chunk uses fct_infreq() of forcats package.\n\n\n\nCode\nexam_data %>%\n  mutate(RACE = fct_infreq(RACE)) %>%\n  ggplot(aes(x = RACE)) + \n  geom_bar()+\n  ylim(0,220) +\n  geom_text(stat=\"count\", \n      aes(label=paste0(..count.., \", \", \n      round(..count../sum(..count..)*100,\n            1), \"%\")),\n      vjust=-1) +\n  xlab(\"Race\") +\n  ylab(\"No. of\\nPupils\") +\n  theme(axis.title.y=element_text(angle = 0))\n\n\n\n\nCredit: I learned this trick from Getting things into the right order of Prof. Claus O. Wilke, the author of Fundamentals of Data Visualization"
+    "text": "Designing Data-drive Graphics for Analysis I\nThis code chunk uses fct_infreq() of forcats package.\n\n\nexam_data %>%\n  mutate(RACE = fct_infreq(RACE)) %>%\n  ggplot(aes(x = RACE)) + \n  geom_bar()+\n  ylim(0,220) +\n  geom_text(stat=\"count\", \n      aes(label=paste0(..count.., \", \", \n      round(..count../sum(..count..)*100,\n            1), \"%\")),\n      vjust=-1) +\n  xlab(\"Race\") +\n  ylab(\"No. of\\nPupils\") +\n  theme(axis.title.y=element_text(angle = 0))\n\n\n\nCredit: I learned this trick from Getting things into the right order of Prof. Claus O. Wilke, the author of Fundamentals of Data Visualization"
   },
   {
     "objectID": "In-class_Ex/In-class_Ex01/In-class_Ex01.html#designing-data-drive-graphics-for-analysis-ii",
     "href": "In-class_Ex/In-class_Ex01/In-class_Ex01.html#designing-data-drive-graphics-for-analysis-ii",
     "title": "In-class Exercise 1: Programming Elegant DataVis with ggplot2",
     "section": "Designing Data-drive Graphics for Analysis II",
-    "text": "Designing Data-drive Graphics for Analysis II\nThe original design"
+    "text": "Designing Data-drive Graphics for Analysis II\n\nThe original design"
   },
   {
     "objectID": "In-class_Ex/In-class_Ex01/In-class_Ex01.html#designing-data-drive-graphics-for-analysis-ii-1",
     "href": "In-class_Ex/In-class_Ex01/In-class_Ex01.html#designing-data-drive-graphics-for-analysis-ii-1",
     "title": "In-class Exercise 1: Programming Elegant DataVis with ggplot2",
     "section": "Designing Data-drive Graphics for Analysis II",
-    "text": "Designing Data-drive Graphics for Analysis II\n\nThe makeover designThe code chunk\n\n\n\nAdding mean and median lines on the histogram plot.\nChange fill color and line color\n\n\n\n\n\n\n\n\n\n\n\nCode\nggplot(data=exam_data, \n       aes(x= MATHS)) +\n  geom_histogram(bins=20, \n                 color=\"black\", \n                 fill=\"light blue\") +\n  geom_vline(aes(xintercept=mean(MATHS, na.rm=T)),\n             color=\"red\", \n             linetype=\"dashed\", \n             size=1) +\n  geom_vline(aes(xintercept=median(MATHS, na.rm=T)),\n             color=\"grey30\",\n             linetype=\"dashed\", \n             size=1)"
+    "text": "Designing Data-drive Graphics for Analysis II\n\nThe makeover designThe code chunk\n\n\n\nAdding mean and median lines on the histogram plot.\nChange fill color and line color\n\n\n\n\n\n\n\n\n\n\nggplot(data=exam_data, \n       aes(x= MATHS)) +\n  geom_histogram(bins=20, \n                 color=\"black\", \n                 fill=\"light blue\") +\n  geom_vline(aes(xintercept=mean(MATHS, na.rm=T)),\n             color=\"red\", \n             linetype=\"dashed\", \n             size=1) +\n  geom_vline(aes(xintercept=median(MATHS, na.rm=T)),\n             color=\"grey30\",\n             linetype=\"dashed\", \n             size=1)"
   },
   {
     "objectID": "In-class_Ex/In-class_Ex01/In-class_Ex01.html#designing-data-drive-graphics-for-analysis-iii",
     "href": "In-class_Ex/In-class_Ex01/In-class_Ex01.html#designing-data-drive-graphics-for-analysis-iii",
     "title": "In-class Exercise 1: Programming Elegant DataVis with ggplot2",
     "section": "Designing Data-drive Graphics for Analysis III",
-    "text": "Designing Data-drive Graphics for Analysis III\n\n\nThe original design\nThe histograms on the left are elegantly designed but not informative. This is because they only reveal the distribution of English scores by gender but without context such as all pupils."
+    "text": "Designing Data-drive Graphics for Analysis III\n\n\n\nThe original design\nThe histograms on the left are elegantly designed but not informative. This is because they only reveal the distribution of English scores by gender but without context such as all pupils."
   },
   {
     "objectID": "In-class_Ex/In-class_Ex01/In-class_Ex01.html#designing-data-drive-graphics-for-analysis-iii-1",
     "href": "In-class_Ex/In-class_Ex01/In-class_Ex01.html#designing-data-drive-graphics-for-analysis-iii-1",
     "title": "In-class Exercise 1: Programming Elegant DataVis with ggplot2",
     "section": "Designing Data-drive Graphics for Analysis III",
-    "text": "Designing Data-drive Graphics for Analysis III\n\nThe makeover designThe code chunk\n\n\nCreate a makeover looks similar to the figure below. The background histograms show the distribution of English scores for all pupils.\n\n\n\n\n\n\n\n\n\n\nCode\nd <- exam_data   \nd_bg <- d[, -3]  \n\nggplot(d, aes(x = ENGLISH, fill = GENDER)) +\n  geom_histogram(data = d_bg, fill = \"grey\", alpha = .5) +\n  geom_histogram(colour = \"black\") +\n  facet_wrap(~ GENDER) +\n  guides(fill = FALSE) +  \n  theme_bw()"
+    "text": "Designing Data-drive Graphics for Analysis III\n\nThe makeover design\n\n\nCreate a makeover looks similar to the figure below. The background histograms show the distribution of English scores for all pupils.\n\n\n\nggplot(d, aes(x = ENGLISH, fill = GENDER)) + geom_histogram(data = d_bg, fill = “grey”, alpha = .5) + geom_histogram(colour = “black”) + facet_wrap(~ GENDER) + guides(fill = FALSE) + # to remove the legend theme_bw() # for clean look overall\n\n### The code chunk\n\n::: {style=\"font-size: 1.4em\"}\n::: {.cell}\n\n```{.r .cell-code}\nd <- exam_data   \nd_bg <- d[, -3]  \n\nggplot(d, aes(x = ENGLISH, fill = GENDER)) +\n  geom_histogram(data = d_bg, fill = \"grey\", alpha = .5) +\n  geom_histogram(colour = \"black\") +\n  facet_wrap(~ GENDER) +\n  guides(fill = FALSE) +  \n  theme_bw()\n\n\n\n::: :::"
   },
   {
     "objectID": "In-class_Ex/In-class_Ex01/In-class_Ex01.html#designing-data-drive-graphics-for-analysis-iv",
     "href": "In-class_Ex/In-class_Ex01/In-class_Ex01.html#designing-data-drive-graphics-for-analysis-iv",
     "title": "In-class Exercise 1: Programming Elegant DataVis with ggplot2",
     "section": "Designing Data-drive Graphics for Analysis IV",
-    "text": "Designing Data-drive Graphics for Analysis IV\nThe original design."
+    "text": "Designing Data-drive Graphics for Analysis IV\n\nThe original design."
   },
   {
     "objectID": "In-class_Ex/In-class_Ex01/In-class_Ex01.html#designing-data-drive-graphics-for-analysis-iv-1",
     "href": "In-class_Ex/In-class_Ex01/In-class_Ex01.html#designing-data-drive-graphics-for-analysis-iv-1",
     "title": "In-class Exercise 1: Programming Elegant DataVis with ggplot2",
     "section": "Designing Data-drive Graphics for Analysis IV",
-    "text": "Designing Data-drive Graphics for Analysis IV\n\nThe makeover designThe code chunk\n\n\nCreate a makeover looks similar to the figure on the below.\n\n\n\n\n\n\n\n\n\n\nCode\nggplot(data=exam_data, \n       aes(x=MATHS, y=ENGLISH)) +\n  geom_point() +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100)) +\n  geom_hline(yintercept=50,\n             linetype=\"dashed\",\n             color=\"grey60\",\n             size=1) + \n  geom_vline(xintercept=50, \n             linetype=\"dashed\",\n             color=\"grey60\",\n             size=1)"
+    "text": "Designing Data-drive Graphics for Analysis IV\n\nThe makeover designThe code chunk\n\n\nCreate a makeover looks similar to the figure on the below.\n\n\n\n\n\n\n\n\n\nggplot(data=exam_data, \n       aes(x=MATHS, y=ENGLISH)) +\n  geom_point() +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100)) +\n  geom_hline(yintercept=50,\n             linetype=\"dashed\",\n             color=\"grey60\",\n             size=1) + \n  geom_vline(xintercept=50, \n             linetype=\"dashed\",\n             color=\"grey60\",\n             size=1)"
   },
   {
     "objectID": "In-class_Ex/In-class_Ex01/In-class_Ex01.html#reference",
@@ -2315,5 +2315,12 @@
     "title": "Lesson 5: Visual Multivariate Analysis",
     "section": "",
     "text": "What will you learn from this lesson?\n\nUnderstand the characteristics of multidimensional data\nVisual analytics techniques and tools for visualising and analysing multidimensional continuous data\nVisual analytics techniques and tools for visualising and analysing multidimensional categorical data\nSensing both categorical and continuous multidimensional data\nMultidimensional data analysis best practices\n\n\nIn this lesson, I am going to share with you a collection of visual multivariate analysis techniques."
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex01/In-class_Ex01.html",
+    "href": "In-class_Ex/In-class_Ex01/In-class_Ex01.html",
+    "title": "In-class Exercise 1: Programming Elegant DataVis with ggplot2",
+    "section": "",
+    "text": "Start a new Quarto document call In-class_Ex01 in RStudio.\nAdd a new link onto your course web page.\nRender the newly created qmd file into html page.\nPush all the changes onto github.\nRefresh your web page to ensure that the In-class Exercise 1 page has been added properly."
   }
 ]

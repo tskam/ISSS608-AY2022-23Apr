@@ -1,0 +1,6 @@
+---
+title: "In-class Exercise 3"
+author: "DR. Kam Tin Seong"
+date: "29 April 2023"
+edit: visual
+---
