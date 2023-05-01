@@ -49,6 +49,7 @@ pacman::p_load(tidyverse)
 exam_data <- read_csv("data/Exam_data.csv")
 ```
 :::
+
 ------------------------------------------------------------------------
 
 ### Working with theme
@@ -57,8 +58,7 @@ Plot a horizontal bar chart looks similar to the figure below.
 
 -   Changing the colors of plot panel background of `theme_minimal()` to light blue and the color of grid lines to white.
 
-::: {.panel-tabset}
-
+::: panel-tabset
 ### The plot
 
 ```{r}
@@ -127,9 +127,9 @@ ggplot(data=exam_data,
 
 ## Designing Data-drive Graphics for Analysis I
 
-::: {.panel-tabset}
-
+::: panel-tabset
 ### The makeover design
+
 With reference to the critics on the earlier slide, create a makeover looks similar to the figure on the right.
 
 ```{r}
@@ -150,6 +150,7 @@ ggplot(data=exam_data,
 ```
 
 ### The code chunk
+
 ::: {style="font-size: 1.4em"}
 ```{r}
 #| eval: false  
@@ -214,7 +215,7 @@ ggplot(data=exam_data,
 
 ## Designing Data-drive Graphics for Analysis II
 
-::: {.panel-tabset}
+::: panel-tabset
 ### The makeover design
 
 -   Adding mean and median lines on the histogram plot.
@@ -252,7 +253,6 @@ ggplot(data=exam_data,
 :::
 :::
 
-
 ## Designing Data-drive Graphics for Analysis III
 
 ::: columns
@@ -273,15 +273,16 @@ ggplot(exam_data,
 
 ## Designing Data-drive Graphics for Analysis III
 
-::: {.panel-tabset}
+::: panel-tabset
 ### The makeover design
 
 Create a makeover looks similar to the figure below. The background histograms show the distribution of English scores for all pupils.
 
 ```{r}
 #| echo: false
-d <- exam_data   # Full data set
-d_bg <- d[, -3]  # Background Data - full without the 3th column (GENDER)
+d <- exam_data   
+d_bg <- d[, -3]
+```
 
 ggplot(d, aes(x = ENGLISH, fill = GENDER)) +
   geom_histogram(data = d_bg, fill = "grey", alpha = .5) +
@@ -328,7 +329,7 @@ ggplot(data=exam_data, aes(x=MATHS, y=ENGLISH)) +
 
 ## Designing Data-drive Graphics for Analysis IV
 
-::: {.panel-tabset}
+::: panel-tabset
 ### The makeover design
 
 Create a makeover looks similar to the figure on the below.
