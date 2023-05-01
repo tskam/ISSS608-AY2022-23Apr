@@ -43,7 +43,7 @@ Contains information about financial transactions.
 For explanation of Rent Adjustment, please refer to this [link](https://www.lawinsider.com/dictionary/rent-adjustment-amount).
 
 ::: callout-note
-Reference to **Take-home Exercise 1** folder on eLearn to download the data sets.
+Refer to **Take-home Exercise 1** folder on eLearn to download the data sets.
 :::
 
 # Submission Instructions
