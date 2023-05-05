@@ -1,6 +1,7 @@
 ---
 title: "Lesson 4: Fundamentals of Visual Analytics"
-date: "`r Sys.Date()`"
+date: "27 April 2023"
+date-modified: "`r Sys.Date()`" 
 format: html
 editor: visual
 ---
@@ -64,7 +65,7 @@ editor: visual
 
 -   [ggstatsplot](https://indrajeetpatil.github.io/ggstatsplot/): An extension of **ggplot2** package for creating statistical graphics with details from statistical tests.
 
--   [**ggdist**](https://mjskay.github.io/ggdist/index.html): An R package that provides a flexible set of ggplot2 geoms and stats designed especially for visualising distributions and uncertainty.
+-   [**ggdist**](https://mjskay.github.io/ggdist/index.html): An R package that provides a flexible set of ggplot2 geoms and stats designed especially for visualising distributions and uncertainty. Also watch the video entitle [Visualizing distributions and uncertainty using ggdist](https://www.rstudio.com/conference/2022/talks/visualizing-distributions-uncertainty-using-ggdist/).
 
 -   [performance](https://easystats.github.io/performance/): An R package provides utilities for computing indices of model quality and goodness of fit including provides many functions to check model assumptions visually.
 

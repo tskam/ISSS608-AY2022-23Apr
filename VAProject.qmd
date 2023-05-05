@@ -2,7 +2,8 @@
 title: "Visual Analytics Project"
 description: |
   Building visually driven web-enabled Shiny application for democratising data and analytics.
-date: "`r Sys.Date()`"
+date: "17 April 2023"
+date-modified: "`r Sys.Date()`"
 format: html
 editor: visual
 ---
@@ -15,7 +16,7 @@ A project may involve developing new methods or implementing visual analytics sy
 
 ## Project Topic
 
-To be announced!
+This term the topic of Visual Analytics Project will be based on [VAST Challenge 2023](https://vast-challenge.github.io/2023/). The are three challenges provided. Teams are required to choose one of the Challenge and build a Shiny Application to answer the questions of the Challenge.
 
 ## Project Management
 
@@ -204,3 +205,6 @@ Note that the following examples are for references purposes. You are urge to us
 -   [Group 13: Movie Analysis and Prediction](https://isss608-vaa-ay2022-23-movie-project.netlify.app/)
 
 # Q & A
+
+If you have any question, please post it on Piazza.
+
