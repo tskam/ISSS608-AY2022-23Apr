@@ -8,11 +8,17 @@ editor: visual
 
 # Setting the Scene
 
-City of Engagement, with a total population of 50,000, is a small city located at Country of Nowhere.  The city serves as a service centre of an agriculture region surrounding the city.  The main agriculture of the region is fruit farms and vineyards.  The local council of the city is in the process of preparing the Local Plan 2023.  A sample survey of 1000 representative residents had been conducted to collect data related to their household demographic and spending patterns, among other things.  The city aims to use the data to assist with their major community revitalization efforts, including how to allocate a very large city renewal grant they have recently received.       
+City of Engagement, with a total population of 50,000, is a small city located at Country of Nowhere. The city serves as a service centre of an agriculture region surrounding the city. The main agriculture of the region is fruit farms and vineyards. The local council of the city is in the process of preparing the Local Plan 2023. A sample survey of 1000 representative residents had been conducted to collect data related to their household demographic and spending patterns, among other things. The city aims to use the data to assist with their major community revitalization efforts, including how to allocate a very large city renewal grant they have recently received.
 
 # The Task
 
-In this take-home exercise, you are required to apply the concepts and methods you had learned in Lesson 1-4 to reveal the demographic and financial characteristics of the city of Engagement, using appropriate **static and interactive statistical graphics** methods. This exercise requires a user-friendly and interactive solution that helps city managers and planners to explore the complex data in an engaging way and reveal hidden patterns. The data should be processed by using appropriate tidyverse family of packages and the statistical graphics must be prepared using ggplot2 and its extensions.
+In this take-home exercise, you are required to apply the concepts and methods you had learned in **Lesson 1-4** to reveal the demographic and financial characteristics of the city of Engagement byusing appropriate **static and interactive statistical graphics** methods. This exercise requires a user-friendly and interactive solution that helps city managers and planners to explore the complex data in an engaging way and reveal hidden patterns. 
+
+::: {.callout-important}
+- The data should be processed by using appropriate **tidyverse** family of packages and the statistical graphics must be prepared using ggplot2 and its extensions.
+- 
+:::
+
 
 # The Data
 
@@ -23,13 +29,12 @@ For the purpose of this study, two data sets are provided. They are:
 Contains information about the residents of City of Engagement that have agreed to participate in this study.
 
 -   participantId (integer): unique ID assigned to each participant.
--   householdSize (integer): the number of people in the participant’s household
--   haveKids (boolean): whether there are children living in the participant’s household.
--   age (integer): participant’s age in years at the start of the study.
--   educationLevel (string factor): the participant’s education level, one of:
-{"Low", "HighSchoolOrCollege", "Bachelors", "Graduate"}
+-   householdSize (integer): the number of people in the participant's household
+-   haveKids (boolean): whether there are children living in the participant's household.
+-   age (integer): participant's age in years at the start of the study.
+-   educationLevel (string factor): the participant's education level, one of: {"Low", "HighSchoolOrCollege", "Bachelors", "Graduate"}
 -   interestGroup (char): a char representing the participant's stated primary interest group, one of {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"}. Note: specific topics of interest have been redacted to avoid bias.
--   joviality (float): a value ranging from [0,1] indicating the participant’s overall happiness level at the start of the study.
+-   joviality (float): a value ranging from \[0,1\] indicating the participant's overall happiness level at the start of the study.
 
 *FinancialJournal.csv*
 
@@ -37,12 +42,12 @@ Contains information about financial transactions.
 
 -   participantId (integer): unique ID corresponding to the participant affected
 -   timestamp (datetime): the time when the check-in was logged
--   category (string factor): a string describing the expense category, one of {“Education”, “Food”, “Recreation”, “RentAdjustment”, “Shelter”, “Wage”}
+-   category (string factor): a string describing the expense category, one of {"Education", "Food", "Recreation", "RentAdjustment", "Shelter", "Wage"}
 -   amount (double): the amount of the transaction
 
 For explanation of Rent Adjustment, please refer to this [link](https://www.lawinsider.com/dictionary/rent-adjustment-amount).
 
-::: callout-note
+::: {.callout-note}
 Refer to **Take-home Exercise 1** folder on eLearn to download the data sets.
 :::
 
@@ -50,11 +55,13 @@ Refer to **Take-home Exercise 1** folder on eLearn to download the data sets.
 
 This is an individual assignment. You are required to work on the take-home exercises and prepare submission individually.
 
+::: {.callout-important}
 The specific submission instructions are as follows:
 
 -   The analytical visualisation must be prepared by using **R and appropriate R packages**.
 -   The write-up of the take-home exercise must be in **Quarto html document** format. You are required to publish the write-up on [**Netlify**](https://www.netlify.com/).
 -   Provide the links to the Take-home Exercise write-up and github repository onto eLearn (i.e. Take-home Exercise section)
+:::
 
 # Submission date
 
@@ -62,7 +69,10 @@ Your completed take-home exercise is due on **14th May 2023, by 11:59pm evening*
 
 # Learning from senior
 
-- [AY2022-23 January Term](https://isss608-ay2022-23jan.netlify.app/take-home_ex/th_ex03#peer-learning-1)
+-   [AY2022-23 January Term](https://isss608-ay2022-23jan.netlify.app/take-home_ex/th_ex03#peer-learning-1).  
+
+::: {.callout-note}
+Students are encouraged to review the three specially mentioned submissions before getting started.  If time permit, please review all of them. You might find some examples that inspiring you.
+:::
 
 # Peer Learning
-
