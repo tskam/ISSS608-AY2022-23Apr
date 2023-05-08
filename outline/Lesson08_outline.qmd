@@ -1,5 +1,5 @@
 ---
-title: "Lesson 8: Network Data Visualisation and Analysis"
+title: "Lesson 5: Network Data Visualisation and Analysis"
 date: "30 December 2022"
 date-modified: "`r Sys.Date()`"
 format: html

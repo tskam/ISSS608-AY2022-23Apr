@@ -1369,7 +1369,7 @@
     "href": "lesson.html",
     "title": "Lesson Plan",
     "section": "",
-    "text": "Lesson\nDate\nVenue\nTopic\nRemarks\n\n\n\n\n1\n15/4\nSCIS1 SR B1-1\nIntroduction to Visual Analytics\n\n\n\n2\n22/4\nSCIS1 SR B1-1\nDesigning Graphs to Enlighten\nOnline Learning\n\n\n3\n29/5\nSCIS1 SR B1-1\nInteractivity in Visual Analytics\n\n\n\n4\n6/5\nSCIS1 SR B1-1\nFundamentals of Visual Analytics\n\n\n\n5\n13/5\nSCIS1 SR B1-1\nVisual Multivariate Analysis\n\n\n\n6\n20/5\nSCIS1 SR B1-1\nIt’s About Time\n\n\n\n\n27/5\nTBC\nShiny Workshop\n\n\n\n7\n3/6\nSCIS1 SR B1-1\nVisualising and Analysing Geographic Data\n\n\n\n8\n10/6\nSCIS1 SR B1-1\nNetwork Data Visualisation and Analysis\n\n\n\n9\n17/6\nSCIS1 SR B1-1\nInformation Dashboard Design\n\n\n\n10\n24/6\nSCIS1 SR B1-1\nVisual Analytics of Financial Data"
+    "text": "Lesson\nDate\nVenue\nTopic\nRemarks\n\n\n\n\n1\n15/4\nSCIS1 SR B1-1\nIntroduction to Visual Analytics\n\n\n\n2\n22/4\nSCIS1 SR B1-1\nDesigning Graphs to Enlighten\nOnline Learning\n\n\n3\n29/5\nSCIS1 SR B1-1\nInteractivity in Visual Analytics\n\n\n\n4\n6/5\nSCIS1 SR B1-1\nFundamentals of Visual Analytics\n\n\n\n5\n13/5\nSCIS1 SR B1-1\nNetwork Data Visualisation and Analysis\n\n\n\n6\n20/5\nSCIS1 SR B1-1\nVisual Multivariate Analysis\n\n\n\n\n27/5\nTBC\nShiny Workshop\n\n\n\n7\n3/6\nSCIS1 SR B1-1\nIt’s About Time\n\n\n\n8\n10/6\nSCIS1 SR B1-1\nVisualising and Analysing Geographic Data\n\n\n\n9\n17/6\nSCIS1 SR B1-1\nInformation Dashboard Design\n\n\n\n10\n24/6\nSCIS1 SR B1-1\nVisual Analytics of Financial Data"
   },
   {
     "objectID": "outline/Lesson01_outline.html",
@@ -1633,28 +1633,28 @@
   {
     "objectID": "outline/Lesson08_outline.html",
     "href": "outline/Lesson08_outline.html",
-    "title": "Lesson 8: Network Data Visualisation and Analysis",
+    "title": "Lesson 5: Network Data Visualisation and Analysis",
     "section": "",
     "text": "Introduction to Graph Data Visualisation\n\nBasic principles of network graph\nGraph data visualisation in actions\n\nNetwork Graph Data\n\nNetwork data sets\nGraph data format\nGraph Database\n\nNetwork Graph Visualisation Tools\nDesigner toolkit\n\nGephi\n\nProgrammer toolkit\n\nR packages\n\nGraph layouts\n\nNode-and-link layouts\nForce-directed layout\nNode-only layout\nAdjacency matrix\n\nVisual Attributes\n\nKey node attributes\nKey edge attributes\nBundles, shapes, images, and more\n\nVisual Analysis of Network Graphs\n\nRelationships\nHierarchies\nCommunities\n\nFlows\nSpatial networks"
   },
   {
     "objectID": "outline/Lesson08_outline.html#lesson-slides-and-hands-on-notes",
     "href": "outline/Lesson08_outline.html#lesson-slides-and-hands-on-notes",
-    "title": "Lesson 8: Network Data Visualisation and Analysis",
+    "title": "Lesson 5: Network Data Visualisation and Analysis",
     "section": "Lesson Slides and Hands-on Notes",
     "text": "Lesson Slides and Hands-on Notes\n\nLesson slides in html and pdf formats\nHandout of Hands-on Exercise 8 in html format."
   },
   {
     "objectID": "outline/Lesson08_outline.html#readings",
     "href": "outline/Lesson08_outline.html#readings",
-    "title": "Lesson 8: Network Data Visualisation and Analysis",
+    "title": "Lesson 5: Network Data Visualisation and Analysis",
     "section": "Readings",
     "text": "Readings\n\nVisual Analysis of Complex Networks for Business Intelligence with Gephi\nGraph Drawing\nGraph Analytics - Lesson Learned and Challenges Ahead\nLearning to Read and Interpret Network Graph Data Visualizations\nThe Visualization of Networks\nViZster: Visualizing Online Social Networks\nAdam Perer. “Finding Beautiful Insights in the Chaos of Social Network Visualizations”. In ’‘’Beautiful Visualization’’’. O’Reilly Press.\nVisual Complexity"
   },
   {
     "objectID": "outline/Lesson08_outline.html#all-about-r",
     "href": "outline/Lesson08_outline.html#all-about-r",
-    "title": "Lesson 8: Network Data Visualisation and Analysis",
+    "title": "Lesson 5: Network Data Visualisation and Analysis",
     "section": "All About R",
     "text": "All About R\n\nWrangling Network Data\n\ntidygraph\ntidygraph 1.1 – A tidy hope\ntidygraph\n\n\n\nVisualisation and Analysis\nggraph\n\nggraph\nAnnouncing ggraph\n1 giraffe, 2 giraffe, GO!\nLayouts\nNodes\nEdges\ntidygraph and ggraph\n\nvizNetwork\n\nvisNetwork: Network Visualization using ‘vis.js’ Library\nIntroduction to visNetwork\nvisNetwork, an R package for interactive network visualization\n\nCircular Plot\n\ncirclize: circular visualization in R\nCircular Visualization in R"
   },
@@ -2335,6 +2335,13 @@
     "href": "In-class_Ex/In-class_Ex04/In-class_Ex04.html",
     "title": "In-class Exercise 4",
     "section": "",
-    "text": "pacman::p_load(nortest, tidyverse)\n\n\nexam_data <- read_csv(\"data/Exam_data.csv\")\n\nRows: 322 Columns: 7\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (4): ID, CLASS, GENDER, RACE\ndbl (3): ENGLISH, MATHS, SCIENCE\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\n\n#computing summary statistics of mean, median and lower and upper whiskers in boxplot\nresale_mean <- round(mean(hdb_2022$resale_price))\nresale_median <- round(median(hdb_2022$resale_price))\nymax <- as.numeric(round((IQR(hdb_2022$resale_price)*1.5) +\n                quantile(hdb_2022$resale_price,0.75)))\nymin <- as.integer(min(hdb_2022$resale_price))\n\n#plotting histogram\nh <- ggplot(data = hdb_2022, aes(x = resale_price)) + \n  geom_histogram(color=\"black\", fill=\"azure4\", binwidth = 50000) + \n  scale_x_continuous(limits = c(0,1500000), labels = scales::comma) +\n  labs(x = \"Resale Price (SGD)\", y = \"Number of transactions\") +\n  geom_vline(aes(xintercept = resale_mean), col=\"darkblue\", linewidth=1) +\n  annotate(\"text\", x=640000, y=4000, label=\"Mean resale price:\", \n           size=4, color=\"darkblue\") +\n  annotate(\"text\", x=640000, y=3750, label=format(resale_mean, big.mark = \",\"),\n           size=4, color=\"darkblue\") +\n  geom_vline(aes(xintercept = resale_median), col=\"lightpink4\", linewidth=1) +\n  annotate(\"text\", x=400000, y=4000, label=\"Median resale price\", \n           size=4, color=\"lightpink4\") +\n  annotate(\"text\", x=400000, y=3750, label=format(resale_median, big.mark = \",\"),\n           size=4, color=\"lightpink4\") +\n  theme(axis.text.x = element_text(size=8))\n\n#plotting boxplot\nb <- ggplot(data = hdb_2022, aes(y = resale_price)) + \n  geom_boxplot(outlier.colour=\"firebrick\", outlier.shape=16,\n               outlier.size=1, notch=FALSE) + \n  coord_flip() + labs(y = \"\", x = \"\") + \n  scale_y_continuous(limits = c(0,1500000), labels = scales::comma) +\n  theme(axis.text = element_blank(), axis.ticks = element_blank()) + \n  stat_boxplot(geom=\"errorbar\", width=0.5) + \n  annotate(\"text\", x=0.35, y=ymax, label=format(ymax, big.mark = \",\"), \n           size=3, color=\"lightpink4\") +\n  annotate(\"text\", x=0.35, y=ymin, label=format(ymin, big.mark = \",\"), \n           size=3, color=\"lightpink4\")\n\n#combining plots\nprice_distri <- b / h + plot_layout(heights = c(1, 4)) \n\nprice_distri + plot_annotation(title = \"Distribution of Resale Prices of 3/4/5-Room HDB flats in 2022\", \n                               subtitle = \"There is a right-skewed distribution i.e. mean resale price > median resale price. There is also a large number of outliers (resale price >$883,000).\",\n                               theme = theme(\n                                 plot.title = element_text(size = 18),\n                                 plot.subtitle = element_text(size = 12)))\n\n\nAD <- ad.test(exam_data$ENGLISH)"
+    "text": "pacman::p_load(rstatix, gt, patchwork, tidyverse)\n\n\nexam_data <- read_csv(\"data/Exam_data.csv\")\n\nVisualising Normal Distribution:\nA Q-Q plot, short for “quantile-quantile” plot, is used to assess whether or not a set of data potentially came from some theoretical distribution. In most cases, this type of plot is used to determine whether or not a set of data follows a normal distribution.\nIf the data is normally distributed, the points in a Q-Q plot will lie on a straight diagonal line. Conversely, if the points deviate significantly from the straight diagonal line, then it’s less likely that the data is normally distributed.\n\nThe plotThe code chunk\n\n\n\n\n\n\n\n\n\n\nggplot(exam_data, \n       aes(sample=ENGLISH)) +\n  stat_qq() + \n  stat_qq_line()\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nWe can see that the points deviate significantly from the straight diagonal line. This is a clear indication that the set of data is not normally distributed.\n\n\n\nCombining statistical graph and analysis table\nNeed to install webshot\n\nThe plotThe code chunk\n\n\n\n\n\n\n\n\n\n\nqq <- ggplot(exam_data, \n       aes(sample=ENGLISH)) +\n  stat_qq() + \n  stat_qq_line()\n\nsw_t <- exam_data %>%\n  shapiro_test(ENGLISH) %>%\n  gt()\n\ntmp <- tempfile(fileext = '.png') \ngtsave(sw_t, tmp)\ntable_png <- png::readPNG(tmp, native = TRUE)\n\nqq + table_png\n\n\n\n\n\n\nFacet version\n\nThe plotThe code chunk\n\n\n\n\n\n\n\n\n\n\nggplot(exam_data, \n       aes(sample=ENGLISH)) +\n  stat_qq() + \n  stat_qq_line() +\n  facet_wrap(~ CLASS,\n             nrow = 3,\n             ncol = 3)"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex04/In-class_Ex04.html#the-plot",
+    "href": "In-class_Ex/In-class_Ex04/In-class_Ex04.html#the-plot",
+    "title": "In-class Exercise 4",
+    "section": "The plot",
+    "text": "The plot\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nWe can see that the points deviate significantly from the straight diagonal line. This is a clear indication that the set of data is not normally distributed.\n\n\n\nCombining statistical graph and analysis table\nNeed to install webshot\n\nThe plotThe code chunkThe code chunk\n\n\n\n\n\n\n\n\n\n\nqq <- ggplot(exam_data, \n       aes(sample=ENGLISH)) +\n  stat_qq() + \n  stat_qq_line()\n\nsw_t <- exam_data %>%\n  shapiro_test(ENGLISH) %>%\n  gt()\n\ntmp <- tempfile(fileext = '.png') \ngtsave(sw_t, tmp)\ntable_png <- png::readPNG(tmp, native = TRUE)\n\nqq + table_png\n\n\n\n\nggplot(exam_data, \n       aes(sample=ENGLISH)) +\n  stat_qq() + \n  stat_qq_line()\n\n\n\n\n\n\nFacet version\n\nThe plotThe code chunk\n\n\n\n\n\n\n\n\n\n\nggplot(exam_data, \n       aes(sample=ENGLISH)) +\n  stat_qq() + \n  stat_qq_line() +\n  facet_wrap(~ CLASS,\n             nrow = 3,\n             ncol = 3)"
   }
 ]

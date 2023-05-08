@@ -7,15 +7,15 @@ editor: visual
 ---
 
 | Lesson | Date | Venue         | Topic                                                                      | Remarks         |
-|--------------|:-------------|--------------|:----------------|:-------------|
+|--------|:-----|---------------|:---------------------------------------------------------------------------|:----------------|
 | 1      | 15/4 | SCIS1 SR B1-1 | [Introduction to Visual Analytics](outline/Lesson01_outline.html)          |                 |
 | 2      | 22/4 | SCIS1 SR B1-1 | [Designing Graphs to Enlighten](outline/Lesson02_outline.html)             | Online Learning |
 | 3      | 29/5 | SCIS1 SR B1-1 | [Interactivity in Visual Analytics](outline/Lesson03_outline.html)         |                 |
 | 4      | 6/5  | SCIS1 SR B1-1 | [Fundamentals of Visual Analytics](outline/Lesson04_outline.html)          |                 |
-| 5      | 13/5 | SCIS1 SR B1-1 | [Visual Multivariate Analysis](outline/Lesson05_outline.html)              |                 |
-| 6      | 20/5 | SCIS1 SR B1-1 | [It's About Time](outline/Lesson06_outline.html)                           |                 |
+| 5      | 13/5 | SCIS1 SR B1-1 | [Network Data Visualisation and Analysis](outline/Lesson08_outline.html)   |                 |
+| 6      | 20/5 | SCIS1 SR B1-1 | [Visual Multivariate Analysis](outline/Lesson05_outline.html)              |                 |
 |        | 27/5 | TBC           | Shiny Workshop                                                             |                 |
-| 7      | 3/6  | SCIS1 SR B1-1 | [Visualising and Analysing Geographic Data](outline/Lesson07_outline.html) |                 |
-| 8      | 10/6 | SCIS1 SR B1-1 | [Network Data Visualisation and Analysis](outline/Lesson08_outline.html)   |                 |
+| 7      | 3/6  | SCIS1 SR B1-1 | [It's About Time](outline/Lesson06_outline.html)                           |                 |
+| 8      | 10/6 | SCIS1 SR B1-1 | [Visualising and Analysing Geographic Data](outline/Lesson07_outline.html) |                 |
 | 9      | 17/6 | SCIS1 SR B1-1 | [Information Dashboard Design](outline/Lesson09_outline.html)              |                 |
 | 10     | 24/6 | SCIS1 SR B1-1 | [Visual Analytics of Financial Data](outline/Lesson10_outline.html)        |                 |

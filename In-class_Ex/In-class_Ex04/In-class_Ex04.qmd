@@ -1,0 +1,131 @@
+---
+title: "In-class Exercise 4"
+author: "Dr. Kam Tin Seong"
+date: "5 May 2023"
+date-modified: "`r Sys.Date()`"
+execute:
+  echo: true
+  eval: true
+  warning: false
+---
+
+```{r}
+pacman::p_load(rstatix, gt, patchwork, tidyverse)
+```
+
+```{r}
+exam_data <- read_csv("data/Exam_data.csv")
+```
+
+Visualising Normal Distribution: 
+
+A Q-Q plot, short for “quantile-quantile” plot, is used to assess whether or not a set of data potentially came from some theoretical distribution.  In most cases, this type of plot is used to determine whether or not a set of data follows a normal distribution.
+
+If the data is normally distributed, the points in a Q-Q plot will lie on a straight diagonal line. Conversely, if the points deviate significantly from the straight diagonal line, then it’s less likely that the data is normally distributed.
+
+::: panel-tabset
+## The plot
+```{r}
+#| echo: false
+#| fig-width: 4
+#| fig-height: 4
+ggplot(exam_data, 
+       aes(sample=ENGLISH)) +
+  stat_qq() + 
+  stat_qq_line()
+```
+
+## The code chunk
+```{r}
+#| eval: false
+#| fig-width: 4
+#| fig-height: 4
+ggplot(exam_data, 
+       aes(sample=ENGLISH)) +
+  stat_qq() + 
+  stat_qq_line()
+```
+:::
+
+::: {.callout-note}
+We can see that the points deviate significantly from the straight diagonal line. This is a clear indication that the set of data is not normally distributed.
+:::
+
+### Combining statistical graph and analysis table
+
+Need to install webshot
+
+::: panel-tabset
+
+## The plot
+```{r}
+#| echo: false
+qq <- ggplot(exam_data, 
+       aes(sample=ENGLISH)) +
+  stat_qq() + 
+  stat_qq_line()
+
+sw_t <- exam_data %>%
+  shapiro_test(ENGLISH) %>%
+  gt()
+
+tmp <- tempfile(fileext = '.png') 
+gtsave(sw_t, tmp)
+table_png <- png::readPNG(tmp, native = TRUE)
+
+qq + table_png
+```
+
+## The code chunk
+```{r}
+#| eval: false
+qq <- ggplot(exam_data, 
+       aes(sample=ENGLISH)) +
+  stat_qq() + 
+  stat_qq_line()
+
+sw_t <- exam_data %>%
+  shapiro_test(ENGLISH) %>%
+  gt()
+
+tmp <- tempfile(fileext = '.png') 
+gtsave(sw_t, tmp)
+table_png <- png::readPNG(tmp, native = TRUE)
+
+qq + table_png
+```
+:::
+
+### Facet version
+
+::: panel-tabset
+
+## The plot
+```{r}
+#| echo: false
+#| fig-width: 12
+#| fig-height: 12
+ggplot(exam_data, 
+       aes(sample=ENGLISH)) +
+  stat_qq() + 
+  stat_qq_line() +
+  facet_wrap(~ CLASS,
+             nrow = 3,
+             ncol = 3)
+```
+
+## The code chunk
+```{r}
+#| eval: false
+ggplot(exam_data, 
+       aes(sample=ENGLISH)) +
+  stat_qq() + 
+  stat_qq_line() +
+  facet_wrap(~ CLASS,
+             nrow = 3,
+             ncol = 3)
+```
+:::
+
+
+
