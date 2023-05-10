@@ -1,5 +1,5 @@
 ---
-title: "Lesson 8: Visualising and Analysing Network Data"
+title: "Lesson 5: Visualising and Analysing Network Data"
 author: "Dr. Kam Tin Seong<br/>Assoc. Professor of Information Systems (Practice)"
 institute: "School of Computing and Information Systems,<br/>Singapore Management University"
 date: "`r Sys.Date()`"
@@ -653,17 +653,17 @@ Source: [flare.prefuse.org](https://flare.prefuse.org/demo/)
 
 ### Force-Directed Layout
 
-::: columns 
-::: {.column width="50%"} 
-- Force-directed graph drawing algorithms are a class of algorithms for drawing graphs in an aesthetically-pleasing way. 
-- Their purpose is to position the nodes of a graph in two-dimensional or three-dimensional space so that all the edges are of more or less equal length and there are as few crossing edges as possible, by assigning forces among the set of edges and the set of nodes, based on their relative positions, and then using these forces either to simulate the motion of the edges and nodes or to minimize their energy.
+::: columns
+::: {.column width="50%"}
+-   Force-directed graph drawing algorithms are a class of algorithms for drawing graphs in an aesthetically-pleasing way.
+-   Their purpose is to position the nodes of a graph in two-dimensional or three-dimensional space so that all the edges are of more or less equal length and there are as few crossing edges as possible, by assigning forces among the set of edges and the set of nodes, based on their relative positions, and then using these forces either to simulate the motion of the edges and nodes or to minimize their energy.
 
 ::: {style="font-size: 0.65em"}
 Source: [Force-directed Graph Drawing](https://en.wikipedia.org/wiki/Force-directed_graph_drawing)
 :::
 :::
 
-::: {.column width="50%"} 
+::: {.column width="50%"}
 ![](img/image9-44.jpg)
 
 ::: {style="font-size: 0.65em"}
@@ -829,7 +829,7 @@ Source: [Hansen, D. L. et. al. 2009]()
 :::
 :::
 
----
+------------------------------------------------------------------------
 
 ### Network Metrics: Degree
 
@@ -1044,4 +1044,3 @@ renderthis::to_pdf(
   to = "../../_site/lesson/Lesson08/Lesson08-NetworkVis.pdf"
 )
 ```
-

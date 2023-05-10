@@ -40,7 +40,7 @@ editor: visual
 
 -   Lesson slides in [html](../lesson/Lesson08/Lesson08-NetworkVis.html) and [pdf](../lesson/Lesson08/Lesson08-NetworkVis.pdf) formats
 
--   Handout of Hands-on Exercise 8 in [html](../Hands-on_Ex/Hands-on_Ex08/Hands-on_Ex08-NetworkVis.html) format.
+-   Handout of Hands-on Exercise 5 in [html](https://r4va.netlify.app/chap27.html) format.
 
 ## Readings
 
