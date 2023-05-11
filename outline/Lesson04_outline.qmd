@@ -28,24 +28,33 @@ editor: visual
 
 -   Handout of Hands-on Exercise 4
 
-    -   [Hands-on Exercise 4: Visual Statistical Analysis](https://r4va.netlify.app/chap09.html)
-    -   [Hands-on Exercise 4: Visualising Uncertainty](https://r4va.netlify.app/chap10.html)
-    -   [Hands-on Exercise 4: Building Funnel Plot with R](https://r4va.netlify.app/chap11.html)
+    -   [Hands-on Exercise 4: Visualising Distribution](https://r4va.netlify.app/chap09.html)
+    -   [Hands-on Exercise 4: Visual Statistical Analysis](https://r4va.netlify.app/chap10.html)
+    -   [Hands-on Exercise 4: Visualising Uncertainty](https://r4va.netlify.app/chap11.html)
+    -   [Hands-on Exercise 4: Building Funnel Plot with R](https://r4va.netlify.app/chap12.html)
 
 ## Readings on Visualising Uncertainty
 
-- [Chapter 9: Visualizing many distributions at once and Chapter](https://clauswilke.com/dataviz/boxplots-violins.html) and [Chapter 16: Visualizing uncertainty](https://clauswilke.com/dataviz/visualizing-uncertainty.html) in Claus O. Wilke (2019) **Fundamentals of Data Visualisation**.
+-   [Chapter 9: Visualizing many distributions at once and Chapter](https://clauswilke.com/dataviz/boxplots-violins.html) and [Chapter 16: Visualizing uncertainty](https://clauswilke.com/dataviz/visualizing-uncertainty.html) in Claus O. Wilke (2019) **Fundamentals of Data Visualisation**.
 -   [Why It's So Hard for Us to Visualize Uncertainty](https://hbr.org/2016/11/why-its-so-hard-for-us-to-visualize-uncertainty)
 -   [Visualizing the Uncertainty in Data](https://flowingdata.com/2018/01/08/visualizing-the-uncertainty-in-data/)
 -   [Uncertainty + Visualization, Explained](https://medium.com/multiple-views-visualization-research-explained/uncertainty-visualization-explained-67e7a73f031b)
 -   [Uncertainty + Visualization, Explained (Part 2: Continuous Encodings)](https://medium.com/multiple-views-visualization-research-explained/uncertainty-visualization-explained-part-2-continuous-encodings-967a7f7c38d0)
-- Michael Fernandes et. al. (2018) "[Uncertainty Displays Using Quantile Dotplots or CDFs Improve Transit Decision-Making](https://mucollective.northwestern.edu/files/2018-UncertainBusDecisions-CHI.pdf)", *ACM Human Factors in Computing Systems (CHI) 2018*.
+-   Michael Fernandes et. al. (2018) "[Uncertainty Displays Using Quantile Dotplots or CDFs Improve Transit Decision-Making](https://mucollective.northwestern.edu/files/2018-UncertainBusDecisions-CHI.pdf)", *ACM Human Factors in Computing Systems (CHI) 2018*.
 
 ### Error Plots
 
-- [Error bar](https://en.wikipedia.org/wiki/Error_bar)
+-   [Error bar](https://en.wikipedia.org/wiki/Error_bar)
 
-### Funnel Plots
+### Ridgeline Plot
+
+-   [9.2 Visualizing distributions along the horizontal axis](https://clauswilke.com/dataviz/boxplots-violins.html#boxplots-violins-horizontal) of Wilke, C. O.(2019) *Fundamentals of data visualization: a primer on making informative and compelling figures.* O'Reilly Media. On-line version.
+
+### Raincloud Plot
+
+Micah Allen et. al. (2021) ["Raincloud plots: a multi-platform tool for robust data visualization" [version 2; peer review: 2 approved]](https://wellcomeopenresearch.org/articles/4-63/v2)
+
+### Funnel Plot
 
 -   [Variation and Its Discontents: Funnel Plots for Fair Comparisons](https://www.perceptualedge.com/articles/visual_business_intelligence/variation_and_its_discontents.pdf)
 -   [What are the chances of successful fertility treatment?](https://understandinguncertainty.org/fertility)
@@ -70,12 +79,12 @@ editor: visual
 
 -   [ggdist](https://mjskay.github.io/ggdist/index.html): An R package that provides a flexible set of ggplot2 geoms and stats designed especially for visualising distributions and uncertainty. Also watch the video entitle [Visualizing distributions and uncertainty using ggdist](https://www.rstudio.com/conference/2022/talks/visualizing-distributions-uncertainty-using-ggdist/).
 
--   [ungeviz](https://github.com/wilkelab/ungeviz): Provides functions for visualizing uncertainty with ggplot2.  It is particularly focused on hypothetical outcome plots (HOPs) and provides bootstrapping and sampling functionality that integrates well with the ggplot2 API.
+-   [ggridges](https://wilkelab.org/ggridges/): An ggplot2 extension specially designed for plotting ridgeline plots.
 
--   [see](https://easystats.github.io/see/): An R package from the [easystats](https://easystats.github.io/easystats/) family of packages that produces visualizations for a wide variety of models and statistical analyses in a way that is tightly linked with the model fitting process and requires minimal interruption of users’ workflow. 
+-   [ungeviz](https://github.com/wilkelab/ungeviz): Provides functions for visualizing uncertainty with ggplot2. It is particularly focused on hypothetical outcome plots (HOPs) and provides bootstrapping and sampling functionality that integrates well with the ggplot2 API.
+
+-   [see](https://easystats.github.io/see/): An R package from the [easystats](https://easystats.github.io/easystats/) family of packages that produces visualizations for a wide variety of models and statistical analyses in a way that is tightly linked with the model fitting process and requires minimal interruption of users' workflow.
 
 -   [performance](https://easystats.github.io/performance/): An R package from easystats family of packages that provides utilities for computing indices of model quality and goodness of fit including provides many functions to check model assumptions visually.
 
 -   [infer](https://infer.netlify.app/index.html): An R package specially designed to perform statistical inference using an expressive statistical grammar that coheres with the tidyverse design framework. The library also includes functions for visualising the distribution of the simulation-based inferential statistics or the theoretical distribution (or both).
-
-
