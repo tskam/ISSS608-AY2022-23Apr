@@ -1,5 +1,5 @@
 ---
-title: "Take-home Exercise 2"
+title: "Take-home Exercise 3"
 date: 15 May 2023
 date-modified: "`r Sys.Date() `"
 editor: visual
@@ -7,9 +7,9 @@ editor: visual
 
 ## The Task
 
-With reference to [Mini-Challenge 2](https://vast-challenge.github.io/2023/MC2.html) of [VAST Challenge 2023](https://vast-challenge.github.io/2023/index.html) and by using appropriate **static and interactive statistical graphics** methods, you are required to help FishEye identify companies that may be engaged in illegal fishing? 
+With reference to [Mini-Challenge 3](https://vast-challenge.github.io/2023/MC3.html) of [VAST Challenge 2023](https://vast-challenge.github.io/2023/index.html) and by using appropriate **static and interactive statistical graphics** methods, you are required to help FishEye identify companies that may be engaged in illegal fishing? 
 
-![](img/mc2.jpg)
+![](img/mc3.jpg)
 
 ::: callout-important
 -   You only need to attempt **one out of the four questions** (excluding Question 5) provided above.
@@ -36,7 +36,7 @@ The specific submission instructions are as follows:
 
 ## Submission date
 
-Your completed take-home exercise is due on **28th May 2022, by 11:59pm evening**.
+Your completed take-home exercise is due on **11th June 2022, by 11:59pm evening**.
 
 ## Peer Learning
 
