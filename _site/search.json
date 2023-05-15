@@ -2350,5 +2350,12 @@
     "title": "Lesson 5: Visualising and Analysing Network Data",
     "section": "",
     "text": "Introduction to Graph Visual Analytics\nGraph Visualisation in Actions\nBasic Principles of Graph\nNetwork data sets\n\nGraph data format\n\nNetwork Visualisation and Analysis\n\nNetwork visualisation and analysis process model\nGraph layouts and visual attributes\nNetwork metrics"
+  },
+  {
+    "objectID": "take-home_ex/TH_EX02.html",
+    "href": "take-home_ex/TH_EX02.html",
+    "title": "Take-home Exercise 2",
+    "section": "",
+    "text": "The Task\nWith reference to Mini-Challenge 2 of VAST Challenge 2023 and by using appropriate static and interactive statistical graphics methods, you are required to help FishEye identify companies that may be engaged in illegal fishing?\n\n\n\n\n\n\n\nImportant\n\n\n\n\nYou only need to attempt one out of the four questions (excluding Question 5) provided above.\nThe data should be processed by using appropriate tidyverse family of packages and the statistical graphics must be prepared by using appropriate R packages.\n\n\n\n\n\nAssessment Rubic\n\nQuality of Visual Storytelling (30%): Ability to provide visually-driven discussions and answers on the tasks and questions chosen.\nQuality of Data Visualisation (30%): Appropriateness, functional and aesthetics of the data visualisation used.\nQuality of Data Preparation and Wrangling (20%): Appropriateness and proficiency of using tidyverse and other related R packages to prepare and wrangle the data.\nQuality of Reproducibility (20%): Completeness and comprehensiveness of documenting the data visualisation process including and not limited to data import, data preparation, data wrangling, data integration and data visualisation design.\n\n\n\nSubmission Instructions\nThis is an individual assignment. You are required to work on the take-home exercises and prepare submission individually.\n\n\n\n\n\n\nImportant\n\n\n\nThe specific submission instructions are as follows:\n\nThe write-up of the take-home exercise must be in Quarto html document format. You are required to publish the write-up on Netlify.\nProvide the links to the Take-home Exercise write-up and github repository onto eLearn (i.e. Take-home Exercise section)\n\n\n\n\n\nSubmission date\nYour completed take-home exercise is due on 28th May 2022, by 11:59pm evening.\n\n\nPeer Learning\n\n\nLearning from Past Work"
   }
 ]

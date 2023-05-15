@@ -1,0 +1,43 @@
+---
+title: "Take-home Exercise 2"
+date: 15 May 2023
+date-modified: "`r Sys.Date() `"
+editor: visual
+---
+
+# The Task
+
+With reference to [Mini-Challenge 2](https://vast-challenge.github.io/2023/MC2.html) of [VAST Challenge 2023](https://vast-challenge.github.io/2023/index.html) and by using appropriate **static and interactive statistical graphics** methods, you are required to help FishEye identify companies that may be engaged in illegal fishing? 
+
+![](img/mc2.jpg)
+
+::: callout-important
+-   You only need to attempt **one out of the four questions** (excluding Question 5) provided above.
+-   The data should be processed by using appropriate **tidyverse** family of packages and the statistical graphics must be prepared by using appropriate R packages.
+:::
+
+# Assessment Rubic
+
+- Quality of Visual Storytelling (30%): Ability to provide visually-driven discussions and answers on the tasks and questions chosen.
+- Quality of Data Visualisation (30%): Appropriateness, functional and aesthetics of the data visualisation used. 
+- Quality of Data Preparation and Wrangling (20%): Appropriateness and proficiency of using tidyverse and other related R packages to prepare and wrangle the data.
+- Quality of Reproducibility (20%): Completeness and comprehensiveness of documenting the data visualisation process including and not limited to data import, data preparation, data wrangling, data integration and data visualisation design.
+
+# Submission Instructions
+
+This is an individual assignment. You are required to work on the take-home exercises and prepare submission individually.
+
+::: callout-important
+The specific submission instructions are as follows:
+
+-   The write-up of the take-home exercise must be in **Quarto html document** format. You are required to publish the write-up on [**Netlify**](https://www.netlify.com/).
+-   Provide the links to the Take-home Exercise write-up and github repository onto eLearn (i.e. Take-home Exercise section)
+:::
+
+# Submission date
+
+Your completed take-home exercise is due on **28th May 2022, by 11:59pm evening**.
+
+# Peer Learning
+
+# Learning from Past Work
