@@ -1542,28 +1542,28 @@
   {
     "objectID": "outline/Lesson05_outline.html",
     "href": "outline/Lesson05_outline.html",
-    "title": "Lesson 5: Visual Multivariate Analysis",
+    "title": "Lesson 6: Visual Multivariate Analysis",
     "section": "",
     "text": "Correlation Matrix\n\nCorrelogram\n\nMultivariate Data Visualisation\n\nternary plot\nGlyphs or Star Plot\nheatmap\nparallel coordinate plot\nparallel plot\n\nSpace-constrained visualization of hierarchies\n\nTreemaps\nSunburst diagram"
   },
   {
     "objectID": "outline/Lesson05_outline.html#lesson-slides-and-hands-on-notes",
     "href": "outline/Lesson05_outline.html#lesson-slides-and-hands-on-notes",
-    "title": "Lesson 5: Visual Multivariate Analysis",
+    "title": "Lesson 6: Visual Multivariate Analysis",
     "section": "Lesson Slides and Hands-on Notes",
     "text": "Lesson Slides and Hands-on Notes\n\nLesson slides in html and pdf formats\nHandout of Hands-on Exercise 5\n\nBuilding Ternary Plot with R.\nVisualising Correlation Matrices with R.\nBuilding Heatmap for Visualising and Analysing Multivariate Data.\nBuilding Parallel Coordinates Plot with R.\nBuilding Treemap Visualisation with R"
   },
   {
     "objectID": "outline/Lesson05_outline.html#readings",
     "href": "outline/Lesson05_outline.html#readings",
-    "title": "Lesson 5: Visual Multivariate Analysis",
+    "title": "Lesson 6: Visual Multivariate Analysis",
     "section": "Readings",
     "text": "Readings\n\nCore Readings\nMultivariate Methods\n\nAn Introduction to Visual Multivariate Analysis\nCorrgrams: Exploratory Displays for Correlation Matrices\nTernary Plot\nMultivariate Data Glyphs\nParallel Coordinates\nWikipedia: Heatmap\n\nTreemaps\n\nShneiderman, Ben (2008) Treemaps for space-constrained visualization of hierarchies\nExtending the Utility of Treemaps with Flexible Hierarchy\n\n\n\nOptional Readings\nMultivariate Methods\n\nThe scatter-plot matrix: a great tool\nA Graphical Display of Large Correlation Matrices\nTernary Diagram\nReading a Ternary Diagram\nMultidimensional Detective\nParallel Coordinates\nMultivariate Analysis Using Parallel Coordinates\nGhosts on the Radar — Why Radar Charts Are Easily Misread\nKeep Radar Graphs Below the Radar - Far Below\nA Critique of Radar Charts\nRadar: More Evil Than Pie\n\nTreemaps\n\nTreemaps\nDiscovering Business Intelligence Using Treemap Visualization\n10 Lessons in Treemap Design\nBederson, Benjamin B.; Shneiderman, Ben; Wattenberg, Martin (2002). Ordered and quantum treemaps: Making effective use of 2D space to display hierarchies. ACM Transactions on Graphics. 21 (4): 833.\nBruls, Mark; Huizing, Kees; van Wijk, Jarke J. (2000). Squarified treemaps. In de Leeuw, W.; van Liere, R. Data Visualization 2000: Proc. Joint Eurographics and IEEE TCVG Symp. on Visualization]\nUS Economic Census Treemap\nTreeCovery: Coordinated dual treemap visualization for exploring the Recovery Act\nJuice’s Stimulus Bill Explorer\nFundexplorer\nMap of the Market\nThe HIVE Group\nTruck Sales Slip, Tripping Up Chrysler\nNewsmap\nObama’s 2011 Budget Proposal: How It’s Spent"
   },
   {
     "objectID": "outline/Lesson05_outline.html#r-packages",
     "href": "outline/Lesson05_outline.html#r-packages",
-    "title": "Lesson 5: Visual Multivariate Analysis",
+    "title": "Lesson 6: Visual Multivariate Analysis",
     "section": "R Packages",
     "text": "R Packages\n\nCorrelation Matrix\n\nggscatmat and ggpairs of GGally.\ncorrplot. A graphical display of a correlation matrix or general matrix. It also contains some algorithms to do matrix reordering. In addition, corrplot is good at details, including choosing color, text labels, color labels, layout, etc.\ncorrgram calculates correlation of variables and displays the results graphically. Included panel functions can display points, shading, ellipses, and correlation values with confidence intervals.\n\n\n\nHeatmap\nStatic heatmap\n\nheatmap() of R stats package. It draws a simple heatmap.\nheatmap.2() of gplots R package. It draws an enhanced heatmap compared to the R base function.\npheatmap() of pheatmap R package. pheatmap package also known as Pretty Heatmap. The package provides functions to draws pretty heatmaps and provides more control to change the appearance of heatmaps.\nComplexHeatmap package of R/Bioconductor package. The package draws, annotates and arranges complex heatmaps (very useful for genomic data analysis). The full reference guide of the package is available here.\nsuperheat package: A Graphical Tool for Exploring Complex Datasets Using Heatmaps. A system for generating extendable and customizable heatmaps for exploring complex datasets, including big data and data with multiple data types. The full reference guide of the package is available here.\n\nInteractive Heatmap\n\nheatmaply: Make Interactive Cluster Heat Maps Using ‘plotly’\nd3heatmap: Make Interactive Heat Maps Using ‘htmlwidgets’ and ’D3.js.\niheatmapr makes complex, interactive heatmaps. Detail information are available at here.\n\n\n\nTreemaps\n\nTreemap package.\n\nCreating a Treemap in R\ntreemap: mapping to color palettes\nSimple Steps to Create Treemap in R\n\ntreemapify: Draw Treemaps in ‘ggplot2’\n\nIntroduction to treemapify\nInteractive visualization with R-Shiny versus with Tableau: Treemaps\n\n\n\n\nSunburst Diagram\n\nsunburstR\nSunburst 2.0.0\nCreate Basic Sunburst Graphs with ggplot2"
   },

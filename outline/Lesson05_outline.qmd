@@ -1,5 +1,5 @@
 ---
-title: "Lesson 5: Visual Multivariate Analysis"
+title: "Lesson 6: Visual Multivariate Analysis"
 date: "`r Sys.Date()`"
 format: html
 editor: visual
