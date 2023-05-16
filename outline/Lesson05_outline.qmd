@@ -25,12 +25,11 @@ editor: visual
 
 -   Handout of Hands-on Exercise 5
 
-    -   [Building Ternary Plot with R](../Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05-ternary.html).
-    -   [Visualising Correlation Matrices with R](../Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05-Corrgram.html).
-    -   [Building Heatmap for Visualising and Analysing Multivariate Data](../Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05-Heatmap.html).
-    -   [Building Parallel Coordinates Plot with R](../Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05-pcp.html).
-    -   [Building Treemap Visualisation with R](../Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05-Treemap.html)
-    
+    -   [Building Ternary Plot with R](https://r4va.netlify.app/chap13.html).
+    -   [Visualising Correlation Matrices with R](https://r4va.netlify.app/chap06.html).
+    -   [Building Heatmap for Visualising and Analysing Multivariate Data](https://r4va.netlify.app/chap14.html).
+    -   [Building Parallel Coordinates Plot with R](https://r4va.netlify.app/chap15.html).
+    -   [Building Treemap Visualisation with R](https://r4va.netlify.app/chap16.html)
 
 ## Readings
 
