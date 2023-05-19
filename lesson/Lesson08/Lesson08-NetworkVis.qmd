@@ -667,7 +667,7 @@ Source: [Force-directed Graph Drawing](https://en.wikipedia.org/wiki/Force-direc
 ![](img/image9-44.jpg)
 
 ::: {style="font-size: 0.65em"}
-Source: [Observable](http://bl.ocks.org/mbostock/4062045)
+Source: [Observable](https://observablehq.com/@d3/force-directed-graph)
 :::
 :::
 :::
