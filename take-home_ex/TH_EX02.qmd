@@ -7,7 +7,7 @@ editor: visual
 
 ## The Task
 
-With reference to [Mini-Challenge 2](https://vast-challenge.github.io/2023/MC2.html) of [VAST Challenge 2023](https://vast-challenge.github.io/2023/index.html) and by using appropriate **static and interactive statistical graphics** methods, you are required to help FishEye identify companies that may be engaged in illegal fishing? 
+With reference to [Mini-Challenge 2](https://vast-challenge.github.io/2023/MC2.html) of [VAST Challenge 2023](https://vast-challenge.github.io/2023/index.html) and by using appropriate **static and interactive statistical graphics** methods, you are required to help FishEye identify companies that may be engaged in illegal fishing?
 
 ![](img/mc2.jpg)
 
@@ -18,10 +18,10 @@ With reference to [Mini-Challenge 2](https://vast-challenge.github.io/2023/MC2.h
 
 ## Assessment Rubic
 
-- Quality of Visual Storytelling (30%): Ability to provide visually-driven discussions and answers on the tasks and questions chosen.
-- Quality of Data Visualisation (30%): Appropriateness, functional and aesthetics of the data visualisation used. 
-- Quality of Data Preparation and Wrangling (20%): Appropriateness and proficiency of using tidyverse and other related R packages to prepare and wrangle the data.
-- Quality of Reproducibility (20%): Completeness and comprehensiveness of documenting the data visualisation process including and not limited to data import, data preparation, data wrangling, data integration and data visualisation design.
+-   Quality of Visual Storytelling (30%): Ability to provide visually-driven discussions and answers on the tasks and questions chosen.
+-   Quality of Data Visualisation (30%): Appropriateness, functional and aesthetics of the data visualisation used.
+-   Quality of Data Preparation and Wrangling (20%): Appropriateness and proficiency of using tidyverse and other related R packages to prepare and wrangle the data.
+-   Quality of Reproducibility (20%): Completeness and comprehensiveness of documenting the data visualisation process including and not limited to data import, data preparation, data wrangling, data integration and data visualisation design.
 
 ## Submission Instructions
 
@@ -38,11 +38,17 @@ The specific submission instructions are as follows:
 
 Your completed take-home exercise is due on **28th May 2022, by 11:59pm evening**.
 
+
+## KickStarter
+
+- KickStarter of Take-home Exercise 2 in [html](TH_EX02/MC2.html) format. 
+
+
 ## Peer Learning
 
 ## Learning from Past Work
 
-- [ISSS608 2016-17 T3 Assign GUAN YIFEI](https://wiki.smu.edu.sg/1617t3isss608g1/ISSS608_2016-17_T3_Assign_GUAN_YIFEI).  Although this assignment was completed by using Tableau Professional but there are a lot we can learn from the submission especially the discussion of visual insights.
-- [ISSS608 2016-17 T3 Assign ZHANG YANRONG](https://wiki.smu.edu.sg/1617t3isss608g1/ISSS608_2016-17_T3_Assign_ZHANG_YANRONG). Although this assignment was completed by using QGIS and Tableau Professional but there are a lot we can learn from the submission especially the discussion of visual insights.
-- [ISSS608 2021-22 April Term Assignment 6: Ong Zhi Rong Jordan](https://isss608-jordan-va.netlify.app/th_ex6/th_ex6.html)
-- [ISSS608 2021-22 April Term Assignment 6: Raunak Kapur](https://isss608-raunakkapur.netlify.app/th_ex/the6)
+-   [ISSS608 2016-17 T3 Assign GUAN YIFEI](https://wiki.smu.edu.sg/1617t3isss608g1/ISSS608_2016-17_T3_Assign_GUAN_YIFEI). Although this assignment was completed by using Tableau Professional but there are a lot we can learn from the submission especially the discussion of visual insights.
+-   [ISSS608 2016-17 T3 Assign ZHANG YANRONG](https://wiki.smu.edu.sg/1617t3isss608g1/ISSS608_2016-17_T3_Assign_ZHANG_YANRONG). Although this assignment was completed by using QGIS and Tableau Professional but there are a lot we can learn from the submission especially the discussion of visual insights.
+-   [ISSS608 2021-22 April Term Assignment 6: Ong Zhi Rong Jordan](https://isss608-jordan-va.netlify.app/th_ex6/th_ex6.html)
+-   [ISSS608 2021-22 April Term Assignment 6: Raunak Kapur](https://isss608-raunakkapur.netlify.app/th_ex/the6)

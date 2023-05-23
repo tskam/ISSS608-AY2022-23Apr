@@ -2434,5 +2434,61 @@
     "title": "Take-home Exercise 2",
     "section": "Learning from Past Work",
     "text": "Learning from Past Work\n\nISSS608 2016-17 T3 Assign GUAN YIFEI. Although this assignment was completed by using Tableau Professional but there are a lot we can learn from the submission especially the discussion of visual insights.\nISSS608 2016-17 T3 Assign ZHANG YANRONG. Although this assignment was completed by using QGIS and Tableau Professional but there are a lot we can learn from the submission especially the discussion of visual insights.\nISSS608 2021-22 April Term Assignment 6: Ong Zhi Rong Jordan\nISSS608 2021-22 April Term Assignment 6: Raunak Kapur"
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex02/MC2.html",
+    "href": "take-home_ex/TH_Ex02/MC2.html",
+    "title": "Take-home Exercise 2: KickStarter",
+    "section": "",
+    "text": "Declaimer\n\n\n\nThis document aims to provide you guidance on how to get started with Takehome Exercise 2, especially how to prepare the network data. It is not a model answer."
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex02/MC2.html#getting-started",
+    "href": "take-home_ex/TH_Ex02/MC2.html#getting-started",
+    "title": "Take-home Exercise 2: KickStarter",
+    "section": "Getting Started",
+    "text": "Getting Started\nThe code chunk below will be used to install and load the necessary R packages to meet the data preparation, data wrangling, data analysis and visualisation needs.\n\npacman::p_load(jsonlite, tidygraph, ggraph, visNetwork, lubridate, tidyverse)"
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex02/MC2.html#data-import",
+    "href": "take-home_ex/TH_Ex02/MC2.html#data-import",
+    "title": "Take-home Exercise 2: KickStarter",
+    "section": "Data Import",
+    "text": "Data Import\nIn the code chunk below, fromJSON() of jsonlite package is used to import mc2_challenge_graph.json into R environment.\n\nmc2_data <- fromJSON(\"data/mc2_challenge_graph.json\")\n\n\nExamine the list object created by using RStudio, especially nodes and links data tables."
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex02/MC2.html#data-wrangling",
+    "href": "take-home_ex/TH_Ex02/MC2.html#data-wrangling",
+    "title": "Take-home Exercise 2: KickStarter",
+    "section": "Data Wrangling",
+    "text": "Data Wrangling\n\nExtracting the nodes\nThe code chunk is used to extract nodes data table from mc2_data list object and save the output in a tibble data frame object called mc2_nodes.\n\nmc2_nodes <- as_tibble(mc2_data$nodes) %>%\n  select(id, shpcountry, rcvcountry)\n\n\n\n\n\n\n\nThing to learn\n\n\n\n\nselect() is used not only to select the field needed but also to re-organise the sequent of the fields.\n\n\n\n\n\nExtracting the edges\nThe code chunk is used to extract edgess data table from mc2_data list object and save the output in a tibble data frame object called mc2_edges.\n\nmc2_edges <- as_tibble(mc2_data$links) %>%\n  mutate(ArrivalDate = ymd(arrivaldate)) %>%\n  mutate(Year = year(ArrivalDate)) %>%\n  select(source, target, ArrivalDate, Year, hscode, valueofgoods_omu, \n         volumeteu, weightkg, valueofgoodsusd) %>% \n  distinct()\n\n\n\n\n\n\n\nThings to learn\n\n\n\n\nmutate() is used two times to create two derive fields.\n\nymd() of lubridate package is used to covert arrivaldate field from character data type into date data type.\nyear() of lubridate package is used to convert the values in ArrivalDate field into year values.\n\nselect() is used not only to select the field needed but also to re-organise the sequent of the fields.\n\n\n\n\n\nPreparing edges data table\n\n\n\n\n\n\nThings to learn from the code chunk below\n\n\n\n\nfilter() is used to select records whereby hscode is equal 306170 and Year is equal to 2028.\ngroup_by() is used to aggregate values by source, target, hscode, Year.\nsummarise() and n() are used to count the aggregated records.\nfilter() is then used to perform two selections\n\nto select all records whereby source are not equal to target, and\nto select all records whereby the values of their weights field are greater than 20\n\n\n\n\n\nmc2_edges_aggregated <- mc2_edges %>%\n  filter(hscode == \"306170\" & Year == \"2028\") %>%\n  group_by(source, target, hscode, Year) %>%\n    summarise(weights = n()) %>%\n  filter(source!=target) %>%\n  filter(weights > 20) %>%\n  ungroup()"
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex02/MC2.html#preparing-nodes-data",
+    "href": "take-home_ex/TH_Ex02/MC2.html#preparing-nodes-data",
+    "title": "Take-home Exercise 2: KickStarter",
+    "section": "Preparing nodes data",
+    "text": "Preparing nodes data\nInstead of using the nodes data table extracted from mc2_data, we will prepare a new nodes data table by using the source and target fields of mc2_edges_aggregated data table. This is necessary to ensure that the nodes in nodes data tables include all the source and target values.\n\nid1 <- mc2_edges_aggregated %>%\n  select(source) %>%\n  rename(id = source)\nid2 <- mc2_edges_aggregated %>%\n  select(target) %>%\n  rename(id = target)\nmc2_nodes_extracted <- rbind(id1, id2) %>%\n  distinct()"
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex02/MC2.html#building-the-tidy-graph-data-model",
+    "href": "take-home_ex/TH_Ex02/MC2.html#building-the-tidy-graph-data-model",
+    "title": "Take-home Exercise 2: KickStarter",
+    "section": "Building the tidy graph data model",
+    "text": "Building the tidy graph data model\nThe code chunk below is then used to build the tidy graph data model.\n\nmc2_graph <- tbl_graph(nodes = mc2_nodes_extracted,\n                       edges = mc2_edges_aggregated,\n                       directed = TRUE)"
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex02/MC2.html#visualising-the-network-graph",
+    "href": "take-home_ex/TH_Ex02/MC2.html#visualising-the-network-graph",
+    "title": "Take-home Exercise 2: KickStarter",
+    "section": "Visualising the network graph",
+    "text": "Visualising the network graph\nIn this code chunk below, appropriate functions from ggraph package are used to prepare the network graph.\n\nggraph(mc2_graph,\n       layout = \"fr\") +\n  geom_edge_link(aes()) +\n  geom_node_point(aes()) +\n  theme_graph()"
+  },
+  {
+    "objectID": "take-home_ex/TH_EX02.html#kickstarter",
+    "href": "take-home_ex/TH_EX02.html#kickstarter",
+    "title": "Take-home Exercise 2",
+    "section": "KickStarter",
+    "text": "KickStarter\n\nKickStarter of Take-home Exercise 2 in html format."
   }
 ]
