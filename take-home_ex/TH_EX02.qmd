@@ -38,11 +38,9 @@ The specific submission instructions are as follows:
 
 Your completed take-home exercise is due on **28th May 2022, by 11:59pm evening**.
 
-
 ## KickStarter
 
-- KickStarter of Take-home Exercise 2 in [html](TH_EX02/MC2.html) format. 
-
+-   KickStarter of Take-home Exercise 2 in [html](TH_EX02/MC2-Kick-starter1.html) format.
 
 ## Peer Learning
 
