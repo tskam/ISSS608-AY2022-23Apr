@@ -2490,5 +2490,124 @@
     "title": "Take-home Exercise 2",
     "section": "KickStarter",
     "text": "KickStarter\n\nKickStarter of Take-home Exercise 2 in html format."
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex02/MC2-Kick-starter1.html",
+    "href": "take-home_ex/TH_Ex02/MC2-Kick-starter1.html",
+    "title": "Take-home Exercise 2: Kick-starter 1: Building Network Data Models",
+    "section": "",
+    "text": "Declaimer\n\n\n\nThis document aims to provide you guidance on how to get started with Takehome Exercise 2, especially how to prepare the network data. It is not a model answer."
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex02/MC2-Kick-starter1.html#getting-started",
+    "href": "take-home_ex/TH_Ex02/MC2-Kick-starter1.html#getting-started",
+    "title": "Take-home Exercise 2: Kick-starter 1: Building Network Data Models",
+    "section": "Getting Started",
+    "text": "Getting Started\nThe code chunk below will be used to install and load the necessary R packages to meet the data preparation, data wrangling, data analysis and visualisation needs.\n\npacman::p_load(jsonlite, tidygraph, ggraph, visNetwork, lubridate, tidyverse)"
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex02/MC2-Kick-starter1.html#data-import",
+    "href": "take-home_ex/TH_Ex02/MC2-Kick-starter1.html#data-import",
+    "title": "Take-home Exercise 2: Kick-starter 1: Building Network Data Models",
+    "section": "Data Import",
+    "text": "Data Import\nIn the code chunk below, fromJSON() of jsonlite package is used to import mc2_challenge_graph.json into R environment.\n\nmc2_data <- fromJSON(\"data/mc2_challenge_graph.json\")\n\n\nExamine the list object created by using RStudio, especially nodes and links data tables."
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex02/MC2-Kick-starter1.html#data-wrangling",
+    "href": "take-home_ex/TH_Ex02/MC2-Kick-starter1.html#data-wrangling",
+    "title": "Take-home Exercise 2: Kick-starter 1: Building Network Data Models",
+    "section": "Data Wrangling",
+    "text": "Data Wrangling\n\nExtracting the nodes\nThe code chunk is used to extract nodes data table from mc2_data list object and save the output in a tibble data frame object called mc2_nodes.\n\nmc2_nodes <- as_tibble(mc2_data$nodes) %>%\n  select(id, shpcountry, rcvcountry)\n\n\n\n\n\n\n\nThing to learn\n\n\n\n\nselect() is used not only to select the field needed but also to re-organise the sequent of the fields.\n\n\n\n\n\nExtracting the edges\nThe code chunk is used to extract edgess data table from mc2_data list object and save the output in a tibble data frame object called mc2_edges.\n\nmc2_edges <- as_tibble(mc2_data$links) %>%\n  mutate(ArrivalDate = ymd(arrivaldate)) %>%\n  mutate(Year = year(ArrivalDate)) %>%\n  select(source, target, ArrivalDate, Year, hscode, valueofgoods_omu, \n         volumeteu, weightkg, valueofgoodsusd) %>% \n  distinct()\n\n\n\n\n\n\n\nThings to learn\n\n\n\n\nmutate() is used two times to create two derive fields.\n\nymd() of lubridate package is used to covert arrivaldate field from character data type into date data type.\nyear() of lubridate package is used to convert the values in ArrivalDate field into year values.\n\nselect() is used not only to select the field needed but also to re-organise the sequent of the fields.\n\n\n\n\n\nPreparing edges data table\n\n\n\n\n\n\nThings to learn from the code chunk below\n\n\n\n\nfilter() is used to select records whereby hscode is equal 306170 and Year is equal to 2028.\ngroup_by() is used to aggregate values by source, target, hscode, Year.\nsummarise() and n() are used to count the aggregated records.\nfilter() is then used to perform two selections\n\nto select all records whereby source are not equal to target, and\nto select all records whereby the values of their weights field are greater than 20\n\n\n\n\n\nmc2_edges_aggregated <- mc2_edges %>%\n  filter(hscode == \"306170\" & Year == \"2028\") %>%\n  group_by(source, target, hscode, Year) %>%\n    summarise(weights = n()) %>%\n  filter(source!=target) %>%\n  filter(weights > 20) %>%\n  ungroup()"
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex02/MC2-Kick-starter1.html#preparing-nodes-data",
+    "href": "take-home_ex/TH_Ex02/MC2-Kick-starter1.html#preparing-nodes-data",
+    "title": "Take-home Exercise 2: Kick-starter 1: Building Network Data Models",
+    "section": "Preparing nodes data",
+    "text": "Preparing nodes data\nInstead of using the nodes data table extracted from mc2_data, we will prepare a new nodes data table by using the source and target fields of mc2_edges_aggregated data table. This is necessary to ensure that the nodes in nodes data tables include all the source and target values.\n\nid1 <- mc2_edges_aggregated %>%\n  select(source) %>%\n  rename(id = source)\nid2 <- mc2_edges_aggregated %>%\n  select(target) %>%\n  rename(id = target)\nmc2_nodes_extracted <- rbind(id1, id2) %>%\n  distinct()"
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex02/MC2-Kick-starter1.html#building-the-tidy-graph-data-model",
+    "href": "take-home_ex/TH_Ex02/MC2-Kick-starter1.html#building-the-tidy-graph-data-model",
+    "title": "Take-home Exercise 2: Kick-starter 1: Building Network Data Models",
+    "section": "Building the tidy graph data model",
+    "text": "Building the tidy graph data model\nThe code chunk below is then used to build the tidy graph data model.\n\nmc2_graph <- tbl_graph(nodes = mc2_nodes_extracted,\n                       edges = mc2_edges_aggregated,\n                       directed = TRUE)\n\n\nVisualising the network graph with ggraph\nIn order to check if the tidygraph model has been prepared correctly, we can use selected functions of ggraph package to plot a simple network graph as shown below.\n\nggraph(mc2_graph,\n       layout = \"fr\") +\n  geom_edge_link(aes()) +\n  geom_node_point(aes()) +\n  theme_graph()\n\n\n\n\n\n\nExporting data objects\nCode chunk below will be used to export the data objects prepared in previous section into rds format for subsequent use.\n\nwrite_rds(mc2_nodes_extracted, \"data/mc2_nodes_extracted.rds\")\nwrite_rds(mc2_edges_aggregated, \"data/mc2_edges_aggregated.rds\")\nwrite_rds(mc2_graph, \"data/mc2_graph.rds\")"
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex02/MC2-Kick-starter1.html#visualising-the-network-graph-with-ggraph",
+    "href": "take-home_ex/TH_Ex02/MC2-Kick-starter1.html#visualising-the-network-graph-with-ggraph",
+    "title": "Take-home Exercise 2: Kick-starter 1: Building Network Data Models",
+    "section": "Visualising the network graph with ggraph",
+    "text": "Visualising the network graph with ggraph\nIn this code chunk below, appropriate functions from ggraph package are used to prepare the network graph.\n\nggraph(mc2_graph,\n       layout = \"fr\") +\n  geom_edge_link(aes()) +\n  geom_node_point(aes()) +\n  theme_graph()"
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex02/MC2-Kick-starter1.html#building-and-interactive-network-graph-with-visnetwork",
+    "href": "take-home_ex/TH_Ex02/MC2-Kick-starter1.html#building-and-interactive-network-graph-with-visnetwork",
+    "title": "Take-home Exercise 2: Kick-starter 1: Building Network Data Models",
+    "section": "Building and Interactive network graph with visNetwork",
+    "text": "Building and Interactive network graph with visNetwork"
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex02/MC2-Kick-starter2.html",
+    "href": "take-home_ex/TH_Ex02/MC2-Kick-starter2.html",
+    "title": "Take-home Exercise 2: Kick-starter 2: Visualising and Analysing Network Data",
+    "section": "",
+    "text": "Declaimer\n\n\n\nThis document aims to provide you guidance on how to get started with Takehome Exercise 2, especially how to prepare the network data. It is not a model answer."
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex02/MC2-Kick-starter2.html#getting-started",
+    "href": "take-home_ex/TH_Ex02/MC2-Kick-starter2.html#getting-started",
+    "title": "Take-home Exercise 2: Kick-starter 2: Visualising and Analysing Network Data",
+    "section": "Getting Started",
+    "text": "Getting Started\nThe code chunk below will be used to install and load the necessary R packages to meet the data preparation, data wrangling, data analysis and visualisation needs.\n\npacman::p_load(jsonlite, tidygraph, ggraph, visNetwork, lubridate, igraph, tidyverse)\n\n\ndevtools::install_github(\"schochastics/snahelper\")\n\n\nlibrary(snahelper)"
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex02/MC2-Kick-starter2.html#data-import",
+    "href": "take-home_ex/TH_Ex02/MC2-Kick-starter2.html#data-import",
+    "title": "Take-home Exercise 2: Kick-starter 2: Visualising and Analysing Network Data",
+    "section": "Data Import",
+    "text": "Data Import\nIn the code chunk below, fromJSON() of jsonlite package is used to import mc2_challenge_graph.json into R environment.\n\nVisualising the network graph with ggraph\nIn this code chunk below, appropriate functions from ggraph package are used to prepare the network graph.\n\nggraph(mc2_graph,\n       layout = \"fr\") +\n  geom_edge_link(aes()) +\n  geom_node_point(aes()) +\n  theme_graph()\n\nComputing Network Metrices\n\nmc2_graph1 <- mc2_graph %>% \n  mutate(indegree = centrality_degree(\n    weights = weights, mode = \"in\"),\n    outdegree = centrality_degree(\n    weights = weights, mode = \"out\"), \n    closeness_centrality = centrality_closeness(),\n    betweenness_centrality = centrality_betweenness(),\n    component = group_components(type = \"weak\")\n    )\n\n\nnodes_df <- mc2_graph1 %>%\n  activate(nodes) %>%\n  as.tibble() %>%\n  rename(label = id) %>%\n  mutate(id=row_number()) %>%\n  select(id, label, indegree, outdegree,\n         closeness_centrality, betweenness_centrality, component)\n\n\nedges_df <- mc2_graph1 %>%\n  activate(edges) %>%\n  as.tibble()\n\n\nvisNetwork(nodes_df,\n           edges_df) %>%\n  visIgraphLayout(layout = \"layout_with_fr\") %>%\n  visEdges(arrows = \"to\", \n           smooth = list(enabled = TRUE, \n                         type = \"curvedCW\"))\n\n\nggraph(mc2_graph1) + \n  geom_edge_link(color = \"grey\", \n                 arrow = arrow(\n                   length = unit(0.2, \"cm\"))) +\n  geom_node_point(size = 2, \n                  aes(color = as.factor(component))) +\n  labs(color = \"Component\") +\n  theme_void()\n\n\nmc2_graph1 %>%\n  filter(component == 1) %>%\nggraph() + \n  geom_edge_link(color = \"grey\", \n                 arrow = arrow(\n                   length = unit(0.2, \"cm\"))) +\n  geom_node_point(aes(\n    color = as.factor(component),\n    size = indegree),\n    alpha = 0.5) +\n  labs(color = \"component\") +\n  theme_void()\n\n\nExamine the list object created by using RStudio, especially nodes and links data tables.\n\nCreating an igraph object\n\nig <- graph_from_data_frame(mc2_edges_aggregated, directed = TRUE, vertices = NULL)"
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex02/MC2-Kick-starter2.html#data-wrangling",
+    "href": "take-home_ex/TH_Ex02/MC2-Kick-starter2.html#data-wrangling",
+    "title": "Take-home Exercise 2: KickStarter",
+    "section": "Data Wrangling",
+    "text": "Data Wrangling\n\nExtracting the nodes\nThe code chunk is used to extract nodes data table from mc2_data list object and save the output in a tibble data frame object called mc2_nodes.\n\nmc2_nodes <- as_tibble(mc2_data$nodes) %>%\n  select(id, shpcountry, rcvcountry)\n\n\n\n\n\n\n\nThing to learn\n\n\n\n\nselect() is used not only to select the field needed but also to re-organise the sequent of the fields.\n\n\n\n\n\nExtracting the edges\nThe code chunk is used to extract edgess data table from mc2_data list object and save the output in a tibble data frame object called mc2_edges.\n\nmc2_edges <- as_tibble(mc2_data$links) %>%\n  mutate(ArrivalDate = ymd(arrivaldate)) %>%\n  mutate(Year = year(ArrivalDate)) %>%\n  select(source, target, ArrivalDate, Year, hscode, valueofgoods_omu, \n         volumeteu, weightkg, valueofgoodsusd) %>% \n  distinct()\n\n\n\n\n\n\n\nThings to learn\n\n\n\n\nmutate() is used two times to create two derive fields.\n\nymd() of lubridate package is used to covert arrivaldate field from character data type into date data type.\nyear() of lubridate package is used to convert the values in ArrivalDate field into year values.\n\nselect() is used not only to select the field needed but also to re-organise the sequent of the fields.\n\n\n\n\n\nPreparing edges data table\n\n\n\n\n\n\nThings to learn from the code chunk below\n\n\n\n\nfilter() is used to select records whereby hscode is equal 306170 and Year is equal to 2028.\ngroup_by() is used to aggregate values by source, target, hscode, Year.\nsummarise() and n() are used to count the aggregated records.\nfilter() is then used to perform two selections\n\nto select all records whereby source are not equal to target, and\nto select all records whereby the values of their weights field are greater than 20\n\n\n\n\n\nmc2_edges_aggregated <- mc2_edges %>%\n  filter(hscode == \"306170\" & Year == \"2028\") %>%\n  group_by(source, target, hscode, Year) %>%\n    summarise(weights = n()) %>%\n  filter(source!=target) %>%\n  filter(weights > 20) %>%\n  ungroup()"
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex02/MC2-Kick-starter2.html#preparing-nodes-data",
+    "href": "take-home_ex/TH_Ex02/MC2-Kick-starter2.html#preparing-nodes-data",
+    "title": "Take-home Exercise 2: KickStarter",
+    "section": "Preparing nodes data",
+    "text": "Preparing nodes data\nInstead of using the nodes data table extracted from mc2_data, we will prepare a new nodes data table by using the source and target fields of mc2_edges_aggregated data table. This is necessary to ensure that the nodes in nodes data tables include all the source and target values.\n\nid1 <- mc2_edges_aggregated %>%\n  select(source) %>%\n  rename(id = source)\nid2 <- mc2_edges_aggregated %>%\n  select(target) %>%\n  rename(id = target)\nmc2_nodes_extracted <- rbind(id1, id2) %>%\n  distinct()"
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex02/MC2-Kick-starter2.html#building-the-tidy-graph-data-model",
+    "href": "take-home_ex/TH_Ex02/MC2-Kick-starter2.html#building-the-tidy-graph-data-model",
+    "title": "Take-home Exercise 2: KickStarter",
+    "section": "Building the tidy graph data model",
+    "text": "Building the tidy graph data model\nThe code chunk below is then used to build the tidy graph data model.\n\nmc2_graph <- tbl_graph(nodes = mc2_nodes_extracted,\n                       edges = mc2_edges_aggregated,\n                       directed = TRUE)"
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex02/MC2-Kick-starter2.html#visualising-the-network-graph-with-ggraph",
+    "href": "take-home_ex/TH_Ex02/MC2-Kick-starter2.html#visualising-the-network-graph-with-ggraph",
+    "title": "Take-home Exercise 2: KickStarter",
+    "section": "Visualising the network graph with ggraph",
+    "text": "Visualising the network graph with ggraph\nIn this code chunk below, appropriate functions from ggraph package are used to prepare the network graph.\n\nggraph(mc2_graph,\n       layout = \"fr\") +\n  geom_edge_link(aes()) +\n  geom_node_point(aes()) +\n  theme_graph()"
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex02/MC2-Kick-starter2.html#building-and-interactive-network-graph-with-visnetwork",
+    "href": "take-home_ex/TH_Ex02/MC2-Kick-starter2.html#building-and-interactive-network-graph-with-visnetwork",
+    "title": "Take-home Exercise 2: Kick-starter 2: Visualising and Analysing Network Data",
+    "section": "Building and Interactive network graph with visNetwork",
+    "text": "Building and Interactive network graph with visNetwork\n\nvisNetwork(mc2_nodes_extracted,\n           mc2_edges_aggregated) %>%\n  visIgraphLayout(layout = \"layout_with_fr\")"
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex02/MC2-Kick-starter1.html#preparing-network-data-for-visnetwork",
+    "href": "take-home_ex/TH_Ex02/MC2-Kick-starter1.html#preparing-network-data-for-visnetwork",
+    "title": "Take-home Exercise 2: Kick-starter 1: Building Network Data Models",
+    "section": "Preparing Network Data for visNetwork",
+    "text": "Preparing Network Data for visNetwork\nInstead of plotting static network graph, we can plot interactive network graph by using visNetwork package. Before we can plot a interactive network graph by using visNetwork package, we are required to prepare two tibble data frames, one for the nodes and the other one for the edges.\n\nPreparing edges tibble data frame\nIn this example, we assume that you already have created a tidygraph model look similar to the print below.\n\nmc2_graph\n\n# A tbl_graph: 123 nodes and 146 edges\n#\n# A directed acyclic simple graph with 12 components\n#\n# A tibble: 123 × 1\n  id                                             \n  <chr>                                          \n1 1 Ltd. Liability Co Cargo                      \n2 Adriatic Catch Ltd. Liability Co Transportation\n3 Adriatic Tuna AS Solutions                     \n4 Amerigo Dockyard S.p.A. Distribution           \n5 Aqua Adventures Carriers Seabed                \n6 Aqua Azul LC International                     \n# ℹ 117 more rows\n#\n# A tibble: 146 × 5\n   from    to hscode  Year weights\n  <int> <int> <chr>  <dbl>   <int>\n1     1    74 306170  2028      68\n2     2    75 306170  2028      30\n3     3    76 306170  2028      22\n# ℹ 143 more rows\n\n\nNote that tidygraph model is in R list format. The code chunk below will be used to extract and convert the edges into a tibble data frame.\n\nedges_df <- mc2_graph %>%\n  activate(edges) %>%\n  as.tibble()\n\n\n\n\n\n\n\nThings to learn from the code chunk above\n\n\n\n\nactivate() is used to make the edges of mc2_graph1 active. This is necessary in order to extract the correct compontent from the list object.\nas.tibble() is used to convert the edges list into tibble data frame.\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\nYou might be curious to ask why don’t we used mc2_edges, the tibble data frame extracted in the earlier section. If you compare the data structure of both data frames, you will notice the first two field names in edges_df are called from and to instead of source and target. This is conformed to the nodes data structure of igraph object. Also note that the data type of from and to are in numeric data type and not in character data type.\n\n\n\n\nPreparing nodes tibble data frame\nIn this section, we will prepare a nodes tibble data frame by using the code chunk below.\n\nnodes_df <- mc2_graph %>%\n  activate(nodes) %>%\n  as.tibble() %>%\n  rename(label = id) %>%\n  mutate(id=row_number()) %>%\n  select(id, label)\n\n\n\n\n\n\n\nThings to learn from the code chunk above\n\n\n\n\nactivate() is used to make the edges of mc2_graph1 active. This is necessary in order to extract the correct compontent from the list object.\nas.tibble() is used to convert the edges list into tibble data frame.\nrename() is used to rename the field name id to label.\nmutate() is used to create a new field called id and row_number() is used to assign the row number into id values.\nselect() is used to re-organised the field name. This is because visNerwork is expecting the first field is called id and the second field is called label.\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\n\nvisNetowrk is expecting a field called id in the tibble data frame. The field must be in numeric data type and it must unique to the values in the from and to field of edges_df.\n\n\n\n\n\n\nPlotting a simple interactive network graph\nTo ensure that the tibble data frames are confirmed to the requirements of visNetwork, we will plot a simple interactive graph by using the code chunk below.\n\nvisNetwork(nodes_df,\n           edges_df) %>%\n  visIgraphLayout(layout = \"layout_with_fr\") %>%\n  visEdges(arrows = \"to\", \n           smooth = list(enabled = TRUE, \n                         type = \"curvedCW\"))"
   }
 ]
