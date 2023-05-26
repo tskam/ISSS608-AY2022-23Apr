@@ -815,7 +815,7 @@ sgpools_sf <- st_as_sf(sgpools,
                        crs= 3414)
 ```
 
-::: {callout-note}
+::: callout-note
 ### Things to learn from the code chunk above:
 
 -   [`st_as_sf()`](https://r-spatial.github.io/sf/reference/st_as_sf.html) of sf package is used to convert the tibble data frame into simple feature data frame by using values from the XCOORD and YCOORD fields. The crs argument is used to specify the projected coordinates systems (i.e. svy21 for Singapore).
