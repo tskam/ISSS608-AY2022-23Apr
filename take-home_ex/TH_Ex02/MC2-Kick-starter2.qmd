@@ -1,0 +1,151 @@
+---
+title: "Take-home Exercise 2: Kick-starter 2: Visualising and Analysing Network Data"
+date: "12/4/2023"
+date-modified: "`r Sys.Date()`"
+format: html
+execute: 
+  eval: true
+  echo: true
+  warning: false
+editor: visual
+---
+
+::: callout-warning
+## Declaimer
+
+This document aims to provide you guidance on how to get started with Takehome Exercise 2, especially how to prepare the network data. It is not a model answer.
+:::
+
+## Getting Started
+
+The code chunk below will be used to install and load the necessary R packages to meet the data preparation, data wrangling, data analysis and visualisation needs.
+
+```{r}
+pacman::p_load(jsonlite, tidygraph, ggraph, visNetwork, lubridate, igraph, tidyverse)
+```
+
+```{r}
+devtools::install_github("schochastics/snahelper")
+```
+
+```{r}
+library(snahelper)
+```
+
+## Data Import
+
+In the code chunk below, `fromJSON()` of **jsonlite** package is used to import *mc2_challenge_graph.json* into R environment.
+
+### Visualising the network graph with ggraph
+
+In this code chunk below, appropriate functions from **ggraph** package are used to prepare the network graph. 
+
+```{r}
+#| eval: false
+ggraph(mc2_graph,
+       layout = "fr") +
+  geom_edge_link(aes()) +
+  geom_node_point(aes()) +
+  theme_graph()
+```
+
+
+Computing Network Metrices
+
+```{r}
+#| eval: false
+mc2_graph1 <- mc2_graph %>% 
+  mutate(indegree = centrality_degree(
+    weights = weights, mode = "in"),
+    outdegree = centrality_degree(
+    weights = weights, mode = "out"), 
+    closeness_centrality = centrality_closeness(),
+    betweenness_centrality = centrality_betweenness(),
+    component = group_components(type = "weak")
+    )
+```
+
+```{r}
+#| eval: false
+nodes_df <- mc2_graph1 %>%
+  activate(nodes) %>%
+  as.tibble() %>%
+  rename(label = id) %>%
+  mutate(id=row_number()) %>%
+  select(id, label, indegree, outdegree,
+         closeness_centrality, betweenness_centrality, component)
+```
+
+```{r}
+#| eval: false
+edges_df <- mc2_graph1 %>%
+  activate(edges) %>%
+  as.tibble()
+```
+
+```{r}
+#| eval: false
+visNetwork(nodes_df,
+           edges_df) %>%
+  visIgraphLayout(layout = "layout_with_fr") %>%
+  visEdges(arrows = "to", 
+           smooth = list(enabled = TRUE, 
+                         type = "curvedCW"))
+```
+
+
+```{r}
+#| eval: false
+ggraph(mc2_graph1) + 
+  geom_edge_link(color = "grey", 
+                 arrow = arrow(
+                   length = unit(0.2, "cm"))) +
+  geom_node_point(size = 2, 
+                  aes(color = as.factor(component))) +
+  labs(color = "Component") +
+  theme_void()
+```
+
+```{r}
+#| eval: false
+mc2_graph1 %>%
+  filter(component == 1) %>%
+ggraph() + 
+  geom_edge_link(color = "grey", 
+                 arrow = arrow(
+                   length = unit(0.2, "cm"))) +
+  geom_node_point(aes(
+    color = as.factor(component),
+    size = indegree),
+    alpha = 0.5) +
+  labs(color = "component") +
+  theme_void()
+```
+
+
+
+
+::: Callout-note
+Examine the list object created by using RStudio, especially *nodes* and *links* data tables.
+:::
+
+Creating an igraph object
+
+```{r}
+#| eval: false
+ig <- graph_from_data_frame(mc2_edges_aggregated, directed = TRUE, vertices = NULL)
+```
+
+
+
+
+## Building and Interactive network graph with visNetwork
+
+```{r}
+#| eval: false
+visNetwork(mc2_nodes_extracted,
+           mc2_edges_aggregated) %>%
+  visIgraphLayout(layout = "layout_with_fr")
+```
+
+

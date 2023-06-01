@@ -147,7 +147,7 @@ write_rds(mc2_graph, "data/mc2_graph.rds")
 
 ## Preparing Network Data for visNetwork
 
-Instead of plotting static network graph, we can plot interactive network graph by using visNetwork package.  Before we can plot a interactive network graph by using visNetwork package, we are required to prepare two tibble data frames, one for the nodes and the other one for the edges.     
+Instead of plotting static network graph, we can plot interactive network graph by using visNetwork package. Before we can plot a interactive network graph by using visNetwork package, we are required to prepare two tibble data frames, one for the nodes and the other one for the edges.
 
 ### Preparing edges tibble data frame
 
@@ -157,7 +157,7 @@ In this example, we assume that you already have created a tidygraph model look 
 mc2_graph
 ```
 
-Note that tidygraph model is in R list format.  The code chunk below will be used to extract and convert the edges into a tibble data frame. 
+Note that tidygraph model is in R list format. The code chunk below will be used to extract and convert the edges into a tibble data frame.
 
 ```{r}
 edges_df <- mc2_graph %>%
@@ -167,17 +167,18 @@ edges_df <- mc2_graph %>%
 
 ::: callout-node
 ## Things to learn from the code chunk above
-- `activate()` is used to make the edges of mc2_graph1 active.  This is necessary in order to extract the correct compontent from the list object.
-- `as.tibble()` is used to convert the edges list into tibble data frame.
+
+-   `activate()` is used to make the edges of mc2_graph1 active. This is necessary in order to extract the correct compontent from the list object.
+-   `as.tibble()` is used to convert the edges list into tibble data frame.
 :::
 
 ::: callout-important
-You might be curious to ask why don't we used *mc2_edges*, the tibble data frame extracted in the earlier section.  If you compare the data structure of both data frames, you will notice the first two field names in *edges_df* are called *from* and *to* instead of *source* and *target*.  This is conformed to the nodes data structure of igraph object.  Also note that the data type of *from* and *to* are in numeric data type and not in character data type.
+You might be curious to ask why don't we used *mc2_edges*, the tibble data frame extracted in the earlier section. If you compare the data structure of both data frames, you will notice the first two field names in *edges_df* are called *from* and *to* instead of *source* and *target*. This is conformed to the nodes data structure of igraph object. Also note that the data type of *from* and *to* are in numeric data type and not in character data type.
 :::
 
 ### Preparing nodes tibble data frame
 
-In this section, we will prepare a nodes tibble data frame by using the code chunk below. 
+In this section, we will prepare a nodes tibble data frame by using the code chunk below.
 
 ```{r}
 nodes_df <- mc2_graph %>%
@@ -190,15 +191,16 @@ nodes_df <- mc2_graph %>%
 
 ::: callout-note
 ## Things to learn from the code chunk above
-- `activate()` is used to make the edges of mc2_graph1 active.  This is necessary in order to extract the correct compontent from the list object.
-- `as.tibble()` is used to convert the edges list into tibble data frame.
-- `rename()` is used to rename the field name id to label.
-- `mutate()` is used to create a new field called id and `row_number()` is used to assign the row number into id values. 
-- `select()` is used to re-organised the field name.  This is because visNerwork is expecting the first field is called id and the second field is called label.
+
+-   `activate()` is used to make the edges of mc2_graph1 active. This is necessary in order to extract the correct compontent from the list object.
+-   `as.tibble()` is used to convert the edges list into tibble data frame.
+-   `rename()` is used to rename the field name id to label.
+-   `mutate()` is used to create a new field called id and `row_number()` is used to assign the row number into id values.
+-   `select()` is used to re-organised the field name. This is because visNerwork is expecting the first field is called id and the second field is called label.
 :::
 
 ::: callout-important
-- visNetowrk is expecting a field called *id* in the tibble data frame.  The field must be in numeric data type and it must unique to the values in the from and to field of edges_df.     
+-   visNetowrk is expecting a field called *id* in the tibble data frame. The field must be in numeric data type and it must unique to the values in the from and to field of edges_df.\
 :::
 
 ### Plotting a simple interactive network graph
@@ -213,4 +215,3 @@ visNetwork(nodes_df,
            smooth = list(enabled = TRUE, 
                          type = "curvedCW"))
 ```
-

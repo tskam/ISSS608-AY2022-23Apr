@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.475">
+<meta name="generator" content="quarto-1.3.361">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -18,9 +18,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -47,43 +48,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -119,7 +90,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script src="../../site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
@@ -143,108 +115,110 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <span class="navbar-title">ISSS608</span>
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../syllabus.html">
+    <a class="nav-link" href="../../syllabus.html" rel="" target="">
  <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../lesson.html">
+    <a class="nav-link" href="../../lesson.html" rel="" target="">
  <span class="menu-text">Lesson Plan</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
  <span class="menu-text">Take-home Exercise</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
         <li>
-    <a class="dropdown-item" href="../../take-home_ex/TH_EX01.html">
+    <a class="dropdown-item" href="../../take-home_ex/TH_EX01.html" rel="" target="">
  <span class="dropdown-text">Take-home Exercise 1</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../take-home_ex/TH_EX02.html">
+    <a class="dropdown-item" href="../../take-home_ex/TH_EX02.html" rel="" target="">
  <span class="dropdown-text">Take-home Exercise 2</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../take-home_ex/TH_EX03.html">
+    <a class="dropdown-item" href="../../take-home_ex/TH_EX03.html" rel="" target="">
  <span class="dropdown-text">Take-home Exercise 3</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../take-home_ex/TH_EX04.html">
+    <a class="dropdown-item" href="../../take-home_ex/TH_EX04.html" rel="" target="">
  <span class="dropdown-text">Take-home Exercise 4</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="../../VAproject.html">
+    <a class="nav-link" href="../../VAproject.html" rel="" target="">
  <span class="menu-text">Visual Analytics Project</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-shiny-workshop" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-shiny-workshop" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
  <span class="menu-text">Shiny Workshop</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-shiny-workshop">    
         <li>
-    <a class="dropdown-item" href="../../ShinyWorkshop/Shiny1/Shiny1.html">
+    <a class="dropdown-item" href="../../ShinyWorkshop/Shiny1/Shiny1.html" rel="" target="">
  <span class="dropdown-text">R Shiny basic</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../ShinyWorkshop/Shiny2/Shiny2.html">
+    <a class="dropdown-item" href="../../ShinyWorkshop/Shiny2/Shiny2.html" rel="" target="">
  <span class="dropdown-text">Beyond the basic</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../ShinyWorkshop/Shiny3/Shiny3.html">
+    <a class="dropdown-item" href="../../ShinyWorkshop/Shiny3/Shiny3.html" rel="" target="">
  <span class="dropdown-text">Customising Shiny</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../ShinyResources.html">
+    <a class="dropdown-item" href="../../ShinyResources.html" rel="" target="">
  <span class="dropdown-text">Shiny Resources</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="../../Tableau.html">
+    <a class="nav-link" href="../../Tableau.html" rel="" target="">
  <span class="menu-text">Tableau Resources</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-all-about-r" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-all-about-r" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
  <span class="menu-text">All About R</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-all-about-r">    
         <li>
-    <a class="dropdown-item" href="../../R.html">
+    <a class="dropdown-item" href="../../R.html" rel="" target="">
  <span class="dropdown-text">R Resouces</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../R4Vis.html">
+    <a class="dropdown-item" href="../../R4Vis.html" rel="" target="">
  <span class="dropdown-text">R for Visual Analytics</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../Rt.html">
+    <a class="dropdown-item" href="../../Rt.html" rel="" target="">
  <span class="dropdown-text">R tips &amp; tricks</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../Quarto.html">
+    <a class="dropdown-item" href="../../Quarto.html" rel="" target="">
  <span class="dropdown-text">Quarto</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../git.html">
+    <a class="dropdown-item" href="../../git.html" rel="" target="">
  <span class="dropdown-text">git and github</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html">
+    <a class="nav-link" href="../../index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
 </ul>
-              <div id="quarto-search" class="" title="Search"></div>
+            <div class="quarto-navbar-tools">
+</div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
@@ -275,9 +249,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#preparing-network-data-for-visnetwork" id="toc-preparing-network-data-for-visnetwork" class="nav-link" data-scroll-target="#preparing-network-data-for-visnetwork">Preparing Network Data for visNetwork</a>
   <ul class="collapse">
   <li><a href="#preparing-edges-tibble-data-frame" id="toc-preparing-edges-tibble-data-frame" class="nav-link" data-scroll-target="#preparing-edges-tibble-data-frame">Preparing edges tibble data frame</a></li>
+  </ul></li>
+  <li><a href="#things-to-learn-from-the-code-chunk-above" id="toc-things-to-learn-from-the-code-chunk-above" class="nav-link" data-scroll-target="#things-to-learn-from-the-code-chunk-above">Things to learn from the code chunk above</a></li>
   <li><a href="#preparing-nodes-tibble-data-frame" id="toc-preparing-nodes-tibble-data-frame" class="nav-link" data-scroll-target="#preparing-nodes-tibble-data-frame">Preparing nodes tibble data frame</a></li>
   <li><a href="#plotting-a-simple-interactive-network-graph" id="toc-plotting-a-simple-interactive-network-graph" class="nav-link" data-scroll-target="#plotting-a-simple-interactive-network-graph">Plotting a simple interactive network graph</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -304,7 +279,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">May 25, 2023</p>
+      <p class="date-modified">June 1, 2023</p>
     </div>
   </div>
     
@@ -313,12 +288,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Declaimer
 </div>
 </div>
@@ -352,12 +327,12 @@ Declaimer
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mc2_nodes <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(mc2_data<span class="sc">$</span>nodes) <span class="sc">%&gt;%</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, shpcountry, rcvcountry)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Thing to learn
 </div>
 </div>
@@ -379,12 +354,12 @@ Thing to learn
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>         volumeteu, weightkg, valueofgoodsusd) <span class="sc">%&gt;%</span> </span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Things to learn
 </div>
 </div>
@@ -402,12 +377,12 @@ Things to learn
 </section>
 <section id="preparing-edges-data-table" class="level3">
 <h3 class="anchored" data-anchor-id="preparing-edges-data-table">Preparing edges data table</h3>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Things to learn from the code chunk below
 </div>
 </div>
@@ -520,28 +495,21 @@ Things to learn from the code chunk below
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(edges) <span class="sc">%&gt;%</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.tibble</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-node callout callout-style-default no-icon callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Things to learn from the code chunk above
-</div>
-</div>
-<div class="callout-body-container callout-body">
+</section>
+</section>
+<section id="things-to-learn-from-the-code-chunk-above" class="level2 callout-node">
+<h2 class="anchored" data-anchor-id="things-to-learn-from-the-code-chunk-above">Things to learn from the code chunk above</h2>
 <ul>
 <li><code>activate()</code> is used to make the edges of mc2_graph1 active. This is necessary in order to extract the correct compontent from the list object.</li>
 <li><code>as.tibble()</code> is used to convert the edges list into tibble data frame.</li>
 </ul>
-</div>
-</div>
-<div class="callout-important callout callout-style-default callout-captioned">
+</section>
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -549,7 +517,6 @@ Important
 <p>You might be curious to ask why don’t we used <em>mc2_edges</em>, the tibble data frame extracted in the earlier section. If you compare the data structure of both data frames, you will notice the first two field names in <em>edges_df</em> are called <em>from</em> and <em>to</em> instead of <em>source</em> and <em>target</em>. This is conformed to the nodes data structure of igraph object. Also note that the data type of <em>from</em> and <em>to</em> are in numeric data type and not in character data type.</p>
 </div>
 </div>
-</section>
 <section id="preparing-nodes-tibble-data-frame" class="level3">
 <h3 class="anchored" data-anchor-id="preparing-nodes-tibble-data-frame">Preparing nodes tibble data frame</h3>
 <p>In this section, we will prepare a nodes tibble data frame by using the code chunk below.</p>
@@ -561,12 +528,12 @@ Important
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id=</span><span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, label)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Things to learn from the code chunk above
 </div>
 </div>
@@ -580,12 +547,12 @@ Things to learn from the code chunk above
 </ul>
 </div>
 </div>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -608,13 +575,12 @@ Important
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">smooth =</span> <span class="fu">list</span>(<span class="at">enabled =</span> <span class="cn">TRUE</span>, </span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">type =</span> <span class="st">"curvedCW"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="visNetwork html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-a1176bc99babdfaf3230" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-a1176bc99babdfaf3230">{"x":{"nodes":{"id":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123],"label":["1 Ltd. Liability Co Cargo","Adriatic Catch Ltd. Liability Co Transportation","Adriatic Tuna AS Solutions","Amerigo Dockyard S.p.A. Distribution","Aqua Adventures Carriers Seabed","Aqua Azul LC International","Arunachal Pradesh s Plc","Balkan Cat ОАО Transport","Bay of Bengal's Corp","Blue Horizon Family &","Chuan gou  N.V. Delivery","CoralCove Foods AG Marine conservation","Costa del Mar Ges.m.b.H. Marine biology","Costa del Viento A/S Freight ","Daniel Ferry N.V. Transit","Danish Plaice BV Investment","Danish Plaice Ltd. Liability Co Logistics","Donald Sp & Son's","Dutch Bill  Marine mist NV Freight ","Dutch Eel AB Holdings","Finests  Salmon Ltd Marine ecology","French  Seabed S.p.A. Forwading","Haryana s Plc Transit","Irish Scallop Corporation Transport","Italian Sardines Ltd. Liability Co","Lake Tana  & Son's","Ltd. Corporation Ltd. Liability Co","Manipur  Market Corporation Cargo","Mar de la Costa Sagl","Mar de la Felicidad BV","Mar de la Felicidad NV","Mar de la Vida S.p.A.","Mar del Oeste Cruise ship","Mar del Placer CJSC Transport","Marine Masterminds SE Saltwater","Michael Ltd. Corporation Seal","Neptune's Realm NV Navigation","Noord Limited Liability Company Line","Náutica del Sol Brothers","Ob River Ltd. Liability Co","Ocean Emporium Pic Holdings","Ocean Outfitters Ltd. Corporation","Oceanfront Oases Co Shipping","Oceanfront Oasis Company Green ","Perla del Mar BV","Perla del Mar Deep-sea","Playa de Arena OJSC Express","Playa del Mar Corporation","ReefRider Foods S.p.A. Cargo","Richard S.A. de C.V. Solutions","Rift Valley fishery Sagl","Rufiji River  Ges.m.b.H. Family","Saltwater Sirens Limited Liability Company Marine conservation","SeaBass  Ltd. Liability Co Consulting","Selous Game Reserve  AB","Spanish Shrimp A/S Marine","Surf and Sea Marine","Tamil Nadu s Barge","The Sea Lion Corporation","Tripura  Market S.A. de C.V.","Tristen Jetty Company Solutions","Turkish Sword NV Ocean","Uttar Pradesh Sea  A/S Express","Viento Azul N.V. Distribution","Viento y Mar BV","Wave Watchers Ltd. Liability Co","bǐ mù yú AG Marine","bǐ mù yú Sagl Distribution","guī yú Ltd. Corporation","qīng yú Ltd. Corporation","shí rén yú Marine conservation","suō yú GmbH & Co. KG Freight ","xiǎo lóng xiā SRL","Himachal Pradesh  BV Holdings","The Sea Turtle GmbH & Co. KG","AquaDelight N.V. Coral Reef","Caracola del Sol Services","Shou gan  Limited Liability Company Distribution","Caracola del Este Ltd. Liability Co","Casablanca Coast  Flounder Oyj Line","Lake Turkana  Charter Boat  NV Marine","Sea Breeze Corporation Marine sanctuary","-5669","-5670","Arunachal Pradesh s Brine","Costa de la Felicidad Shipping","Mar del Este CJSC","Dubingiai Ltd. Liability Co","Coastal Castaway Coast Corporation Worldwide","Madagascar Coast  AG Freight ","Mar del Paraíso Corporation Logistics","Selous Game Reserve  S.A. de C.V.","hǎi dǎn AG Express","hǎi dǎn Corporation Wharf","hǎi mǎ Sagl Express","SeaLion Marine AG Express","Punjab s Marine conservation","Pao gan SE Seal","Arena del Mar Marine Marine biology","Maharashtra  Ltd. Liability Co Shipping","Saltwater Supreme Pelican Ltd Enterprises","West Bengal   OJSC Transport","Tripura  Pier N.V. Solutions","Mar del Placer Manatee","3 Oceanography ОАО Marine life","Water Wonders AG Transport","Rybachit Sagl and Son's","-1363","Kilimanjaro fishery Ltd. Corporation Carriers","-1539","Coral Cove BV Delivery","Isla del Tesoro GmbH & Co. KG Chart","Pao gan LC Freight ","Brisa del Este BV","Playa de Arena SE Underwater","Yu xian  SRL Industrial","Black Sea Tuna Snapper","Mar de la Luz Plc","Assam  Market Cargo ship Company Marine conservation","Sailors and Surfers Incorporated Enterprises","-1203","Mar de Plata BV Marine","Selkie Ltd. Liability Co"],"x":[0.623366616233148,0.580387692783929,-0.529470637412758,0.250807750981673,0.0341822857874805,0.430527844823592,-0.601610483054536,-0.247743189356947,-0.687760788397537,0.168118404150039,-0.464670452585769,-0.255815207555528,-0.743703694187225,0.272003819632122,-0.686272564465098,0.630407045471153,0.276698685583293,0.370610397749138,0.63113676398973,0.28742033880829,-0.193715670429663,-0.0793077419649384,-0.0372775578086214,0.770660036401763,-0.351701426562615,-0.100040308022366,-0.0478650708420187,-0.217194830716,1,-0.308390138539377,0.127873625156938,0.14128102480917,-0.186597387235992,0.18227854026774,0.0939828450006512,-0.0563472816747913,-0.494066362628286,0.308854585294284,-0.679391144497735,-0.248859273637592,0.375704538777705,0.143933890332506,-0.615342614846131,-0.217560341629111,0.713892850996029,-0.29052075773818,-0.324819641518128,-0.521580557070371,0.879452316421403,-0.643775681467396,-1,0.23542091462578,-0.562624606835772,0.18626163847221,0.674233216633029,-0.0297441721659695,-0.758414426766866,0.501045777958549,-0.0652636954839076,-0.101192163333202,0.305246204432764,-0.653571521001542,-0.122414111135585,-0.330676938262577,0.0913530888758995,0.0684381732630881,-0.253589509162595,0.870293763536178,-0.361094172689829,-0.858063278377917,-0.0273180541484331,0.451785961194556,-0.517750482038746,0.69708699997253,0.412140743477603,-0.458376675030127,-0.320564321191936,0.158930509556459,-0.211220039765245,0.17365082414523,0.273441652219792,-0.121304275862446,0.615769563890631,0.53894260239993,0.456203498907316,0.601924671245997,0.158988875984415,-0.486195064335472,-0.446001519124895,-0.158812406224391,-0.237744946820793,-0.172805582818933,-0.473788676441368,0.063114252235775,-0.380041971381611,-0.633547278984482,-0.30343179463794,0.447517282506091,0.484677638066338,0.574652118982427,-0.181045858431168,-0.0559324325819173,-0.0348873069026969,-0.0496231641284061,0.998969164619418,0.088703354786956,-0.56647548543554,0.280861407124867,-0.329341316228763,0.350344401402904,-0.691917368506815,0.869692841549257,-0.18692588143236,-0.696575902040943,-0.733064004366643,0.812743869635999,-0.922188062904882,-0.149847639419342,-0.355258447049385,0.101581530087263,0.911952009763991,-0.90101432720251,0.487031248332057],"y":[-0.733566934217792,0.629812938150732,0.0799796960970307,0.976818400330043,-0.0256478991429806,-0.251115130768485,0.765880710279745,-0.0156451365464634,0.217912833124403,0.271906044442358,0.400326402600033,0.329712456144512,0.1529334672732,0.371798109538269,0.111023227876473,0.0634994046439166,0.154786867127819,0.430846450720832,0.19637491508047,0.529662019325778,0.716317620766975,0.487103474689446,0.613558926684634,-0.60042185627407,0.645985885581407,0.179481796424968,-0.148492239381684,-0.222203646011987,-0.0698076032476884,-0.552995964660708,-0.97087056291975,-0.313594947950104,0.327073631679643,0.609542157839281,0.537318843471775,0.145631232506131,-0.859226572348169,-0.926618471386931,0.034157182258312,-0.881251285731027,-0.120826539960855,0.117436867355403,-0.431710938615723,-0.601041920590717,0.13852000311368,0.426681368166731,-0.0292480112519803,0.359702199203378,-0.281787990653449,-0.0495936350359556,-0.200101168208286,0.456011474197881,0.213109438123216,0.528294367136098,-0.0386547949002284,0.174061694361989,-0.0176755580841734,0.69773501815489,-0.974406627269695,-0.051920821317073,-0.21825060885506,-0.755274973233875,-0.536885315106073,0.72449726016376,0.619834311628683,-0.280682939979341,-0.354364254155936,0.47960750230891,0.326846024753883,-0.573576284587819,-0.56530889514758,-0.774589502162546,-0.0503435603815942,-0.669094097786561,0.526303469662184,0.126443067805325,0.0642532308237753,1,0.213291471680421,-0.186930834914492,-0.0400715823199622,-0.144355072314703,-0.274657113191411,-0.414067739497053,-0.442072553958872,-0.359570470761914,-0.0424686171979549,0.652790545965922,-0.150754469587437,0.246340538935011,-0.145690862138629,-0.383122792294864,-0.269544398189828,0.352909600689294,-0.214238623045572,0.538946269177801,0.488876513336182,0.104844230759985,0.232943104164804,0.489353572304819,0.480300202557808,0.735892885412083,0.377665108299112,-0.402064619177675,-0.165299009397251,-0.891305569011111,-0.801810015693132,-0.842199318709287,-0.919279590013329,0.0786973234958666,-0.538176026911797,0.158696814677114,0.0610466183651377,0.344059019004363,0.458636495122431,-0.160546657137581,-0.114493168001258,-1,0.88789396912739,-0.507247924591323,0.39470309143441,-0.487137009612463,-0.855332905883401]},"edges":{"from":[1,2,3,3,4,5,5,5,5,6,6,6,6,6,6,7,8,8,8,8,8,8,8,8,8,9,10,10,10,10,11,11,11,11,12,12,12,13,14,15,16,17,17,17,17,18,18,19,20,20,21,22,22,22,23,24,25,25,26,26,26,26,26,27,28,28,28,29,30,31,32,32,33,33,33,34,35,36,36,36,36,36,36,37,38,39,40,41,42,42,42,43,43,44,45,45,46,46,47,47,47,47,48,48,48,49,50,51,52,53,53,54,55,55,56,56,56,56,56,56,57,57,58,59,60,60,60,61,62,63,63,64,64,64,65,66,66,66,67,68,69,70,71,71,72,73],"to":[74,75,76,77,78,79,80,81,82,83,84,85,86,81,87,88,76,79,89,90,91,92,93,94,95,76,90,87,75,94,76,79,88,96,76,97,94,76,94,76,98,99,81,87,94,100,94,98,75,94,101,79,102,94,103,74,88,101,76,90,87,103,94,92,77,104,82,105,92,106,87,104,77,97,94,94,94,76,77,98,101,82,94,107,108,76,109,87,110,81,90,111,93,92,112,98,90,97,76,77,113,82,114,90,115,116,76,117,94,114,77,94,98,116,27,90,87,113,101,103,76,117,75,118,77,87,91,87,107,104,92,119,88,101,94,87,120,82,82,121,90,122,120,92,123,77],"hscode":["306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170"],"Year":[2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028],"weights":[68,30,22,21,42,80,23,42,46,54,21,234,30,33,22,28,126,31,23,36,66,36,62,29,37,54,61,21,23,45,63,182,24,24,64,89,44,40,73,176,95,34,65,21,134,50,29,25,191,80,24,42,22,35,120,68,28,50,101,49,40,25,39,83,246,127,59,25,49,80,43,22,135,35,26,26,173,21,26,34,36,32,27,183,73,96,21,64,35,41,57,41,82,63,28,44,70,115,23,30,36,27,79,40,37,24,36,41,62,25,46,59,63,26,125,72,26,90,55,36,122,22,57,30,23,22,21,204,260,36,74,21,37,28,36,456,67,25,35,33,32,164,32,44,58,30]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"arrows":"to","smooth":{"enabled":true,"type":"curvedCW"}},"physics":{"stabilization":false}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","igraphlayout":{"type":"square"}},"evals":[],"jsHooks":[]}</script>
+<div class="visNetwork html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-42391ef78f98d7e71f7f" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-42391ef78f98d7e71f7f">{"x":{"nodes":{"id":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123],"label":["1 Ltd. Liability Co Cargo","Adriatic Catch Ltd. Liability Co Transportation","Adriatic Tuna AS Solutions","Amerigo Dockyard S.p.A. Distribution","Aqua Adventures Carriers Seabed","Aqua Azul LC International","Arunachal Pradesh s Plc","Balkan Cat ОАО Transport","Bay of Bengal's Corp","Blue Horizon Family &","Chuan gou  N.V. Delivery","CoralCove Foods AG Marine conservation","Costa del Mar Ges.m.b.H. Marine biology","Costa del Viento A/S Freight ","Daniel Ferry N.V. Transit","Danish Plaice BV Investment","Danish Plaice Ltd. Liability Co Logistics","Donald Sp & Son's","Dutch Bill  Marine mist NV Freight ","Dutch Eel AB Holdings","Finests  Salmon Ltd Marine ecology","French  Seabed S.p.A. Forwading","Haryana s Plc Transit","Irish Scallop Corporation Transport","Italian Sardines Ltd. Liability Co","Lake Tana  & Son's","Ltd. Corporation Ltd. Liability Co","Manipur  Market Corporation Cargo","Mar de la Costa Sagl","Mar de la Felicidad BV","Mar de la Felicidad NV","Mar de la Vida S.p.A.","Mar del Oeste Cruise ship","Mar del Placer CJSC Transport","Marine Masterminds SE Saltwater","Michael Ltd. Corporation Seal","Neptune's Realm NV Navigation","Noord Limited Liability Company Line","Náutica del Sol Brothers","Ob River Ltd. Liability Co","Ocean Emporium Pic Holdings","Ocean Outfitters Ltd. Corporation","Oceanfront Oases Co Shipping","Oceanfront Oasis Company Green ","Perla del Mar BV","Perla del Mar Deep-sea","Playa de Arena OJSC Express","Playa del Mar Corporation","ReefRider Foods S.p.A. Cargo","Richard S.A. de C.V. Solutions","Rift Valley fishery Sagl","Rufiji River  Ges.m.b.H. Family","Saltwater Sirens Limited Liability Company Marine conservation","SeaBass  Ltd. Liability Co Consulting","Selous Game Reserve  AB","Spanish Shrimp A/S Marine","Surf and Sea Marine","Tamil Nadu s Barge","The Sea Lion Corporation","Tripura  Market S.A. de C.V.","Tristen Jetty Company Solutions","Turkish Sword NV Ocean","Uttar Pradesh Sea  A/S Express","Viento Azul N.V. Distribution","Viento y Mar BV","Wave Watchers Ltd. Liability Co","bǐ mù yú AG Marine","bǐ mù yú Sagl Distribution","guī yú Ltd. Corporation","qīng yú Ltd. Corporation","shí rén yú Marine conservation","suō yú GmbH & Co. KG Freight ","xiǎo lóng xiā SRL","Himachal Pradesh  BV Holdings","The Sea Turtle GmbH & Co. KG","AquaDelight N.V. Coral Reef","Caracola del Sol Services","Shou gan  Limited Liability Company Distribution","Caracola del Este Ltd. Liability Co","Casablanca Coast  Flounder Oyj Line","Lake Turkana  Charter Boat  NV Marine","Sea Breeze Corporation Marine sanctuary","-5669","-5670","Arunachal Pradesh s Brine","Costa de la Felicidad Shipping","Mar del Este CJSC","Dubingiai Ltd. Liability Co","Coastal Castaway Coast Corporation Worldwide","Madagascar Coast  AG Freight ","Mar del Paraíso Corporation Logistics","Selous Game Reserve  S.A. de C.V.","hǎi dǎn AG Express","hǎi dǎn Corporation Wharf","hǎi mǎ Sagl Express","SeaLion Marine AG Express","Punjab s Marine conservation","Pao gan SE Seal","Arena del Mar Marine Marine biology","Maharashtra  Ltd. Liability Co Shipping","Saltwater Supreme Pelican Ltd Enterprises","West Bengal   OJSC Transport","Tripura  Pier N.V. Solutions","Mar del Placer Manatee","3 Oceanography ОАО Marine life","Water Wonders AG Transport","Rybachit Sagl and Son's","-1363","Kilimanjaro fishery Ltd. Corporation Carriers","-1539","Coral Cove BV Delivery","Isla del Tesoro GmbH & Co. KG Chart","Pao gan LC Freight ","Brisa del Este BV","Playa de Arena SE Underwater","Yu xian  SRL Industrial","Black Sea Tuna Snapper","Mar de la Luz Plc","Assam  Market Cargo ship Company Marine conservation","Sailors and Surfers Incorporated Enterprises","-1203","Mar de Plata BV Marine","Selkie Ltd. Liability Co"],"x":[-0.816832109780464,-0.661140184893828,0.370790842707357,-0.989326314573882,-0.0214440899917159,-0.414912030224694,0.853516618224399,0.236555571089792,0.573186013612633,-0.237475355680736,0.560907522878256,0.119426084759653,0.636776672830002,-0.0698199835531622,0.644848668857479,-0.66599581384208,-0.3013924058477,-0.198137448567454,-0.659912180176428,-0.350825741532847,0.468877543655269,0.107959844854199,0.162601571703152,-0.718654958446676,0.580802724870676,0.0782328681899611,0.350480636384967,0.217650865076795,-1,0.602691598183456,-0.538587170418079,-0.0324319409864976,0.00209948600461662,-0.265568690774136,-0.248445194128842,0.0378579421871035,-0.179182187765338,0.303153110292576,0.681553241562756,0.1977622707185,-0.346723649558999,-0.250198552439928,0.415903079409898,0.535866475676338,-0.699449555290151,-0.17512752118131,0.330526017741506,-0.0628273344215987,-0.849946136370211,0.609342764601822,1,-0.188581168805701,0.131154413712265,-0.318701690828659,-0.693569290726135,0.162940072992551,0.730168540403622,-0.600731281470097,0.530321256965883,0.0331066996807829,-0.364360043132264,-0.266911016458134,0.34201840473297,0.613193078404668,-0.108998878738224,0.0502251252549917,0.284161042089115,-0.449811381585142,-0.132897274831837,0.689485758290831,0.394791466099611,-0.0120549307539104,0.324635497853143,-0.733545875278675,-0.484846152772358,0.425060393026516,0.180284864500219,-0.996534143228719,0.249109037699739,-0.146513402084401,-0.271841974787674,0.158137893368989,-0.529123730101169,-0.591271508226798,-0.592083046154777,-0.466591403312565,-0.139957186978668,0.706579138404264,0.462449608477989,-0.0560188441697496,0.17172592363743,0.41681703324269,0.350630928823213,-0.101026282101147,0.292461304223814,0.763699217302326,-0.0881143371502898,-0.471142399785335,-0.50649238645004,-0.267199948428494,0.364564963718948,0.113964230179199,0.112882907090212,0.168030242981429,-0.987344320667144,-0.594085345179511,-0.239017799863747,0.221277067461629,0.111940863634402,-0.323403586232106,0.454989299646186,-0.834505283044984,0.377323974100598,0.0567778513703827,-0.0960286727820225,-0.814708110088578,0.912107048697261,0.462138072665792,0.730873408865085,0.209625502989659,-0.40249337347635,0.759639046909507,-0.0523652830502878],"y":[0.512047257604247,-0.614294281417792,-0.367946861254096,-0.259769381927327,-0.147009024977875,0.0806525601571724,0.226937144372836,-0.161855044085634,-0.473476263117527,-0.328199881032107,-0.110717149547715,-0.420776207205588,-0.231818309072641,-0.790485418046681,-0.441932649043873,-0.239081227735918,-0.311593370298524,-0.831042911592748,-0.151167375047786,-0.567779764010883,0.307985273751775,-0.603203198367153,0.356014781816985,0.658796588686101,0.17264753604349,-0.198838306827521,-0.304128593281522,-0.469001864864872,0.138846773609883,-0.664884778082213,0.700251975719972,-0.512538451069473,-0.367152083791579,-0.739672970278388,-0.621272516467881,-0.223432042806526,0.819298194423251,0.865725768584826,-0.357144113023162,1,-0.12905358241404,0.184189190431668,0.466081567076476,-0.729708186961471,-0.333126422559097,-0.120784608637886,-0.222697721043342,0.337940943218817,0.237425152694986,-0.342149877340946,-0.0942375566866617,-0.720726285368938,0.180184439318836,-0.671569854812883,-0.0452719800227417,-0.0701746656175145,-0.243883793942748,-0.702740220320289,0.830645769365596,-0.0617077594597424,-0.236872196527594,0.985448160805659,-0.729211167578593,0.260960635717145,-0.726829639177815,-0.509309353443291,-0.581440284239737,0.890696570915177,0.234434528350103,0.702991271526314,-0.785726169070037,0.89065496602396,-0.0227650828877947,0.562869366677638,-0.54623554619967,-0.292005539567104,-0.186935359817769,-0.156452706678424,-0.290677256515136,0.0643924072943809,-0.0347540921792748,-0.36242166685468,0.252886608384054,0.111231231700651,0.203681545581095,0.29767964999994,-0.216955844111179,0.129412453174747,-0.0207554044808496,0.00233521471159293,0.0298921910691792,-0.539112881617793,0.205497793024103,-0.507390823081166,0.0928751780580497,-0.0343602273343377,-0.326521135656785,-0.199774568082592,-0.389021490050462,-1,0.085038709375814,-0.864372501678934,0.105475493056914,-0.667001921040525,0.239355062102504,0.775869128673084,0.892928425188126,0.820480076551048,0.996661054611418,0.398747460624332,0.61817438863019,-0.416747417336163,-0.085471797581811,0.409412833359135,0.547004804957556,0.0998720364321135,-0.189277763819829,0.884253951348473,0.402072587371143,-0.762917059564602,0.809651826254324,0.637753859564322,0.983505191298026]},"edges":{"from":[1,2,3,3,4,5,5,5,5,6,6,6,6,6,6,7,8,8,8,8,8,8,8,8,8,9,10,10,10,10,11,11,11,11,12,12,12,13,14,15,16,17,17,17,17,18,18,19,20,20,21,22,22,22,23,24,25,25,26,26,26,26,26,27,28,28,28,29,30,31,32,32,33,33,33,34,35,36,36,36,36,36,36,37,38,39,40,41,42,42,42,43,43,44,45,45,46,46,47,47,47,47,48,48,48,49,50,51,52,53,53,54,55,55,56,56,56,56,56,56,57,57,58,59,60,60,60,61,62,63,63,64,64,64,65,66,66,66,67,68,69,70,71,71,72,73],"to":[74,75,76,77,78,79,80,81,82,83,84,85,86,81,87,88,76,79,89,90,91,92,93,94,95,76,90,87,75,94,76,79,88,96,76,97,94,76,94,76,98,99,81,87,94,100,94,98,75,94,101,79,102,94,103,74,88,101,76,90,87,103,94,92,77,104,82,105,92,106,87,104,77,97,94,94,94,76,77,98,101,82,94,107,108,76,109,87,110,81,90,111,93,92,112,98,90,97,76,77,113,82,114,90,115,116,76,117,94,114,77,94,98,116,27,90,87,113,101,103,76,117,75,118,77,87,91,87,107,104,92,119,88,101,94,87,120,82,82,121,90,122,120,92,123,77],"hscode":["306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170","306170"],"Year":[2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028,2028],"weights":[68,30,22,21,42,80,23,42,46,54,21,234,30,33,22,28,126,31,23,36,66,36,62,29,37,54,61,21,23,45,63,182,24,24,64,89,44,40,73,176,95,34,65,21,134,50,29,25,191,80,24,42,22,35,120,68,28,50,101,49,40,25,39,83,246,127,59,25,49,80,43,22,135,35,26,26,173,21,26,34,36,32,27,183,73,96,21,64,35,41,57,41,82,63,28,44,70,115,23,30,36,27,79,40,37,24,36,41,62,25,46,59,63,26,125,72,26,90,55,36,122,22,57,30,23,22,21,204,260,36,74,21,37,28,36,456,67,25,35,33,32,164,32,44,58,30]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"arrows":"to","smooth":{"enabled":true,"type":"curvedCW"}},"physics":{"stabilization":false}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","igraphlayout":{"type":"square"}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -645,9 +611,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -712,6 +692,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
