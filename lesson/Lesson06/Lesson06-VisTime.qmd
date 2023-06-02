@@ -591,7 +591,7 @@ Claus. O. Wilke (2019) **Fundamentals of Data Visualisation**, O'Reilly. USA. [C
 #| echo: false
 #| eval: false
 renderthis::to_pdf(
-  from = "https://isss608-ay2022-23jan.netlify.app/lesson/Lesson06/Lesson06-VisTime.html",
+  from = "https://isss608-ay2022-23apr.netlify.app/lesson/Lesson06/Lesson06-VisTime.html",
   to = "../../_site/lesson/Lesson06/Lesson06-VisTime.pdf"
 )
 ```
