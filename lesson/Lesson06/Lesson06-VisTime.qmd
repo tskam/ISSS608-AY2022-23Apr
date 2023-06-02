@@ -1,5 +1,5 @@
 ---
-title: "Lesson 6: Visualising and Analysing Time-Oriented Data"
+title: "Lesson 7: Visualising and Analysing Time-Oriented Data"
 author: "Dr. Kam Tin Seong<br/>Assoc. Professor of Information Systems (Practice)"
 institute: "School of Computing and Information Systems,<br/>Singapore Management University"
 date: "`r Sys.Date()`"
@@ -14,6 +14,7 @@ date-format: "DD MMM YYYY"
 execute: 
   echo: true
   eval: true
+  freeze: auto
   warning: false
 editor: visual
 ---
