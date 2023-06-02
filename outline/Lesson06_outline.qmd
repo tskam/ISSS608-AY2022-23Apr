@@ -27,7 +27,11 @@ editor: visual
 
 -   Lesson slides in [html](../lesson/Lesson06/Lesson06-VisTime.html) and [pdf](../lesson/Lesson06/Lesson06-VisTime.pdf) formats
 
--   Handout of Hands-on Exercise 6 in [html](../Hands-on_Ex/Hands-on_Ex06/Hands-on_Ex06-VisTime.html) format.
+-   Hands-on Exercise 7
+
+    -   [17 Visualising and Analysing Time-oriented Data](https://r4va.netlify.app/chap17.html), and
+
+    -   [20 Time on the Horizon: ggHoriPlot methods](https://r4va.netlify.app/chap20.html).
 
 ## Readings
 
