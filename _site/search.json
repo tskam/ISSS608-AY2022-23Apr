@@ -2651,5 +2651,82 @@
     "title": "Lesson 7: Visualising and Analysing Time-Oriented Data",
     "section": "",
     "text": "Characteristics of time-series data\nClassic ways of graphing time\nTime-series patterns\nTime-series data visualization\nInteractive techniques for time-series data visualisation\n\n\n\nIn this lesson, I am going to share with you methods and best practice for visualising and analysing time-series data. It is organised into five main sections. First, we will examine different format of time series data. This is followed by a review of selected inspiring data visualisation for revealing time series patterns. In section three, we will examine different time-series patterns graphically. In section 4, I will introduce selected not so commonly used time-series data visualisation techniques. Lastly, in section 5, we will examine how interactivity and animation can be used to enhance visual time-series data discovery."
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex03/MC3-Kick-starter.html",
+    "href": "take-home_ex/TH_Ex03/MC3-Kick-starter.html",
+    "title": "Take-home Exercise 3: Kick-starter",
+    "section": "",
+    "text": "Declaimer\n\n\n\nThis document aims to provide you guidance on how to get started with Takehome Exercise 3, especially how to prepare the network data. It is not a model answer."
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex03/MC3-Kick-starter.html#getting-started",
+    "href": "take-home_ex/TH_Ex03/MC3-Kick-starter.html#getting-started",
+    "title": "Take-home Exercise 3: Kick-starter",
+    "section": "Getting Started",
+    "text": "Getting Started\nThe code chunk below will be used to install and load the necessary R packages to meet the data preparation, data wrangling, data analysis and visualisation needs.\n\npacman::p_load(jsonlite, tidygraph, ggraph, \n               visNetwork, graphlayouts, ggforce, \n               skimr, tidytext, tidyverse)"
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex03/MC3-Kick-starter.html#data-import",
+    "href": "take-home_ex/TH_Ex03/MC3-Kick-starter.html#data-import",
+    "title": "Take-home Exercise 3: Kick-starter",
+    "section": "Data Import",
+    "text": "Data Import\nIn the code chunk below, fromJSON() of jsonlite package is used to import MC3.json into R environment.\n\nmc3_data &lt;- fromJSON(\"data/MC3.json\")\n\nThe output is called mc3_data. It is a large list R object.\n\nExtracting edges\nThe code chunk below will be used to extract the links data.frame of mc3_data and save it as a tibble data.frame called mc3_edges.\n\nmc3_edges &lt;- as_tibble(mc3_data$links) %&gt;% \n  distinct() %&gt;%\n  mutate(source = as.character(source),\n         target = as.character(target),\n         type = as.character(type)) %&gt;%\n  group_by(source, target, type) %&gt;%\n    summarise(weights = n()) %&gt;%\n  filter(source!=target) %&gt;%\n  ungroup()\n\n\n\n\n\n\n\nThings to learn from the code chunk above\n\n\n\n\ndistinct() is used to ensure that there will be no duplicated records.\nmutate() and as.character() are used to convert the field data type from list to character.\ngroup_by() and summarise() are used to count the number of unique links.\nthe filter(source!=target) is to ensure that no record with similar source and target.\n\n\n\n\n\nExtracting nodes\nThe code chunk below will be used to extract the nodes data.frame of mc3_data and save it as a tibble data.frame called mc3_nodes.\n\nmc3_nodes &lt;- as_tibble(mc3_data$nodes) %&gt;%\n  mutate(country = as.character(country),\n         id = as.character(id),\n         product_services = as.character(product_services),\n         revenue_omu = as.numeric(as.character(revenue_omu)),\n         type = as.character(type)) %&gt;%\n  select(id, country, type, revenue_omu, product_services)\n\n\n\n\n\n\n\nThings to learn from the code chunk above\n\n\n\n\nmutate() and as.character() are used to convert the field data type from list to character.\nTo convert revenue_omu from list data type to numeric data type, we need to convert the values into character first by using as.character(). Then, as.numeric() will be used to convert them into numeric data type.\n\nselect() is used to re-organise the order of the fields."
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex03/MC3-Kick-starter.html#initial-data-exploration",
+    "href": "take-home_ex/TH_Ex03/MC3-Kick-starter.html#initial-data-exploration",
+    "title": "Take-home Exercise 3: Kick-starter",
+    "section": "Initial Data Exploration",
+    "text": "Initial Data Exploration\n\nExploring the edges data frame\nIn the code chunk below, skim() of skimr package is used to display the summary statistics of mc3_edges tibble data frame.\n\nskim(mc3_edges)\n\n\nData summary\n\n\nName\nmc3_edges\n\n\nNumber of rows\n24036\n\n\nNumber of columns\n4\n\n\n_______________________\n\n\n\nColumn type frequency:\n\n\n\ncharacter\n3\n\n\nnumeric\n1\n\n\n________________________\n\n\n\nGroup variables\nNone\n\n\n\nVariable type: character\n\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmin\nmax\nempty\nn_unique\nwhitespace\n\n\n\n\nsource\n0\n1\n6\n700\n0\n12856\n0\n\n\ntarget\n0\n1\n6\n28\n0\n21265\n0\n\n\ntype\n0\n1\n16\n16\n0\n2\n0\n\n\n\nVariable type: numeric\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmean\nsd\np0\np25\np50\np75\np100\nhist\n\n\n\n\nweights\n0\n1\n1\n0\n1\n1\n1\n1\n1\n▁▁▇▁▁\n\n\n\n\n\nThe report above reveals that there is not missing values in all fields.\nIn the code chunk below, datatable() of DT package is used to display mc3_edges tibble data frame as an interactive table on the html document.\n\nDT::datatable(mc3_edges)\n\n\n\n\n\n\n\nggplot(data = mc3_edges,\n       aes(x = type)) +\n  geom_bar()"
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex03/MC3-Kick-starter.html#data-wrangling-for-visnetwork",
+    "href": "take-home_ex/TH_Ex03/MC3-Kick-starter.html#data-wrangling-for-visnetwork",
+    "title": "Take-home Exercise 3: Kick-starter",
+    "section": "Data Wrangling for visNetwork",
+    "text": "Data Wrangling for visNetwork\n\nid1 &lt;- mc3_edges %&gt;%\n  select(source) %&gt;%\n  rename(label = source)\nid2 &lt;- mc3_edges %&gt;%\n  select(target) %&gt;%\n  rename(label = target)\nmc3_nodes2 &lt;- rbind(id1, id2) %&gt;%\n  distinct() %&gt;%\n  mutate(id=row_number()) %&gt;%\n  select(id, label)\n\n\nmc3_edges2 &lt;- mc3_edges %&gt;%\n  left_join(mc3_nodes2, \n            by = c(\"source\" = \"label\")) %&gt;%\n  rename(from = id) %&gt;%\n  left_join(mc3_nodes2, \n            by = c(\"target\" = \"label\")) %&gt;%\n  rename(to = id) %&gt;%\n  rename(weight = weights) %&gt;%\n  rename(group = type) %&gt;%\n  select(from, to, weight, group, source, target)\n\n\nvisNetwork(mc3_nodes2, \n           mc3_edges2) %&gt;%\n  visIgraphLayout(layout = \"layout_with_fr\")"
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex03/MC3-Kick-starter.html#text-sensing-with-tidytext",
+    "href": "take-home_ex/TH_Ex03/MC3-Kick-starter.html#text-sensing-with-tidytext",
+    "title": "Take-home Exercise 3: Kick-starter",
+    "section": "Text Sensing with tidytext",
+    "text": "Text Sensing with tidytext\nIn this section, you will learn how to perform basic text sensing using appropriate functions of tidytext package.\n\nSimple word count\nThe code chunk below calculates number of times the word fish appeared in the field product_services.\n\nmc3_nodes %&gt;% \n    mutate(n_fish = str_count(product_services, \"fish\")) \n\n# A tibble: 27,622 × 6\n   id                          country type  revenue_omu product_services n_fish\n   &lt;chr&gt;                       &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;             &lt;int&gt;\n 1 Jones LLC                   ZH      Comp…  310612303. Automobiles           0\n 2 Coleman, Hall and Lopez     ZH      Comp…  162734684. Passenger cars,…      0\n 3 Aqua Advancements Sashimi … Oceanus Comp…  115004667. Holding firm wh…      0\n 4 Makumba Ltd. Liability Co   Utopor… Comp…   90986413. Car service, ca…      0\n 5 Taylor, Taylor and Farrell  ZH      Comp…   81466667. Fully electric …      0\n 6 Harmon, Edwards and Bates   ZH      Comp…   75070435. Discount superm…      0\n 7 Punjab s Marine conservati… Riodel… Comp…   72167572. Beef, pork, chi…      0\n 8 Assam   Limited Liability … Utopor… Comp…   72162317. Power and Gas s…      0\n 9 Ianira Starfish Sagl Import Rio Is… Comp…   68832979. Light commercia…      0\n10 Moran, Lewis and Jimenez    ZH      Comp…   65592906. Automobiles, tr…      0\n# ℹ 27,612 more rows\n\n\n\n\nTokenisation\nThe word tokenisation have different meaning in different scientific domains. In text sensing, tokenisation is the process of breaking up a given text into units called tokens. Tokens can be individual words, phrases or even whole sentences. In the process of tokenisation, some characters like punctuation marks may be discarded. The tokens usually become the input for the processes like parsing and text mining.\nIn the code chunk below, unnest_token() of tidytext is used to split text in product_services field into words.\n\ntoken_nodes &lt;- mc3_nodes %&gt;%\n  unnest_tokens(word, \n                product_services)\n\nThe two basic arguments to unnest_tokens() used here are column names. First we have the output column name that will be created as the text is unnested into it (word, in this case), and then the input column that the text comes from (product_services, in this case).\n\n\n\n\n\n\nNote\n\n\n\n\nBy default, punctuation has been stripped. (Use the to_lower = FALSE argument to turn off this behavior).\nBy default, unnest_tokens() converts the tokens to lowercase, which makes them easier to compare or combine with other datasets. (Use the to_lower = FALSE argument to turn off this behavior).\n\n\n\nNow we can visualise the words extracted by using the code chunk below.\n\ntoken_nodes %&gt;%\n  count(word, sort = TRUE) %&gt;%\n  top_n(15) %&gt;%\n  mutate(word = reorder(word, n)) %&gt;%\n  ggplot(aes(x = word, y = n)) +\n  geom_col() +\n  xlab(NULL) +\n  coord_flip() +\n      labs(x = \"Count\",\n      y = \"Unique words\",\n      title = \"Count of unique words found in product_services field\")\n\n\n\n\nThe bar chart reveals that the unique words contains some words that may not be useful to use. For instance “a” and “to”. In the word of text mining we call those words stop words. You want to remove these words from your analysis as they are fillers used to compose a sentence.\n\n\nRemoving stopwords\nLucky for use, the tidytext package has a function called stop_words that will help us clean up stop words.\nLet’s give this a try next!\n\nstopwords_removed &lt;- token_nodes %&gt;% \n  anti_join(stop_words)\n\n\n\n\n\n\n\nNote\n\n\n\nThere are two processes:\n\nLoad the stop_words data included with tidytext. This data is simply a list of words that you may want to remove in a natural language analysis.\nThen anti_join() of dplyr package is used to remove all stop words from the analysis.\n\n\n\nNow we can visualise the words extracted by using the code chunk below.\n\nstopwords_removed %&gt;%\n  count(word, sort = TRUE) %&gt;%\n  top_n(15) %&gt;%\n  mutate(word = reorder(word, n)) %&gt;%\n  ggplot(aes(x = word, y = n)) +\n  geom_col() +\n  xlab(NULL) +\n  coord_flip() +\n      labs(x = \"Count\",\n      y = \"Unique words\",\n      title = \"Count of unique words found in product_services field\")\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nAll the stop words disappears!"
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex03/MC3-Kick-starter.html#initial-network-visualisation-and-analysis",
+    "href": "take-home_ex/TH_Ex03/MC3-Kick-starter.html#initial-network-visualisation-and-analysis",
+    "title": "Take-home Exercise 3: Kick-starter",
+    "section": "Initial Network Visualisation and Analysis",
+    "text": "Initial Network Visualisation and Analysis\n\nBuilding network model with tidygraph\n\nid1 &lt;- mc3_edges %&gt;%\n  select(source) %&gt;%\n  rename(id = source)\nid2 &lt;- mc3_edges %&gt;%\n  select(target) %&gt;%\n  rename(id = target)\nmc3_nodes1 &lt;- rbind(id1, id2) %&gt;%\n  distinct() %&gt;%\n  left_join(mc3_nodes,\n            unmatched = \"drop\")\n\n\nmc3_graph &lt;- tbl_graph(nodes = mc3_nodes1,\n                       edges = mc3_edges,\n                       directed = FALSE) %&gt;%\n  mutate(betweenness_centrality = centrality_betweenness(),\n         closeness_centrality = centrality_closeness())\n\n\nmc3_graph %&gt;%\n  filter(betweenness_centrality &gt;= 100000) %&gt;%\nggraph(layout = \"fr\") +\n  geom_edge_link(aes(alpha=0.5)) +\n  geom_node_point(aes(\n    size = betweenness_centrality,\n    colors = \"lightblue\",\n    alpha = 0.5)) +\n  scale_size_continuous(range=c(1,10))+\n  theme_graph()"
+  },
+  {
+    "objectID": "take-home_ex/TH_Ex03/MC3-Kick-starter.html#exploring-the-nodes-data-frame",
+    "href": "take-home_ex/TH_Ex03/MC3-Kick-starter.html#exploring-the-nodes-data-frame",
+    "title": "Take-home Exercise 3: Kick-starter",
+    "section": "Exploring the nodes data frame",
+    "text": "Exploring the nodes data frame\nIn the code chunk below, skim() of skimr package is used to display the summary statistics of mc3_nodes tibble data frame.\n\nskim(mc3_nodes)\n\n\nData summary\n\n\nName\nmc3_nodes\n\n\nNumber of rows\n27622\n\n\nNumber of columns\n5\n\n\n_______________________\n\n\n\nColumn type frequency:\n\n\n\ncharacter\n4\n\n\nnumeric\n1\n\n\n________________________\n\n\n\nGroup variables\nNone\n\n\n\nVariable type: character\n\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmin\nmax\nempty\nn_unique\nwhitespace\n\n\n\n\nid\n0\n1\n6\n64\n0\n22929\n0\n\n\ncountry\n0\n1\n2\n15\n0\n100\n0\n\n\ntype\n0\n1\n7\n16\n0\n3\n0\n\n\nproduct_services\n0\n1\n4\n1737\n0\n3244\n0\n\n\n\nVariable type: numeric\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmean\nsd\np0\np25\np50\np75\np100\nhist\n\n\n\n\nrevenue_omu\n21515\n0.22\n1822155\n18184433\n3652.23\n7676.36\n16210.68\n48327.66\n310612303\n▇▁▁▁▁\n\n\n\n\n\nThe report above reveals that there is no missing values in all fields.\nIn the code chunk below, datatable() of DT package is used to display mc3_nodes tibble data frame as an interactive table on the html document.\n\nDT::datatable(mc3_nodes)\n\n\n\n\n\n\n\nggplot(data = mc3_nodes,\n       aes(x = type)) +\n  geom_bar()"
+  },
+  {
+    "objectID": "take-home_ex/TH_EX02.html#the-task",
+    "href": "take-home_ex/TH_EX02.html#the-task",
+    "title": "Take-home Exercise 2",
+    "section": "",
+    "text": "With reference to Mini-Challenge 2 of VAST Challenge 2023 and by using appropriate static and interactive statistical graphics methods, you are required to help FishEye identify companies that may be engaged in illegal fishing?\n\n\n\n\n\n\n\nImportant\n\n\n\n\nYou only need to attempt one out of the four questions (excluding Question 5) provided above.\nThe data should be processed by using appropriate tidyverse family of packages and the statistical graphics must be prepared by using appropriate R packages."
+  },
+  {
+    "objectID": "take-home_ex/TH_EX03.html#the-task",
+    "href": "take-home_ex/TH_EX03.html#the-task",
+    "title": "Take-home Exercise 3",
+    "section": "",
+    "text": "With reference to Mini-Challenge 3 of VAST Challenge 2023 and by using appropriate static and interactive statistical graphics methods, you are required to help FishEye identify companies that may be engaged in illegal fishing?\n\n\n\n\n\n\n\nImportant\n\n\n\n\nYou only need to attempt one out of the four questions (excluding Question 5) provided above.\nThe data should be processed by using appropriate tidyverse family of packages and the statistical graphics must be prepared by using appropriate R packages."
+  },
+  {
+    "objectID": "take-home_ex/TH_EX03.html#kickstarter",
+    "href": "take-home_ex/TH_EX03.html#kickstarter",
+    "title": "Take-home Exercise 3",
+    "section": "KickStarter",
+    "text": "KickStarter\n\nKickStarter of Take-home Exercise 3 in html format."
   }
 ]

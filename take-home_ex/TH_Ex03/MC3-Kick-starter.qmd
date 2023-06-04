@@ -1,0 +1,263 @@
+---
+title: "Take-home Exercise 3: Kick-starter"
+date: "12/4/2023"
+date-modified: "`r Sys.Date()`"
+format: html
+execute: 
+  eval: true
+  echo: true
+  warning: false
+  freeze: auto
+editor: visual
+---
+
+::: callout-warning
+## Declaimer
+
+This document aims to provide you guidance on how to get started with Takehome Exercise 3, especially how to prepare the network data. It is not a model answer.
+:::
+
+## Getting Started
+
+The code chunk below will be used to install and load the necessary R packages to meet the data preparation, data wrangling, data analysis and visualisation needs.
+
+```{r}
+pacman::p_load(jsonlite, tidygraph, ggraph, 
+               visNetwork, graphlayouts, ggforce, 
+               skimr, tidytext, tidyverse)
+```
+
+## Data Import
+
+In the code chunk below, `fromJSON()` of **jsonlite** package is used to import *MC3.json* into R environment.
+
+```{r}
+mc3_data <- fromJSON("data/MC3.json")
+```
+
+The output is called *mc3_data*.  It is a large list R object.   
+
+### Extracting edges 
+
+The code chunk below will be used to extract the *links* data.frame of *mc3_data* and save it as a tibble data.frame called *mc3_edges*.
+
+```{r}
+mc3_edges <- as_tibble(mc3_data$links) %>% 
+  distinct() %>%
+  mutate(source = as.character(source),
+         target = as.character(target),
+         type = as.character(type)) %>%
+  group_by(source, target, type) %>%
+    summarise(weights = n()) %>%
+  filter(source!=target) %>%
+  ungroup()
+```
+
+::: callout-note
+### Things to learn from the code chunk above
+- `distinct()` is used to ensure that there will be no duplicated records.
+- `mutate()` and `as.character()` are used to convert the field data type from list to character.
+- `group_by()` and `summarise()` are used to count the number of unique links.
+- the `filter(source!=target)` is to ensure that no record with similar source and target.
+:::
+
+### Extracting nodes
+
+The code chunk below will be used to extract the *nodes* data.frame of *mc3_data* and save it as a tibble data.frame called *mc3_nodes*.
+
+```{r}
+mc3_nodes <- as_tibble(mc3_data$nodes) %>%
+  mutate(country = as.character(country),
+         id = as.character(id),
+         product_services = as.character(product_services),
+         revenue_omu = as.numeric(as.character(revenue_omu)),
+         type = as.character(type)) %>%
+  select(id, country, type, revenue_omu, product_services)
+```
+
+::: callout-note
+### Things to learn from the code chunk above
+- `mutate()` and `as.character()` are used to convert the field data type from list to character.
+- To convert *revenue_omu* from list data type to numeric data type, we need to convert the values into character first by using `as.character()`.  Then, `as.numeric()` will be used to convert them into numeric data type.   
+- `select()` is used to re-organise the order of the fields.
+:::
+
+## Initial Data Exploration
+
+### Exploring the edges data frame
+
+In the code chunk below, [`skim()`](https://docs.ropensci.org/skimr/reference/skim.html) of [**skimr**](https://docs.ropensci.org/skimr/index.html) package is used to display the summary statistics of *mc3_edges* tibble data frame.
+
+```{r}
+skim(mc3_edges)
+```
+
+The report above reveals that there is not missing values in all fields.
+
+In the code chunk below, `datatable()` of DT package is used to display mc3_edges tibble data frame as an interactive table on the html document.  
+
+```{r}
+DT::datatable(mc3_edges)
+
+```
+
+
+```{r}
+ggplot(data = mc3_edges,
+       aes(x = type)) +
+  geom_bar()
+```
+
+## Initial Network Visualisation and Analysis
+
+### Building network model with tidygraph
+
+```{r}
+id1 <- mc3_edges %>%
+  select(source) %>%
+  rename(id = source)
+id2 <- mc3_edges %>%
+  select(target) %>%
+  rename(id = target)
+mc3_nodes1 <- rbind(id1, id2) %>%
+  distinct() %>%
+  left_join(mc3_nodes,
+            unmatched = "drop")
+```
+
+```{r}
+mc3_graph <- tbl_graph(nodes = mc3_nodes1,
+                       edges = mc3_edges,
+                       directed = FALSE) %>%
+  mutate(betweenness_centrality = centrality_betweenness(),
+         closeness_centrality = centrality_closeness())
+```
+
+```{r}
+mc3_graph %>%
+  filter(betweenness_centrality >= 100000) %>%
+ggraph(layout = "fr") +
+  geom_edge_link(aes(alpha=0.5)) +
+  geom_node_point(aes(
+    size = betweenness_centrality,
+    colors = "lightblue",
+    alpha = 0.5)) +
+  scale_size_continuous(range=c(1,10))+
+  theme_graph()
+```
+
+## Exploring the nodes data frame
+
+In the code chunk below, [`skim()`](https://docs.ropensci.org/skimr/reference/skim.html) of [**skimr**](https://docs.ropensci.org/skimr/index.html) package is used to display the summary statistics of *mc3_nodes* tibble data frame.
+
+```{r}
+skim(mc3_nodes)
+```
+
+The report above reveals that there is no missing values in all fields.
+
+In the code chunk below, `datatable()` of DT package is used to display mc3_nodes tibble data frame as an interactive table on the html document.  
+
+```{r}
+DT::datatable(mc3_nodes)
+
+```
+
+
+```{r}
+ggplot(data = mc3_nodes,
+       aes(x = type)) +
+  geom_bar()
+```
+
+## Text Sensing with tidytext
+
+In this section, you will learn how to perform basic text sensing using appropriate functions of [**tidytext**](https://juliasilge.github.io/tidytext/index.html) package.   
+
+### Simple word count
+
+The code chunk below calculates number of times the word *fish* appeared in the field *product_services*.
+
+```{r}
+mc3_nodes %>% 
+    mutate(n_fish = str_count(product_services, "fish")) 
+```
+
+### Tokenisation
+
+The word tokenisation have different meaning in different scientific domains.  In text sensing, **tokenisation** is the process of breaking up a given text into units called **tokens**. Tokens can be individual words, phrases or even whole sentences.  In the process of tokenisation, some characters like punctuation marks may be discarded. The tokens usually become the input for the processes like parsing and text mining.
+
+In the code chunk below, [`unnest_token()`](https://juliasilge.github.io/tidytext/reference/unnest_tokens.html) of tidytext is used to split text in *product_services* field into words. 
+
+```{r}
+token_nodes <- mc3_nodes %>%
+  unnest_tokens(word, 
+                product_services)
+```
+
+The two basic arguments to `unnest_tokens()` used here are column names. First we have the output column name that will be created as the text is unnested into it (*word*, in this case), and then the input column that the text comes from (*product_services*, in this case). 
+
+::: callout-note
+- By default, punctuation has been stripped. (Use the *to_lower = FALSE* argument to turn off this behavior).
+- By default, `unnest_tokens()` converts the tokens to lowercase, which makes them easier to compare or combine with other datasets. (Use the *to_lower = FALSE* argument to turn off this behavior).
+:::
+
+Now we can visualise the words extracted by using the code chunk below.
+
+```{r}
+token_nodes %>%
+  count(word, sort = TRUE) %>%
+  top_n(15) %>%
+  mutate(word = reorder(word, n)) %>%
+  ggplot(aes(x = word, y = n)) +
+  geom_col() +
+  xlab(NULL) +
+  coord_flip() +
+      labs(x = "Count",
+      y = "Unique words",
+      title = "Count of unique words found in product_services field")
+```
+
+The bar chart reveals that the unique words contains some words that may not be useful to use. For instance “a” and “to”. In the word of text mining we call those words **stop words**. You want to remove these words from your analysis as they are fillers used to compose a sentence.
+
+### Removing stopwords
+
+Lucky for use, the tidytext package has a function called [`stop_words`](https://juliasilge.github.io/tidytext/reference/stop_words.html) that will help us clean up stop words.
+
+Let’s give this a try next!
+
+```{r}
+stopwords_removed <- token_nodes %>% 
+  anti_join(stop_words)
+```
+
+::: callout-note
+There are two processes:
+
+- Load the stop_words data included with tidytext. This data is simply a list of words that you may want to remove in a natural language analysis.
+- Then `anti_join()` of dplyr package is used to remove all stop words from the analysis.
+:::
+
+
+Now we can visualise the words extracted by using the code chunk below.
+
+```{r}
+stopwords_removed %>%
+  count(word, sort = TRUE) %>%
+  top_n(15) %>%
+  mutate(word = reorder(word, n)) %>%
+  ggplot(aes(x = word, y = n)) +
+  geom_col() +
+  xlab(NULL) +
+  coord_flip() +
+      labs(x = "Count",
+      y = "Unique words",
+      title = "Count of unique words found in product_services field")
+```
+
+::: callout-note
+All the stop words disappears!
+:::
+
+
+
