@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.3.361">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2022-12-30">
 
-<title>ISSS608 - Lesson 7: Visualising and Analysing Geographic Data</title>
+<title>ISSS608 - Lesson 8: Visualising and Analysing Geographic Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -18,7 +18,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
 </style>
@@ -56,7 +56,8 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -76,108 +77,110 @@ ul.task-list li input[type="checkbox"] {
     <span class="navbar-title">ISSS608</span>
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../syllabus.html">
+    <a class="nav-link" href="../syllabus.html" rel="" target="">
  <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../lesson.html">
+    <a class="nav-link" href="../lesson.html" rel="" target="">
  <span class="menu-text">Lesson Plan</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
  <span class="menu-text">Take-home Exercise</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
         <li>
-    <a class="dropdown-item" href="../take-home_ex/TH_EX01.html">
+    <a class="dropdown-item" href="../take-home_ex/TH_EX01.html" rel="" target="">
  <span class="dropdown-text">Take-home Exercise 1</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../take-home_ex/TH_EX02.html">
+    <a class="dropdown-item" href="../take-home_ex/TH_EX02.html" rel="" target="">
  <span class="dropdown-text">Take-home Exercise 2</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../take-home_ex/TH_EX03.html">
+    <a class="dropdown-item" href="../take-home_ex/TH_EX03.html" rel="" target="">
  <span class="dropdown-text">Take-home Exercise 3</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../take-home_ex/TH_EX04.html">
+    <a class="dropdown-item" href="../take-home_ex/TH_EX04.html" rel="" target="">
  <span class="dropdown-text">Take-home Exercise 4</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="../VAproject.html">
+    <a class="nav-link" href="../VAproject.html" rel="" target="">
  <span class="menu-text">Visual Analytics Project</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-shiny-workshop" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-shiny-workshop" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
  <span class="menu-text">Shiny Workshop</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-shiny-workshop">    
         <li>
-    <a class="dropdown-item" href="../ShinyWorkshop/Shiny1/Shiny1.html">
+    <a class="dropdown-item" href="../ShinyWorkshop/Shiny1/Shiny1.html" rel="" target="">
  <span class="dropdown-text">R Shiny basic</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../ShinyWorkshop/Shiny2/Shiny0.html">
+    <a class="dropdown-item" href="../ShinyWorkshop/Shiny2/Shiny2.html" rel="" target="">
  <span class="dropdown-text">Beyond the basic</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../ShinyWorkshop/Shiny3/Shiny0.html">
+    <a class="dropdown-item" href="../ShinyWorkshop/Shiny3/Shiny3.html" rel="" target="">
  <span class="dropdown-text">Customising Shiny</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../ShinyResources.html">
+    <a class="dropdown-item" href="../ShinyResources.html" rel="" target="">
  <span class="dropdown-text">Shiny Resources</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="../Tableau.html">
+    <a class="nav-link" href="../Tableau.html" rel="" target="">
  <span class="menu-text">Tableau Resources</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-all-about-r" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-all-about-r" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
  <span class="menu-text">All About R</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-all-about-r">    
         <li>
-    <a class="dropdown-item" href="../R.html">
+    <a class="dropdown-item" href="../R.html" rel="" target="">
  <span class="dropdown-text">R Resouces</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../R4Vis.html">
+    <a class="dropdown-item" href="../R4Vis.html" rel="" target="">
  <span class="dropdown-text">R for Visual Analytics</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../Rt.html">
+    <a class="dropdown-item" href="../Rt.html" rel="" target="">
  <span class="dropdown-text">R tips &amp; tricks</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../Quarto.html">
+    <a class="dropdown-item" href="../Quarto.html" rel="" target="">
  <span class="dropdown-text">Quarto</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../git.html">
+    <a class="dropdown-item" href="../git.html" rel="" target="">
  <span class="dropdown-text">git and github</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="../index.html">
+    <a class="nav-link" href="../index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
 </ul>
-              <div id="quarto-search" class="" title="Search"></div>
+            <div class="quarto-navbar-tools">
+</div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
@@ -220,7 +223,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Lesson 7: Visualising and Analysing Geographic Data</h1>
+<h1 class="title">Lesson 8: Visualising and Analysing Geographic Data</h1>
 </div>
 
 
@@ -238,7 +241,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">April 14, 2023</p>
+      <p class="date-modified">Invalid Date</p>
     </div>
   </div>
     
@@ -265,11 +268,13 @@ ul.task-list li input[type="checkbox"] {
 <section id="lesson-slides-and-hands-on-notes" class="level2">
 <h2 class="anchored" data-anchor-id="lesson-slides-and-hands-on-notes">Lesson Slides and Hands-on Notes</h2>
 <ul>
-<li><p>Lesson slides in <a href="../lesson/Lesson07/Lesson07-VisGeo.html">html</a> and <a href="../lesson/Lesson07/Lesson07-VisGeo.pdf">pdf</a> formats</p></li>
-<li><p>Hands-on Exercises:</p></li>
-<li><p>Hands-on Exercise 7: Choropleth Mapping in R <a href="../Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07-Choropleth_Mapping.html">html</a></p></li>
-<li><p>Hands-on Exercise 7: Visualising Geospatial Point Data <a href="../Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07-Point_Mapping.html">html</a></p></li>
-<li><p>Handout of Hands-on Exercise 7: Analytical Mapping in <a href="../Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07-Analytical_Mapping.html">html</a>.</p></li>
+<li>Lesson slides in <a href="../lesson/Lesson07/Lesson07-VisGeo.html">html</a> and <a href="../lesson/Lesson07/Lesson07-VisGeo.pdf">pdf</a> formats</li>
+</ul>
+<p>Hands-on Exercises:</p>
+<ul>
+<li><p>Hands-on Exercise 8: Choropleth Mapping in R <a href="https://r4va.netlify.app/chap21.html">html</a></p></li>
+<li><p>Hands-on Exercise 8: Visualising Geospatial Point Data <a href="https://r4va.netlify.app/chap22.html">html</a></p></li>
+<li><p>Handout of Hands-on Exercise 8: Analytical Mapping in R <a href="https://r4va.netlify.app/chap23.html">html</a>.</p></li>
 </ul>
 </section>
 <section id="readings" class="level2">
@@ -413,9 +418,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -480,6 +499,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {

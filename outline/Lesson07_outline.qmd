@@ -1,5 +1,5 @@
 ---
-title: "Lesson 7: Visualising and Analysing Geographic Data"
+title: "Lesson 8: Visualising and Analysing Geographic Data"
 date: "30 December 2022"
 date-modified: "`r Sys.Date()`"
 format: html
@@ -21,11 +21,13 @@ editor: visual
 
 -   Lesson slides in [html](../lesson/Lesson07/Lesson07-VisGeo.html) and [pdf](../lesson/Lesson07/Lesson07-VisGeo.pdf) formats
 
--   Hands-on Exercises:
+Hands-on Exercises:
 
-  -   Hands-on Exercise 7: Choropleth Mapping in R [html](../Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07-Choropleth_Mapping.html)
-  -   Hands-on Exercise 7: Visualising Geospatial Point Data [html](../Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07-Point_Mapping.html)
-  -   Handout of Hands-on Exercise 7: Analytical Mapping in [html](../Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07-Analytical_Mapping.html). 
+-   Hands-on Exercise 8: Choropleth Mapping in R [html](https://r4va.netlify.app/chap21.html)
+
+-   Hands-on Exercise 8: Visualising Geospatial Point Data [html](https://r4va.netlify.app/chap22.html)
+
+-   Handout of Hands-on Exercise 8: Analytical Mapping in R [html](https://r4va.netlify.app/chap23.html).
 
 ## Readings
 
