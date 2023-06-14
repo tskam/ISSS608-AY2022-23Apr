@@ -12,13 +12,12 @@ City of Engagement, with a total population of 50,000, is a small city located a
 
 # The Task
 
-In this take-home exercise, you are required to apply the concepts and methods you had learned in **Lesson 1-4** to reveal the demographic and financial characteristics of the city of Engagement byusing appropriate **static and interactive statistical graphics** methods. This exercise requires a user-friendly and interactive solution that helps city managers and planners to explore the complex data in an engaging way and reveal hidden patterns. 
+In this take-home exercise, you are required to apply the concepts and methods you had learned in **Lesson 1-4** to reveal the demographic and financial characteristics of the city of Engagement byusing appropriate **static and interactive statistical graphics** methods. This exercise requires a user-friendly and interactive solution that helps city managers and planners to explore the complex data in an engaging way and reveal hidden patterns.
 
-::: {.callout-important}
-- The data should be processed by using appropriate **tidyverse** family of packages and the statistical graphics must be prepared using ggplot2 and its extensions.
-- 
+::: callout-important
+-   The data should be processed by using appropriate **tidyverse** family of packages and the statistical graphics must be prepared using ggplot2 and its extensions.
+-   
 :::
-
 
 # The Data
 
@@ -47,7 +46,7 @@ Contains information about financial transactions.
 
 For explanation of Rent Adjustment, please refer to this [link](https://www.lawinsider.com/dictionary/rent-adjustment-amount).
 
-::: {.callout-note}
+::: callout-note
 Refer to **Take-home Exercise 1** folder on eLearn to download the data sets.
 :::
 
@@ -55,7 +54,7 @@ Refer to **Take-home Exercise 1** folder on eLearn to download the data sets.
 
 This is an individual assignment. You are required to work on the take-home exercises and prepare submission individually.
 
-::: {.callout-important}
+::: callout-important
 The specific submission instructions are as follows:
 
 -   The analytical visualisation must be prepared by using **R and appropriate R packages**.
@@ -63,16 +62,57 @@ The specific submission instructions are as follows:
 -   Provide the links to the Take-home Exercise write-up and github repository onto eLearn (i.e. Take-home Exercise section)
 :::
 
-# Submission date
+## Submission date
 
 Your completed take-home exercise is due on **14th May 2023, by 11:59pm evening**.
 
-# Learning from senior
+## Learning from senior
 
--   [AY2022-23 January Term](https://isss608-ay2022-23jan.netlify.app/take-home_ex/th_ex03#peer-learning-1).  
+-   [AY2022-23 January Term](https://isss608-ay2022-23jan.netlify.app/take-home_ex/th_ex03#peer-learning-1).
 
-::: {.callout-note}
-Students are encouraged to review the three specially mentioned submissions before getting started.  If time permit, please review all of them. You might find some examples that inspiring you.
+::: callout-note
+Students are encouraged to review the three specially mentioned submissions before getting started. If time permit, please review all of them. You might find some examples that inspiring you.
 :::
 
-# Peer Learning
+## Peer Learning
+
+- [ABHISHEK SINGH]()
+- [CAO FEI]()
+- [CHAN HIN PHUNG]()
+- [CHEN FANGXIAN]()
+- [DABBIE NEO WEN MIN]()
+- [DENG ZHAN]()
+- [FANG ZI WEI]()
+- [FONG BAO XIAN]()
+- [HAILEY CHEONG SZE-YENN]()
+- [HAN SHUMIN]()
+- [HUYNH MINH PHUONG]()
+- [KIM JUNSEOK]()
+- [KWA KAH BOON]()
+- [LEE PECK KHEE]()
+- [LEONARD LEE JINZHEN]()
+- [LIANG SZE LEONG]()
+- [LIANG YAO]()
+- [LIM LI YING]()
+- [LIN LIN]()
+- [LINN THAW TAR]()
+- [LIU JIAQI]()
+- [LIU YAN]()
+- [LOH JIAHUI]()
+- [NEO YI XIN]()
+- [OH JIA WEN]()
+- [ONG CHAE HUI]()
+- [SEOW KIAT HUI LENNIS]()
+- [SHERINAH BINTE RASHID]()
+- [TAN XIN XIAN WILSON]()
+- [TAN YI RONG SHAUN]()
+- [TAN YU YAN RACHEL]()
+- [THNG YAO WEN]()
+- [WAN XINYU]()
+- [WANG SHENGMING]()
+- [YANG JUN]()
+- [YANG TIANYI]()
+- [YAP PIN YAW]()
+- [YE NAING OO]()
+- [YEN YUN-HSUAN]()
+- [ZHOU AO]()

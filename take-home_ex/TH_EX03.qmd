@@ -42,8 +42,48 @@ Your completed take-home exercise is due on **11th June 2022, by 11:59pm evening
 
 -   KickStarter of Take-home Exercise 3 in [html](TH_Ex03/MC3-Kick-starter.html) format.
 
-
 ## Peer Learning
+
+- [ABHISHEK SINGH]()
+- [CAO FEI]()
+- [CHAN HIN PHUNG]()
+- [CHEN FANGXIAN]()
+- [DABBIE NEO WEN MIN]()
+- [DENG ZHAN]()
+- [FANG ZI WEI]()
+- [FONG BAO XIAN]()
+- [HAILEY CHEONG SZE-YENN]()
+- [HAN SHUMIN]()
+- [HUYNH MINH PHUONG]()
+- [KIM JUNSEOK]()
+- [KWA KAH BOON]()
+- [LEE PECK KHEE]()
+- [LEONARD LEE JINZHEN]()
+- [LIANG SZE LEONG]()
+- [LIANG YAO]()
+- [LIM LI YING]()
+- [LIN LIN]()
+- [LINN THAW TAR]()
+- [LIU JIAQI]()
+- [LIU YAN]()
+- [LOH JIAHUI]()
+- [NEO YI XIN]()
+- [OH JIA WEN]()
+- [ONG CHAE HUI]()
+- [SEOW KIAT HUI LENNIS]()
+- [SHERINAH BINTE RASHID]()
+- [TAN XIN XIAN WILSON]()
+- [TAN YI RONG SHAUN]()
+- [TAN YU YAN RACHEL]()
+- [THNG YAO WEN]()
+- [WAN XINYU]()
+- [WANG SHENGMING]()
+- [YANG JUN]()
+- [YANG TIANYI]()
+- [YAP PIN YAW]()
+- [YE NAING OO]()
+- [YEN YUN-HSUAN]()
+- [ZHOU AO]()
 
 ## Learning from Past Work
 
